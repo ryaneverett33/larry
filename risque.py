@@ -10,4 +10,4 @@ class Risque:
         self.session = requests.session()
 
     def getTicketData(self, ticketNumber):
-        
+        raise NotImplementedError()

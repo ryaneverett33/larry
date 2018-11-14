@@ -1,0 +1,6 @@
+from Vlan import Vlan
+Vlan(risqueString='128.046.170.000/24 Public Subnet (470)').printDebug()
+Vlan(risqueString='128.210.071.000/24 Public Subnet').printDebug()
+Vlan(risqueString='172.021.031.000/24-VetSchoolPrintersDev (906)').printDebug()
+Vlan(risqueString='010.162.017.000/24-STEW-CSDS-Supported_Computers_1 (1211)').printDebug()
+Vlan(risqueString='128.046.202.000/24 Public Subnet (502)').printDebug()
