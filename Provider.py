@@ -22,6 +22,8 @@ class Provider:
             raise ValueError("risqueString attribute is not a string")
         # ['hamp-gu01a-c3750ep-01', '04-Gi4/0/18']
         risqueSplit = risque.split(':')
+        if len(risqueSplit) != 2:
+            raise AttributeError("risqueString is not a valid provider!")
         # ['hamp', 'gu01a', 'c3750ep', '01']
         buildingSplit = risqueSplit[0].split('-')
         self.building = buildingSplit[0].lower()
@@ -34,7 +36,7 @@ class Provider:
         # ['Gi4', '0', '18']
         providerSplit = switchSplit[1].split('/')
         self.port = int(providerSplit[len(providerSplit) - 1])
-        self.intType = providerSplit[0][0:len(providerSplit[0] - 1)]
+        self.intType = providerSplit[0][0:len(providerSplit[0]) - 1]
 
     # Fills out the provider object from the switch type
     # GigabitEthernet1/0/9 resolves to switch 1, port 9, intType: Gi
@@ -51,16 +53,17 @@ class Provider:
         providerSplit = switch.split('/')
         if len(providerSplit) < 2:
             raise AttributeError("switchString is an invalid provider")
-        rawType = providerSplit[0:len(providerSplit)-1]
-        self.switch = providerSplit[len(providerSplit) - 1]
+        # ['Gi3', '0']
+        rawType = providerSplit[0][0:len(providerSplit[0])-1]
+        self.switch = int(providerSplit[0][len(providerSplit[0]) - 1])
         if len(rawType) > 2:
-            if rawType == "GigabitEthernet":
+            if "GigabitEthernet" == rawType:
                 self.intType = "Gi"
-            elif rawType == "TwoGigabitEthernet":
+            elif "TwoGigabitEthernet" == rawType:
                 self.intType = "Tw"
-            elif rawType == "TenGigabitEthernet":
+            elif "TenGigabitEthernet" == rawType:
                 self.intType = "Te"
-            elif rawType == "FastEthernet":
+            elif "FastEthernet" == rawType:
                 self.intType = 'Fa'
             else:
                 raise AttributeError("switchSting is not a valid provider!")
@@ -68,9 +71,9 @@ class Provider:
             self.intType = rawType
         # ['Fa0', '8']
         if len(providerSplit) == 2:
-            self.port = providerSplit[1]
+            self.port = int(providerSplit[1])
         else:
-            self.port = providerSplit[2]
+            self.port = int(providerSplit[2])
             if providerSplit[1] != '0':
                 if providerSplit[1] != '1':
                     raise AttributeError("switchString is a line card, not supported!")
