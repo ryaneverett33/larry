@@ -1,13 +1,6 @@
-from Speed import Speed
-from Vlan import Vlan
+from PIC import PIC
 
 
 class Ticket:
-    speed = None
-    vlan = None
-    voiceVlan = None
 
-    def __init__(self, speedString, vlanString, voiceVlanString):
-        self.speed = Speed(risqueString=speedString)
-        self.vlan = Vlan(risqueString=vlanString)
-        self.voiceVlan = Vlan(risqueString=voiceVlanString)
+    def __init__(self):

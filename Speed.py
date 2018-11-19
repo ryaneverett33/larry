@@ -55,20 +55,21 @@ class Speed:
             raise AttributeError("risqueString attribute is None")
         if type(risque) is not str:
             raise TypeError("risqueString attribute is not a string")
+        splitSpeed = risque.split('-')[0]
         # fill out speed first
-        if "10T" in risque:
+        if "10T" == splitSpeed:
             self.__fillTuple(ten=1)
-        elif "100T" in risque:
+        elif "100T" == splitSpeed:
             self.__fillTuple(hundred=1)
-        elif "1000T" in risque:
+        elif "1000T" == splitSpeed:
             self.__fillTuple(gig=1)
-        elif "10/100T" in risque:
+        elif "10/100T" == splitSpeed:
             self.__fillTuple(ten=1, hundred=1)
-        elif "10/100/100T" in risque:
+        elif "10/100/1000T" == splitSpeed:
             self.__fillTuple(ten=1, hundred=1, gig=1)
-        elif "100/1000T" in risque:
+        elif "100/1000T" == splitSpeed:
             self.__fillTuple(hundred=1, gig=1)
-        elif "100/1000/2.5G/5G/10G" in risque:
+        elif "100/1000/2.5G/5G/10G" == splitSpeed:
             self.__fillTuple(hundred=1, gig=1, twogig=1, fivegig=1, tengig=1)
         else:
             raise AttributeError("Risque String is not supported! Error: Speed")
@@ -110,6 +111,8 @@ class Speed:
             tengig = True
         self.__fillTuple(ten, hundred, gig, twogig, fivegig, tengig)
         if "auto" in switch.lower():
+            self.speedAuto = True
+        if not ten and not hundred and not gig and not twogig and not fivegig and not tengig:
             self.speedAuto = True
 
     # Sets the duplex of the speed object

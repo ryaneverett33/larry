@@ -110,11 +110,13 @@ class Vlan:
                 for i in range(lowerRange, upperRange + 1):
                     newVlan = Vlan()
                     newVlan.setTag(i)
-                    list.append(newVlan)
+                    if not Vlan.tagInVlanList(list, newVlan.tag):
+                        list.append(newVlan)
             else:
                 newVlan = Vlan()
                 newVlan.setTag(int(vlan))
-                list.append(newVlan)
+                if not Vlan.tagInVlanList(list, newVlan.tag):
+                    list.append(newVlan)
         return list
 
     # Joins two list of allowed vlans to one list of allowed vlans
@@ -127,9 +129,11 @@ class Vlan:
             raise ValueError("one or more list attributes is not a list")
         combinedList = []
         for item in list1:
-            combinedList.append(item)
+            if not Vlan.tagInVlanList(combinedList, item.tag):
+                combinedList.append(item)
         for item in list2:
-            combinedList.append(item)
+            if not Vlan.tagInVlanList(combinedList, item.tag):
+                combinedList.append(item)
         # StackOverflow: https://stackoverflow.com/a/8479025
         # (y.tag > x.tag) - (y.tag < x.tag)
         combinedList.sort(cmp=lambda x, y: (y.tag < x.tag) - (y.tag > x.tag))
@@ -137,3 +141,16 @@ class Vlan:
     def printDebug(self):
         print "ip: {0}, tag: {1}, name: {2}, mask: {3}, trunk? {4}, voice? {5}"\
             .format(self.ipAddress, self.tag, self.name, self.mask, self.trunk, self.voice)
+
+    # Returns true if a tag already exists in a vlan list, false if it doesn't
+    @staticmethod
+    def tagInVlanList(list, tag):
+        if list is None or tag is None:
+            return False
+        for vlanObj in list:
+            if not isinstance(vlanObj, Vlan):
+                return False
+            if vlanObj.tag == tag:
+                return True
+        return False
+
