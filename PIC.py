@@ -11,7 +11,7 @@ class PICConfig:
         if type(vlan) is not str or type(speed) is not str:
             raise AttributeError("PICConfig given null attributes")
         self.vlan = Vlan(risqueString=vlan)
-        self.speed = Vlan(risqueString=speed)
+        self.speed = Speed(risqueString=speed)
 
     def addVoiceVlan(self, voiceVlan):
         if type(voiceVlan) is not str:

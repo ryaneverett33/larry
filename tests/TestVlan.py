@@ -43,6 +43,13 @@ class TestVlan(unittest.TestCase):
         self.assertEqual(vlan5.trunk, False)
         self.assertEqual(vlan5.mask, 24)
         self.assertEqual(vlan5.tag, 502)
+        vlan6 = Vlan(risqueString='ITIS Networks Wired Device Management Subnet (1000)')
+        self.assertIsNotNone(vlan6)
+        self.assertEqual(vlan6.name, 'ITIS Networks Wired Device Management Subnet')
+        self.assertIsNone(vlan6.ipAddress)
+        self.assertEqual(vlan6.trunk, False)
+        self.assertIsNone(vlan6.mask)
+        self.assertEqual(vlan6.tag, 1000)
         with self.assertRaises(AttributeError) as cm:
             Vlan(risqueString='')
 

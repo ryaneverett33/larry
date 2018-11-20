@@ -15,16 +15,36 @@ class Vlan:
     # Fills out the vlan object from the risque string
     # 128.046.083.000/24 Public Subnet (383) resolves to ip: 128.046.083.000, tag: 383, name: Public Subnet, mask: 24
     # 172.021.008.0/24-SSTA Host Printers Only (695) resolves to ip: 172.021.008.0, tag: 695, name: SSTA Host Printers Only, mask: 24
+    # ITIS Networks Wired Device Management Subnet (1000) resolves to name: ITIS Networks Wired Device Management Subnet, tag: 1000
     # risque is case-sensitive
     def __resolveVlanFromRisque(self, risque):
         if risque is None:
             raise AttributeError("risqueString attribute is None")
         if type(risque) is not str:
             raise TypeError("risqueString attribute is not a string")
+        if len(risque) is 0:
+            raise AttributeError("risqueString is not a valid vlan")
         # ['128.046.083.000', '24 Public Subnet (383)']
         ipSplit = risque.split('/')
         if len(ipSplit) is 1:
-            raise AttributeError("risqueString is not a valid vlan")
+            # ITIS Networks Wired Device Management Subnet (1000)
+            if '/' not in risque:
+                if ' ' in risque:
+                    try:
+                        # ['ITIS Networks Wired Device Management Subnet ', '1000)']
+                        tagSplit = risque.split('(')
+                        if tagSplit[0][len(tagSplit[0]) - 1] == ' ':
+                            self.name = tagSplit[0][0:len(tagSplit[0]) - 1]  # remove space at the end
+                        else:
+                            self.name = tagSplit[0]
+                        self.tag = int(tagSplit[1][0:len(tagSplit[1]) - 1])  # remove the trailing ')'
+                    except AttributeError:
+                        raise
+                    except:
+                        raise AttributeError("risqueString is not a valid vlan")
+                    return
+            else:
+                raise AttributeError("risqueString is not a valid vlan")
         self.ipAddress = ipSplit[0]
         # ['24', 'Public', 'Subnet', '(383)']
         spaceSplit = ipSplit[1].split(' ')
@@ -154,3 +174,22 @@ class Vlan:
                 return True
         return False
 
+    @staticmethod
+    def equal(vlan1, vlan2):
+        if vlan1 is None or vlan2 is None:
+            return False
+        if not isinstance(vlan1, Vlan) or not isinstance(vlan2, Vlan):
+            return False
+        if vlan1.ipAddress != vlan2.ipAddress:
+            return False
+        if vlan1.tag != vlan2.tag:
+            return False
+        if vlan1.name != vlan2.name:
+            return False
+        if vlan1.mask != vlan2.mask:
+            return False
+        if vlan1.trunk != vlan2.trunk:
+            return False
+        if vlan1.voice != vlan2.voice:
+            return False
+        return True

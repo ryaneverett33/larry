@@ -1,4 +1,6 @@
 import requests, lxml.html
+
+
 class Risque:
     user = None
     password = None

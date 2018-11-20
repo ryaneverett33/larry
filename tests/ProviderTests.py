@@ -33,6 +33,15 @@ class ProviderTests(unittest.TestCase):
         self.assertEqual(provider3.switch, 6)
         self.assertEqual(provider3.port, 23)
         self.assertEqual(provider3.stack, 2)
+        provider4 = Provider(risqueString='gcmb-100-c3560cg-01-Gi0/6')
+        self.assertIsNotNone(provider4)
+        self.assertEqual(provider4.building, "gcmb")
+        self.assertEqual(provider4.TR, "100")
+        self.assertEqual(provider4.switchType, "c3560cg")
+        self.assertEqual(provider4.intType, "Gi")
+        self.assertEqual(provider4.switch, 0)
+        self.assertEqual(provider4.port, 6)
+        self.assertEqual(provider4.stack, 1)
         with self.assertRaises(AttributeError) as cm:
             Provider(risqueString='')
 

@@ -15,15 +15,48 @@ class Provider:
 
     # Fills out the provider object from a risque type
     # hamp-gu01a-c3750ep-01:04-Gi4/0/18 resolves to building: hamp, TR: gu01a, stack: 1, switch: 4
+    # gcmb-100-c3560cg-01-Gi0/6 resolves to building: gcmb, TR: 100, stack: 1, switch: 0
     def __parseProviderFromRisque(self, risque):
         if risque is None:
             raise AttributeError("risqueString attribute is None")
         if type(risque) is not str:
             raise ValueError("risqueString attribute is not a string")
+        if len(risque) is 0:
+            raise AttributeError("risqueString is not a valid provider!")
         # ['hamp-gu01a-c3750ep-01', '04-Gi4/0/18']
         risqueSplit = risque.split(':')
         if len(risqueSplit) != 2:
-            raise AttributeError("risqueString is not a valid provider!")
+            if ':' not in risque:
+                # gcmb-100-c3560cg-01-Gi0/6
+                # ['gcmb', '100', 'c3560cg', '01', 'Gi0/6']
+                hypenSplit = risque.split('-')
+                try:
+                    if len(hypenSplit) is 1:
+                        raise AttributeError("risqueString is not a valid provider!")
+                    else:
+                        self.building = hypenSplit[0]
+                        self.TR = hypenSplit[1]
+                        self.switchType = hypenSplit[2]
+                        self.stack = int(hypenSplit[3])
+                        # ['Gi0', '6']
+                        interfaceSplit = hypenSplit[4].split('/')
+                        self.intType = interfaceSplit[0][0:len(interfaceSplit)]
+                        self.switch = int(interfaceSplit[0][len(interfaceSplit)])
+                        self.port = int(interfaceSplit[len(interfaceSplit)-1])
+                        if len(interfaceSplit) is 3:
+                            # ['Gi4', '0', '18']
+                            if interfaceSplit[1] == '1':
+                                self.uplink = True
+                            elif int(interfaceSplit[1]) > 1:
+                                raise AttributeError("risqueString is a line card, not supported!")
+
+                except AttributeError:
+                    raise
+                except:
+                    raise AttributeError("risqueString is not a valid provider!")
+            else:
+                raise AttributeError("risqueString is not a valid provider!")
+            return
         # ['hamp', 'gu01a', 'c3750ep', '01']
         buildingSplit = risqueSplit[0].split('-')
         self.building = buildingSplit[0].lower()
@@ -49,6 +82,8 @@ class Provider:
             raise AttributeError("switchString attribute is None")
         if type(switch) is not str:
             raise ValueError("switchString attribute is not a string")
+        if len(switch) is 0:
+            raise AttributeError("switchString is an invalid provider")
         # ['GigabitEthernet1', '0', '9'], ['Fa0', '8']
         providerSplit = switch.split('/')
         if len(providerSplit) < 2:
