@@ -1,3 +1,4 @@
 requests
 lxml
 BeautifulSoup4
+paramiko
