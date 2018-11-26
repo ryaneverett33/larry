@@ -39,7 +39,7 @@ class Provider:
                         self.switchType = hypenSplit[2]
                         self.stack = int(hypenSplit[3])
                         # ['Gi0', '6']
-                        interfaceSplit = hypenSplit[4].split('/')
+                        interfaceSplit = hypenSplit[len(hypenSplit) - 1].split('/')
                         self.intType = interfaceSplit[0][0:len(interfaceSplit)]
                         self.switch = int(interfaceSplit[0][len(interfaceSplit)])
                         self.port = int(interfaceSplit[len(interfaceSplit)-1])
@@ -67,9 +67,13 @@ class Provider:
         switchSplit = risqueSplit[1].split('-')
         self.switch = int(switchSplit[0])
         # ['Gi4', '0', '18']
-        providerSplit = switchSplit[1].split('/')
+        providerSplit = switchSplit[len(switchSplit) - 1].split('/')
         self.port = int(providerSplit[len(providerSplit) - 1])
         self.intType = providerSplit[0][0:len(providerSplit[0]) - 1]
+        if int(providerSplit[1]) != 0:
+            self.uplink = True
+            if int(providerSplit[1]) != 1:
+                raise AttributeError("risqueString is a line card, not supported!")
 
     # Fills out the provider object from the switch type
     # GigabitEthernet1/0/9 resolves to switch 1, port 9, intType: Gi
@@ -117,3 +121,12 @@ class Provider:
                     raise AttributeError("switchString is a line card, not supported!")
                 self.uplink = True
 
+    def __str__(self):
+        string = self.building + '-' + self.TR + '-' + self.switchType + '-' + str(self.stack)\
+               + '-' + self.intType + str(self.switch) + '/'
+        if self.uplink:
+            string = string + '1/'
+        else:
+            string = string + '0/'
+        string = string + str(self.port)
+        return string

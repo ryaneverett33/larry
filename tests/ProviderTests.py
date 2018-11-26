@@ -1,7 +1,9 @@
 import unittest
 from Provider import Provider
 
+
 class ProviderTests(unittest.TestCase):
+
     def test_risque(self):
         # hamp-gu01a-c3750ep-01:04-Gi4/0/18
         # arms-3163-c3750ep-01:01-Gi1/0/27
@@ -89,3 +91,11 @@ class ProviderTests(unittest.TestCase):
             Provider(switchString='')
 
         self.assertEqual(cm.exception.message, "switchString is an invalid provider")
+
+    def test_fiberLinksFromRisque(self):
+        provider1 = Provider(risqueString='pvab-40-c9348uxm-01:01-01-03-Te1/1/3')
+        self.assertEqual(provider1.intType, 'Te')
+        self.assertEqual(provider1.switch, 1)
+        self.assertEqual(provider1.stack, 1)
+        self.assertEqual(provider1.port, 3)
+        self.assertTrue(provider1.uplink)

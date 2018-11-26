@@ -1,0 +1,1135 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /><meta http-equiv="X-UA-Compatible" content="IE=Edge" /><meta charset="utf-8" /><meta name="viewport" content="width=1200" /><title>
+	Ticket Detail - Risque Tickets
+</title>
+    <link rel="stylesheet" href="/Common/Content/bootstrap.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/bootstrap-multiselect.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/multiple-select.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/select2.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/purdue.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/risque.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/risque-print.css" media="print" />
+    <script type="text/javascript" src="/Common/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.datepicker.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.timepicker.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/common.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/bootstrap.multiselect.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/select2.min.js"></script>
+    <script src="/Common/Scripts/jquery.multiple.select.js"></script>
+    <script type="text/javascript">
+        function resetDotNetScrollPosition() {
+            var scrollX = document.getElementById('__SCROLLPOSITIONX');
+            var scrollY = document.getElementById('__SCROLLPOSITIONY');
+
+            if (scrollX != null && scrollY != null) {
+                scrollX.value = 0;
+                scrollY.value = 0;
+            }
+        }
+    </script>
+    
+    </head>
+<body>
+    <form method="post" action="./TicketDetail.aspx?id=67161" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=xID3YltANWMGut7twUYrke2z32uFCyxGCzwWPCutkxwKZOzwAJN-tv2skc_0fmLLyAxJ7-cFiw01x8CIFv7kpkYbiylwTSflQxPUIYf8jlE1&amp;t=636712422560000000" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=YXFrLcfmtLTZeebRVy2G8wd3r8Lqvh3UrsRF-4xeqQMt-uL8-HyWZjkism9e3vApBoJP_N-ynbQuXVTjrJaa1GKZTS8B_5P7CKZdpqD62InuIYS8mZQiBuN_TBkLK9nl0&amp;t=254cc609" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=HrSzJ4NU01ucuErhIkHMSszXofGU97AUe83nbbQtW1-rIdBO1Nv_blBX3nF9npQvW9zjcwLiK2hWd56_3rOh8ihzGXObPWfQ92sEaWbT1xNYaAzPy2vQ2AXuCFbcoIlW1jiu8qafsof_NlXTCOveig2&amp;t=254cc609" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="5335BF19" />
+	<input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0" />
+	<input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="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" />
+</div>
+        <div class="purdue-top">
+            <div class="purdue-container">
+                <div class="purdue-row">
+                    <div class="logo"><a href="http://www.purdue.edu/">
+                        <img alt="Purdue University" src="/Common/Content/img/logo.png" /></a></div>
+                    <img src="/Common/Content/img/purdue-print.jpg" id="purdue-print" alt="" />
+                    <div class="department"><a href="/">Risque Tickets</a></div>
+                         
+                    <div id="login">
+                        Logged in as <a href="/Portal/Users/Edit.aspx">Ryan Everett</a><br />
+                        
+                        <a id="lnkLogout" class="btn btn-mini btn-inverse" href="javascript:__doPostBack(&#39;ctl00$lnkLogout&#39;,&#39;&#39;)" style="font-weight: normal">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="purdue-navbar" role="navigation">
+            <div class="purdue-container" style="width:1200px">
+                <ul class="purdue-nav purdue-navbar-nav">
+                    <li><a href='/Portal/'>Portal</a></li>
+<li><a href='/Records/'>Records</a></li>
+<li><a href='/Reports/'>Reports</a></li>
+<li><a href='/Resources/'>Resources</a></li>
+<li><a href='/Tickets/'>Tickets</a></li>
+<li><a href='/Tracker/'>Tracker</a></li>
+
+                    <li style="float: right">
+                        <a id="lnkHelp" data-toggle="modal" data-target="#pnlHelp_Content" href="javascript:__doPostBack(&#39;ctl00$lnkHelp&#39;,&#39;&#39;)">Need Help?</a>
+
+                    </li>
+                    <li style="float: right"><a href='javascript:window.print()'>Print Page</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="purdue-content">
+            <div class="purdue-container" style="background-color: #fff; padding-top: 15px;">
+                <div class="purdue-row">
+                    <div class="maincontent right">
+                        
+    <style type="text/css">
+        #topArea .form-horizontal .control-group, .accordion-inner .control-group {
+            margin-bottom: 3px;
+        }
+
+        #topArea h3 {
+            line-height: 25px;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .accordion-inner {
+            margin: 0 -1px;
+            padding: 0;
+        }
+
+        .accordion-group {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
+            color: #fff !important;
+        }
+
+        td select {
+            font-size: 12px;
+            height: auto;
+            padding: 0;
+        }
+
+        .ms-drop {
+            width: 320px;
+        }
+
+        .table tbody tr.success > td {
+            background-color: #bae4a8 !important;
+        }
+
+        td input[type="text"] {
+            font-size: 12px;
+            height: auto;
+            padding: 0;
+        }
+
+        .current-settings {
+            color: #777;
+        }
+
+        hr.style-two { /* Gradient transparent - color - transparent */
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+    </style>
+    <style type="text/css" media="print">
+        .printHidden {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$contentMain$scrptManager_TicketDetail', 'form1', ['tctl00$contentMain$updt_AdditionalContacts','contentMain_updt_AdditionalContacts','tctl00$contentMain$updateCommentsPNL','contentMain_updateCommentsPNL'], ['ctl00$contentMain$rdoCommentsAll','contentMain_rdoCommentsAll','ctl00$contentMain$rdoCommentsClientOnly','contentMain_rdoCommentsClientOnly','ctl00$contentMain$rdoCommentsInternalOnly','contentMain_rdoCommentsInternalOnly','ctl00$contentMain$btnAddComment','contentMain_btnAddComment'], [], 90, 'ctl00');
+//]]>
+</script>
+
+    <h2>Ticket Detail - #<span id="contentMain_lblTicketID">67161</span>
+    </h2>
+    
+
+
+
+
+
+    
+    <div id="topArea" style="float: left; width: 50%;">
+        <div id="contentMain_pnlTicketContactInfo" class="form-horizontal">
+	
+            <h3>Contact Information</h3>
+            <div class="control-group">
+                <label class="control-label">Submitter:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactSubmitter">Kristopher J Klutzke</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Submitter Department:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactDeptName">regenstrief center for healthcare eng</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Name:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactName">Kristopher J Klutzke</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Phone:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactPhone">765-494-6141</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Email:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <a id="contentMain_lnkContactEmail" href="mailto:kklutzke@purdue.edu?subject=Risque Ticket #67161">kklutzke@purdue.edu</a>
+                </div>
+            </div>
+            <div class="control-group">
+                <div id="contentMain_pnlStandardAdditionalContacts">
+		
+                    <label class="control-label">Additional Contacts:</label>
+                    <div class="controls" style="padding-top: 4px">
+                        <span id="contentMain_lblContactAdditional">None</span>
+                    </div>
+                
+	</div>
+                
+                <div id="contentMain_updt_AdditionalContacts">
+		
+                        
+                    
+	</div>
+                
+            </div>
+            <br />
+            <h3>Ticket Information</h3>
+            <div class="control-group">
+                <label class="control-label">Submitted:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketSubmitted">11/26/2018 1:17 PM</span>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Due By:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketDue">11/29/2018 1:17 PM</span>
+                    
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Priority:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketPriority">Standard</span>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Status:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketStatus">Opened</span>
+                </div>
+            </div>
+            <div id="contentMain_pnlInternalStatus" class="control-group">
+		
+                <label class="control-label">Internal Status:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketInternalStatus">Active</span>
+                </div>
+            
+	</div>
+            <div id="contentMain_pnlEffectiveDate" class="control-group">
+		
+                <label class="control-label">Effective Date:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketEffective">N/A</span>
+                    
+                </div>
+            
+	</div>
+            
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <div class="btn-group">
+                        <a id="contentMain_A1" class="btn dropdown-toggle" data-toggle="dropdown">Actions <span id="contentMain_Span1" class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                <a onclick="window.print()">Print</a>
+                            </li>
+                            <li>
+                                <a id="contentMain_lnkEmail" href="javascript:__doPostBack(&#39;ctl00$contentMain$lnkEmail&#39;,&#39;&#39;)">E-mail</a>
+                            </li>
+                            <li>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <input type="submit" name="ctl00$contentMain$btnGrab" value="Grab" id="contentMain_btnGrab" class="btn-primary btn" />
+
+                </div>
+            </div>
+        
+</div>
+    </div>
+    
+    <div id="contentMain_pnlAgentHelper" style="float: left; width: 50%;">
+	
+        
+        <div class="accordion" id="agentTools">
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#relatedt">Related Tickets
+                    </a>
+                </div>
+                <div id="relatedt" class="accordion-body collapse in">
+                    <div class="accordion-inner" style="max-height: 100px; overflow-y: auto;">
+                        
+                        <div>
+		<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdRelatedTickets" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">
+                                There are no related tickets.
+                       
+                            </td>
+			</tr>
+		</table>
+	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#relatedwa">Related Assignments
+                    </a>
+                </div>
+                <div id="relatedwa" class="accordion-body collapse in">
+                    <div class="accordion-inner" style="max-height: 100px; overflow-y: auto;">
+                        
+                        <div>
+		<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdRelatedWAs" style="border-collapse:collapse;">
+			<tr>
+				<td>
+                                There are no related work assignments.
+                       
+                            </td>
+			</tr>
+		</table>
+	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#trkeys">Telecom Room Keys
+                    </a>
+                </div>
+                <div id="trkeys" class="accordion-body collapse in">
+                    <div class="accordion-inner" style="max-height: 100px; overflow-y: auto;">
+                        
+                        <div>
+		<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdTRKeys" style="border-collapse:collapse;">
+			<tr>
+				<th scope="col">Keys</th><th scope="col">TR</th>
+			</tr><tr>
+				<td>Key Corbin 426</td><td>MANN 132</td>
+			</tr>
+		</table>
+	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#deputy">Building Deputy
+                    </a>
+                </div>
+                <div id="deputy" class="accordion-body collapse">
+                    <div class="accordion-inner form-horizontal" style="padding: 0 10px;">
+                        <div class="control-group">
+                            <label class="control-label">Deputy Name:</label>
+                            <div class="controls" style="padding-top: 4px">
+                                <span id="contentMain_lblDeputyName">Gary Linn</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Deputy Office:</label>
+                            <div class="controls" style="padding-top: 4px">
+                                <span id="contentMain_lblDeputyOffice">MRGN 148</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Deputy Phone:</label>
+                            <div class="controls" style="padding-top: 4px">
+                                <span id="contentMain_lblDeputyPhone">7654962380</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Deputy Email:</label>
+                            <div class="controls" style="padding-top: 4px">
+                                <span id="contentMain_lblDeputyEmail">gelinn@purdue.edu</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+    <div style="clear: both;"></div>
+
+    
+    <h2>Ticket Items  
+        
+    </h2>
+
+    
+    <div id="save-records-progress" style="display: none; float: left; margin: 0 0; width: 400px;">
+        <div class="progress progress-striped active" style="height: 30px; margin-bottom: 0">
+            <div class="bar" style="padding-top: 4px; width: 100%;">Saving records, please wait...</div>
+        </div>
+    </div>
+
+    <div id="contentMain_pnlLineSort" class="printHidden" style="clear: both; float: right; margin-top: -13px; padding-bottom: 10px;">
+	
+        <div style="float: left; font-weight: bold; margin-right: 10px; margin-top: 3px;">Sort:</div>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortPIC" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortPIC" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoLineSortPIC\&#39;,\&#39;\&#39;)&#39;, 0)" />
+            PIC
+   
+        </label>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortPatch" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortPatch" checked="checked" />
+            Patch
+   
+        </label>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortProvider" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortProvider" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoLineSortProvider\&#39;,\&#39;\&#39;)&#39;, 0)" />
+            Provider
+   
+        </label>
+    
+</div>
+    <div style="clear: both;"></div>
+    
+    <div>
+	<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdItems" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Action</th><th scope="col">Port Info</th><th scope="col">Settings</th><th class="printHidden" scope="col">Options</th>
+		</tr><tr>
+			<td>
+                    <strong>Activate</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_0" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_0" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=MANN-154B-B" target="_blank">MANN-154B-B</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_0" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_0">mann-132-c6pp24-06-16 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_0" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            None
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_0"></div>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_0">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_0" style="font-weight:normal;"><br />&nbsp;&nbsp;10/100/1000T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_0">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_0">New VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_0" style="font-weight:normal;"><br />&nbsp;&nbsp;010.162.121.000/24-MANN-CSDS-Supported_Computers (1204)</span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlNewVoIPVlan_0">
+				
+                        <strong>New VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblNewVoIPVlan_0"></span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemServices_0">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_0" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_0'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_0" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl02$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_0" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr>
+	</table>
+</div>
+    
+
+
+
+
+    
+    <h2>Comments</h2>
+    <div id="contentMain_updateCommentsPNL">
+	
+            <div id="contentMain_pnlCommentFilters" class="printHidden" style="clear: both; float: right; margin-top: -13px; padding-bottom: 10px;">
+		
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsAll" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsAll" checked="checked" />All
+           
+                </label>
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsClientOnly" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsClientOnly" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoCommentsClientOnly\&#39;,\&#39;\&#39;)&#39;, 0)" />
+                    Client Only
+           
+                </label>
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsInternalOnly" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsInternalOnly" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoCommentsInternalOnly\&#39;,\&#39;\&#39;)&#39;, 0)" />
+                    Internal Only
+           
+                </label>
+            
+	</div>
+            <div style="clear: both;"></div>
+            
+            <div>
+		<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdComments" style="border-collapse:collapse;">
+			<tr>
+				<th scope="col">Date</th><th scope="col">Client</th><th scope="col">Comment</th><th scope="col">Visibility</th>
+			</tr><tr>
+				<td>11/26/2018 2:37:37 PM</td><td>Jordan Kramer</td><td>FP:1012638</td><td>Internal</td>
+			</tr>
+		</table>
+	</div>
+            <div id="contentMain_pnlAddComment" class="printHidden" style="margin: 0 auto; width: 910px;">
+		
+                <h3>Add Comment:</h3>
+                <div style="float: left; width: 730px;">
+                    <textarea name="ctl00$contentMain$txtComment" rows="5" cols="20" id="contentMain_txtComment" style="height:75px;width:700px;max-width: 700px;">
+</textarea>
+                </div>
+                <div style="float: left; width: 180px;">
+                    <div id="contentMain_pnlCommentAddFilters" class="form-horizontal">
+			
+                        <div class="control-group">
+                            <label class="control-label" style="width: 70px !important">Visibility:</label>
+                            <div class="controls" style="margin-left: 70px !important">
+                                <label class="radio">
+                                    <input id="contentMain_rdoCommentClient" type="radio" name="ctl00$contentMain$CommentVisibility" value="rdoCommentClient" />
+                                    Client
+                           
+                                </label>
+                                <label class="radio">
+                                    <input id="contentMain_rdoCommentInternal" type="radio" name="ctl00$contentMain$CommentVisibility" value="rdoCommentInternal" checked="checked" />
+                                    Internal Only
+                           
+                                </label>
+                            </div>
+                        </div>
+                    
+		</div>
+                    <div style="text-align: center">
+                        <input type="submit" name="ctl00$contentMain$btnAddComment" value="Add Comment" id="contentMain_btnAddComment" class="btn btn-primary" />
+                    </div>
+                </div>
+            
+	</div>
+            <div style="clear: both;"></div>
+        
+</div>
+
+    
+    
+    <div id="pnlHistory" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <input type="hidden" name="ctl00$contentMain$showModal_History" id="contentMain_showModal_History" />
+        <div class="modal-header">
+            <h3>
+                <i class="icon-time icon-white"></i>History for
+           
+                <span id="contentMain_lblPICHistoryTitle"></span>
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="btn-group" data-toggle="buttons-radio" style="clear: both; display: block; margin-bottom: 15px; text-align: center;">
+                <input type="submit" name="ctl00$contentMain$btnHistoryTask" value="Task History" id="contentMain_btnHistoryTask" class="btn btn-primary active" />
+                <input type="submit" name="ctl00$contentMain$btnHistoryPIC" value="PIC History" id="contentMain_btnHistoryPIC" class="btn" />
+            </div>
+            
+            <div id="contentMain_pnlHistoryTask">
+	
+                <h3>Tickets:</h3>
+                <div>
+
+	</div>
+
+                <h3>Work Assignments:</h3>
+                <div>
+
+	</div>
+            
+</div>
+
+            
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnHistoryClose" value="Close" id="contentMain_btnHistoryClose" class="btn" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlAssignTo" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <input type="hidden" name="ctl00$contentMain$showModal_AssignTo" id="contentMain_showModal_AssignTo" />
+        <input type="hidden" name="ctl00$contentMain$assignTo_TicketID" id="contentMain_assignTo_TicketID" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-user icon-white"></i>Assign To
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Group Member:</label>
+                    <div class="controls">
+                        <select name="ctl00$contentMain$ddlAssignTo" id="contentMain_ddlAssignTo">
+
+</select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnAssignTo_Save" value="Save" id="contentMain_btnAssignTo_Save" class="btn btn-inverse" />
+            <input type="submit" name="ctl00$contentMain$btnAssignToCancel" value="Cancel" id="contentMain_btnAssignToCancel" class="btn" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlHold" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-exclamation-sign icon-white"></i>Place Ticket On Hold
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Hold Reason:</label>
+                    <div class="controls">
+                        <textarea name="ctl00$contentMain$txtHoldReason" rows="2" cols="20" id="contentMain_txtHoldReason">
+</textarea>
+                    </div>
+                </div>
+                <div class="controls">
+                    <div class="checkbox">
+                        <label>
+                            <input id="contentMain_chkHoldNotify" type="checkbox" name="ctl00$contentMain$chkHoldNotify" />
+                            Notify Ticket Submitter
+                   
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnHoldSubmit" value="Place On Hold" id="contentMain_btnHoldSubmit" class="btn btn-inverse" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlEditDueBy" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        
+        <input type="hidden" name="ctl00$contentMain$showModal_EditDueBy" id="contentMain_showModal_EditDueBy" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-exclamation-sign icon-white"></i>Edit Ticket Due By Date
+            </h3>
+        </div>
+        
+
+
+
+
+        <div id="contentMain_pnlEditDueDate" style="width:100%;">
+	
+            <span class="input-append date" data-date="" data-date-format="mm/dd/yyyy" style="margin-left: 10px; margin-top: 10px;">
+                <input name="ctl00$contentMain$txtEditDueDate" type="text" value="11/29/2018" id="contentMain_txtEditDueDate" class="input-small" />
+                <span class="add-on">
+                    <i class="icon-calendar"></i>
+                </span>
+            </span>
+            <span class="input-append bootstrap-timepicker-component" style="margin-left: 10px; margin-top: 10px;">
+                <input name="ctl00$contentMain$txtEditDueTime" type="text" value="1:17 PM" id="contentMain_txtEditDueTime" class="input-small time" data-minute-step="5" />
+                <span class="add-on">
+                    <i class="icon-time"></i>
+                </span>
+            </span>
+        
+</div>
+        <div id="contentMain_rdoEditDueDate_ScheduledInfo" class="form-horizontal" style="margin-left: 10px;">
+	
+            <div class="control-group">
+                <label class="control-label" style="width: 100px !important">Scheduled:</label>
+                <div class="controls" style="margin-left: 100px !important">
+                    <label class="radio inline">
+                        <input id="contentMain_rdoNewDueDateScheduled_YES" type="radio" name="ctl00$contentMain$editDueDate_ScheduledInfo" value="rdoNewDueDateScheduled_YES" />
+                        Yes
+               
+                    </label>
+                    <label class="radio inline">
+                        <input id="contentMain_rdoNewDueDateScheduled_NO" type="radio" name="ctl00$contentMain$editDueDate_ScheduledInfo" value="rdoNewDueDateScheduled_NO" checked="checked" />
+                        No
+               
+                    </label>
+                </div>
+            </div>
+        
+</div>
+        <input type="submit" name="ctl00$contentMain$btnEditDueBy" value="Save" id="contentMain_btnEditDueBy" class="btn btn-inverse" style="margin-left: 50px;" />
+        <div id="contentMain_pnlSpace" style="height:10px;">
+
+</div>
+    </div>
+    
+    
+    <script type="text/javascript">
+        if (document.getElementById('contentMain_showModal_AssignTo').value === "true")
+            $('#pnlAssignTo').modal('show');
+
+        if (document.getElementById('contentMain_showModal_History').value === "true")
+            $('#pnlHistory').modal('show');
+
+        if (document.getElementById('contentMain_showModal_EditDueBy').value === "true")
+            $('#pnlEditDueBy').modal('show');
+    </script>
+
+                        
+                    </div>
+
+                    <div class="sidenav">
+                        <ul>
+                            <li class='sidenav-head'>Data Ticketing</li>
+<li><a href='/Tickets/Data/CreateTicket.aspx'>Create Ticket</a></li>
+<li><a href='/Tickets/Data/ViewTickets.aspx'>View Tickets</a></li>
+<li><a href='/Tickets/Data/SearchTickets.aspx'>Search Tickets</a></li>
+<li><a href='/Tickets/Constellation/ConstellationTickets.aspx'>View Archived Tickets</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="clear: both;"></div>
+        <div class="purdue-bottom">
+            <div class="purdue-container">
+                <div class="purdue-row">
+                    <div class="purdue-bottom-row">
+                        <p>Purdue University, West Lafayette, IN 47907&nbsp;(765) 494-4600</p>
+                        <p><a href="http://www.purdue.edu/purdue/disclaimer.html">&copy; 2018 Purdue University</a> | <a href="http://www.purdue.edu/purdue/ea_eou_statement.html">An equal access/equal opportunity university</a></p>
+                        <p>If you have trouble accessing this page because of a disability, please contact <a href="mailto:risque-admin@lists.purdue.edu">risque-admin@lists.purdue.edu</a>.</p>
+                        <p>Risque Galaxy version <span id="lblVersion">3.0.6897.20980</span> | Served by WPVWEBASP02B</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div id="pnlHelp_Content" class="modal hide fade" role="dialog" aria-hidden="true">
+            <input type="hidden" name="ctl00$showModal_Help_Content" id="showModal_Help_Content" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h3><i class="glyphicon glyphicon-plus icon-white" style="margin-right: 10px;"></i>Submit Help Request</h3>
+                    </div>
+                    <div class="modal-body" style="overflow:auto;">
+                        <div class="radio">
+                            <input id="rdoHelp1" type="radio" name="ctl00$rdoHelp" value="rdoHelp1" onclick="javascript:togTickets();" /><label for="rdoHelp1">Request for Status or Ask Question about a Risque Ticket</label>
+                        </div>
+                        <div id="helpTicketsPanel" style="display: none; margin-left: 20px;">
+                            <div class="control-label">
+                                <strong>Select a Ticket:</strong>
+                            </div>
+                            <div class="controls">
+                                <select name="ctl00$ddlHelpTickets" id="ddlHelpTickets" class="form-control ddlSearchableFullText" style="width:200px;">
+	<option value="66952">66952</option>
+	<option value="66963">66963</option>
+	<option value="66978">66978</option>
+	<option value="66980">66980</option>
+	<option value="66983">66983</option>
+	<option value="67020">67020</option>
+	<option value="67029">67029</option>
+	<option value="67037">67037</option>
+	<option value="67040">67040</option>
+	<option value="67041">67041</option>
+	<option value="67042">67042</option>
+	<option value="67043">67043</option>
+	<option value="67049">67049</option>
+	<option value="67055">67055</option>
+	<option value="67056">67056</option>
+	<option value="67061">67061</option>
+	<option value="67062">67062</option>
+	<option value="67063">67063</option>
+	<option value="67064">67064</option>
+	<option value="67080">67080</option>
+	<option value="67083">67083</option>
+	<option value="67084">67084</option>
+	<option value="67090">67090</option>
+	<option value="67091">67091</option>
+	<option value="67092">67092</option>
+	<option value="67093">67093</option>
+	<option value="67096">67096</option>
+	<option value="67097">67097</option>
+	<option value="67098">67098</option>
+	<option value="67099">67099</option>
+	<option value="67100">67100</option>
+	<option value="67101">67101</option>
+	<option value="67102">67102</option>
+	<option value="67103">67103</option>
+	<option value="67104">67104</option>
+	<option value="67105">67105</option>
+	<option value="67106">67106</option>
+	<option value="67107">67107</option>
+	<option value="67108">67108</option>
+	<option value="67109">67109</option>
+	<option value="67110">67110</option>
+	<option value="67111">67111</option>
+	<option value="67112">67112</option>
+	<option value="67113">67113</option>
+	<option value="67114">67114</option>
+	<option value="67115">67115</option>
+	<option value="67116">67116</option>
+	<option value="67117">67117</option>
+	<option value="67118">67118</option>
+	<option value="67119">67119</option>
+	<option value="67120">67120</option>
+	<option value="67121">67121</option>
+	<option value="67122">67122</option>
+	<option value="67123">67123</option>
+	<option value="67124">67124</option>
+	<option value="67125">67125</option>
+	<option value="67126">67126</option>
+	<option value="67127">67127</option>
+	<option value="67128">67128</option>
+	<option value="67129">67129</option>
+	<option value="67130">67130</option>
+	<option value="67131">67131</option>
+	<option value="67132">67132</option>
+	<option value="67133">67133</option>
+	<option value="67134">67134</option>
+	<option value="67135">67135</option>
+	<option value="67136">67136</option>
+	<option value="67137">67137</option>
+	<option value="67138">67138</option>
+	<option value="67139">67139</option>
+	<option value="67140">67140</option>
+	<option value="67141">67141</option>
+	<option value="67142">67142</option>
+	<option value="67143">67143</option>
+	<option value="67144">67144</option>
+	<option value="67145">67145</option>
+	<option value="67146">67146</option>
+	<option value="67147">67147</option>
+	<option value="67148">67148</option>
+	<option value="67149">67149</option>
+	<option value="67150">67150</option>
+	<option value="67151">67151</option>
+	<option value="67152">67152</option>
+	<option value="67153">67153</option>
+	<option value="67154">67154</option>
+	<option value="67155">67155</option>
+	<option value="67156">67156</option>
+	<option value="67157">67157</option>
+	<option value="67158">67158</option>
+	<option value="67159">67159</option>
+	<option value="67160">67160</option>
+	<option value="67161">67161</option>
+	<option value="67162">67162</option>
+	<option value="67163">67163</option>
+	<option value="67164">67164</option>
+
+</select>
+                            </div>
+                        </div>
+                        <div class="radio">
+                            <input id="rdoHelp2" type="radio" name="ctl00$rdoHelp" value="rdoHelp2" onclick="javascript:togProblem();" /><label for="rdoHelp2">Report a Problem with a Risque Application</label>
+                        </div>
+                        <div id="helpProblemPanel" style="display: none; margin-left: 20px;">
+                            <label class="control-label">
+                                <strong>Select&nbsp;Application(s):</strong>
+                            </label>
+                            <div class="controls">
+                                
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_0" type="checkbox" name="ctl00$rptHelpProblem$ctl00$chkApp" /><label for="rptHelpProblem_chkApp_0">Portal</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_1" type="checkbox" name="ctl00$rptHelpProblem$ctl01$chkApp" /><label for="rptHelpProblem_chkApp_1">Records</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_2" type="checkbox" name="ctl00$rptHelpProblem$ctl02$chkApp" /><label for="rptHelpProblem_chkApp_2">Reports</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_3" type="checkbox" name="ctl00$rptHelpProblem$ctl03$chkApp" /><label for="rptHelpProblem_chkApp_3">Resources</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_4" type="checkbox" name="ctl00$rptHelpProblem$ctl04$chkApp" /><label for="rptHelpProblem_chkApp_4">Tickets</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_5" type="checkbox" name="ctl00$rptHelpProblem$ctl05$chkApp" /><label for="rptHelpProblem_chkApp_5">Tracker</label>
+                                        </div>
+                                    
+                            </div>
+                        </div>
+
+                        <div class="radio">
+                            <input id="rdoHelp3" type="radio" name="ctl00$rdoHelp" value="rdoHelp3" onclick="javascript:togFeature();" /><label for="rdoHelp3">Request Creation of a New Risque Feature</label>
+                        </div>
+                        <div id="helpFeaturePanel" style="display: none; margin-left: 20px;">
+                            <label class="control-label">
+                                <strong>Select&nbsp;Application(s):</strong>
+                            </label>
+                            <div class="controls">
+                                
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_0" type="checkbox" name="ctl00$rptHelpFeature$ctl00$chkApp" /><label for="rptHelpFeature_chkApp_0">Portal</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_1" type="checkbox" name="ctl00$rptHelpFeature$ctl01$chkApp" /><label for="rptHelpFeature_chkApp_1">Records</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_2" type="checkbox" name="ctl00$rptHelpFeature$ctl02$chkApp" /><label for="rptHelpFeature_chkApp_2">Reports</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_3" type="checkbox" name="ctl00$rptHelpFeature$ctl03$chkApp" /><label for="rptHelpFeature_chkApp_3">Resources</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_4" type="checkbox" name="ctl00$rptHelpFeature$ctl04$chkApp" /><label for="rptHelpFeature_chkApp_4">Tickets</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_5" type="checkbox" name="ctl00$rptHelpFeature$ctl05$chkApp" /><label for="rptHelpFeature_chkApp_5">Tracker</label>
+                                        </div>
+                                    
+                            </div>
+                        </div>
+                        <div class="radio">
+                            <input id="rdoHelp4" type="radio" name="ctl00$rdoHelp" value="rdoHelp4" checked="checked" onclick="javascript:togElse();" /><label for="rdoHelp4">Something else…</label>
+                        </div>
+                        <div class="control-group" style="margin-left:17%;">
+                            <textarea name="ctl00$txtHelpReq" rows="7" cols="20" id="txtHelpReq" class="form-control" PlaceHolder="Please enter as much detail about this request as possible." style="width:370px;">
+</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <input type="submit" name="ctl00$btnHelpSubmit" value="Submit Request" id="btnHelpSubmit" class="btn btn-primary" style="float: left;" />
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        if (document.getElementById('showModal_Help_Content').value == "true")
+                            $('#pnlHelp_Content').modal('show');
+                    </script>
+        </div>
+
+        <div class="modal fade" id="NoExcel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="color:white;">Excel Export Notice</h4>
+              </div>
+              <div class="modal-body">
+                <p>The data set presented is too large to export as an Excel file, please download it as a CSV instead. </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+
+theForm.oldSubmit = theForm.submit;
+theForm.submit = WebForm_SaveScrollPositionSubmit;
+
+theForm.oldOnSubmit = theForm.onsubmit;
+theForm.onsubmit = WebForm_SaveScrollPositionOnSubmit;
+//]]>
+</script>
+</form>
+    <script type="text/javascript">
+        $(".ddlSearchable").select2({
+            matcher: function (term, text) { return text.toUpperCase().indexOf(term.toUpperCase()) == 0; },
+            minimumResultsForSearch: 7
+        });
+
+        $(".ddlSearchableFullText").select2({
+            minimumResultsForSearch: 7
+        });
+
+        function togTickets() {
+            $('#helpProblemPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+
+            $('#helpTicketsPanel').show(400);
+        }
+
+        function togProblem() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+
+            $('#helpProblemPanel').show(400);
+        }
+
+        function togFeature() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpProblemPanel').hide(400);
+
+            $('#helpFeaturePanel').show(400);
+        }
+
+        function togElse() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpProblemPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+        }
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-86579122-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

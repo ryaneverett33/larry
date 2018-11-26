@@ -1,17 +1,17 @@
 import requests, lxml.html
 import re
-from bs4 import BeautifulSoup, NavigableString
+from bs4 import BeautifulSoup, NavigableString, Tag
 from Ticket import Ticket
 from PIC import PIC
 
 
 class Risque:
-    user = None
+    username = None
     password = None
     session = None
 
     def __init__(self, user, password):
-        self.user = user
+        self.username = user
         self.password = password
         self.session = requests.session()
 
@@ -50,9 +50,17 @@ class Risque:
         if type(string) is not str and type(string) is not unicode and type(string) is not NavigableString:
             raise AttributeError("string attribute is an invalid type")
         value = re.sub('[\t\n\xa0]', '', string).strip().encode('ascii', 'replace')
-        if value == 'None':
+        if value == 'None' or value == '' or value.lower() == 'n/a':
             return None
         return value
+
+    # Return a list that doesn't contain any Tag Objects
+    def __removeTags(self, list):
+        newList = []
+        for item in list:
+            if not isinstance(item, Tag):
+                newList.append(item)
+        return newList
 
     # Returns a Ticket object
     def parseTicket(self, ticketBody):
@@ -72,18 +80,19 @@ class Risque:
             # Iterate over the table
             for i in range(1, len(rows)):
                 j = i - 1       # Reindex i to start at 0 instead of 1
-                cols = rows[i].find_all('td') # rows[3] is an options row
+                cols = rows[i].find_all('td')   # rows[3] is an options row
                 action = self.clean(cols[0].strong.string)
                 picId = cols[1].find('a', {'id': 'contentMain_grdItems_PICHyperLink_' + str(j)}).string
                 patch = cols[1].find('span', {'id': 'contentMain_grdItems_lblItemPatch_' + str(j)}).string
-                currentProvider = \
-                cols[1].find('div', {'id': 'contentMain_grdItems_PanelCurrentProviderPort_' + str(j)}).contents[3]
+                currentProvider = cols[1].find('div', {'id': 'contentMain_grdItems_PanelCurrentProviderPort_' + str(j)})
+                if currentProvider is not None:
+                    currentProvider = currentProvider.contents[3]
                 #  newProvider = cols[1].find('span', {'id': 'contentMain_grdItems_lblItemProvider_' + str(j)}).string
                 newProvider = cols[1].find('span', {'id': 'contentMain_grdItems_lblItemProvider_' + str(j)})
                 if newProvider is not None:
                     newProvider = newProvider.string
-                else:
-                    raise ValueError("Ticket contains a null 'New Provider' field")
+                # else:
+                #    raise ValueError("Ticket contains a null 'New Provider' field")
                 # currentSpeed = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemOldSpeed_' + str(j)}).contents[1]
                 currentSpeed = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemOldSpeed_' + str(j)})
                 if currentSpeed is not None:
@@ -93,7 +102,7 @@ class Risque:
                 # currentVlans = cols[2].find('span', {
                     # 'id': 'contentMain_grdItems_lblItemOldVLAN_' + str(j)}).contents  # contents[0] is <br/>
                 currentVlans = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemOldVLAN_' + str(j)})
-                if currentVlans is not None:
+                if currentVlans is not None and len(currentVlans) >= 2:
                     currentVlans = currentVlans.contents
                 else:
                     currentVlans = None
@@ -103,16 +112,27 @@ class Risque:
                     currentVoip = currentVoip.contents[1]
                 else:
                     currentVoip = None
-                newSpeed = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemNewSpeed_' + str(j)}).contents[1]
-                newVlans = cols[2].find('span', {
-                    'id': 'contentMain_grdItems_lblItemNewVLAN_' + str(j)}).contents  # contents[0] is <br/>
+                # newSpeed = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemNewSpeed_' + str(j)}).contents[1]
+                newSpeed = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemNewSpeed_' + str(j)})
+                if newSpeed is not None:
+                    newSpeed = newSpeed.contents[1]
+                # newVlans = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemNewVLAN_' + str(j)}).contents  # contents[0] is <br/>
+                newVlans = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemNewVLAN_' + str(j)})
+                if newVlans is not None and len(newVlans.contents) >= 2:
+                    newVlans = newVlans.contents
+                else:
+                    newVlans = None
                 # newVoip = cols[2].find('span', {'id': 'contentMain_grdItems_lblNewVoIPVlan_' + str(j)}).contents[1]
                 newVoip = cols[2].find('span', {'id': 'contentMain_grdItems_lblNewVoIPVlan_' + str(j)})
                 if newVoip is not None and len(newVoip.contents) >= 2:
                         newVoip = newVoip.contents[1]
                 else:
                     newVoip = None
-                newServices = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemServices_' + str(j)}).string
+                # newServices = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemServices_' + str(j)}).string
+                newServices = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemServices_' + str(j)})
+                if newServices is not None:
+                    newServices = newServices.string
+
                 # Clean the data
                 pidId = self.clean(picId)
                 patch = self.clean(patch)
@@ -122,12 +142,14 @@ class Risque:
                 if currentVlans is not None:
                     for x in range(1, len(currentVlans)):
                         currentVlans[x] = self.clean(currentVlans[x])
-                    del currentVlans[0]
+                    currentVlans = self.__removeTags(currentVlans)
                 currentVoip = self.clean(currentVoip)
                 newSpeed = self.clean(newSpeed)
-                for x in range(1, len(newVlans)):
-                    newVlans[x] = self.clean(newVlans[x])
-                del newVlans[0]
+                if newVlans is not None:
+                    for x in range(0, len(newVlans)):
+                        if isinstance(newVlans[x], NavigableString):
+                            newVlans[x] = self.clean(newVlans[x])
+                    newVlans = self.__removeTags(newVlans)
                 newVoip = self.clean(newVoip)
                 # Don't clean new services as we're not sure if it is a str or []
 
@@ -135,7 +157,8 @@ class Risque:
                 pic = PIC(picId, currentProvider, newProvider, action, newServices)
                 if currentVlans is not None and currentSpeed is not None:
                     pic.applyCurrentConfig(currentVoip, currentVlans, currentSpeed)
-                pic.applyNewConfig(newVoip, newVlans, newSpeed)
+                if newVlans is not None and newSpeed is not None:
+                    pic.applyNewConfig(newVoip, newVlans, newSpeed)
                 ticket.addPic(pic)
 
             return ticket

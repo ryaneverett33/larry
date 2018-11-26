@@ -5,7 +5,7 @@ from Provider import Provider
 
 class PICConfig:
     voiceVlan = None
-    vlan = None # Can be an array
+    vlan = None     # Can be an array
     vlanList = False
     speed = None
 
@@ -38,13 +38,14 @@ class PIC:
     action = None
 
     def __init__(self, name, currentProvider, newProvider, action, services):
-        if name is None or newProvider is None or action is None:
-            raise AttributeError("PIC given null attributes")
+        # if name is None or newProvider is None or action is None:
+        #    raise AttributeError("PIC given null attributes")
         self.name = name
         self.action = action
         if currentProvider is not None:
             self.currentProvider = Provider(risqueString=currentProvider)
-        self.newProvider = Provider(risqueString=newProvider)
+        if newProvider is not None:
+            self.newProvider = Provider(risqueString=newProvider)
         self.services = services
         self.__isValidAction()
 

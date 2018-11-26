@@ -1,0 +1,1229 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /><meta http-equiv="X-UA-Compatible" content="IE=Edge" /><meta charset="utf-8" /><meta name="viewport" content="width=1200" /><title>
+	Ticket Detail - Risque Tickets
+</title>
+    <link rel="stylesheet" href="/Common/Content/bootstrap.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/bootstrap-multiselect.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/multiple-select.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/select2.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/purdue.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/risque.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/risque-print.css" media="print" />
+    <script type="text/javascript" src="/Common/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.datepicker.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.timepicker.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/common.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/bootstrap.multiselect.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/select2.min.js"></script>
+    <script src="/Common/Scripts/jquery.multiple.select.js"></script>
+    <script type="text/javascript">
+        function resetDotNetScrollPosition() {
+            var scrollX = document.getElementById('__SCROLLPOSITIONX');
+            var scrollY = document.getElementById('__SCROLLPOSITIONY');
+
+            if (scrollX != null && scrollY != null) {
+                scrollX.value = 0;
+                scrollY.value = 0;
+            }
+        }
+    </script>
+    
+    </head>
+<body>
+    <form method="post" action="./TicketDetail.aspx?id=67154" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=xID3YltANWMGut7twUYrke2z32uFCyxGCzwWPCutkxwKZOzwAJN-tv2skc_0fmLLyAxJ7-cFiw01x8CIFv7kpkYbiylwTSflQxPUIYf8jlE1&amp;t=636712422560000000" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=YXFrLcfmtLTZeebRVy2G8wd3r8Lqvh3UrsRF-4xeqQMt-uL8-HyWZjkism9e3vApBoJP_N-ynbQuXVTjrJaa1GKZTS8B_5P7CKZdpqD62InuIYS8mZQiBuN_TBkLK9nl0&amp;t=254cc609" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=HrSzJ4NU01ucuErhIkHMSszXofGU97AUe83nbbQtW1-rIdBO1Nv_blBX3nF9npQvW9zjcwLiK2hWd56_3rOh8ihzGXObPWfQ92sEaWbT1xNYaAzPy2vQ2AXuCFbcoIlW1jiu8qafsof_NlXTCOveig2&amp;t=254cc609" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="5335BF19" />
+	<input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0" />
+	<input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="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" />
+</div>
+        <div class="purdue-top">
+            <div class="purdue-container">
+                <div class="purdue-row">
+                    <div class="logo"><a href="http://www.purdue.edu/">
+                        <img alt="Purdue University" src="/Common/Content/img/logo.png" /></a></div>
+                    <img src="/Common/Content/img/purdue-print.jpg" id="purdue-print" alt="" />
+                    <div class="department"><a href="/">Risque Tickets</a></div>
+                         
+                    <div id="login">
+                        Logged in as <a href="/Portal/Users/Edit.aspx">Ryan Everett</a><br />
+                        
+                        <a id="lnkLogout" class="btn btn-mini btn-inverse" href="javascript:__doPostBack(&#39;ctl00$lnkLogout&#39;,&#39;&#39;)" style="font-weight: normal">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="purdue-navbar" role="navigation">
+            <div class="purdue-container" style="width:1200px">
+                <ul class="purdue-nav purdue-navbar-nav">
+                    <li><a href='/Portal/'>Portal</a></li>
+<li><a href='/Records/'>Records</a></li>
+<li><a href='/Reports/'>Reports</a></li>
+<li><a href='/Resources/'>Resources</a></li>
+<li><a href='/Tickets/'>Tickets</a></li>
+<li><a href='/Tracker/'>Tracker</a></li>
+
+                    <li style="float: right">
+                        <a id="lnkHelp" data-toggle="modal" data-target="#pnlHelp_Content" href="javascript:__doPostBack(&#39;ctl00$lnkHelp&#39;,&#39;&#39;)">Need Help?</a>
+
+                    </li>
+                    <li style="float: right"><a href='javascript:window.print()'>Print Page</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="purdue-content">
+            <div class="purdue-container" style="background-color: #fff; padding-top: 15px;">
+                <div class="purdue-row">
+                    <div class="maincontent right">
+                        
+    <style type="text/css">
+        #topArea .form-horizontal .control-group, .accordion-inner .control-group {
+            margin-bottom: 3px;
+        }
+
+        #topArea h3 {
+            line-height: 25px;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .accordion-inner {
+            margin: 0 -1px;
+            padding: 0;
+        }
+
+        .accordion-group {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
+            color: #fff !important;
+        }
+
+        td select {
+            font-size: 12px;
+            height: auto;
+            padding: 0;
+        }
+
+        .ms-drop {
+            width: 320px;
+        }
+
+        .table tbody tr.success > td {
+            background-color: #bae4a8 !important;
+        }
+
+        td input[type="text"] {
+            font-size: 12px;
+            height: auto;
+            padding: 0;
+        }
+
+        .current-settings {
+            color: #777;
+        }
+
+        hr.style-two { /* Gradient transparent - color - transparent */
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+    </style>
+    <style type="text/css" media="print">
+        .printHidden {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$contentMain$scrptManager_TicketDetail', 'form1', ['tctl00$contentMain$updt_AdditionalContacts','contentMain_updt_AdditionalContacts','tctl00$contentMain$updateCommentsPNL','contentMain_updateCommentsPNL'], ['ctl00$contentMain$rdoCommentsAll','contentMain_rdoCommentsAll','ctl00$contentMain$rdoCommentsClientOnly','contentMain_rdoCommentsClientOnly','ctl00$contentMain$rdoCommentsInternalOnly','contentMain_rdoCommentsInternalOnly'], [], 90, 'ctl00');
+//]]>
+</script>
+
+    <h2>Ticket Detail - #<span id="contentMain_lblTicketID">67154</span>
+    </h2>
+    
+
+
+
+
+
+    
+    <div id="topArea" style="float: left; width: 50%;">
+        <div id="contentMain_pnlTicketContactInfo" class="form-horizontal">
+	
+            <h3>Contact Information</h3>
+            <div class="control-group">
+                <label class="control-label">Submitter:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactSubmitter">Duane Kyburz</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Submitter Department:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactDeptName">it infrastructure services</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Name:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactName">Duane Kyburz</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Phone:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactPhone">765-490-4755</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Email:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <a id="contentMain_lnkContactEmail" href="mailto:storm@purdue.edu?subject=Risque Ticket #67154">storm@purdue.edu</a>
+                </div>
+            </div>
+            <div class="control-group">
+                <div id="contentMain_pnlStandardAdditionalContacts">
+		
+                    <label class="control-label">Additional Contacts:</label>
+                    <div class="controls" style="padding-top: 4px">
+                        <span id="contentMain_lblContactAdditional">None</span>
+                    </div>
+                
+	</div>
+                
+                <div id="contentMain_updt_AdditionalContacts">
+		
+                        
+                    
+	</div>
+                
+            </div>
+            <br />
+            <h3>Ticket Information</h3>
+            <div class="control-group">
+                <label class="control-label">Submitted:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketSubmitted">11/26/2018 3:39 AM</span>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Due By:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketDue">11/29/2018 3:39 AM</span>
+                    
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Priority:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketPriority">Standard</span>
+                </div>
+            </div>
+            <div id="contentMain_pnlTicketAgent" class="control-group">
+		
+                <label class="control-label">Agent:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketAgent">Jacob Carlson</span>
+                </div>
+            
+	</div>
+            <div class="control-group">
+                <label class="control-label">Status:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketStatus">Complete</span>
+                </div>
+            </div>
+            <div id="contentMain_pnlInternalStatus" class="control-group">
+		
+                <label class="control-label">Internal Status:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketInternalStatus">Active</span>
+                </div>
+            
+	</div>
+            <div id="contentMain_pnlEffectiveDate" class="control-group">
+		
+                <label class="control-label">Effective Date:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketEffective">11/26/2018</span>
+                    
+                </div>
+            
+	</div>
+            
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <div class="btn-group">
+                        <a id="contentMain_A1" class="btn dropdown-toggle" data-toggle="dropdown">Actions <span id="contentMain_Span1" class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                <a onclick="window.print()">Print</a>
+                            </li>
+                            <li>
+                                <a id="contentMain_lnkEmail" href="javascript:__doPostBack(&#39;ctl00$contentMain$lnkEmail&#39;,&#39;&#39;)">E-mail</a>
+                            </li>
+                            <li>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    
+
+                </div>
+            </div>
+        
+</div>
+    </div>
+    
+    
+
+    <div style="clear: both;"></div>
+
+    
+    <h2>Ticket Items  
+        
+    </h2>
+
+    
+    <div id="save-records-progress" style="display: none; float: left; margin: 0 0; width: 400px;">
+        <div class="progress progress-striped active" style="height: 30px; margin-bottom: 0">
+            <div class="bar" style="padding-top: 4px; width: 100%;">Saving records, please wait...</div>
+        </div>
+    </div>
+
+    <div id="contentMain_pnlLineSort" class="printHidden" style="clear: both; float: right; margin-top: -13px; padding-bottom: 10px;">
+	
+        <div style="float: left; font-weight: bold; margin-right: 10px; margin-top: 3px;">Sort:</div>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortPIC" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortPIC" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoLineSortPIC\&#39;,\&#39;\&#39;)&#39;, 0)" />
+            PIC
+   
+        </label>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortPatch" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortPatch" checked="checked" />
+            Patch
+   
+        </label>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortProvider" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortProvider" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoLineSortProvider\&#39;,\&#39;\&#39;)&#39;, 0)" />
+            Provider
+   
+        </label>
+    
+</div>
+    <div style="clear: both;"></div>
+    
+    <div>
+	<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdItems" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Action</th><th scope="col">Port Info</th><th scope="col">Settings</th><th class="printHidden" scope="col">Options</th>
+		</tr><tr class="success">
+			<td>
+                    <strong>Deactivate</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_0" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_0" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=MATH-B60HW-ACA" target="_blank">MATH-B60HW-ACA</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_0" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_0">N/A</span><br />
+                        
+                        
+                        <strong>Provider:</strong> <span id="contentMain_grdItems_lblItemProvider_0">math-b60-c3750ep-03:01-Gi1/0/1</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_0" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_0"><br />&nbsp;&nbsp;&nbsp;No Speed</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_0" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_0"><br />&nbsp;&nbsp;&nbsp;ITIS Networks Wired Device Management Subnet (1000)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_0" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_0"><br />&nbsp;&nbsp;</span>
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_0" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl02$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_0" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Deactivate</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_1" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_1" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=MATH-B60HW-ACB" target="_blank">MATH-B60HW-ACB</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_1" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_1">N/A</span><br />
+                        
+                        
+                        <strong>Provider:</strong> <span id="contentMain_grdItems_lblItemProvider_1">math-b60-c3750ep-03:01-Gi1/0/2</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_1" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_1"><br />&nbsp;&nbsp;&nbsp;No Speed</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_1" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_1"><br />&nbsp;&nbsp;&nbsp;ITIS Networks Wired Device Management Subnet (1000)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_1" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_1"><br />&nbsp;&nbsp;</span>
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_1" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl03$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_1" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Deactivate</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_2" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_2" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=MATH-B60HW-ACC" target="_blank">MATH-B60HW-ACC</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_2" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_2">N/A</span><br />
+                        
+                        
+                        <strong>Provider:</strong> <span id="contentMain_grdItems_lblItemProvider_2">math-b60-c3750ep-03:01-Gi1/0/3</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_2" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_2"><br />&nbsp;&nbsp;&nbsp;No Speed</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_2" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_2"><br />&nbsp;&nbsp;&nbsp;ITIS Networks Wired Device Management Subnet (1000)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_2" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_2"><br />&nbsp;&nbsp;</span>
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_2" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl04$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_2" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Deactivate</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_3" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_3" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=MATH-B60HW-ACD" target="_blank">MATH-B60HW-ACD</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_3" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_3">N/A</span><br />
+                        
+                        
+                        <strong>Provider:</strong> <span id="contentMain_grdItems_lblItemProvider_3">math-b60-c3750ep-03:01-Gi1/0/4</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_3" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_3"><br />&nbsp;&nbsp;&nbsp;No Speed</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_3" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_3"><br />&nbsp;&nbsp;&nbsp;ITIS Networks Wired Device Management Subnet (1000)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_3" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_3"><br />&nbsp;&nbsp;</span>
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_3" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl05$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_3" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Deactivate</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_4" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_4" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=MATH-B60HW-ACE" target="_blank">MATH-B60HW-ACE</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_4" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_4">N/A</span><br />
+                        
+                        
+                        <strong>Provider:</strong> <span id="contentMain_grdItems_lblItemProvider_4">math-b60-c3750ep-03:01-Gi1/0/5</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_4" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_4"><br />&nbsp;&nbsp;&nbsp;No Speed</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_4" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_4"><br />&nbsp;&nbsp;&nbsp;ITIS Networks Wired Device Management Subnet (1000)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_4" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_4"><br />&nbsp;&nbsp;</span>
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_4" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl06$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_4" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr>
+	</table>
+</div>
+    
+
+
+
+
+    
+    <h2>Comments</h2>
+    <div id="contentMain_updateCommentsPNL">
+	
+            <div id="contentMain_pnlCommentFilters" class="printHidden" style="clear: both; float: right; margin-top: -13px; padding-bottom: 10px;">
+		
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsAll" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsAll" checked="checked" />All
+           
+                </label>
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsClientOnly" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsClientOnly" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoCommentsClientOnly\&#39;,\&#39;\&#39;)&#39;, 0)" />
+                    Client Only
+           
+                </label>
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsInternalOnly" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsInternalOnly" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoCommentsInternalOnly\&#39;,\&#39;\&#39;)&#39;, 0)" />
+                    Internal Only
+           
+                </label>
+            
+	</div>
+            <div style="clear: both;"></div>
+            
+            <div>
+		<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdComments" style="border-collapse:collapse;">
+			<tr>
+				<th scope="col">Date</th><th scope="col">Client</th><th scope="col">Comment</th><th scope="col">Visibility</th>
+			</tr><tr>
+				<td>11/26/2018 2:33:59 PM</td><td>Jacob Carlson</td><td>The switch is not in risque, and has been replaced in the field. There is nothing to deactivate.</td><td>Internal</td>
+			</tr><tr>
+				<td>11/26/2018 3:39:22 AM</td><td>Duane Kyburz</td><td>I noticed that math-b60-c3750ep-01 is no longer registered in DNS so am requesting documentation of the deactivation work that has already been completed for these PICs.  Please also move the math-b60-c3750ep-01 switch to storage in Risque after completing the ticket.</td><td>Client</td>
+			</tr>
+		</table>
+	</div>
+            
+            <div style="clear: both;"></div>
+        
+</div>
+
+    
+    
+    <div id="pnlHistory" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <input type="hidden" name="ctl00$contentMain$showModal_History" id="contentMain_showModal_History" />
+        <div class="modal-header">
+            <h3>
+                <i class="icon-time icon-white"></i>History for
+           
+                <span id="contentMain_lblPICHistoryTitle"></span>
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="btn-group" data-toggle="buttons-radio" style="clear: both; display: block; margin-bottom: 15px; text-align: center;">
+                <input type="submit" name="ctl00$contentMain$btnHistoryTask" value="Task History" id="contentMain_btnHistoryTask" class="btn btn-primary active" />
+                <input type="submit" name="ctl00$contentMain$btnHistoryPIC" value="PIC History" id="contentMain_btnHistoryPIC" class="btn" />
+            </div>
+            
+            <div id="contentMain_pnlHistoryTask">
+	
+                <h3>Tickets:</h3>
+                <div>
+
+	</div>
+
+                <h3>Work Assignments:</h3>
+                <div>
+
+	</div>
+            
+</div>
+
+            
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnHistoryClose" value="Close" id="contentMain_btnHistoryClose" class="btn" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlAssignTo" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <input type="hidden" name="ctl00$contentMain$showModal_AssignTo" id="contentMain_showModal_AssignTo" />
+        <input type="hidden" name="ctl00$contentMain$assignTo_TicketID" id="contentMain_assignTo_TicketID" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-user icon-white"></i>Assign To
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Group Member:</label>
+                    <div class="controls">
+                        <select name="ctl00$contentMain$ddlAssignTo" id="contentMain_ddlAssignTo">
+
+</select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnAssignTo_Save" value="Save" id="contentMain_btnAssignTo_Save" class="btn btn-inverse" />
+            <input type="submit" name="ctl00$contentMain$btnAssignToCancel" value="Cancel" id="contentMain_btnAssignToCancel" class="btn" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlHold" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-exclamation-sign icon-white"></i>Place Ticket On Hold
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Hold Reason:</label>
+                    <div class="controls">
+                        <textarea name="ctl00$contentMain$txtHoldReason" rows="2" cols="20" id="contentMain_txtHoldReason">
+</textarea>
+                    </div>
+                </div>
+                <div class="controls">
+                    <div class="checkbox">
+                        <label>
+                            <input id="contentMain_chkHoldNotify" type="checkbox" name="ctl00$contentMain$chkHoldNotify" />
+                            Notify Ticket Submitter
+                   
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnHoldSubmit" value="Place On Hold" id="contentMain_btnHoldSubmit" class="btn btn-inverse" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlEditDueBy" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        
+        <input type="hidden" name="ctl00$contentMain$showModal_EditDueBy" id="contentMain_showModal_EditDueBy" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-exclamation-sign icon-white"></i>Edit Ticket Due By Date
+            </h3>
+        </div>
+        
+
+
+
+
+        <div id="contentMain_pnlEditDueDate" style="width:100%;">
+	
+            <span class="input-append date" data-date="" data-date-format="mm/dd/yyyy" style="margin-left: 10px; margin-top: 10px;">
+                <input name="ctl00$contentMain$txtEditDueDate" type="text" value="11/29/2018" id="contentMain_txtEditDueDate" class="input-small" />
+                <span class="add-on">
+                    <i class="icon-calendar"></i>
+                </span>
+            </span>
+            <span class="input-append bootstrap-timepicker-component" style="margin-left: 10px; margin-top: 10px;">
+                <input name="ctl00$contentMain$txtEditDueTime" type="text" value="3:39 AM" id="contentMain_txtEditDueTime" class="input-small time" data-minute-step="5" />
+                <span class="add-on">
+                    <i class="icon-time"></i>
+                </span>
+            </span>
+        
+</div>
+        <div id="contentMain_rdoEditDueDate_ScheduledInfo" class="form-horizontal" style="margin-left: 10px;">
+	
+            <div class="control-group">
+                <label class="control-label" style="width: 100px !important">Scheduled:</label>
+                <div class="controls" style="margin-left: 100px !important">
+                    <label class="radio inline">
+                        <input id="contentMain_rdoNewDueDateScheduled_YES" type="radio" name="ctl00$contentMain$editDueDate_ScheduledInfo" value="rdoNewDueDateScheduled_YES" />
+                        Yes
+               
+                    </label>
+                    <label class="radio inline">
+                        <input id="contentMain_rdoNewDueDateScheduled_NO" type="radio" name="ctl00$contentMain$editDueDate_ScheduledInfo" value="rdoNewDueDateScheduled_NO" checked="checked" />
+                        No
+               
+                    </label>
+                </div>
+            </div>
+        
+</div>
+        <input type="submit" name="ctl00$contentMain$btnEditDueBy" value="Save" id="contentMain_btnEditDueBy" class="btn btn-inverse" style="margin-left: 50px;" />
+        <div id="contentMain_pnlSpace" style="height:10px;">
+
+</div>
+    </div>
+    
+    
+    <script type="text/javascript">
+        if (document.getElementById('contentMain_showModal_AssignTo').value === "true")
+            $('#pnlAssignTo').modal('show');
+
+        if (document.getElementById('contentMain_showModal_History').value === "true")
+            $('#pnlHistory').modal('show');
+
+        if (document.getElementById('contentMain_showModal_EditDueBy').value === "true")
+            $('#pnlEditDueBy').modal('show');
+    </script>
+
+                        
+                    </div>
+
+                    <div class="sidenav">
+                        <ul>
+                            <li class='sidenav-head'>Data Ticketing</li>
+<li><a href='/Tickets/Data/CreateTicket.aspx'>Create Ticket</a></li>
+<li><a href='/Tickets/Data/ViewTickets.aspx'>View Tickets</a></li>
+<li><a href='/Tickets/Data/SearchTickets.aspx'>Search Tickets</a></li>
+<li><a href='/Tickets/Constellation/ConstellationTickets.aspx'>View Archived Tickets</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="clear: both;"></div>
+        <div class="purdue-bottom">
+            <div class="purdue-container">
+                <div class="purdue-row">
+                    <div class="purdue-bottom-row">
+                        <p>Purdue University, West Lafayette, IN 47907&nbsp;(765) 494-4600</p>
+                        <p><a href="http://www.purdue.edu/purdue/disclaimer.html">&copy; 2018 Purdue University</a> | <a href="http://www.purdue.edu/purdue/ea_eou_statement.html">An equal access/equal opportunity university</a></p>
+                        <p>If you have trouble accessing this page because of a disability, please contact <a href="mailto:risque-admin@lists.purdue.edu">risque-admin@lists.purdue.edu</a>.</p>
+                        <p>Risque Galaxy version <span id="lblVersion">3.0.6897.20980</span> | Served by WPVWEBASP02B</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div id="pnlHelp_Content" class="modal hide fade" role="dialog" aria-hidden="true">
+            <input type="hidden" name="ctl00$showModal_Help_Content" id="showModal_Help_Content" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h3><i class="glyphicon glyphicon-plus icon-white" style="margin-right: 10px;"></i>Submit Help Request</h3>
+                    </div>
+                    <div class="modal-body" style="overflow:auto;">
+                        <div class="radio">
+                            <input id="rdoHelp1" type="radio" name="ctl00$rdoHelp" value="rdoHelp1" onclick="javascript:togTickets();" /><label for="rdoHelp1">Request for Status or Ask Question about a Risque Ticket</label>
+                        </div>
+                        <div id="helpTicketsPanel" style="display: none; margin-left: 20px;">
+                            <div class="control-label">
+                                <strong>Select a Ticket:</strong>
+                            </div>
+                            <div class="controls">
+                                <select name="ctl00$ddlHelpTickets" id="ddlHelpTickets" class="form-control ddlSearchableFullText" style="width:200px;">
+	<option value="66952">66952</option>
+	<option value="66963">66963</option>
+	<option value="66978">66978</option>
+	<option value="66980">66980</option>
+	<option value="66983">66983</option>
+	<option value="67020">67020</option>
+	<option value="67029">67029</option>
+	<option value="67037">67037</option>
+	<option value="67040">67040</option>
+	<option value="67041">67041</option>
+	<option value="67042">67042</option>
+	<option value="67043">67043</option>
+	<option value="67049">67049</option>
+	<option value="67055">67055</option>
+	<option value="67056">67056</option>
+	<option value="67061">67061</option>
+	<option value="67062">67062</option>
+	<option value="67063">67063</option>
+	<option value="67064">67064</option>
+	<option value="67080">67080</option>
+	<option value="67083">67083</option>
+	<option value="67084">67084</option>
+	<option value="67090">67090</option>
+	<option value="67091">67091</option>
+	<option value="67092">67092</option>
+	<option value="67093">67093</option>
+	<option value="67096">67096</option>
+	<option value="67097">67097</option>
+	<option value="67098">67098</option>
+	<option value="67099">67099</option>
+	<option value="67100">67100</option>
+	<option value="67101">67101</option>
+	<option value="67102">67102</option>
+	<option value="67103">67103</option>
+	<option value="67104">67104</option>
+	<option value="67105">67105</option>
+	<option value="67106">67106</option>
+	<option value="67107">67107</option>
+	<option value="67108">67108</option>
+	<option value="67109">67109</option>
+	<option value="67110">67110</option>
+	<option value="67111">67111</option>
+	<option value="67112">67112</option>
+	<option value="67113">67113</option>
+	<option value="67114">67114</option>
+	<option value="67115">67115</option>
+	<option value="67116">67116</option>
+	<option value="67117">67117</option>
+	<option value="67118">67118</option>
+	<option value="67119">67119</option>
+	<option value="67120">67120</option>
+	<option value="67121">67121</option>
+	<option value="67122">67122</option>
+	<option value="67123">67123</option>
+	<option value="67124">67124</option>
+	<option value="67125">67125</option>
+	<option value="67126">67126</option>
+	<option value="67127">67127</option>
+	<option value="67128">67128</option>
+	<option value="67129">67129</option>
+	<option value="67130">67130</option>
+	<option value="67131">67131</option>
+	<option value="67132">67132</option>
+	<option value="67133">67133</option>
+	<option value="67134">67134</option>
+	<option value="67135">67135</option>
+	<option value="67136">67136</option>
+	<option value="67137">67137</option>
+	<option value="67138">67138</option>
+	<option value="67139">67139</option>
+	<option value="67140">67140</option>
+	<option value="67141">67141</option>
+	<option value="67142">67142</option>
+	<option value="67143">67143</option>
+	<option value="67144">67144</option>
+	<option value="67145">67145</option>
+	<option value="67146">67146</option>
+	<option value="67147">67147</option>
+	<option value="67148">67148</option>
+	<option value="67149">67149</option>
+	<option value="67150">67150</option>
+	<option value="67151">67151</option>
+	<option value="67152">67152</option>
+	<option value="67153">67153</option>
+	<option value="67154">67154</option>
+	<option value="67155">67155</option>
+	<option value="67156">67156</option>
+	<option value="67157">67157</option>
+	<option value="67158">67158</option>
+	<option value="67159">67159</option>
+	<option value="67160">67160</option>
+	<option value="67161">67161</option>
+	<option value="67162">67162</option>
+	<option value="67163">67163</option>
+	<option value="67164">67164</option>
+
+</select>
+                            </div>
+                        </div>
+                        <div class="radio">
+                            <input id="rdoHelp2" type="radio" name="ctl00$rdoHelp" value="rdoHelp2" onclick="javascript:togProblem();" /><label for="rdoHelp2">Report a Problem with a Risque Application</label>
+                        </div>
+                        <div id="helpProblemPanel" style="display: none; margin-left: 20px;">
+                            <label class="control-label">
+                                <strong>Select&nbsp;Application(s):</strong>
+                            </label>
+                            <div class="controls">
+                                
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_0" type="checkbox" name="ctl00$rptHelpProblem$ctl00$chkApp" /><label for="rptHelpProblem_chkApp_0">Portal</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_1" type="checkbox" name="ctl00$rptHelpProblem$ctl01$chkApp" /><label for="rptHelpProblem_chkApp_1">Records</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_2" type="checkbox" name="ctl00$rptHelpProblem$ctl02$chkApp" /><label for="rptHelpProblem_chkApp_2">Reports</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_3" type="checkbox" name="ctl00$rptHelpProblem$ctl03$chkApp" /><label for="rptHelpProblem_chkApp_3">Resources</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_4" type="checkbox" name="ctl00$rptHelpProblem$ctl04$chkApp" /><label for="rptHelpProblem_chkApp_4">Tickets</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_5" type="checkbox" name="ctl00$rptHelpProblem$ctl05$chkApp" /><label for="rptHelpProblem_chkApp_5">Tracker</label>
+                                        </div>
+                                    
+                            </div>
+                        </div>
+
+                        <div class="radio">
+                            <input id="rdoHelp3" type="radio" name="ctl00$rdoHelp" value="rdoHelp3" onclick="javascript:togFeature();" /><label for="rdoHelp3">Request Creation of a New Risque Feature</label>
+                        </div>
+                        <div id="helpFeaturePanel" style="display: none; margin-left: 20px;">
+                            <label class="control-label">
+                                <strong>Select&nbsp;Application(s):</strong>
+                            </label>
+                            <div class="controls">
+                                
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_0" type="checkbox" name="ctl00$rptHelpFeature$ctl00$chkApp" /><label for="rptHelpFeature_chkApp_0">Portal</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_1" type="checkbox" name="ctl00$rptHelpFeature$ctl01$chkApp" /><label for="rptHelpFeature_chkApp_1">Records</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_2" type="checkbox" name="ctl00$rptHelpFeature$ctl02$chkApp" /><label for="rptHelpFeature_chkApp_2">Reports</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_3" type="checkbox" name="ctl00$rptHelpFeature$ctl03$chkApp" /><label for="rptHelpFeature_chkApp_3">Resources</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_4" type="checkbox" name="ctl00$rptHelpFeature$ctl04$chkApp" /><label for="rptHelpFeature_chkApp_4">Tickets</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_5" type="checkbox" name="ctl00$rptHelpFeature$ctl05$chkApp" /><label for="rptHelpFeature_chkApp_5">Tracker</label>
+                                        </div>
+                                    
+                            </div>
+                        </div>
+                        <div class="radio">
+                            <input id="rdoHelp4" type="radio" name="ctl00$rdoHelp" value="rdoHelp4" checked="checked" onclick="javascript:togElse();" /><label for="rdoHelp4">Something else…</label>
+                        </div>
+                        <div class="control-group" style="margin-left:17%;">
+                            <textarea name="ctl00$txtHelpReq" rows="7" cols="20" id="txtHelpReq" class="form-control" PlaceHolder="Please enter as much detail about this request as possible." style="width:370px;">
+</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <input type="submit" name="ctl00$btnHelpSubmit" value="Submit Request" id="btnHelpSubmit" class="btn btn-primary" style="float: left;" />
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        if (document.getElementById('showModal_Help_Content').value == "true")
+                            $('#pnlHelp_Content').modal('show');
+                    </script>
+        </div>
+
+        <div class="modal fade" id="NoExcel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="color:white;">Excel Export Notice</h4>
+              </div>
+              <div class="modal-body">
+                <p>The data set presented is too large to export as an Excel file, please download it as a CSV instead. </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+
+theForm.oldSubmit = theForm.submit;
+theForm.submit = WebForm_SaveScrollPositionSubmit;
+
+theForm.oldOnSubmit = theForm.onsubmit;
+theForm.onsubmit = WebForm_SaveScrollPositionOnSubmit;
+//]]>
+</script>
+</form>
+    <script type="text/javascript">
+        $(".ddlSearchable").select2({
+            matcher: function (term, text) { return text.toUpperCase().indexOf(term.toUpperCase()) == 0; },
+            minimumResultsForSearch: 7
+        });
+
+        $(".ddlSearchableFullText").select2({
+            minimumResultsForSearch: 7
+        });
+
+        function togTickets() {
+            $('#helpProblemPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+
+            $('#helpTicketsPanel').show(400);
+        }
+
+        function togProblem() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+
+            $('#helpProblemPanel').show(400);
+        }
+
+        function togFeature() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpProblemPanel').hide(400);
+
+            $('#helpFeaturePanel').show(400);
+        }
+
+        function togElse() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpProblemPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+        }
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-86579122-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

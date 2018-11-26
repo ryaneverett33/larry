@@ -21,3 +21,17 @@ class ParsingTests(unittest.TestCase):
         r = Risque('u', 'p')
         ticket = r.parseTicket(ticketBody)
         self.assertIsNotNone(ticket)
+
+    def test_bigModify(self):
+        ticketBody = self.getTicketBody('../risque-out/67160.html')
+        self.assertIsNotNone(ticketBody, "Failed to read ticket, setUp failed")
+        r = Risque('u', 'p')
+        ticket = r.parseTicket(ticketBody)
+        self.assertIsNotNone(ticket)
+
+    def test_deactivate(self):
+        ticketBody = self.getTicketBody('../risque-out/67154.html')
+        self.assertIsNotNone(ticketBody, "Failed to read ticket, setUp failed")
+        r = Risque('u', 'p')
+        ticket = r.parseTicket(ticketBody)
+        self.assertIsNotNone(ticket)

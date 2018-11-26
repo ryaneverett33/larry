@@ -193,3 +193,16 @@ class Vlan:
         if vlan1.voice != vlan2.voice:
             return False
         return True
+
+    def __str__(self):
+        # return self.ipAddress + '/' + str(self.mask) + ' ' + self.name + ' (' + str(self.tag) + ')'
+        string = ""
+        if self.ipAddress is not None:
+            string = string + self.ipAddress
+        if self.mask is not None:
+            string = string + '/' + str(self.mask)
+        if self.name is not None:
+            string = string + ' ' + self.name
+        if self.tag is not None:
+            string = string + ' (' + str(self.tag) + ')'
+        return string

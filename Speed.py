@@ -71,6 +71,13 @@ class Speed:
             self.__fillTuple(hundred=1, gig=1)
         elif "100/1000/2.5G/5G/10G" == splitSpeed:
             self.__fillTuple(hundred=1, gig=1, twogig=1, fivegig=1, tengig=1)
+        elif "100/1000/2.5G" == splitSpeed:
+            self.__fillTuple(hundred=1, gig=1, twogig=1)
+        elif "100/1000/2.5G/5G" == splitSpeed:
+            self.__fillTuple(hundred=1, gig=1, twogig=1, fivegig=1)
+        elif "no speed" == splitSpeed.lower():
+            self.__fillTuple()
+            return
         else:
             raise AttributeError("Risque String is not supported! Error: Speed")
         # fill out duplex
@@ -143,7 +150,7 @@ class Speed:
 
     # Fills the speed Tuple
     def __fillTuple(self, ten=None, hundred=None, gig=None, twogig=None, fivegig=None, tengig=None):
-        self.speedTuple = [0,0,0,0,0,0]
+        self.speedTuple = [0, 0, 0, 0, 0, 0]
         if ten is not None or ten:
             self.speedTuple[0] = 10
         if hundred is not None or hundred:
@@ -159,3 +166,25 @@ class Speed:
 
     def printDebug(self):
         print "name: {0}, duplex: {1}, auto? {2}, tuple: {3}".format(self.name, self.duplex, self.speedAuto, self.speedTuple)
+
+    def __str__(self):
+        speeds = []
+        for i in range(0, len(self.speedTuple)):
+            if self.speedTuple[i] != 0:
+                speeds.append(self.speedTuple[i])
+
+        if len(speeds) == 0:
+            return "No Speed"
+        string = ""
+        for i in range(0, len(speeds)):
+            string = string + str(speeds[i])
+            if i + 1 < len(speeds):
+                string = string + '/'
+        string = string + 'T-SW-'
+        if self.duplex == self.DUPLEX_FULL:
+            string = string + 'F'
+        elif self.duplex == self.DUPLEX_HALF:
+            string = string + 'H'
+        else:
+            string = string + 'A'
+        return string
