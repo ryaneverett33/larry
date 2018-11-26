@@ -82,6 +82,10 @@ class ProviderTests(unittest.TestCase):
         self.assertEqual(provider4.intType, "Fa")
         self.assertFalse(provider4.uplink)
         with self.assertRaises(AttributeError) as cm:
+            Provider(switchString='gi104/1/0/6')
+
+        self.assertEqual(cm.exception.message, "switchString is a FEX port, not supported!")
+        with self.assertRaises(AttributeError) as cm:
             Provider(switchString='')
 
         self.assertEqual(cm.exception.message, "switchString is an invalid provider")

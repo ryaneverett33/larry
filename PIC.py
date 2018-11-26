@@ -5,12 +5,21 @@ from Provider import Provider
 
 class PICConfig:
     voiceVlan = None
-    vlan = None
+    vlan = None # Can be an array
+    vlanList = False
     speed = None
+
     def __init__(self, vlan, speed):
-        if type(vlan) is not str or type(speed) is not str:
+        if type(speed) is not str or vlan is None:
             raise AttributeError("PICConfig given null attributes")
-        self.vlan = Vlan(risqueString=vlan)
+        if type(vlan) is str:
+            self.vlan = Vlan(risqueString=vlan)
+            self.vlanList = False
+        elif isinstance(vlan, list):
+            self.vlan = []
+            for v in vlan:
+                self.vlan.append(Vlan(risqueString=v))
+            self.vlanList = True
         self.speed = Speed(risqueString=speed)
 
     def addVoiceVlan(self, voiceVlan):
@@ -22,17 +31,21 @@ class PICConfig:
 class PIC:
     services = None
     name = None
-    provider = None
+    currentProvider = None
+    newProvider = None
     currentConfig = None
     newConfig = None
     action = None
 
-    def __init__(self, name, provider, action):
-        if name is None or provider is None or action is None:
+    def __init__(self, name, currentProvider, newProvider, action, services):
+        if name is None or newProvider is None or action is None:
             raise AttributeError("PIC given null attributes")
         self.name = name
         self.action = action
-        self.provider = Provider(risqueString=provider)
+        if currentProvider is not None:
+            self.currentProvider = Provider(risqueString=currentProvider)
+        self.newProvider = Provider(risqueString=newProvider)
+        self.services = services
         self.__isValidAction()
 
     def applyCurrentConfig(self, voiceVlan, vlan, speed):

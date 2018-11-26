@@ -86,6 +86,9 @@ class Provider:
             raise AttributeError("switchString is an invalid provider")
         # ['GigabitEthernet1', '0', '9'], ['Fa0', '8']
         providerSplit = switch.split('/')
+        if len(providerSplit) == 4:
+            # ['gi104', '1', '0', '6']
+            raise AttributeError("switchString is a FEX port, not supported!")
         if len(providerSplit) < 2:
             raise AttributeError("switchString is an invalid provider")
         # ['Gi3', '0']

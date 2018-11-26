@@ -1,0 +1,28 @@
+submitter = find('span', { 'id' : 'contentMain_lblContactSubmitter' }).string
+
+# Ticket Information
+submitted = find('span', { 'id' : 'contentMain_lblTicketSubmitted' }).string
+dueby = find('span', { 'id' : 'contentMain_lblTicketDue' }).string
+priority = find('span', { 'id' : 'contentMain_lblTicketPriority' }).string
+agent = find('span', { 'id' : 'contentMain_lblTicketAgent' }).string
+status = find('span', { 'id' : 'contentMain_lblTicketStatus' }).string
+internalstatus = find('span', {'id' : 'contentMain_lblTicketInternalStatus'}).string
+number = find('span', {'id' : 'contentMain_lblTicketID'}).string
+
+# Items
+table = find('table', { 'id' : 'contentMain_grdItems'})
+rows = table.find_all('tr') # row[0] is a header row
+cols = rows[i].find_all('td') # cols[3] is an options row
+action = cols[0].strong.string
+# i is the row - 1
+picId = cols[1].find('a', {'id' : 'contentMain_grdItems_PICHyperLink_' + i}).string
+patch = cols[1].find('span', {'id' : 'contentMain_grdItems_lblItemPatch_' + i}).string
+currentProvider = cols[1].find('div', {'id' : 'contentMain_grdItems_PanelCurrentProviderPort_' + i}).contents[3]
+newProvider = cols[1].find('span', {'id' : 'contentMain_grdItems_lblItemProvider_' + i}).string
+currentSpeed = cols[1].find('span', {'id' : 'contentMain_grdItems_lblItemOldSpeed_' + i}).contents[0]
+currentVlans = cols[2].find('span', {'id' : 'contentMain_grdItems_lblItemOldVLAN_' + i}).contents # contents[0] is <br/>
+currentVoip = cols[2].find('span', {'id' : 'contentMain_grdItems_lblCurrentVoIPVlan_' + i}).contents[1]
+newSpeed = cols[2].find('span', {'id' : 'contentMain_grdItems_lblItemNewSpeed_' + i}).contents[1]
+newVlan = cols[2].find('span', {'id' : 'contentMain_grdItems_lblItemNewVLAN_' + i}).contents # contents[0] is <br/>
+newVoip = cols[2].find('span', {'id' : 'contentMain_grdItems_lblNewVoIPVlan_0'}).contents[1]
+newServices = cols[2].find('span', {'id' : 'contentMain_grdItems_lblItemServices_0'}).string
