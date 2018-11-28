@@ -138,14 +138,14 @@ class Provider:
     def getHostFromProvider(provider):
         if provider is None:
             return None
-        if provider.building is None or provider.room is None or provider.switchType is None:
+        if provider.building is None or provider.TR is None or provider.switchType is None:
             raise AttributeError("getHostFromProvider requires a valid building, room, and switchType")
         buildingList = Hosts.getBuildings(provider.building)
         if provider.building not in buildingList:
             raise ValueError("Invalid Building, unable to get host")
         #  search by room and switch
-        filtered = Hosts.filter(buildingList, str(provider.room), switches=True)
+        filtered = Hosts.filter(buildingList, str(provider.TR), switches=True)
         for host in filtered[provider.building]:
-            if Hosts.isEqual(host, provider.building, provider.room, provider.switchType, provider.stack):
-                return host
+		if Hosts.isEqual(host, provider.building, provider.TR, provider.switchType, provider.stack):
+                	return host
         return None

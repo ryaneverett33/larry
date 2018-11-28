@@ -193,13 +193,17 @@ class Hosts:
         if len(hostSplit) != 4:
             raise AttributeError("hostname is an invalid hosttype")
         if hostSplit[0] != building:
+	    #  print "building mismatch: {0}, {1}".format(hostSplit[0], building)
             return False
         if hostSplit[1] != str(room):
+	    #  print "room mismatch: {0}, {1}".format(hostSplit[1], room)
             return False
         if hostSplit[2] != device:
+	    #  print "device mismatch: {0}, {1}".format(hostSplit[2], device)
             return False
-        if hostSplit[3] != str(stack):
-            return False
+        #  if hostSplit[3] != str(stack):
+	#    print "stack mismatch: {0}, {1}".format(hostSplit[3], stack)
+        #    return False
         return True
 
 
