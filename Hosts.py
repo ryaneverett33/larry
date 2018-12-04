@@ -174,6 +174,12 @@ class Hosts:
         return split[1]
 
     @staticmethod
+    def __splitIp(hostline):
+        #  123.1.4.5\tyong-601-blah becomes 123.1.4.5
+        split = hostline.strip().split('\t')
+        return split[0]
+
+    @staticmethod
     # Return host device
     def __getHostDevice(hostname):
         split = hostname.strip().split('-')
@@ -193,18 +199,51 @@ class Hosts:
         if len(hostSplit) != 4:
             raise AttributeError("hostname is an invalid hosttype")
         if hostSplit[0] != building:
-	    #  print "building mismatch: {0}, {1}".format(hostSplit[0], building)
+            #  print "building mismatch: {0}, {1}".format(hostSplit[0], building)
             return False
         if hostSplit[1] != str(room):
-	    #  print "room mismatch: {0}, {1}".format(hostSplit[1], room)
+            #  print "room mismatch: {0}, {1}".format(hostSplit[1], room)
             return False
         if hostSplit[2] != device:
-	    #  print "device mismatch: {0}, {1}".format(hostSplit[2], device)
+            #  print "device mismatch: {0}, {1}".format(hostSplit[2], device)
             return False
         #  if hostSplit[3] != str(stack):
-	#    print "stack mismatch: {0}, {1}".format(hostSplit[3], stack)
+        #    print "stack mismatch: {0}, {1}".format(hostSplit[3], stack)
         #    return False
         return True
+
+    @staticmethod
+    # Return the IP address of a host, None else
+    def getIPAddressOfHost(hostname):
+        if Hosts.isLinux():
+            try:
+                lines = open("/etc/hosts").readlines()
+            except IOError:
+                print("Couldn't read HOSTS file: {0}".format(IOError))
+                return None
+
+            inZone = False
+            for line in lines:
+                if len(line) == 0:
+                    continue
+                if line[0] == '#':
+                    # Find Zone: tcom.purdue.edu
+                    if "Zone:" in line and "tcom.purdue.edu" in line:
+                        inZone = True
+                        continue
+                if inZone:
+                    hosts = Hosts.__splitHost(line)
+                    ip = Hosts.__splitIp(line)
+                    if hosts == hostname:
+                        return ip
+        return None
+
+    @staticmethod
+    # Returns true if the ip address matches itap-iape's ip address, false else
+    def isItapIape(ip):
+        itapIp = Hosts.getIPAddressOfHost('itap-iape-01.tcom.purdue.edu')
+        print "itap-iape IP: {0}".format(itapIp)
+        return itapIp == ip
 
 
 class OSException(Exception):
