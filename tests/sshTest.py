@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0, '../')
-from Ssh import Ssh
+from ssh import Ssh
 from BufferedSsh import BufferedSsh
 from Hosts import Hosts
 import getpass
@@ -8,40 +8,19 @@ import getpass
 
 def main():
     username = raw_input("SSH username: ")
-    password = getpass.getpass("SSH password: ")
+    # password = getpass.getpass("SSH password: ")
+    password = raw_input("SSH password: ")
     host = raw_input("host: ")
-    ssh = BufferedSsh(username, password)
+    ssh = Ssh(username, password)
     ssh.connect(host)
-    stdin, stdout, stderr = ssh.exec_command("show run int gi1/0/1")
-    print stdout.read()
-    stdout.close()
-    stdin, stdout, stderr = ssh.exec_command("show boot")
-    print stdout.read()
-    stdout.close()
-    stdin, stdout, stderr = ssh.exec_command("sis")
-    print stdout.read()
-    stdout.close()
-    stdin, stdout, stderr = ssh.exec_command("show aliases")
-    print stdout.read()
-    stdout.close()
-    stdin, stdout, stderr = ssh.exec_command("show switch")
-    print stdout.read()
-    stdout.close()
-    stdin, stdout, stderr = ssh.exec_command("sis")
-    print stdout.read()
-    stdout.close()
-    stdin, stdout, stderr = ssh.exec_command("sis | i Te")
-    print stdout.read()
-    stdout.close()
-    #ssh = Ssh(username, password)
-    #ssh.setExpect("$")
-    #ssh.connect(host)
-    #print "peername: {0}".format(ssh.getPeerName())
-    #print "is itap-iape: {0}".format(Hosts.isItapIape(ssh.getPeerName()))
-    #print ssh.findIOSHostname()
-    #print ssh.execute("show run int gi1/0/1")
-    #print ssh.execute("show run int gi1/0/2")
-    #print ssh.execute("sis")
+    # hostname = ssh.findIOSHostname()
+    # print hostname
+    message = ssh.execute("show run int gi1/0/1")
+    print message[0]
+    message = ssh.execute("sis")
+    print message[0]
+    message = ssh.execute("config t")
+    print message[1]
     ssh.disconnect()
 
 

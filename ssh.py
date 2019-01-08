@@ -8,12 +8,18 @@ class Ssh:
     BUFFER_LEN = 1000
 
     host = None
+    hostname = None
     user = None
     password = None
     client = None
     connected = False
     channel = None
     expected = ""
+    # Enable Mode versus NonEnabled Mode
+    modes = {
+        '#',
+        '>'
+    }
 
     # Password is not the boilerkey password
     def __init__(self, user, password):
@@ -31,6 +37,7 @@ class Ssh:
             self.client.connect(host, username=self.user, password=self.password, look_for_keys=False)
             self.channel = self.client.invoke_shell(term="vt100", height=500)
             self.connected = True
+            self.findIOSHostname()
 
     # Disconnects from the current host
     def disconnect(self):
@@ -71,20 +78,67 @@ class Ssh:
         self.expected = expected
 
     # Return the hostname of the ios system
-    def findIOSHostname(self):
+    # keepMode determines whether or not mode symbols should be kept
+    def findIOSHostname(self, keepMode=False):
         self.__waitForSendReady()
         self.__send('\n')
         self.__waitForRecvReady()
         recieved = self.channel.recv(self.BUFFER_LEN)
-        return recieved
+        hostname = recieved
+        if '\n' in recieved:
+            recvSplit = recieved.split('\n')
+            # find in array
+            found = False
+            for split in recvSplit:
+                if split == '\r' or len(split) is 0:
+                    continue
+                hostname = split
+                found = True
+                break
+            if not found:
+                print "UNABLE TO FIND HOSTNAME"
+        if '\r' in hostname:
+            hostname = hostname.split('\r')[0]
+        if not keepMode:
+            modeChar = hostname[len(hostname) - 1]
+            for mode in self.modes:
+                if modeChar == mode:
+                    hostname = hostname[0:len(hostname)-1]
+                    break
+        self.hostname = hostname
+        return self.hostname
 
-    # Executes the command and returns the result (stdout)
+    # Executes the command and returns [cleaned output, resultant hostname]
     # Commands are appended with a newline
-    def execute(self, command, more=True):
+    def execute(self, command):
         self.__waitForSendReady()
         self.__send(command)
         self.__waitForRecvReady()
-        return self.channel.recv(self.BUFFER_LEN)
+
+        foundHostname = False
+        output = ""
+        while not foundHostname:
+            rawOutput = self.channel.recv(self.BUFFER_LEN)
+            # print "\trawOutput: {0}".format(rawOutput)
+            outputLines = rawOutput.split('\n')
+            for line in outputLines:
+                if '\r' in line:
+                    line = line.split('\r')[0]
+                if len(line) == 0:
+                    continue
+                if "more" in line.lower():
+                    self.__send(' ')
+                    # print "REQUESTING MORE, SENDING NEWLINE, line: {0}".format(line)
+                if command in line:
+                    continue
+                if self.hostname in line:
+                    # print "FOUND HOSTNAME: {0} on line {1}".format(self.hostname, line)
+                    foundHostname = True
+                    return [output[0:len(output)-1], line]
+                output = output + line + '\n'
+            if not foundHostname:
+                if output[len(output) - 1] == '\n':
+                    output = output[0:len(output) - 1]
         # buffer = ""
         # finishedRecieving = False
         # while not finishedRecieving:
