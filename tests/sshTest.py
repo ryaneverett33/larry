@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0, '../')
-from ssh import Ssh
+from Ssh import Ssh
 from BufferedSsh import BufferedSsh
 from Hosts import Hosts
 import getpass
