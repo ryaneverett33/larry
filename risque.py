@@ -18,7 +18,7 @@ class Risque:
     def getTicketData(self, ticketNumber):
         try:
             ticket = self.getTicketBody(ticketNumber)
-            # actually parsing the data
+            return self.parseTicket(ticket)
         except ValueError:
             print "Failed to get ticket, login invalid"
             return None

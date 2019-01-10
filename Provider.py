@@ -9,6 +9,7 @@ class Provider:
     switchType = None   # e.g. c3750ep
     intType = None      # Gi, Te, Tw, Fa
     uplink = False      # e.g. Te1/1/3
+
     def __init__(self, risqueString=None, switchString=None):
         if risqueString is not None:
             self.__parseProviderFromRisque(risqueString)
@@ -146,6 +147,15 @@ class Provider:
         #  search by room and switch
         filtered = Hosts.filter(buildingList, str(provider.TR), switches=True)
         for host in filtered[provider.building]:
-		if Hosts.isEqual(host, provider.building, provider.TR, provider.switchType, provider.stack):
-                	return host
+            if Hosts.isEqual(host, provider.building, provider.TR, provider.switchType, provider.stack):
+                return host
         return None
+
+    # Returns an interface corresponding to this provider
+    # e.g., gi3/0/1, te1/1/3, fa0/1, tw3/0/1
+    def getSwitchInterface(self):
+        if self.switch == 0:
+            # e.g. fa0/1
+            return "{0}0/{1}".format(self.intType, self.port)
+        else:
+            return "{0}{1}/{2}/{3}".format(self.intType, self.switch, (0, 1)[self.uplink], self.port)

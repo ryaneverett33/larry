@@ -27,6 +27,14 @@ class PICConfig:
             raise AttributeError("addVoiceVlan given null attributes")
         self.voiceVlan = Vlan(risqueString=voiceVlan)
 
+    # returns a new PICConfig of the differences between two configs, null if the same
+    @staticmethod
+    def diffConfig(oldConfig, newConfig):
+        if oldConfig is None or newConfig is None:
+            raise AttributeError("diffConfig given null attributes")
+        if not isinstance(oldConfig, PICConfig) or not isinstance(newConfig, PICConfig):
+            raise AttributeError("diffConfig can't diff objects that aren't of type PICConfig")
+
 
 class PIC:
     services = None
@@ -72,3 +80,20 @@ class PIC:
             return
         else:
             raise ValueError("PIC given an invalid action")
+
+    def getProvider(self):
+        if self.action == "Activate":
+            if self.newProvider is None:
+                raise AttributeError("Provider hasn't been supplied yet")
+            return self.newProvider
+        if self.action == "Modify":
+            if self.newProvider is None and self.currentProvider is None:
+                raise AttributeError("Provider hasn't been supplied yet")
+            return (self.currentProvider, self.newProvider)[self.currentProvider is None]
+        if self.action == "Deactivate":
+            if self.newProvider is None:
+                raise AttributeError("Provider hasn't been supplied yet")
+            return self.newProvider
+
+    def getConfig(self):
+

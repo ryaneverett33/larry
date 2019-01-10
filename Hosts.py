@@ -2,6 +2,16 @@ import os
 
 
 class Hosts:
+    DEBUG_LOCATION = "C:\Users\everettr\Documents\hosts"
+    USE_DEBUG = True
+
+    @staticmethod
+    def getHostsFile():
+        if Hosts.USE_DEBUG:
+            return Hosts.DEBUG_LOCATION
+        else:
+            return "/etc/hosts"
+
     # Get all the hosts for each building requested
     # Returns a list of the buildings requested
     @staticmethod
@@ -18,7 +28,7 @@ class Hosts:
             hostDict = dict()  # [buildings] -> array(hostnames)
 
             try:
-                lines = open("/etc/hosts").readlines()
+                lines = open(Hosts.getHostsFile()).readlines()
             except IOError:
                 print("Couldn't read HOSTS file: {0}".format(IOError))
                 return None
@@ -54,7 +64,7 @@ class Hosts:
             hostDict = dict()  # [buildings] -> array(hostnames)
 
             try:
-                lines = open("/etc/hosts").readlines()
+                lines = open(Hosts.getHostsFile()).readlines()
             except IOError:
                 print("Couldn't read HOSTS file: {0}".format(IOError))
                 return None
@@ -80,6 +90,8 @@ class Hosts:
     # Returns True if Linux and false for everything else
     @staticmethod
     def isLinux():
+        if Hosts.USE_DEBUG:
+            return True
         if os.name == "posix":
             return True
         else:
@@ -217,7 +229,7 @@ class Hosts:
     def getIPAddressOfHost(hostname):
         if Hosts.isLinux():
             try:
-                lines = open("/etc/hosts").readlines()
+                lines = open(Hosts.getHostsFile()).readlines()
             except IOError:
                 print("Couldn't read HOSTS file: {0}".format(IOError))
                 return None

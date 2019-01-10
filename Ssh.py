@@ -111,6 +111,7 @@ class Ssh:
     # Executes the command and returns [cleaned output, resultant hostname]
     # Commands are appended with a newline
     def execute(self, command):
+        print "Ssh Driver executing command {0}".format(command)
         self.__waitForSendReady()
         self.__send(command)
         self.__waitForRecvReady()
