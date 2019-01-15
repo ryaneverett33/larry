@@ -10,18 +10,16 @@ class VerifyTicket:
         self.appUI = appUI
 
     def main(self):
-        username = raw_input("Risque Username: ")
-        password = raw_input("Risque Password (BoilerKey): ")
+        username, risquePassword, switchPassword = ConfigurationDriver.getCredentials()
         ticketNumber = raw_input("Risque Ticket Number: ")
         print "Getting Info from Risque"
-        risque = Risque(username, password)
+        risque = Risque(username, risquePassword)
         ticket = risque.getTicketData(ticketNumber)
         if ticket is None:
             print "Failed to get ticket from risque"
             self.appUI.goToMainPage()
             return
         self.__printDebugTicket(ticket)
-        ConfigurationDriver.storeCredentials(username, password)
         Verify.Verify(ticket).run()
 
     def __printDebugTicket(self, ticket):

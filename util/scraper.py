@@ -22,13 +22,15 @@ def printTicket(ticket):
         print "PIC: {0}, Action: {1}, Current Provider: {2}, New Provider: {3}"\
             .format(pic.name, pic.action, pic.currentProvider, pic.newProvider)
         if pic.currentConfig is not None:
-            print "Current Speed: {0}, Current Vlans: {1}, Current VoIP: {2}"\
-                .format(pic.currentConfig.speed, listToStr(pic.currentConfig.vlan), pic.currentConfig.voiceVlan)
+            print "Current Speed: {0}, Current Vlans: {1}, Trunk: {3} Current VoIP: {2}"\
+                .format(pic.currentConfig.speed, listToStr(pic.currentConfig.vlan), pic.currentConfig.voiceVlan,
+                        pic.currentConfig.trunk)
         else:
             print "Current Speed: None, Current Vlans: None, Current VoIP: None"
         if pic.newConfig is not None:
-            print "New Speed: {0}, New Vlans: {1}, New VoIP: {2}, New Services: {3}"\
-                .format(pic.newConfig.speed, listToStr(pic.newConfig.vlan), pic.newConfig.voiceVlan, pic.services)
+            print "New Speed: {0}, New Vlans: {1}, Trunk: {4} New VoIP: {2}, New Services: {3}"\
+                .format(pic.newConfig.speed, listToStr(pic.newConfig.vlan), pic.newConfig.voiceVlan, pic.services,
+                        pic.newConfig.trunk)
         else:
             print "New Speed: None, New Vlans: None, New VoIP: None"
         print ""

@@ -104,18 +104,37 @@ class Speed:
         twogig = None
         fivegig = None
         tengig = None
-        if "10" in switch:
-            ten = True
-        if "100" in switch:
-            hundred = True
-        if "1000" in switch:
-            gig = True
-        if "2.5G" in switch.upper() or "2500" in switch:
-            twogig = True
-        if "5G" in switch.upper() or "5000" in switch:
-            fivegig = True
-        if "10G" in switch.upper() or "10000" in switch:
-            tengig = True
+        # if "10 " in switch or " 10" in switch:
+        #     ten = True
+        # if "100 " in switch or " 100" in switch:
+        #     hundred = True
+        # if "1000 " in switch or " 1000" in switch:
+        #     gig = True
+        # if "2.5G " in switch.upper() or "2500 " in switch or " 2.5G" in switch.upper() or " 2500" in switch:
+        #     twogig = True
+        # if "5G " in switch.upper() or "5000 " in switch or " 5G" in switch.upper() or " 5000" in switch:
+        #     fivegig = True
+        # if "10G " in switch.upper() or "10000 " in switch or " 10G" in switch.upper() or " 10000" in switch:
+        #     tengig = True
+        # self.__fillTuple(ten, hundred, gig, twogig, fivegig, tengig)
+        # if "auto" in switch.lower():
+        #     self.speedAuto = True
+        # if not ten and not hundred and not gig and not twogig and not fivegig and not tengig:
+        #     self.speedAuto = True
+        words = switch.split(' ')
+        for word in words:
+            if word == "10":
+                ten = True
+            if word == "100":
+                hundred = True
+            if word == "1000":
+                gig = True
+            if word.upper() == "2.5G" or word == "2500":
+                twogig = True
+            if word.upper() == "5G" or word == "5000":
+                fivegig = True
+            if word.upper() == "10G" or word == "10000":
+                tengig = True
         self.__fillTuple(ten, hundred, gig, twogig, fivegig, tengig)
         if "auto" in switch.lower():
             self.speedAuto = True

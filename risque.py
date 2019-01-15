@@ -3,17 +3,23 @@ import re
 from bs4 import BeautifulSoup, NavigableString, Tag
 from Ticket import Ticket
 from PIC import PIC
+import warnings
+from ConfigurationDriver import ConfigurationDriver
+import urllib3
+import exceptions
 
 
 class Risque:
     username = None
     password = None
     session = None
+    loggedIn = False
 
     def __init__(self, user, password):
         self.username = user
         self.password = password
         self.session = requests.session()
+        warnings.filterwarnings("ignore")
 
     def getTicketData(self, ticketNumber):
         try:
@@ -24,18 +30,7 @@ class Risque:
             return None
 
     def getTicketBody(self, ticketNumber):
-        login = self.session.get(
-            'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal')
-        login_html = lxml.html.fromstring(login.text)
-        hidden_inputs = login_html.xpath(r'//form//input[@type="hidden"]')
-        form = {x.attrib["name"]: x.attrib["value"] for x in hidden_inputs}
-
-        form['username'] = self.username
-        form['password'] = self.password
-
-        response = self.session.post(
-            'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal',
-            data=form)
+        self.login()
         ticket = self.session.get('https://risque.itap.purdue.edu/Tickets/Data/TicketDetail.aspx?id=%s' % ticketNumber)
 
         txt = ticket.content
@@ -53,6 +48,22 @@ class Risque:
         if value == 'None' or value == '' or value.lower() == 'n/a':
             return None
         return value
+
+    def login(self):
+        print "Logging in"
+        login = self.session.get(
+            'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal')
+        login_html = lxml.html.fromstring(login.text)
+        hidden_inputs = login_html.xpath(r'//form//input[@type="hidden"]')
+        form = {x.attrib["name"]: x.attrib["value"] for x in hidden_inputs}
+
+        form['username'] = self.username
+        form['password'] = self.password
+
+        response = self.session.post(
+            'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal',
+            data=form)
+        self.loggedIn = True
 
     # Return a list that doesn't contain any Tag Objects
     def __removeTags(self, list):
@@ -122,6 +133,11 @@ class Risque:
                     newVlans = newVlans.contents
                 else:
                     newVlans = None
+                newTaggedVlans = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemTaggedVLANs_' + str(j)})
+                if newTaggedVlans is not None and len(newTaggedVlans.contents) >= 2:
+                    newTaggedVlans = newTaggedVlans.contents
+                else:
+                    newTaggedVlans = None
                 # newVoip = cols[2].find('span', {'id': 'contentMain_grdItems_lblNewVoIPVlan_' + str(j)}).contents[1]
                 newVoip = cols[2].find('span', {'id': 'contentMain_grdItems_lblNewVoIPVlan_' + str(j)})
                 if newVoip is not None and len(newVoip.contents) >= 2:
@@ -143,6 +159,9 @@ class Risque:
                     for x in range(1, len(currentVlans)):
                         currentVlans[x] = self.clean(currentVlans[x])
                     currentVlans = self.__removeTags(currentVlans)
+                    if len(currentVlans) == 1:
+                        # convert from list
+                        currentVlans = currentVlans[0]
                 currentVoip = self.clean(currentVoip)
                 newSpeed = self.clean(newSpeed)
                 if newVlans is not None:
@@ -150,6 +169,14 @@ class Risque:
                         if isinstance(newVlans[x], NavigableString):
                             newVlans[x] = self.clean(newVlans[x])
                     newVlans = self.__removeTags(newVlans)
+                    if len(newVlans) == 1:
+                        # convert from list
+                        newVlans = newVlans[0]
+                if newTaggedVlans is not None:
+                    for x in range(0, len(newTaggedVlans)):
+                        if isinstance(newTaggedVlans[x], NavigableString):
+                            newTaggedVlans[x] = self.clean(newTaggedVlans[x])
+                            newTaggedVlans = self.__removeTags(newTaggedVlans)
                 newVoip = self.clean(newVoip)
                 # Don't clean new services as we're not sure if it is a str or []
 
@@ -159,6 +186,8 @@ class Risque:
                     pic.applyCurrentConfig(currentVoip, currentVlans, currentSpeed)
                 if newVlans is not None and newSpeed is not None:
                     pic.applyNewConfig(newVoip, newVlans, newSpeed)
+                if newTaggedVlans is not None:
+                    pic.addTaggedVlans(newTaggedVlans)
                 ticket.addPic(pic)
 
             return ticket

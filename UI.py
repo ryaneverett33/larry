@@ -1,4 +1,5 @@
 from ui import VerifyTicket
+from ConfigurationDriver import ConfigurationDriver
 
 
 class UI:
@@ -13,7 +14,8 @@ class UI:
         self.pages = [
             ["Do Ticket", self.work_page],
             ["Verify Ticket", self.verify_page],
-            ["Settings", self.settings_page]
+            ["Settings", self.settings_page],
+            ["Store Credentials", self.credentials_page]
         ]
         self.goToMainPage()
 
@@ -35,6 +37,17 @@ class UI:
         print "Settings"
         self.goToMainPage()
 
+    def credentials_page(self):
+        print "Store Credentials"
+        if ConfigurationDriver.credentialsStored():
+            print "Credentials already stored"
+            response = raw_input("overwrite? (y/n): ")
+            if response.lower() == "y":
+                ConfigurationDriver.getCredentials()
+        else:
+            ConfigurationDriver.getCredentials()
+        self.goToMainPage()
+
     def main_page(self):
         self.__printPages()
         index = -1
@@ -45,9 +58,12 @@ class UI:
                 if rawIndex >= 0 and rawIndex < len(self.pages):
                     index = rawIndex
                     break
+                else:
+                    print "invalid index: {0}, range: [0,{1}]".format(rawIndex, len(self.pages))
             except:
                 print "Invalid Action, must be a value between 0 and {1}".format(len(self.pages) - 1)
         self.currentPage = self.pages[index]
+        print "switching to page {0} with index {1}".format(self.currentPage[0], index)
 
     def goToMainPage(self):
         self.currentPage = ["Main Page", self.main_page]

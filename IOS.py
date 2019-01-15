@@ -1,4 +1,5 @@
-from Ssh import Ssh
+from Vlan import Vlan
+from Speed import Speed
 
 
 # Represents an SSH connection to an IOS switch
@@ -57,3 +58,80 @@ class IOS:
     def currentMode(self):
         a = None
 
+    def getDescription(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "description" in line:
+                return line.split(' ')[1]
+        return None
+
+    def getVlan(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "access vlan" in line:
+                return Vlan(switchString=line)
+        return None
+
+    def getVoiceVlan(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "voice vlan" in line:
+                return Vlan(switchString=line)
+        return None
+
+    def getSpeed(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "speed" in line:
+                return Speed(switchString=line)
+        return None
+
+    def isShutdown(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "shut" in line:
+                return True
+        return False
+
+    # Return "access" if switchport mode access, "trunk" if switchport mode trunk
+    def getSwitchportMode(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "switchport mode" in line:
+                if "trunk" in line:
+                    return "trunk"
+                elif "access" in line:
+                    return "access"
+                else:
+                    print "Unknown switchport mode: {0}".format(line)
+        return None
+
+    def getTaggedVlans(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "switchport trunk allowed" in line:
+                return Vlan(switchString=line)
+        return None
+
+    def getNativeVlan(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "switchport trunk native" in line:
+                return Vlan(switchString=line)
+        return None

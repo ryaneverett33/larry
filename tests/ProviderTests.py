@@ -99,3 +99,13 @@ class ProviderTests(unittest.TestCase):
         self.assertEqual(provider1.stack, 1)
         self.assertEqual(provider1.port, 3)
         self.assertTrue(provider1.uplink)
+
+    def test_getHosts(self):
+        provider1 = Provider(risqueString='hamp-gu01a-c3750ep-01:04-Gi4/0/18')
+        self.assertEqual(Provider.getHostFromProvider(provider1), "hamp-gu01a-c3750ep-01.tcom.purdue.edu")
+        provider2 = Provider(risqueString="stew-b20c-c3850-02:01-Gi1/0/37")
+        self.assertEqual(Provider.getHostFromProvider(provider2), "stew-b20c-c3850-02.tcom.purdue.edu")
+        provider3 = Provider(risqueString='yong-464-c3750ep-01:01-Gi1/0/1')
+        self.assertEqual(Provider.getHostFromProvider(provider3), "yong-464-c3750ep-01.tcom.purdue.edu")
+        provider4 = Provider(risqueString='jnsn-b099f-c3750ep-01:01-Gi1/0/21')
+        self.assertEqual(Provider.getHostFromProvider(provider4), "jnsn-b099f-c3750ep-01.tcom.purdue.edu")

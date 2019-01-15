@@ -5,9 +5,11 @@ from Provider import Provider
 
 class PICConfig:
     voiceVlan = None
-    vlan = None     # Can be an array
+    vlan = None     # Can be an array [Native vlan or access vlan]
+    taggedVlans = None
     vlanList = False
     speed = None
+    trunk = False
 
     def __init__(self, vlan, speed):
         if type(speed) is not str or vlan is None:
@@ -26,6 +28,14 @@ class PICConfig:
         if type(voiceVlan) is not str:
             raise AttributeError("addVoiceVlan given null attributes")
         self.voiceVlan = Vlan(risqueString=voiceVlan)
+
+    def addTaggedVlans(self, taggedVlans):
+        if not isinstance(taggedVlans, list):
+            raise AttributeError("addTaggedVlans given null attributes")
+        self.taggedVlans = list()
+        for vlan in taggedVlans:
+            self.taggedVlans.append(Vlan(risqueString=vlan))
+        self.trunk = True
 
     # returns a new PICConfig of the differences between two configs, null if the same
     @staticmethod
@@ -51,9 +61,17 @@ class PIC:
         self.name = name
         self.action = action
         if currentProvider is not None:
-            self.currentProvider = Provider(risqueString=currentProvider)
+            try:
+                self.currentProvider = Provider(risqueString=currentProvider)
+            except:
+                print "Failed to parse currentProvider"
+                self.currentProvider = None
         if newProvider is not None:
-            self.newProvider = Provider(risqueString=newProvider)
+            try:
+                self.newProvider = Provider(risqueString=newProvider)
+            except:
+                print "Failed to parse newProvider"
+                self.newProvider = None
         self.services = services
         self.__isValidAction()
 
@@ -81,6 +99,11 @@ class PIC:
         else:
             raise ValueError("PIC given an invalid action")
 
+    def addTaggedVlans(self, vlans):
+        if vlans is None:
+            raise AttributeError("Invalid tagged vlans - null")
+        self.newConfig.addTaggedVlans(vlans)
+
     def getProvider(self):
         if self.action == "Activate":
             if self.newProvider is None:
@@ -89,11 +112,23 @@ class PIC:
         if self.action == "Modify":
             if self.newProvider is None and self.currentProvider is None:
                 raise AttributeError("Provider hasn't been supplied yet")
-            return (self.currentProvider, self.newProvider)[self.currentProvider is None]
+            return (self.newProvider, self.currentProvider)[self.currentProvider is None]
         if self.action == "Deactivate":
             if self.newProvider is None:
                 raise AttributeError("Provider hasn't been supplied yet")
             return self.newProvider
 
     def getConfig(self):
+        if self.action == "Activate":
+            if self.newConfig is None:
+                raise AttributeError("Config hasn't been supplied yet")
+            return self.newConfig
+        if self.action == "Modify":
+            return self.newConfig
+        if self.action == "Deactivate":
+            if self.newConfig is None:
+                raise AttributeError("Config hasn't been supplied yet")
+            return self.newConfig
 
+    def getDescription(self):
+        return self.name.lower()

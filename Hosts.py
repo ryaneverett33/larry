@@ -3,7 +3,7 @@ import os
 
 class Hosts:
     DEBUG_LOCATION = "C:\Users\everettr\Documents\hosts"
-    USE_DEBUG = True
+    USE_DEBUG = False
 
     @staticmethod
     def getHostsFile():
@@ -218,6 +218,10 @@ class Hosts:
             return False
         if hostSplit[2] != device:
             #  print "device mismatch: {0}, {1}".format(hostSplit[2], device)
+            return False
+        hostStack = hostSplit[3].split('.')[0]
+        hostStack = int(hostStack)
+        if hostStack != stack:
             return False
         #  if hostSplit[3] != str(stack):
         #    print "stack mismatch: {0}, {1}".format(hostSplit[3], stack)
