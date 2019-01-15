@@ -5,6 +5,7 @@ from ConfigurationDriver import ConfigurationDriver
 
 class VerifyTicket:
     appUI = None
+    risque = None
 
     def __init__(self, appUI):
         self.appUI = appUI
@@ -13,8 +14,9 @@ class VerifyTicket:
         username, risquePassword, switchPassword = ConfigurationDriver.getCredentials()
         ticketNumber = raw_input("Risque Ticket Number: ")
         print "Getting Info from Risque"
-        risque = Risque(username, risquePassword)
-        ticket = risque.getTicketData(ticketNumber)
+        if self.risque is None:
+            self.risque = Risque(username, risquePassword)
+        ticket = self.risque.getTicketData(ticketNumber)
         if ticket is None:
             print "Failed to get ticket from risque"
             self.appUI.goToMainPage()

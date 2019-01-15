@@ -206,3 +206,9 @@ class Vlan:
         if self.tag is not None:
             string = string + ' (' + str(self.tag) + ')'
         return string
+
+    @staticmethod
+    def Vlan1():
+        vlan = Vlan()
+        vlan.tag = 1
+        return vlan

@@ -30,10 +30,18 @@ class Risque:
             return None
 
     def getTicketBody(self, ticketNumber):
-        self.login()
-        ticket = self.session.get('https://risque.itap.purdue.edu/Tickets/Data/TicketDetail.aspx?id=%s' % ticketNumber)
-
+        if not ConfigurationDriver.cookiesStored():
+            self.login()
+        ticket = None
+        if ConfigurationDriver.cookiesStored():
+            ticket = self.session.get('https://risque.itap.purdue.edu/Tickets/Data/TicketDetail.aspx?id=%s' % ticketNumber,
+                                      cookies=ConfigurationDriver.getCookies())
+        else:
+            ticket = self.session.get(
+                'https://risque.itap.purdue.edu/Tickets/Data/TicketDetail.aspx?id=%s' % ticketNumber)
+            ConfigurationDriver.storeCookies(self.session.cookies)
         txt = ticket.content
+        # Store session
         if "You have asked to login to" in txt:
             raise ValueError("Failed to get ticket body, login invalid")
         return txt

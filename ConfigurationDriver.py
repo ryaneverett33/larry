@@ -35,13 +35,12 @@ class ConfigurationDriver:
 
     @staticmethod
     def storeCookies(cookies):
-        print "Stored cookies {0}".format(cookies)
         try:
-            name = cookies.get(cookies.keys()[0]).get('/').keys()[0]
-            value = cookies.get(cookies.keys()[0]).get('/').get(name).value
-            ConfigurationDriver.cookies = {
-                name : value
-            }
+            keys = cookies.keys()
+            ConfigurationDriver.cookies = dict()
+            for key in keys:
+                ConfigurationDriver.cookies[key] = cookies[key]
+            print "Stored cookies: {0}".format(ConfigurationDriver.cookies)
         except:
             print "failed storing cookies"
             ConfigurationDriver.cookies = None

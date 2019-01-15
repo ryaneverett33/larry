@@ -74,7 +74,7 @@ class IOS:
         for line in useConfig:
             if "access vlan" in line:
                 return Vlan(switchString=line)
-        return None
+        return Vlan.Vlan1()
 
     def getVoiceVlan(self, interface, config=None):
         useConfig = config
