@@ -11,6 +11,7 @@ class Speed:
     duplex = None       # auto, full, half
     speedTuple = None   # 10, 100, 1000, 2500, 5000, 10000
     speedAuto = False
+    noSpeed = False
 
     def __init__(self, name=None, risqueString=None, switchString=None):
         if name is not None:
@@ -42,7 +43,7 @@ class Speed:
             self.name = self.NAME_GIGABIT
         elif name.lower() == "10gigabit":
             self.duplex = self.DUPLEX_AUTO
-            self.__fillTuple(ten=1, hundred=1, gig=1, twogig=1, fivegig=1, tengig=1)
+            self.__fillTuple(ten=0, hundred=1, gig=1, twogig=1, fivegig=1, tengig=1)
             self.name = self.NAME_TENGIGABIT
         else:
             raise AttributeError("name is an invalid type")
@@ -207,3 +208,28 @@ class Speed:
         else:
             string = string + 'A'
         return string
+
+    @staticmethod
+    def switchCommand(speed):
+        if speed is None or not isinstance(speed, Speed):
+            raise AttributeError("Speed::switchCommand() given invalid arguments")
+        if speed.noSpeed:
+            return "no speed auto"
+        base = "speed "
+        speeds = ""
+        count = 0
+        for speed in speed.speedTuple:
+            if speed != 0:
+                speeds = speeds + str(speed) + " "
+                count = count + 1
+        if count == 1:
+            return (base + speeds).rstrip()
+        else:
+            return (base + "auto " + speeds).rstrip()
+
+    @staticmethod
+    def NoSpeed():
+        speed = Speed()
+        speed.__fillTuple()
+        speed.noSpeed = True
+        return speed

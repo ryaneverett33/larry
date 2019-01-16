@@ -53,3 +53,8 @@ class ConfigurationDriver:
     @staticmethod
     def getCookies():
         return ConfigurationDriver.cookies
+
+    @staticmethod
+    def useTestCredentials(username, switchPassword):
+        ConfigurationDriver.user = username
+        ConfigurationDriver.switchPassword = switchPassword

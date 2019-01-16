@@ -15,7 +15,8 @@ class UI:
             ["Do Ticket", self.work_page],
             ["Verify Ticket", self.verify_page],
             ["Settings", self.settings_page],
-            ["Store Credentials", self.credentials_page]
+            ["Store Credentials", self.credentials_page],
+            ["Exit", self.exit]
         ]
         self.goToMainPage()
 
@@ -61,9 +62,12 @@ class UI:
                 else:
                     print "invalid index: {0}, range: [0,{1}]".format(rawIndex, len(self.pages))
             except:
-                print "Invalid Action, must be a value between 0 and {1}".format(len(self.pages) - 1)
+                print "Invalid Action, must be a value between 0 and {0}".format(len(self.pages) - 1)
         self.currentPage = self.pages[index]
         print "switching to page {0} with index {1}".format(self.currentPage[0], index)
+
+    def exit(self):
+        self.exitApp = True
 
     def goToMainPage(self):
         self.currentPage = ["Main Page", self.main_page]

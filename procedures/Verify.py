@@ -93,7 +93,7 @@ class Verify:
         return passed
 
     # Returns true/false if pic is correct, prints out any errors
-    def __verify(self, iosConnection, provider, pic):
+    def verify(self, iosConnection, provider, pic):
         if pic.action == "Deactivate":
             return self.__verifyBasicDeactivate(iosConnection, provider, pic)
         elif pic.action == "Activate":
@@ -115,8 +115,12 @@ class Verify:
                 driver = ConfigurationDriver.getDriver()
                 driver.connect(currentHost)
                 iosConnection = IOS(driver, currentHost, provider.switchType)
-            if not self.__verify(iosConnection, provider, pic):
-                failed.append(pic)
+            try:
+                if not self.verify(iosConnection, provider, pic):
+                    failed.append(pic)
+            except Exception, e:
+                print "Failed to verify {0} with provider {1}, error: {2}".format(pic.name, provider, e)
+
         if len(failed) != 0:
             print "The following PICs are invalid"
             for pic in failed:
