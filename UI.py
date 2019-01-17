@@ -1,9 +1,10 @@
 from ui import VerifyTicket
+from ui import ConfigTicket
 from ConfigurationDriver import ConfigurationDriver
+import signal
 
 
 class UI:
-
     app = None
     pages = None
     currentPage = None
@@ -19,14 +20,19 @@ class UI:
             ["Exit", self.exit]
         ]
         self.goToMainPage()
+        signal.signal(signal.SIGINT, self.ctrlchandler)
 
     def main(self):
         while not self.exitApp:
             currentPage = self.currentPage
-            currentPage[1]()
+            try:
+                currentPage[1]()
+            except StopIteration:
+                self.goToMainPage()
 
     def work_page(self):
         print "Work"
+        ConfigTicket.ConfigTicket(self).main()
         self.goToMainPage()
 
     def verify_page(self):
@@ -77,3 +83,9 @@ class UI:
         for page in self.pages:
             print "{0} - {1}".format(i, page[0])
             i = i + 1
+
+    def ctrlchandler(self, sig, frame):
+        if self.currentPage[0] == "Main Page":
+            self.exit()
+        # raise an exception on main thread, and leave
+        raise StopIteration()

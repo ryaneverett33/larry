@@ -114,6 +114,8 @@ class Verify:
                 currentHost = provider.getHostFromProvider(provider)
                 driver = ConfigurationDriver.getDriver()
                 driver.connect(currentHost)
+                if iosConnection is not None:
+                    iosConnection.disconnect()
                 iosConnection = IOS(driver, currentHost, provider.switchType)
             try:
                 if not self.verify(iosConnection, provider, pic):

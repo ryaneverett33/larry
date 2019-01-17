@@ -9,12 +9,15 @@ class Ssh:
 
     host = None
     hostname = None
+    cleanedHostname = None
     user = None
     password = None
     client = None
     connected = False
     channel = None
     expected = ""
+    SSH_DISALLOWED_HOSTS = ["itap-iape", "lynn-sbpe", "lamb-sbpe", "erht-sbpe"]
+
     # Enable Mode versus NonEnabled Mode
     modes = {
         '#',
@@ -31,6 +34,7 @@ class Ssh:
 
     # Connects to the host if a host is not already connected
     def connect(self, host):
+        print "SSH Driver connecting to {0}".format(host)
         if self.connected:
             raise StandardError("Already connected to a host, must disconnect first")
         else:
@@ -106,11 +110,26 @@ class Ssh:
                     hostname = hostname[0:len(hostname)-1]
                     break
         self.hostname = hostname
+        self.cleanHostname()
         return self.hostname
+
+    # Fix for mjis-3063-c9348uxm-01.tcom.purdue.edu, where config t -> mjis-3063-c9348uxm-0(config)#
+    def cleanHostname(self):
+        hostSplit = self.hostname.split('-')
+        hostClean = ""
+        for i in range(0, len(hostSplit) - 1):
+            hostClean = hostClean + hostSplit[i]
+            if i < len(hostSplit) - 2:
+                hostClean = hostClean + '-'
+        self.cleanedHostname = hostClean
+        print "cleaned hostname is {0}".format(self.cleanedHostname)
 
     # Executes the command and returns [cleaned output, resultant hostname]
     # Commands are appended with a newline
     def execute(self, command):
+        if not self.connected:
+            print "not connected to a host, can't execute"
+            return
         print "Ssh Driver executing command {0}".format(command)
         self.__waitForSendReady()
         self.__send(command)
@@ -132,16 +151,22 @@ class Ssh:
                     # print "REQUESTING MORE, SENDING NEWLINE, line: {0}".format(line)
                 if command in line:
                     continue
-                if self.hostname in line:
+                if self.hostname in line or self.cleanedHostname in line:
                     # print "FOUND HOSTNAME: {0} on line {1}".format(self.hostname, line)
                     foundHostname = True
                     return [output[0:len(output)-1], line]
                 output = output + line + '\n'
             if not foundHostname:
-                if output[len(output) - 1] == '\n':
+                if len(output) > 1 and output[len(output) - 1] == '\n':
                     output = output[0:len(output) - 1]
         # buffer = ""
         # finishedRecieving = False
         # while not finishedRecieving:
         #     text = self.channel.recv(self.BUFFER_LEN)
             # check if text contains the expected string
+
+    def isForbiddenHost(self):
+        for host in self.SSH_DISALLOWED_HOSTS:
+            if host in self.hostname:
+                return True
+        return False

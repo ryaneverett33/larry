@@ -4,6 +4,7 @@ from shutil import copyfile
 from COMMON import Common
 import zipfile
 from os import walk
+import signal
 
 
 class Package:
@@ -12,6 +13,7 @@ class Package:
 
     def __init__(self):
         self.parseArgs()
+        signal.signal(signal.SIGINT, self.ctrlchandler)
 
     def parseArgs(self):
         for arg in sys.argv:
@@ -99,12 +101,7 @@ class Package:
             releaseNumber = None
             while releaseNumber is None:
                 releaseNumber = raw_input("release number: ")
-                try:
-                    float(releaseNumber)    # verify it's an actual number
-                except:
-                    print "release number is invalid"
-                    releaseNumber = None
-                if self.setVersion and Common.mycmp(releaseNumber, latestVersion) != 1:
+                if self.setVersion and Common.compareVersions(releaseNumber, latestVersion) != 1:
                     print "release number not greater than current version {0}".format(latestVersion)
                     response = raw_input("do you want to set a different number (y/n)? ")
                     if response == "y":
@@ -122,6 +119,9 @@ class Package:
 
         else:
             self.printHelp()
+
+    def ctrlchandler(self, sig, frame):
+        exit(0)
 
 
 if __name__ == "__main__":

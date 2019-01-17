@@ -16,11 +16,16 @@ class IOS:
             self.sshClient.disconnect()
         self.sshClient.connect(host)
         self.switchType = switchType
+        if self.sshClient.isForbiddenHost():
+            raise NotImplementedError("Not allowed to make changes on host {0}, Reason: DISALLOWED_HOST".format(host))
 
     def sis(self):
         # [output, hostname]
         # result = self.sshClient.execute('sis')
-        raise AttributeError("not implemented yet")
+        raise NotImplementedError()
+
+    def disconnect(self):
+        self.sshClient.disconnect()
 
     def __isValidResponse(self, commandResponse):
         return (True, False)["Invalid input" in commandResponse]
@@ -64,7 +69,7 @@ class IOS:
             return lines
 
     def currentMode(self):
-        a = None
+        raise NotImplementedError()
 
     def getDescription(self, interface, config=None):
         useConfig = config

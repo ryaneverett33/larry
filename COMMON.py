@@ -1,11 +1,14 @@
 import re
 import os
 
+
 class Common:
     baseDir = "/home/ONEPURDUE/everettr/larry-release/"
     versionFile = "latest.version"
+    userVersionFile = "larry.version"
     releaseFile = "latest.release"
     releasesDir = "releases/"
+    executableFile = "larry"
     ignoreDirectories = [".git", ".idea", "risque-out"]
 
     @staticmethod
@@ -22,7 +25,7 @@ class Common:
 
     # -1 if version2 > version1, 0 if equal, 1 if version1 > version 2
     @staticmethod
-    def mycmp(version1, version2):
+    def compareVersions(version1, version2):
         def normalize(v):
             return [int(x) for x in re.sub(r'(\.0+)*$', '', v).split(".")]
 
@@ -31,4 +34,4 @@ class Common:
     @staticmethod
     def getUserHome():
         username = os.getenv("USER")
-        return "/home/ONEPURDUE/{0}".format(username)
+        return "/home/ONEPURDUE/{0}/".format(username)
