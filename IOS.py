@@ -17,12 +17,51 @@ class IOS:
         self.sshClient.connect(host)
         self.switchType = switchType
         if self.sshClient.isForbiddenHost():
+            self.disconnect()
             raise NotImplementedError("Not allowed to make changes on host {0}, Reason: DISALLOWED_HOST".format(host))
 
+    # Return [Port, Name, Status, Vlan, Duplex, Speed, Type]
+    def sisSplit(self, line):
+        splat = line.split(' ')
+        arr = []
+        for i in range(0, len(splat)):
+            word = splat[i]
+            if len(word) < 1:
+                continue
+            if "Not" in word and "Present" in splat[i + 1]:
+                arr.append("Not Present")
+                continue
+            arr.append(word)
+        return arr
+
+    # Return array of Tuples[Port, Name, Status, Vlan, Duplex, Speed, Type]
     def sis(self):
         # [output, hostname]
-        # result = self.sshClient.execute('sis')
-        raise NotImplementedError()
+        result = None
+        if self.inConfigMode:
+            print "IOS::getConfig() in Config Mode!!"
+            result = self.sshClient.execute('do show int status')
+        else:
+            result = self.sshClient.execute('show int status')
+        rawLines = result[0].split('\n')
+        lines = []
+        for line in rawLines:
+            if "Port" in line and "Name" in line:
+                # skip header
+                continue
+            if len(line) <= 1:
+                continue
+            lines.append(self.sisSplit(line))
+        return lines
+
+    def findInterfaceOfPic(self, picName):
+        sis = self.sis()
+        for arr in sis:
+            interface = arr[0]
+            name = arr[1]
+            if name.lower() == picName.lower():
+                return interface
+        return None
 
     def disconnect(self):
         self.sshClient.disconnect()

@@ -30,8 +30,7 @@ $Z8ZDZDIIIIOIIIIIIIIIIIIIII$O$ZZOZND8DI
                          :8             
     """
 
-    posing = """
-                                        
+    posing = """                  
                        N                
                                         
                         N               
