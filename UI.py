@@ -2,6 +2,7 @@ from ui import VerifyTicket
 from ui import ConfigTicket
 from ConfigurationDriver import ConfigurationDriver
 import signal
+from ui import art
 
 
 class UI:
@@ -17,12 +18,14 @@ class UI:
             ["Verify Ticket", self.verify_page],
             ["Settings", self.settings_page],
             ["Store Credentials", self.credentials_page],
-            ["Exit", self.exit]
+            ["Exit", self.exit],
+            ["Art", self.artPage]
         ]
         self.goToMainPage()
         signal.signal(signal.SIGINT, self.ctrlchandler)
 
     def main(self):
+        print art.art.getArt()
         while not self.exitApp:
             currentPage = self.currentPage
             try:
@@ -77,6 +80,10 @@ class UI:
 
     def goToMainPage(self):
         self.currentPage = ["Main Page", self.main_page]
+
+    def artPage(self):
+        print art.art.getArt()
+        self.goToMainPage()
 
     def __printPages(self):
         i = 0
