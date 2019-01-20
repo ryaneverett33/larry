@@ -4,6 +4,7 @@ from Vlan import Vlan
 from Speed import Speed
 from Verify import Verify
 
+
 class Config:
     ticket = None
     verify = None
@@ -13,9 +14,18 @@ class Config:
         self.ticket = ticket
         self.verify = Verify(ticket)
 
+    def __isInterfaceEmpty(self, switchConfig):
+        if "spanning-tree" not in switchConfig:
+            return True
+        if "switchport" not in switchConfig:
+            return True
+        if "phone" not in switchConfig:
+            return True
+        return False
+
     def __basicDeactivate(self, iosConnection, provider, pic):
         interface = provider.getSwitchInterface()
-        switchConfig = iosConnection.getConfig(interface, flatten=False)
+        switchConfig = iosConnection.getConfig(interface, flatten=True)
         description = iosConnection.getDescription(interface, switchConfig)
         if description is None or description != pic.getDescription():
             print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
@@ -37,12 +47,18 @@ class Config:
         interface = provider.getSwitchInterface()
         risqueConfig = pic.getConfig()
 
+        switchConfig = iosConnection.getConfig(interface, flatten=False)
+
         if provider.uplink:
             print "Provider is an uplink port, not supported yet!"
             return
 
         iosConnection.enterConfigMode()
         iosConnection.enterInterfaceConfig(interface)
+
+        if self.__isInterfaceEmpty(switchConfig):
+            # Apply base config
+            iosConnection.applyBaseConfig(iosConnection.getBaseConfig())
 
         # Set Description
         iosConnection.setDescription(pic.getDescription())

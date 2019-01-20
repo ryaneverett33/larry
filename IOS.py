@@ -356,3 +356,30 @@ class IOS:
             print "Failed to set switchport mode"
             return False
         return True
+
+    def getBaseConfig(self):
+        if "3750" in self.switchType:
+            return ""
+        elif "3850" in self.switchType:
+            return ""
+        elif "9348" in self.switchType or "9300" in self.switchType:
+            return ""
+        elif "3560" in self.switchType:
+            return ""
+        elif "2960" in self.switchType:
+            return ""
+        else:
+            return None
+
+    def applyBaseConfig(self, config):
+        if not self.inConfigMode:
+            print "can't apply base config when not in config mode"
+            return False
+        if not self.inInterface:
+            print "can't apply base config when not configuring interface"
+            return False
+        for line in config:
+            result = self.sshClient.execute(line)[0]
+            if not self.__isValidResponse(result):
+                print "Failed to apply base config line: {0}".format(line)
+        return True
