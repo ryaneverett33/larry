@@ -43,8 +43,8 @@ class Provider:
                         self.stack = int(hypenSplit[3])
                         # ['Gi0', '6']
                         interfaceSplit = hypenSplit[len(hypenSplit) - 1].split('/')
-                        self.intType = interfaceSplit[0][0:len(interfaceSplit)]
-                        self.switch = int(interfaceSplit[0][len(interfaceSplit)])
+                        self.intType = interfaceSplit[0][0:len(interfaceSplit[0]) - 1]
+                        self.switch = int(interfaceSplit[0][len(interfaceSplit[0]) - 1])
                         self.port = int(interfaceSplit[len(interfaceSplit)-1])
                         if len(interfaceSplit) is 3:
                             # ['Gi4', '0', '18']

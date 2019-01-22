@@ -10,6 +10,7 @@ class IOS:
     switchType = None   # e.g. c3750ep
     inConfigMode = False
     inInterface = False
+    isFexHost = False
 
     def __init__(self, sshClient, host, switchType):
         self.sshClient = sshClient
@@ -20,6 +21,8 @@ class IOS:
         if self.sshClient.isForbiddenHost():
             self.disconnect()
             raise NotImplementedError("Not allowed to make changes on host {0}, Reason: DISALLOWED_HOST".format(host))
+        if self.sshClient.isFexHost():
+            self.isFexHost = True
 
     # Return [Port, Name, Status, Vlan, Duplex, Speed, Type]
     def __sisSplit(self, line):
@@ -36,14 +39,21 @@ class IOS:
         return arr
 
     # Return array of Tuples[Port, Name, Status, Vlan, Duplex, Speed, Type]
-    def sis(self):
+    def __sis(self, include=None):
         # [output, hostname]
         result = None
-        if self.inConfigMode:
-            print "IOS::getConfig() in Config Mode!!"
-            result = self.sshClient.execute('do show int status')
+        if include is not None:
+            if self.inConfigMode:
+                print "IOS::getConfig() in Config Mode!!"
+                result = self.sshClient.execute('do show int status | {0}'.format(include))
+            else:
+                result = self.sshClient.execute('show int status | i {0}'.format(include))
         else:
-            result = self.sshClient.execute('show int status')
+            if self.inConfigMode:
+                print "IOS::getConfig() in Config Mode!!"
+                result = self.sshClient.execute('do show int status')
+            else:
+                result = self.sshClient.execute('show int status')
         rawLines = result[0].split('\n')
         lines = []
         for line in rawLines:
@@ -53,10 +63,18 @@ class IOS:
             if len(line) <= 1:
                 continue
             lines.append(self.__sisSplit(line))
+
         return lines
 
+    # Dirty hack to get sis working for large switches
+    def sis(self, include=None):
+        result = self.__sis(include)
+        if include is None:
+            self.__sis()
+        return result
+
     def findInterfaceOfPic(self, picName):
-        sis = self.sis()
+        sis = self.sis(include=picName.lower())
         for arr in sis:
             interface = arr[0]
             name = arr[1]

@@ -5,6 +5,7 @@ from PIC import PIC
 from procedures import Config
 from Hosts import Hosts
 
+
 class ConfigTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

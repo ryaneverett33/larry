@@ -10,7 +10,13 @@ class Verify:
 
     # Issue handling deactivate for trunk ports
     def __verifyBasicDeactivate(self, iosConnection, provider, pic):
-        switchConfig = iosConnection.getConfig(provider.getSwitchInterface())
+        interface = None
+        if iosConnection.isFexHost:
+            interface = iosConnection.findInterfaceOfPic(pic.name)
+            print "Fex port has interface {0}".format(interface)
+        else:
+            interface = provider.getSwitchInterface()
+        switchConfig = iosConnection.getConfig(interface)
         if switchConfig is None:
             print "{0} - Failed to get config".format(pic.name)
             return False
@@ -31,7 +37,12 @@ class Verify:
 
     def __verifyBasicWork(self, iosConnection, provider, pic):
         passed = True
-        interface = provider.getSwitchInterface()
+        interface = None
+        if iosConnection.isFexHost:
+            interface = iosConnection.findInterfaceOfPic(pic.name)
+            print "Fex port has interface {0}".format(interface)
+        else:
+            interface = provider.getSwitchInterface()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
         if switchConfig is None:
             print "{0} - Failed to get config".format(pic.name)
@@ -41,6 +52,7 @@ class Verify:
         # Check empty
         if iosConnection.isInterfaceEmpty(switchConfig):
             print "{0} - port isn't fully configured".format(pic.name)
+            passed = False
 
         # Check shut status
         if iosConnection.isShutdown(interface, switchConfig):

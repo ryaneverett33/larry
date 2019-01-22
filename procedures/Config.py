@@ -15,7 +15,11 @@ class Config:
         self.verify = Verify(ticket)
 
     def __basicDeactivate(self, iosConnection, provider, pic):
-        interface = provider.getSwitchInterface()
+        interface = None
+        if iosConnection.isFexHost:
+            interface = iosConnection.findInterfaceOfPic(pic.name)
+        else:
+            interface = provider.getSwitchInterface()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
         description = iosConnection.getDescription(interface, switchConfig)
         if description is None or description != pic.getDescription():
@@ -35,7 +39,11 @@ class Config:
         self.hostChanged = True
 
     def __basicActivate(self, iosConnection, provider, pic):
-        interface = provider.getSwitchInterface()
+        interface = None
+        if iosConnection.isFexHost:
+            interface = iosConnection.findInterfaceOfPic(pic.name)
+        else:
+            interface = provider.getSwitchInterface()
         risqueConfig = pic.getConfig()
 
         switchConfig = iosConnection.getConfig(interface, flatten=False)
@@ -70,7 +78,11 @@ class Config:
         self.hostChanged = True
 
     def __basicModify(self, iosConnection, provider, pic):
-        interface = provider.getSwitchInterface()
+        interface = None
+        if iosConnection.isFexHost:
+            interface = iosConnection.findInterfaceOfPic(pic.name)
+        else:
+            interface = provider.getSwitchInterface()
         risqueConfig = pic.getConfig()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
         vlan = iosConnection.getVlan(interface, switchConfig)

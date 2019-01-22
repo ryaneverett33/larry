@@ -123,7 +123,6 @@ class Ssh:
             if i < len(hostSplit) - 2:
                 hostClean = hostClean + '-'
         self.cleanedHostname = hostClean
-        print "cleaned hostname is {0}".format(self.cleanedHostname)
 
     # Executes the command and returns [cleaned output, resultant hostname]
     # Commands are appended with a newline
@@ -149,7 +148,8 @@ class Ssh:
                     continue
                 if "more" in line.lower():
                     self.__send(' ')
-                    # print "REQUESTING MORE, SENDING NEWLINE, line: {0}".format(line)
+                    print "REQUESTING MORE, SENDING NEWLINE, line: {0}".format(line)
+                    continue
                 if command in line:
                     continue
                 if self.hostname in line or self.cleanedHostname in line:

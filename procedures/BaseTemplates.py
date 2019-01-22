@@ -39,6 +39,8 @@ ip verify source
 ip dhcp snooping limit rate 20
 """
 
+    minLines = 5
+
     @staticmethod
     def __empty3560(switchConfig):
         if "mls qos trust" not in switchConfig:
@@ -74,10 +76,20 @@ ip dhcp snooping limit rate 20
         return False
 
     @staticmethod
+    def countLines(switchConfig):
+        return switchConfig.count('\n')
+
+    @staticmethod
     def isInterfaceEmpty(switchConfig, switchType):
         if switchType == "3560":
-            return BaseTemplates.__empty3560(switchConfig)
+            if not BaseTemplates.__empty3560(switchConfig) and BaseTemplates.countLines(switchConfig) < BaseTemplates.minLines:
+                return True
+            return False
         elif switchType == "9300":
-            return BaseTemplates.__empty9300(switchConfig)
+            if not BaseTemplates.__empty9300(switchConfig) and BaseTemplates.countLines(switchConfig) < BaseTemplates.minLines:
+                return True
+            return False
         else:
-            return BaseTemplates.__emptyBase(switchConfig)
+            if not BaseTemplates.__emptyBase(switchConfig) and BaseTemplates.countLines(switchConfig) < BaseTemplates.minLines:
+                return True
+            return False
