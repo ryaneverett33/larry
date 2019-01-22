@@ -16,7 +16,8 @@ class Ssh:
     connected = False
     channel = None
     expected = ""
-    SSH_DISALLOWED_HOSTS = ["itap-iape", "lynn-sbpe", "lamb-sbpe", "erht-sbpe"]
+    SSH_DISALLOWED_HOSTS = ["lynn-sbpe", "erht-sbpe"]   # itap-iape and lamb-sbpe have FEX ports
+    SSH_FEX_HOST = ["itap-iape", "lamb-sbpe"]
 
     # Enable Mode versus NonEnabled Mode
     modes = {
@@ -167,6 +168,12 @@ class Ssh:
 
     def isForbiddenHost(self):
         for host in self.SSH_DISALLOWED_HOSTS:
+            if host in self.hostname:
+                return True
+        return False
+
+    def isFexHost(self):
+        for host in self.SSH_FEX_HOST:
             if host in self.hostname:
                 return True
         return False

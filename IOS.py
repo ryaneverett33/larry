@@ -1,5 +1,6 @@
 from Vlan import Vlan
 from Speed import Speed
+from procedures import BaseTemplates
 
 
 # Represents an SSH connection to an IOS switch
@@ -21,7 +22,7 @@ class IOS:
             raise NotImplementedError("Not allowed to make changes on host {0}, Reason: DISALLOWED_HOST".format(host))
 
     # Return [Port, Name, Status, Vlan, Duplex, Speed, Type]
-    def sisSplit(self, line):
+    def __sisSplit(self, line):
         splat = line.split(' ')
         arr = []
         for i in range(0, len(splat)):
@@ -51,7 +52,7 @@ class IOS:
                 continue
             if len(line) <= 1:
                 continue
-            lines.append(self.sisSplit(line))
+            lines.append(self.__sisSplit(line))
         return lines
 
     def findInterfaceOfPic(self, picName):
@@ -357,29 +358,46 @@ class IOS:
             return False
         return True
 
-    def getBaseConfig(self):
+    def getBaseTemplate(self):
         if "3750" in self.switchType:
-            return ""
+            return BaseTemplates.BaseTemplates.template3750
         elif "3850" in self.switchType:
-            return ""
+            return BaseTemplates.BaseTemplates.template3850
         elif "9348" in self.switchType or "9300" in self.switchType:
-            return ""
+            return BaseTemplates.BaseTemplates.template9300
         elif "3560" in self.switchType:
-            return ""
+            return BaseTemplates.BaseTemplates.template3560
         elif "2960" in self.switchType:
-            return ""
+            return BaseTemplates.BaseTemplates.template2960
         else:
             return None
 
-    def applyBaseConfig(self, config):
+    def applyBaseTemplate(self, template):
         if not self.inConfigMode:
             print "can't apply base config when not in config mode"
             return False
         if not self.inInterface:
             print "can't apply base config when not configuring interface"
             return False
-        for line in config:
-            result = self.sshClient.execute(line)[0]
-            if not self.__isValidResponse(result):
-                print "Failed to apply base config line: {0}".format(line)
+        result = self.sshClient.execute(template)[0]
+        if not self.__isValidResponse(result):
+            print "Failed to set config from base template"
+            return False
         return True
+
+    def isInterfaceEmpty(self, switchConfig, flatten=False):
+        useConfig = switchConfig
+        if not flatten:
+            useConfig = self.__flatten(switchConfig)
+        if "3560" in self.switchType:
+            return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "3560")
+        elif "3750" in self.switchType:
+            return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "3750")
+        elif "2960" in self.switchType:
+            return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "2960")
+        elif "3850" in self.switchType:
+            return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "3850")
+        elif "9300" in self.switchType:
+            return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "9300")
+        else:
+            raise AttributeError("Unknown switch type, unable to determine whether it's empty")

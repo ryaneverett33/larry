@@ -14,18 +14,9 @@ class Config:
         self.ticket = ticket
         self.verify = Verify(ticket)
 
-    def __isInterfaceEmpty(self, switchConfig):
-        if "spanning-tree" not in switchConfig:
-            return True
-        if "switchport" not in switchConfig:
-            return True
-        if "phone" not in switchConfig:
-            return True
-        return False
-
     def __basicDeactivate(self, iosConnection, provider, pic):
         interface = provider.getSwitchInterface()
-        switchConfig = iosConnection.getConfig(interface, flatten=True)
+        switchConfig = iosConnection.getConfig(interface, flatten=False)
         description = iosConnection.getDescription(interface, switchConfig)
         if description is None or description != pic.getDescription():
             print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
@@ -56,9 +47,9 @@ class Config:
         iosConnection.enterConfigMode()
         iosConnection.enterInterfaceConfig(interface)
 
-        if self.__isInterfaceEmpty(switchConfig):
+        if iosConnection.isInterfaceEmpty(switchConfig):
             # Apply base config
-            iosConnection.applyBaseConfig(iosConnection.getBaseConfig())
+            iosConnection.applyBaseTemplate(iosConnection.getBaseTemplate())
 
         # Set Description
         iosConnection.setDescription(pic.getDescription())
@@ -130,7 +121,6 @@ class Config:
                         iosConnection.write()
                 currentHost = newHost
                 driver = ConfigurationDriver.getDriver()
-                driver.connect(currentHost)
                 iosConnection = IOS(driver, currentHost, provider.switchType)
                 self.hostChanged = False
             try :

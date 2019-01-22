@@ -38,6 +38,10 @@ class Verify:
             return False
         risqueConfig = pic.getConfig()
 
+        # Check empty
+        if iosConnection.isInterfaceEmpty(switchConfig):
+            print "{0} - port isn't fully configured".format(pic.name)
+
         # Check shut status
         if iosConnection.isShutdown(interface, switchConfig):
             print "{0} - port is shutdown".format(pic.name)
@@ -113,7 +117,6 @@ class Verify:
             if currentHost != provider.getHostFromProvider(provider):
                 currentHost = provider.getHostFromProvider(provider)
                 driver = ConfigurationDriver.getDriver()
-                driver.connect(currentHost)
                 if iosConnection is not None:
                     iosConnection.disconnect()
                 iosConnection = IOS(driver, currentHost, provider.switchType)
