@@ -1,0 +1,2116 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /><meta http-equiv="X-UA-Compatible" content="IE=Edge" /><meta charset="utf-8" /><meta name="viewport" content="width=1200" /><title>
+	Ticket Detail - Risque Tickets
+</title>
+    <link rel="stylesheet" href="/Common/Content/bootstrap.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/bootstrap-multiselect.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/multiple-select.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/select2.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/purdue.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/risque.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/risque-print.css" media="print" />
+    <script type="text/javascript" src="/Common/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.datepicker.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.timepicker.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/common.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/bootstrap.multiselect.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/select2.min.js"></script>
+    <script src="/Common/Scripts/jquery.multiple.select.js"></script>
+    <script type="text/javascript">
+        function resetDotNetScrollPosition() {
+            var scrollX = document.getElementById('__SCROLLPOSITIONX');
+            var scrollY = document.getElementById('__SCROLLPOSITIONY');
+
+            if (scrollX != null && scrollY != null) {
+                scrollX.value = 0;
+                scrollY.value = 0;
+            }
+        }
+    </script>
+    
+    </head>
+<body>
+    <form method="post" action="./TicketDetail.aspx?id=67593" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=GDd-mh6UBslCB_2rI2dbt8-R8UJ1GqL_FmtHj1W3rh8H1_KmsgkW5FJUZQ1QNCeLdJb0n-xXF8NNU2HXyjaOr4YEQ_0-_-LHHp0BlcIhrmI1&amp;t=636765211280000000" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=N1myaU3blzTwAd0NV2h4-7BnnDn4SAEXzsESc7jNg9hPojO9F8z8zA6uJ__91kT7bjyZSSbIZIiKZJ0sYNMoh-IGw9hWVBOhp9yYysCVXZCfKRI5zWRcFLKzSvnLU8I50&amp;t=254cc609" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=61EyTO2EOO4rfavk2I6zju8pj6YafYopRoBuN7NFM334cP-dDAqvCAqEsP2eT4dPO_DHprykUGJZ3YvJ2MT-G9H2ZNr0Y-7rLZ1IbxZ5AlrRvztMm4bAHi9VJwmcLr86Uw7rH3ydP20kFNQPn4K8Xg2&amp;t=254cc609" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="5335BF19" />
+	<input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0" />
+	<input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="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" />
+</div>
+        <div class="purdue-top">
+            <div class="purdue-container">
+                <div class="purdue-row">
+                    <div class="logo"><a href="http://www.purdue.edu/">
+                        <img alt="Purdue University" src="/Common/Content/img/logo.png" /></a></div>
+                    <img src="/Common/Content/img/purdue-print.jpg" id="purdue-print" alt="" />
+                    <div class="department"><a href="/">Risque Tickets</a></div>
+                         
+                    <div id="login">
+                        Logged in as <a href="/Portal/Users/Edit.aspx">Ryan Everett</a><br />
+                        
+                        <a id="lnkLogout" class="btn btn-mini btn-inverse" href="javascript:__doPostBack(&#39;ctl00$lnkLogout&#39;,&#39;&#39;)" style="font-weight: normal">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="purdue-navbar" role="navigation">
+            <div class="purdue-container" style="width:1200px">
+                <ul class="purdue-nav purdue-navbar-nav">
+                    <li><a href='/Portal/'>Portal</a></li>
+<li><a href='/Records/'>Records</a></li>
+<li><a href='/Reports/'>Reports</a></li>
+<li><a href='/Resources/'>Resources</a></li>
+<li><a href='/Tickets/'>Tickets</a></li>
+<li><a href='/Tracker/'>Tracker</a></li>
+
+                    <li style="float: right">
+                        <a id="lnkHelp" data-toggle="modal" data-target="#pnlHelp_Content" href="javascript:__doPostBack(&#39;ctl00$lnkHelp&#39;,&#39;&#39;)">Need Help?</a>
+
+                    </li>
+                    <li style="float: right"><a href='javascript:window.print()'>Print Page</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="purdue-content">
+            <div class="purdue-container" style="background-color: #fff; padding-top: 15px;">
+                <div class="purdue-row">
+                    <div class="maincontent right">
+                        
+    <style type="text/css">
+        #topArea .form-horizontal .control-group, .accordion-inner .control-group {
+            margin-bottom: 3px;
+        }
+
+        #topArea h3 {
+            line-height: 25px;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .accordion-inner {
+            margin: 0 -1px;
+            padding: 0;
+        }
+
+        .accordion-group {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
+            color: #fff !important;
+        }
+
+        td select {
+            font-size: 12px;
+            height: auto;
+            padding: 0;
+        }
+
+        .ms-drop {
+            width: 320px;
+        }
+
+        .table tbody tr.success > td {
+            background-color: #bae4a8 !important;
+        }
+
+        td input[type="text"] {
+            font-size: 12px;
+            height: auto;
+            padding: 0;
+        }
+
+        .current-settings {
+            color: #777;
+        }
+
+        hr.style-two { /* Gradient transparent - color - transparent */
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+    </style>
+    <style type="text/css" media="print">
+        .printHidden {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$contentMain$scrptManager_TicketDetail', 'form1', ['tctl00$contentMain$updt_AdditionalContacts','contentMain_updt_AdditionalContacts','tctl00$contentMain$updateCommentsPNL','contentMain_updateCommentsPNL'], ['ctl00$contentMain$rdoCommentsAll','contentMain_rdoCommentsAll','ctl00$contentMain$rdoCommentsClientOnly','contentMain_rdoCommentsClientOnly','ctl00$contentMain$rdoCommentsInternalOnly','contentMain_rdoCommentsInternalOnly','ctl00$contentMain$btnAddComment','contentMain_btnAddComment'], [], 90, 'ctl00');
+//]]>
+</script>
+
+    <h2>Ticket Detail - #<span id="contentMain_lblTicketID">67593</span>
+    </h2>
+    
+
+
+
+
+
+    
+    <div id="topArea" style="float: left; width: 50%;">
+        <div id="contentMain_pnlTicketContactInfo" class="form-horizontal">
+	
+            <h3>Contact Information</h3>
+            <div class="control-group">
+                <label class="control-label">Submitter:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactSubmitter">Jeremiah Hord</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Submitter Department:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactDeptName">it infrastructure services</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Name:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactName">Jeremiah Hord</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Phone:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactPhone">317-698-2515</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Email:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <a id="contentMain_lnkContactEmail" href="mailto:hord0@purdue.edu?subject=Risque Ticket #67593">hord0@purdue.edu</a>
+                </div>
+            </div>
+            <div class="control-group">
+                <div id="contentMain_pnlStandardAdditionalContacts">
+		
+                    <label class="control-label">Additional Contacts:</label>
+                    <div class="controls" style="padding-top: 4px">
+                        <span id="contentMain_lblContactAdditional">None</span>
+                    </div>
+                
+	</div>
+                
+                <div id="contentMain_updt_AdditionalContacts">
+		
+                        
+                    
+	</div>
+                
+            </div>
+            <br />
+            <h3>Ticket Information</h3>
+            <div class="control-group">
+                <label class="control-label">Submitted:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketSubmitted">12/17/2018 3:41 PM</span>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Due By:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketDue">12/20/2018 3:41 PM</span>
+                    
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Priority:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketPriority">Standard</span>
+                </div>
+            </div>
+            <div id="contentMain_pnlTicketAgent" class="control-group">
+		
+                <label class="control-label">Agent:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketAgent">Jeremiah Hord</span>
+                </div>
+            
+	</div>
+            <div class="control-group">
+                <label class="control-label">Status:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketStatus">Pending Billing</span>
+                </div>
+            </div>
+            <div id="contentMain_pnlInternalStatus" class="control-group">
+		
+                <label class="control-label">Internal Status:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketInternalStatus">Active</span>
+                </div>
+            
+	</div>
+            <div id="contentMain_pnlEffectiveDate" class="control-group">
+		
+                <label class="control-label">Effective Date:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketEffective">12/17/2018</span>
+                    
+                </div>
+            
+	</div>
+            
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <div class="btn-group">
+                        <a id="contentMain_A1" class="btn dropdown-toggle" data-toggle="dropdown">Actions <span id="contentMain_Span1" class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                <a onclick="window.print()">Print</a>
+                            </li>
+                            <li>
+                                <a id="contentMain_lnkEmail" href="javascript:__doPostBack(&#39;ctl00$contentMain$lnkEmail&#39;,&#39;&#39;)">E-mail</a>
+                            </li>
+                            <li>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    
+
+                </div>
+            </div>
+        
+</div>
+    </div>
+    
+    <div id="contentMain_pnlAgentHelper" style="float: left; width: 50%;">
+	
+        
+        <div class="accordion" id="agentTools">
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#relatedt">Related Tickets
+                    </a>
+                </div>
+                <div id="relatedt" class="accordion-body collapse in">
+                    <div class="accordion-inner" style="max-height: 100px; overflow-y: auto;">
+                        
+                        <div>
+		<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdRelatedTickets" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">
+                                There are no related tickets.
+                       
+                            </td>
+			</tr>
+		</table>
+	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#relatedwa">Related Assignments
+                    </a>
+                </div>
+                <div id="relatedwa" class="accordion-body collapse in">
+                    <div class="accordion-inner" style="max-height: 100px; overflow-y: auto;">
+                        
+                        <div>
+		<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdRelatedWAs" style="border-collapse:collapse;">
+			<tr>
+				<td>
+                                There are no related work assignments.
+                       
+                            </td>
+			</tr>
+		</table>
+	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#trkeys">Telecom Room Keys
+                    </a>
+                </div>
+                <div id="trkeys" class="accordion-body collapse in">
+                    <div class="accordion-inner" style="max-height: 100px; overflow-y: auto;">
+                        
+                        <div>
+		<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdTRKeys" style="border-collapse:collapse;">
+			<tr>
+				<th scope="col">Keys</th><th scope="col">TR</th>
+			</tr><tr>
+				<td>Key Corbin 426</td><td>STDM 1065</td>
+			</tr>
+		</table>
+	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#deputy">Building Deputy
+                    </a>
+                </div>
+                <div id="deputy" class="accordion-body collapse">
+                    <div class="accordion-inner form-horizontal" style="padding: 0 10px;">
+                        <div class="control-group">
+                            <label class="control-label">Deputy Name:</label>
+                            <div class="controls" style="padding-top: 4px">
+                                <span id="contentMain_lblDeputyName">Al Capitos</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Deputy Office:</label>
+                            <div class="controls" style="padding-top: 4px">
+                                <span id="contentMain_lblDeputyOffice">STDM G155A</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Deputy Phone:</label>
+                            <div class="controls" style="padding-top: 4px">
+                                <span id="contentMain_lblDeputyPhone">7654945042</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Deputy Email:</label>
+                            <div class="controls" style="padding-top: 4px">
+                                <span id="contentMain_lblDeputyEmail">capitos@purdue.edu</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+    <div style="clear: both;"></div>
+
+    
+    <h2>Ticket Items  
+        
+    </h2>
+
+    
+    <div id="save-records-progress" style="display: none; float: left; margin: 0 0; width: 400px;">
+        <div class="progress progress-striped active" style="height: 30px; margin-bottom: 0">
+            <div class="bar" style="padding-top: 4px; width: 100%;">Saving records, please wait...</div>
+        </div>
+    </div>
+
+    <div id="contentMain_pnlLineSort" class="printHidden" style="clear: both; float: right; margin-top: -13px; padding-bottom: 10px;">
+	
+        <div style="float: left; font-weight: bold; margin-right: 10px; margin-top: 3px;">Sort:</div>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortPIC" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortPIC" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoLineSortPIC\&#39;,\&#39;\&#39;)&#39;, 0)" />
+            PIC
+   
+        </label>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortPatch" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortPatch" checked="checked" />
+            Patch
+   
+        </label>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortProvider" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortProvider" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoLineSortProvider\&#39;,\&#39;\&#39;)&#39;, 0)" />
+            Provider
+   
+        </label>
+    
+</div>
+    <div style="clear: both;"></div>
+    
+    <div>
+	<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdItems" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Action</th><th scope="col">Port Info</th><th scope="col">Settings</th><th class="printHidden" scope="col">Options</th>
+		</tr><tr class="success">
+			<td>
+                    <strong>Modify</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_0" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_0" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=STDM-1065HW-UPS" target="_blank">STDM-1065HW-UPS</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_0" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_0">N/A</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_0" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            stdm-1065-c3750ep-01:01-Gi1/0/48
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_0"></div><span id="contentMain_grdItems_lblItemProvider_0">stdm-1065-c9348uxm-01:01-Te1/0/48</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_0" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_0"><br />&nbsp;&nbsp;&nbsp;10/100T-SW-A</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_0" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_0"><br />&nbsp;&nbsp;&nbsp;ITIS Networks Wired Device Management Subnet (1000)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_0" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_0"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_0">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_0" style="font-weight:normal;"><br />&nbsp;&nbsp;100/1000T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_0">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_0">New VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_0" style="font-weight:normal;"><br />&nbsp;&nbsp;ITIS Networks Wired Device Management Subnet (1000)<br /></span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlNewVoIPVlan_0">
+				
+                        <strong>New VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblNewVoIPVlan_0"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemServices_0">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_0" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_0'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_0" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl02$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_0" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Modify</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_1" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_1" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=STDM-1049-A" target="_blank">STDM-1049-A</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_1" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_1">stdm-1065-c6wpp24-01-1 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_1" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            stdm-1065-c3750ep-01:01-Gi1/0/13
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_1"></div><span id="contentMain_grdItems_lblItemProvider_1">stdm-1065-c9348uxm-01:01-Tw1/0/1</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_1" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_1"><br />&nbsp;&nbsp;&nbsp;10/100/1000T-SW-A</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_1" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_1"><br />&nbsp;&nbsp;&nbsp;Cisco Default VLAN (1)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_1" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_1"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_1">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_1" style="font-weight:normal;"><br />&nbsp;&nbsp;100/1000T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_1">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_1">New VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_1" style="font-weight:normal;"><br />&nbsp;&nbsp;Cisco Default VLAN (1)</span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlNewVoIPVlan_1">
+				
+                        <strong>New VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblNewVoIPVlan_1"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemServices_1">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_1" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_1'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_1" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl03$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_1" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Modify</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_2" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_2" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=STDM-1047-A" target="_blank">STDM-1047-A</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_2" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_2">stdm-1065-c6wpp24-01-13 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_2" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            stdm-1065-c3750ep-01:01-Gi1/0/7
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_2"></div><span id="contentMain_grdItems_lblItemProvider_2">stdm-1065-c9348uxm-01:01-Tw1/0/2</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_2" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_2"><br />&nbsp;&nbsp;&nbsp;10/100T-SW-A</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_2" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_2"><br />&nbsp;&nbsp;&nbsp;Cisco Default VLAN (1)<br />&nbsp;&nbsp;&nbsp;Levy-Restaurants-PCI-Quest (787)<br />&nbsp;&nbsp;&nbsp;Levy Management-Back Office (785)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_2" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_2"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldServices_2" class="current-settings">
+				
+                        <strong>Current&nbsp;Services:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldServices_2"><br />&nbsp;&nbsp;&nbsp;Disable BPDU Guard</span>
+                    
+			</div>
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_2">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_2" style="font-weight:normal;"><br />&nbsp;&nbsp;100/1000T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_2">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_2">New&nbsp;Native&nbsp;VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_2" style="font-weight:normal;"><br />&nbsp;&nbsp;Cisco Default VLAN (1)<br /></span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    <div id="contentMain_grdItems_pnlItemTaggedVLANs_2">
+				
+                        <strong>New Tagged&nbsp;VLANs:</strong>
+                        <span id="contentMain_grdItems_lblItemTaggedVLANs_2" style="font-weight:normal;"><br /> &nbsp;&nbsp;Levy Management-Back Office (785)<br /> &nbsp;&nbsp;Levy-Restaurants-PCI-Quest (787)</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemTaggedVLANs_2'))
+                                .multipleSelect({
+                                    filter: true,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlNewVoIPVlan_2">
+				
+                        <strong>New VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblNewVoIPVlan_2"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemServices_2">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_2" style="font-weight:normal;"><br />&nbsp;&nbsp;Disable BPDU Guard</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_2'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_2" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl04$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_2" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Modify</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_3" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_3" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=STDM-1042-A" target="_blank">STDM-1042-A</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_3" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_3">stdm-1065-c6wpp24-01-14 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_3" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            stdm-1065-c3750ep-01:01-Gi1/0/8
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_3"></div><span id="contentMain_grdItems_lblItemProvider_3">stdm-1065-c9348uxm-01:01-Tw1/0/3</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_3" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_3"><br />&nbsp;&nbsp;&nbsp;10/100T-SW-A</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_3" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_3"><br />&nbsp;&nbsp;&nbsp;Cisco Default VLAN (1)<br />&nbsp;&nbsp;&nbsp;Levy-Restaurants-PCI-Quest (787)<br />&nbsp;&nbsp;&nbsp;Levy Management-Back Office (785)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_3" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_3"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_3">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_3" style="font-weight:normal;"><br />&nbsp;&nbsp;100/1000T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_3">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_3">New&nbsp;Native&nbsp;VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_3" style="font-weight:normal;"><br />&nbsp;&nbsp;Cisco Default VLAN (1)<br /></span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    <div id="contentMain_grdItems_pnlItemTaggedVLANs_3">
+				
+                        <strong>New Tagged&nbsp;VLANs:</strong>
+                        <span id="contentMain_grdItems_lblItemTaggedVLANs_3" style="font-weight:normal;"><br /> &nbsp;&nbsp;Levy Management-Back Office (785)<br /> &nbsp;&nbsp;Levy-Restaurants-PCI-Quest (787)</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemTaggedVLANs_3'))
+                                .multipleSelect({
+                                    filter: true,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlNewVoIPVlan_3">
+				
+                        <strong>New VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblNewVoIPVlan_3"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemServices_3">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_3" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_3'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_3" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl05$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_3" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Modify</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_4" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_4" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=STDM-1059-B" target="_blank">STDM-1059-B</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_4" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_4">stdm-1065-c6wpp24-01-15 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_4" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            stdm-1065-c3750ep-01:01-Gi1/0/11
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_4"></div><span id="contentMain_grdItems_lblItemProvider_4">stdm-1065-c9348uxm-01:01-Tw1/0/4</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_4" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_4"><br />&nbsp;&nbsp;&nbsp;10/100T-SW-A</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_4" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_4"><br />&nbsp;&nbsp;&nbsp;Cisco Default VLAN (1)<br />&nbsp;&nbsp;&nbsp;Levy-Restaurants-PCI-Quest (787)<br />&nbsp;&nbsp;&nbsp;Levy Management-Back Office (785)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_4" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_4"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_4">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_4" style="font-weight:normal;"><br />&nbsp;&nbsp;100/1000T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_4">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_4">New&nbsp;Native&nbsp;VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_4" style="font-weight:normal;"><br />&nbsp;&nbsp;Cisco Default VLAN (1)<br /></span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    <div id="contentMain_grdItems_pnlItemTaggedVLANs_4">
+				
+                        <strong>New Tagged&nbsp;VLANs:</strong>
+                        <span id="contentMain_grdItems_lblItemTaggedVLANs_4" style="font-weight:normal;"><br /> &nbsp;&nbsp;Levy Management-Back Office (785)<br /> &nbsp;&nbsp;Levy-Restaurants-PCI-Quest (787)</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemTaggedVLANs_4'))
+                                .multipleSelect({
+                                    filter: true,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlNewVoIPVlan_4">
+				
+                        <strong>New VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblNewVoIPVlan_4"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemServices_4">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_4" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_4'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_4" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl06$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_4" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Modify</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_5" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_5" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=STDM-1041-A" target="_blank">STDM-1041-A</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_5" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_5">stdm-1065-c6wpp24-01-16 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_5" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            stdm-1065-c3750ep-01:01-Gi1/0/9
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_5"></div><span id="contentMain_grdItems_lblItemProvider_5">stdm-1065-c9348uxm-01:01-Tw1/0/5</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_5" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_5"><br />&nbsp;&nbsp;&nbsp;10/100T-SW-A</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_5" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_5"><br />&nbsp;&nbsp;&nbsp;Cisco Default VLAN (1)<br />&nbsp;&nbsp;&nbsp;Levy-Restaurants-PCI-Quest (787)<br />&nbsp;&nbsp;&nbsp;Levy Management-Back Office (785)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_5" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_5"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldServices_5" class="current-settings">
+				
+                        <strong>Current&nbsp;Services:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldServices_5"><br />&nbsp;&nbsp;&nbsp;Disable BPDU Guard</span>
+                    
+			</div>
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_5">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_5" style="font-weight:normal;"><br />&nbsp;&nbsp;100/1000T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_5">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_5">New&nbsp;Native&nbsp;VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_5" style="font-weight:normal;"><br />&nbsp;&nbsp;Cisco Default VLAN (1)<br /></span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    <div id="contentMain_grdItems_pnlItemTaggedVLANs_5">
+				
+                        <strong>New Tagged&nbsp;VLANs:</strong>
+                        <span id="contentMain_grdItems_lblItemTaggedVLANs_5" style="font-weight:normal;"><br /> &nbsp;&nbsp;Levy Management-Back Office (785)<br /> &nbsp;&nbsp;Levy-Restaurants-PCI-Quest (787)</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemTaggedVLANs_5'))
+                                .multipleSelect({
+                                    filter: true,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlNewVoIPVlan_5">
+				
+                        <strong>New VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblNewVoIPVlan_5"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemServices_5">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_5" style="font-weight:normal;"><br />&nbsp;&nbsp;Disable BPDU Guard</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_5'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_5" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl07$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_5" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Modify</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_6" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_6" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=STDM-1077-A" target="_blank">STDM-1077-A</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_6" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_6">stdm-1065-c6wpp24-01-17 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_6" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            stdm-1065-c3750ep-01:01-Gi1/0/12
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_6"></div><span id="contentMain_grdItems_lblItemProvider_6">stdm-1065-c9348uxm-01:01-Tw1/0/6</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_6" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_6"><br />&nbsp;&nbsp;&nbsp;10/100T-SW-A</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_6" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_6"><br />&nbsp;&nbsp;&nbsp;Cisco Default VLAN (1)<br />&nbsp;&nbsp;&nbsp;Levy-Restaurants-PCI-Quest (787)<br />&nbsp;&nbsp;&nbsp;Levy Management-Back Office (785)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_6" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_6"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_6">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_6" style="font-weight:normal;"><br />&nbsp;&nbsp;100/1000T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_6">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_6">New&nbsp;Native&nbsp;VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_6" style="font-weight:normal;"><br />&nbsp;&nbsp;Cisco Default VLAN (1)<br /></span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    <div id="contentMain_grdItems_pnlItemTaggedVLANs_6">
+				
+                        <strong>New Tagged&nbsp;VLANs:</strong>
+                        <span id="contentMain_grdItems_lblItemTaggedVLANs_6" style="font-weight:normal;"><br /> &nbsp;&nbsp;Levy Management-Back Office (785)<br /> &nbsp;&nbsp;Levy-Restaurants-PCI-Quest (787)</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemTaggedVLANs_6'))
+                                .multipleSelect({
+                                    filter: true,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlNewVoIPVlan_6">
+				
+                        <strong>New VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblNewVoIPVlan_6"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemServices_6">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_6" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_6'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_6" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl08$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_6" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Modify</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_7" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_7" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=STDM-1069AP-A" target="_blank">STDM-1069AP-A</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_7" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_7">stdm-1065-c6wpp24-01-5 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_7" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            stdm-1065-c3750ep-01:01-Gi1/0/3
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_7"></div><span id="contentMain_grdItems_lblItemProvider_7">stdm-1065-c9348uxm-01:01-Tw1/0/7</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_7" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_7"><br />&nbsp;&nbsp;&nbsp;1000T-SW-F</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_7" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_7"><br />&nbsp;&nbsp;&nbsp;ITIS-Wireless-Device-Mgmt (1001)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_7" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_7"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_7">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_7" style="font-weight:normal;"><br />&nbsp;&nbsp;100/1000T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_7">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_7">New VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_7" style="font-weight:normal;"><br />&nbsp;&nbsp;ITIS-Wireless-Device-Mgmt (1001)<br /></span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlNewVoIPVlan_7">
+				
+                        <strong>New VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblNewVoIPVlan_7"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemServices_7">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_7" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_7'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_7" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl09$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_7" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Modify</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_8" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_8" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=STDM-XTNNW-E" target="_blank">STDM-XTNNW-E</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_8" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_8">stdm-1065-c6wpp24-01-9 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_8" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            stdm-1065-c3750ep-01:01-Gi1/0/10
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_8"></div><span id="contentMain_grdItems_lblItemProvider_8">stdm-1065-c9348uxm-01:01-Tw1/0/8</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    <div id="contentMain_grdItems_pnlItemCurrentSpeed_8" class="current-settings">
+				
+                        <strong>Current&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldSpeed_8"><br />&nbsp;&nbsp;&nbsp;100/1000T-SW-A</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemOldVLANs_8" class="current-settings">
+				
+                        <strong>Current&nbsp;VLAN(s):</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemOldVLAN_8"><br />&nbsp;&nbsp;&nbsp;TERY_Private_Security_Camera_VLAN (738)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_8" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_8"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_8">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_8" style="font-weight:normal;"><br />&nbsp;&nbsp;100/1000T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_8">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_8">New VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_8" style="font-weight:normal;"><br />&nbsp;&nbsp;TERY_Private_Security_Camera_VLAN (738)<br /></span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlNewVoIPVlan_8">
+				
+                        <strong>New VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblNewVoIPVlan_8"><br />&nbsp;&nbsp;010.009.004.000/23-STDM-VoIP-1065_Voice (3027)</span>
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemServices_8">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_8" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_8'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_8" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl10$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_8" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr>
+	</table>
+</div>
+    
+
+
+
+
+    
+    <h2>Comments</h2>
+    <div id="contentMain_updateCommentsPNL">
+	
+            <div id="contentMain_pnlCommentFilters" class="printHidden" style="clear: both; float: right; margin-top: -13px; padding-bottom: 10px;">
+		
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsAll" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsAll" checked="checked" />All
+           
+                </label>
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsClientOnly" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsClientOnly" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoCommentsClientOnly\&#39;,\&#39;\&#39;)&#39;, 0)" />
+                    Client Only
+           
+                </label>
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsInternalOnly" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsInternalOnly" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoCommentsInternalOnly\&#39;,\&#39;\&#39;)&#39;, 0)" />
+                    Internal Only
+           
+                </label>
+            
+	</div>
+            <div style="clear: both;"></div>
+            
+            <div>
+		<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdComments" style="border-collapse:collapse;">
+			<tr>
+				<th scope="col">Date</th><th scope="col">Client</th><th scope="col">Comment</th><th scope="col">Visibility</th>
+			</tr><tr>
+				<td colspan="4">
+                    There are no comments to display.
+           
+                </td>
+			</tr>
+		</table>
+	</div>
+            <div id="contentMain_pnlAddComment" class="printHidden" style="margin: 0 auto; width: 910px;">
+		
+                <h3>Add Comment:</h3>
+                <div style="float: left; width: 730px;">
+                    <textarea name="ctl00$contentMain$txtComment" rows="5" cols="20" id="contentMain_txtComment" style="height:75px;width:700px;max-width: 700px;">
+</textarea>
+                </div>
+                <div style="float: left; width: 180px;">
+                    <div id="contentMain_pnlCommentAddFilters" class="form-horizontal">
+			
+                        <div class="control-group">
+                            <label class="control-label" style="width: 70px !important">Visibility:</label>
+                            <div class="controls" style="margin-left: 70px !important">
+                                <label class="radio">
+                                    <input id="contentMain_rdoCommentClient" type="radio" name="ctl00$contentMain$CommentVisibility" value="rdoCommentClient" />
+                                    Client
+                           
+                                </label>
+                                <label class="radio">
+                                    <input id="contentMain_rdoCommentInternal" type="radio" name="ctl00$contentMain$CommentVisibility" value="rdoCommentInternal" checked="checked" />
+                                    Internal Only
+                           
+                                </label>
+                            </div>
+                        </div>
+                    
+		</div>
+                    <div style="text-align: center">
+                        <input type="submit" name="ctl00$contentMain$btnAddComment" value="Add Comment" id="contentMain_btnAddComment" class="btn btn-primary" />
+                    </div>
+                </div>
+            
+	</div>
+            <div style="clear: both;"></div>
+        
+</div>
+
+    
+    
+    <div id="pnlHistory" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <input type="hidden" name="ctl00$contentMain$showModal_History" id="contentMain_showModal_History" />
+        <div class="modal-header">
+            <h3>
+                <i class="icon-time icon-white"></i>History for
+           
+                <span id="contentMain_lblPICHistoryTitle"></span>
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="btn-group" data-toggle="buttons-radio" style="clear: both; display: block; margin-bottom: 15px; text-align: center;">
+                <input type="submit" name="ctl00$contentMain$btnHistoryTask" value="Task History" id="contentMain_btnHistoryTask" class="btn btn-primary active" />
+                <input type="submit" name="ctl00$contentMain$btnHistoryPIC" value="PIC History" id="contentMain_btnHistoryPIC" class="btn" />
+            </div>
+            
+            <div id="contentMain_pnlHistoryTask">
+	
+                <h3>Tickets:</h3>
+                <div>
+
+	</div>
+
+                <h3>Work Assignments:</h3>
+                <div>
+
+	</div>
+            
+</div>
+
+            
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnHistoryClose" value="Close" id="contentMain_btnHistoryClose" class="btn" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlAssignTo" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <input type="hidden" name="ctl00$contentMain$showModal_AssignTo" id="contentMain_showModal_AssignTo" />
+        <input type="hidden" name="ctl00$contentMain$assignTo_TicketID" id="contentMain_assignTo_TicketID" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-user icon-white"></i>Assign To
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Group Member:</label>
+                    <div class="controls">
+                        <select name="ctl00$contentMain$ddlAssignTo" id="contentMain_ddlAssignTo">
+
+</select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnAssignTo_Save" value="Save" id="contentMain_btnAssignTo_Save" class="btn btn-inverse" />
+            <input type="submit" name="ctl00$contentMain$btnAssignToCancel" value="Cancel" id="contentMain_btnAssignToCancel" class="btn" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlHold" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-exclamation-sign icon-white"></i>Place Ticket On Hold
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Hold Reason:</label>
+                    <div class="controls">
+                        <textarea name="ctl00$contentMain$txtHoldReason" rows="2" cols="20" id="contentMain_txtHoldReason">
+</textarea>
+                    </div>
+                </div>
+                <div class="controls">
+                    <div class="checkbox">
+                        <label>
+                            <input id="contentMain_chkHoldNotify" type="checkbox" name="ctl00$contentMain$chkHoldNotify" />
+                            Notify Ticket Submitter
+                   
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnHoldSubmit" value="Place On Hold" id="contentMain_btnHoldSubmit" class="btn btn-inverse" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlEditDueBy" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        
+        <input type="hidden" name="ctl00$contentMain$showModal_EditDueBy" id="contentMain_showModal_EditDueBy" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-exclamation-sign icon-white"></i>Edit Ticket Due By Date
+            </h3>
+        </div>
+        
+
+
+
+
+        <div id="contentMain_pnlEditDueDate" style="width:100%;">
+	
+            <span class="input-append date" data-date="" data-date-format="mm/dd/yyyy" style="margin-left: 10px; margin-top: 10px;">
+                <input name="ctl00$contentMain$txtEditDueDate" type="text" value="12/20/2018" id="contentMain_txtEditDueDate" class="input-small" />
+                <span class="add-on">
+                    <i class="icon-calendar"></i>
+                </span>
+            </span>
+            <span class="input-append bootstrap-timepicker-component" style="margin-left: 10px; margin-top: 10px;">
+                <input name="ctl00$contentMain$txtEditDueTime" type="text" value="3:41 PM" id="contentMain_txtEditDueTime" class="input-small time" data-minute-step="5" />
+                <span class="add-on">
+                    <i class="icon-time"></i>
+                </span>
+            </span>
+        
+</div>
+        <div id="contentMain_rdoEditDueDate_ScheduledInfo" class="form-horizontal" style="margin-left: 10px;">
+	
+            <div class="control-group">
+                <label class="control-label" style="width: 100px !important">Scheduled:</label>
+                <div class="controls" style="margin-left: 100px !important">
+                    <label class="radio inline">
+                        <input id="contentMain_rdoNewDueDateScheduled_YES" type="radio" name="ctl00$contentMain$editDueDate_ScheduledInfo" value="rdoNewDueDateScheduled_YES" />
+                        Yes
+               
+                    </label>
+                    <label class="radio inline">
+                        <input id="contentMain_rdoNewDueDateScheduled_NO" type="radio" name="ctl00$contentMain$editDueDate_ScheduledInfo" value="rdoNewDueDateScheduled_NO" checked="checked" />
+                        No
+               
+                    </label>
+                </div>
+            </div>
+        
+</div>
+        <input type="submit" name="ctl00$contentMain$btnEditDueBy" value="Save" id="contentMain_btnEditDueBy" class="btn btn-inverse" style="margin-left: 50px;" />
+        <div id="contentMain_pnlSpace" style="height:10px;">
+
+</div>
+    </div>
+    
+    
+    <script type="text/javascript">
+        if (document.getElementById('contentMain_showModal_AssignTo').value === "true")
+            $('#pnlAssignTo').modal('show');
+
+        if (document.getElementById('contentMain_showModal_History').value === "true")
+            $('#pnlHistory').modal('show');
+
+        if (document.getElementById('contentMain_showModal_EditDueBy').value === "true")
+            $('#pnlEditDueBy').modal('show');
+    </script>
+
+                        
+                    </div>
+
+                    <div class="sidenav">
+                        <ul>
+                            <li class='sidenav-head'>Data Ticketing</li>
+<li><a href='/Tickets/Data/CreateTicket.aspx'>Create Ticket</a></li>
+<li><a href='/Tickets/Data/ViewTickets.aspx'>View Tickets</a></li>
+<li><a href='/Tickets/Data/SearchTickets.aspx'>Search Tickets</a></li>
+<li><a href='/Tickets/Constellation/ConstellationTickets.aspx'>View Archived Tickets</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="clear: both;"></div>
+        <div class="purdue-bottom">
+            <div class="purdue-container">
+                <div class="purdue-row">
+                    <div class="purdue-bottom-row">
+                        <p>Purdue University, West Lafayette, IN 47907&nbsp;(765) 494-4600</p>
+                        <p><a href="http://www.purdue.edu/purdue/disclaimer.html">&copy; 2019 Purdue University</a> | <a href="http://www.purdue.edu/purdue/ea_eou_statement.html">An equal access/equal opportunity university</a></p>
+                        <p>If you have trouble accessing this page because of a disability, please contact <a href="mailto:risque-admin@lists.purdue.edu">risque-admin@lists.purdue.edu</a>.</p>
+                        <p>Risque Galaxy version <span id="lblVersion">3.0.6947.15609</span> | Served by WPVWEBASP02A</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div id="pnlHelp_Content" class="modal hide fade" role="dialog" aria-hidden="true">
+            <input type="hidden" name="ctl00$showModal_Help_Content" id="showModal_Help_Content" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h3><i class="glyphicon glyphicon-plus icon-white" style="margin-right: 10px;"></i>Submit Help Request</h3>
+                    </div>
+                    <div class="modal-body" style="overflow:auto;">
+                        <div class="radio">
+                            <input id="rdoHelp1" type="radio" name="ctl00$rdoHelp" value="rdoHelp1" onclick="javascript:togTickets();" /><label for="rdoHelp1">Request for Status or Ask Question about a Risque Ticket</label>
+                        </div>
+                        <div id="helpTicketsPanel" style="display: none; margin-left: 20px;">
+                            <div class="control-label">
+                                <strong>Select a Ticket:</strong>
+                            </div>
+                            <div class="controls">
+                                <select name="ctl00$ddlHelpTickets" id="ddlHelpTickets" class="form-control ddlSearchableFullText" style="width:200px;">
+	<option value="67259">67259</option>
+	<option value="67290">67290</option>
+	<option value="67392">67392</option>
+	<option value="67531">67531</option>
+	<option value="67538">67538</option>
+	<option value="67539">67539</option>
+	<option value="67544">67544</option>
+	<option value="67545">67545</option>
+	<option value="67546">67546</option>
+	<option value="67547">67547</option>
+	<option value="67564">67564</option>
+	<option value="67583">67583</option>
+	<option value="67776">67776</option>
+	<option value="67777">67777</option>
+	<option value="67801">67801</option>
+	<option value="67837">67837</option>
+	<option value="67844">67844</option>
+	<option value="67881">67881</option>
+	<option value="67923">67923</option>
+	<option value="67924">67924</option>
+	<option value="67925">67925</option>
+	<option value="67926">67926</option>
+	<option value="67932">67932</option>
+	<option value="67933">67933</option>
+	<option value="67937">67937</option>
+	<option value="67938">67938</option>
+	<option value="67946">67946</option>
+	<option value="67952">67952</option>
+	<option value="67968">67968</option>
+	<option value="67983">67983</option>
+	<option value="67986">67986</option>
+	<option value="67992">67992</option>
+	<option value="67995">67995</option>
+	<option value="67996">67996</option>
+	<option value="67999">67999</option>
+	<option value="68000">68000</option>
+	<option value="68001">68001</option>
+	<option value="68002">68002</option>
+	<option value="68003">68003</option>
+	<option value="68004">68004</option>
+	<option value="68009">68009</option>
+	<option value="68010">68010</option>
+	<option value="68011">68011</option>
+	<option value="68012">68012</option>
+	<option value="68013">68013</option>
+	<option value="68014">68014</option>
+	<option value="68015">68015</option>
+	<option value="68016">68016</option>
+	<option value="68017">68017</option>
+	<option value="68018">68018</option>
+	<option value="68019">68019</option>
+	<option value="68020">68020</option>
+	<option value="68021">68021</option>
+	<option value="68022">68022</option>
+	<option value="68023">68023</option>
+	<option value="68024">68024</option>
+	<option value="68025">68025</option>
+	<option value="68026">68026</option>
+	<option value="68027">68027</option>
+	<option value="68028">68028</option>
+	<option value="68029">68029</option>
+	<option value="68030">68030</option>
+	<option value="68031">68031</option>
+	<option value="68032">68032</option>
+	<option value="68033">68033</option>
+	<option value="68034">68034</option>
+	<option value="68035">68035</option>
+	<option value="68036">68036</option>
+	<option value="68037">68037</option>
+	<option value="68038">68038</option>
+	<option value="68039">68039</option>
+	<option value="68040">68040</option>
+	<option value="68041">68041</option>
+	<option value="68042">68042</option>
+	<option value="68043">68043</option>
+	<option value="68044">68044</option>
+	<option value="68045">68045</option>
+	<option value="68046">68046</option>
+	<option value="68047">68047</option>
+	<option value="68048">68048</option>
+	<option value="68049">68049</option>
+	<option value="68050">68050</option>
+	<option value="68051">68051</option>
+	<option value="68052">68052</option>
+	<option value="68053">68053</option>
+	<option value="68054">68054</option>
+	<option value="68055">68055</option>
+	<option value="68056">68056</option>
+	<option value="68057">68057</option>
+	<option value="68058">68058</option>
+	<option value="68059">68059</option>
+	<option value="68060">68060</option>
+	<option value="68061">68061</option>
+	<option value="68062">68062</option>
+	<option value="68063">68063</option>
+	<option value="68064">68064</option>
+	<option value="68065">68065</option>
+	<option value="68066">68066</option>
+	<option value="68067">68067</option>
+	<option value="68068">68068</option>
+	<option value="68069">68069</option>
+	<option value="68070">68070</option>
+	<option value="68071">68071</option>
+	<option value="68072">68072</option>
+	<option value="68073">68073</option>
+	<option value="68074">68074</option>
+	<option value="68075">68075</option>
+	<option value="68076">68076</option>
+	<option value="68077">68077</option>
+	<option value="68078">68078</option>
+	<option value="68079">68079</option>
+	<option value="68080">68080</option>
+	<option value="68081">68081</option>
+	<option value="68082">68082</option>
+	<option value="68083">68083</option>
+	<option value="68084">68084</option>
+	<option value="68085">68085</option>
+	<option value="68086">68086</option>
+	<option value="68087">68087</option>
+	<option value="68088">68088</option>
+	<option value="68089">68089</option>
+	<option value="68090">68090</option>
+	<option value="68091">68091</option>
+	<option value="68092">68092</option>
+	<option value="68093">68093</option>
+	<option value="68094">68094</option>
+	<option value="68095">68095</option>
+	<option value="68096">68096</option>
+	<option value="68097">68097</option>
+	<option value="68098">68098</option>
+	<option value="68099">68099</option>
+	<option value="68100">68100</option>
+	<option value="68101">68101</option>
+
+</select>
+                            </div>
+                        </div>
+                        <div class="radio">
+                            <input id="rdoHelp2" type="radio" name="ctl00$rdoHelp" value="rdoHelp2" onclick="javascript:togProblem();" /><label for="rdoHelp2">Report a Problem with a Risque Application</label>
+                        </div>
+                        <div id="helpProblemPanel" style="display: none; margin-left: 20px;">
+                            <label class="control-label">
+                                <strong>Select&nbsp;Application(s):</strong>
+                            </label>
+                            <div class="controls">
+                                
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_0" type="checkbox" name="ctl00$rptHelpProblem$ctl00$chkApp" /><label for="rptHelpProblem_chkApp_0">Portal</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_1" type="checkbox" name="ctl00$rptHelpProblem$ctl01$chkApp" /><label for="rptHelpProblem_chkApp_1">Records</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_2" type="checkbox" name="ctl00$rptHelpProblem$ctl02$chkApp" /><label for="rptHelpProblem_chkApp_2">Reports</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_3" type="checkbox" name="ctl00$rptHelpProblem$ctl03$chkApp" /><label for="rptHelpProblem_chkApp_3">Resources</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_4" type="checkbox" name="ctl00$rptHelpProblem$ctl04$chkApp" /><label for="rptHelpProblem_chkApp_4">Tickets</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_5" type="checkbox" name="ctl00$rptHelpProblem$ctl05$chkApp" /><label for="rptHelpProblem_chkApp_5">Tracker</label>
+                                        </div>
+                                    
+                            </div>
+                        </div>
+
+                        <div class="radio">
+                            <input id="rdoHelp3" type="radio" name="ctl00$rdoHelp" value="rdoHelp3" onclick="javascript:togFeature();" /><label for="rdoHelp3">Request Creation of a New Risque Feature</label>
+                        </div>
+                        <div id="helpFeaturePanel" style="display: none; margin-left: 20px;">
+                            <label class="control-label">
+                                <strong>Select&nbsp;Application(s):</strong>
+                            </label>
+                            <div class="controls">
+                                
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_0" type="checkbox" name="ctl00$rptHelpFeature$ctl00$chkApp" /><label for="rptHelpFeature_chkApp_0">Portal</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_1" type="checkbox" name="ctl00$rptHelpFeature$ctl01$chkApp" /><label for="rptHelpFeature_chkApp_1">Records</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_2" type="checkbox" name="ctl00$rptHelpFeature$ctl02$chkApp" /><label for="rptHelpFeature_chkApp_2">Reports</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_3" type="checkbox" name="ctl00$rptHelpFeature$ctl03$chkApp" /><label for="rptHelpFeature_chkApp_3">Resources</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_4" type="checkbox" name="ctl00$rptHelpFeature$ctl04$chkApp" /><label for="rptHelpFeature_chkApp_4">Tickets</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_5" type="checkbox" name="ctl00$rptHelpFeature$ctl05$chkApp" /><label for="rptHelpFeature_chkApp_5">Tracker</label>
+                                        </div>
+                                    
+                            </div>
+                        </div>
+                        <div class="radio">
+                            <input id="rdoHelp4" type="radio" name="ctl00$rdoHelp" value="rdoHelp4" checked="checked" onclick="javascript:togElse();" /><label for="rdoHelp4">Something else…</label>
+                        </div>
+                        <div class="control-group" style="margin-left:17%;">
+                            <textarea name="ctl00$txtHelpReq" rows="7" cols="20" id="txtHelpReq" class="form-control" PlaceHolder="Please enter as much detail about this request as possible." style="width:370px;">
+</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <input type="submit" name="ctl00$btnHelpSubmit" value="Submit Request" id="btnHelpSubmit" class="btn btn-primary" style="float: left;" />
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        if (document.getElementById('showModal_Help_Content').value == "true")
+                            $('#pnlHelp_Content').modal('show');
+                    </script>
+        </div>
+
+        <div class="modal fade" id="NoExcel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="color:white;">Excel Export Notice</h4>
+              </div>
+              <div class="modal-body">
+                <p>The data set presented is too large to export as an Excel file, please download it as a CSV instead. </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+
+theForm.oldSubmit = theForm.submit;
+theForm.submit = WebForm_SaveScrollPositionSubmit;
+
+theForm.oldOnSubmit = theForm.onsubmit;
+theForm.onsubmit = WebForm_SaveScrollPositionOnSubmit;
+//]]>
+</script>
+</form>
+    <script type="text/javascript">
+        $(".ddlSearchable").select2({
+            matcher: function (term, text) { return text.toUpperCase().indexOf(term.toUpperCase()) == 0; },
+            minimumResultsForSearch: 7
+        });
+
+        $(".ddlSearchableFullText").select2({
+            minimumResultsForSearch: 7
+        });
+
+        function togTickets() {
+            $('#helpProblemPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+
+            $('#helpTicketsPanel').show(400);
+        }
+
+        function togProblem() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+
+            $('#helpProblemPanel').show(400);
+        }
+
+        function togFeature() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpProblemPanel').hide(400);
+
+            $('#helpFeaturePanel').show(400);
+        }
+
+        function togElse() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpProblemPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+        }
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-86579122-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</body>
+</html>
