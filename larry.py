@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from UI import UI
 from PasswordUtility import PasswordUtility
 import sys

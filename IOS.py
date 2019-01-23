@@ -415,7 +415,7 @@ class IOS:
             return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "2960")
         elif "3850" in self.switchType:
             return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "3850")
-        elif "9300" in self.switchType:
+        elif "9300" in self.switchType or "9348" in self.switchType:
             return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "9300")
         else:
             raise AttributeError("Unknown switch type, unable to determine whether it's empty")

@@ -126,6 +126,10 @@ class Verify:
         failed = list()     # list of pics that are not valid
         for pic in self.ticket.pics:
             provider = pic.getProvider()
+            if provider.getHostFromProvider(provider) is None:
+                print "Failed to get host for provider {0}".format(provider)
+                failed.append(pic)
+                continue
             if currentHost != provider.getHostFromProvider(provider):
                 currentHost = provider.getHostFromProvider(provider)
                 driver = ConfigurationDriver.getDriver()

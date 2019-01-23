@@ -82,14 +82,14 @@ ip dhcp snooping limit rate 20
     @staticmethod
     def isInterfaceEmpty(switchConfig, switchType):
         if switchType == "3560":
-            if not BaseTemplates.__empty3560(switchConfig) and BaseTemplates.countLines(switchConfig) < BaseTemplates.minLines:
+            if BaseTemplates.__empty3560(switchConfig) and BaseTemplates.countLines(switchConfig) < BaseTemplates.minLines:
                 return True
             return False
         elif switchType == "9300":
-            if not BaseTemplates.__empty9300(switchConfig) and BaseTemplates.countLines(switchConfig) < BaseTemplates.minLines:
+            if BaseTemplates.__empty9300(switchConfig) and BaseTemplates.countLines(switchConfig) < BaseTemplates.minLines:
                 return True
             return False
         else:
-            if not BaseTemplates.__emptyBase(switchConfig) and BaseTemplates.countLines(switchConfig) < BaseTemplates.minLines:
+            if BaseTemplates.__emptyBase(switchConfig) and BaseTemplates.countLines(switchConfig) < BaseTemplates.minLines:
                 return True
             return False

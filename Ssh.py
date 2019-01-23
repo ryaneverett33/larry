@@ -148,7 +148,7 @@ class Ssh:
                     continue
                 if "more" in line.lower():
                     self.__send(' ')
-                    print "REQUESTING MORE, SENDING NEWLINE, line: {0}".format(line)
+                    # print "REQUESTING MORE, SENDING NEWLINE, line: {0}".format(line)
                     continue
                 if command in line:
                     continue
