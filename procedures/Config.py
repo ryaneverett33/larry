@@ -224,7 +224,6 @@ class Config:
         if not self.verify.verify(iosConnection, provider, pic):
             print "Failed to configure {0} on {1}".format(pic.name, provider)
             print "Switch configuration"
-            print iosConnection.getConfig(provider.getSwitchInterface(), flatten=False)
 
     def run(self):
         currentHost = None
