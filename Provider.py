@@ -130,14 +130,17 @@ class Provider:
                 self.uplink = True
 
     def __str__(self):
-        string = self.building + '-' + self.TR + '-' + self.switchType + '-' + str(self.stack)\
-               + '-' + self.intType + str(self.switch) + '/'
-        if self.uplink:
-            string = string + '1/'
+        if self.building is not None and self.TR is not None:
+            string = self.building + '-' + self.TR + '-' + self.switchType + '-' + str(self.stack)\
+                   + '-' + self.intType + str(self.switch) + '/'
+            if self.uplink:
+                string = string + '1/'
+            else:
+                string = string + '0/'
+            string = string + str(self.port)
+            return string
         else:
-            string = string + '0/'
-        string = string + str(self.port)
-        return string
+            return self.getSwitchInterface()
 
     # Returns a host address from a given provider
     @staticmethod

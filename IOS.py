@@ -94,17 +94,25 @@ class IOS:
         if len(interfaces) == 0:
             return None
         else:
-            neighborInterface = interfaces[0][0]
-            neighborProvider = Provider(risqueString=neighborInterface)
-            print "neighborInterface: {0}, neighborProvider: {1}".format(neighborInterface, neighborProvider)
-            # Gi103/1/0/9
-            return "{0}{1}/1/0/{2}".format(neighborProvider.intType, neighborProvider.switch, provider.port)
+            for interface in interfaces:
+                port = interface[0]
+                name = interface[1]
+                if ("Te" in port or "Po" in port) or (provider.building.lower() in name and provider.TR.lower() in name):
+                    continue
+                if "Gi" in port:
+                    neighborProvider = Provider(switchString=port)
+                    # Gi103/1/0/9
+                    return "{0}{1}/1/0/{2}".format(neighborProvider.intType, neighborProvider.switch, provider.port)
+            return None
 
     def disconnect(self):
         self.sshClient.disconnect()
 
     def __isValidResponse(self, commandResponse):
-        return (True, False)["Invalid input" in commandResponse]
+        passed = True
+        passed = (True, False)[not passed or "Invalid input" in commandResponse]
+        passed = (True, False)[not passed or "not supported" in commandResponse]
+        return passed
 
     def __flatten(self, arr, char='\n'):
         string = ""
