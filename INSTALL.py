@@ -33,10 +33,14 @@ class Install:
         installedVersion = self.getInstalledVersion(Common.getUserHome() + "larry/")
         return Common.compareVersions(installedVersion, Common.getLatestVersion()) == -1
 
-    def upgrade(self, installDirectory=None):
+    def upgrade(self, installDirectory=None, force=False):
         installFile = Common.baseDir + Common.releaseFile
         if installDirectory is None:
             installDirectory = Common.getUserHome() + "larry/"
+        if not force:
+            if self.isAlreadyInstalled(installDirectory):
+                if not self.isUpgradeAvailable():
+                    return
         # Remove what's currently installed
         shutil.rmtree(installDirectory)
         zipfile.ZipFile(installFile).extractall(installDirectory)
@@ -62,7 +66,7 @@ class Install:
                 response = raw_input("larry is already installed, but out-of-date. Do you want to update? (y/n)")
                 if response == "n" or response == "N":
                     exit(-1)
-                self.upgrade(installDirectory)
+                self.upgrade(installDirectory, force=True)
         else:
             installFile = Common.baseDir + Common.releaseFile
             print "Installing at {0}".format(installDirectory)

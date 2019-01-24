@@ -193,10 +193,15 @@ class IOS:
         useConfig = config
         if useConfig is None:
             useConfig = self.getConfig(interface, flatten=False)
+        vlan = None
         for line in useConfig:
             if "switchport trunk allowed" in line:
-                return Vlan(switchString=line)
-        return None
+                vlan2 = Vlan.AllowedVlanList(line)
+                if vlan is None:
+                    vlan = vlan2
+                else:
+                    vlan = Vlan.JoinAllowedVlanList(vlan, vlan2)
+        return vlan
 
     def getNativeVlan(self, interface, config=None):
         useConfig = config
@@ -238,6 +243,62 @@ class IOS:
             result = self.sshClient.execute("switchport voice vlan {0}".format(newVoiceVlan.tag))[0]
         if not self.__isValidResponse(result):
             print "Failed to set voice vlan, vlan {0} may be bad".format(newVoiceVlan)
+            return False
+        return True
+
+    def setNativeVlan(self, newNativeVlan):
+        if not self.inConfigMode:
+            print "can't set voice vlan when not in config mode"
+            return False
+        if not self.inInterface:
+            print "can't set voice vlan when not configuring interface"
+            return False
+        result = self.sshClient.execute("switchport trunk native vlan {0}".format(newNativeVlan.tag))[0]
+        if not self.__isValidResponse(result):
+            print "Failed to set native vlan, vlan {0} may be bad".format(newNativeVlan)
+            return False
+        return True
+
+    # sets switchport trunk allowed vlan 3,4 so that vlans can be added
+    def setTaggedVlans(self, newTaggedVlans):
+        if not self.inConfigMode:
+            print "can't set voice vlan when not in config mode"
+            return False
+        if not self.inInterface:
+            print "can't set voice vlan when not configuring interface"
+            return False
+        string = "switchport trunk allowed vlan "
+        if isinstance(newTaggedVlans, list):
+            for i in range(0, len(newTaggedVlans)):
+                string = string + str(newTaggedVlans[i].tag)
+                if i != len(newTaggedVlans) - 1:
+                    string = string + ','
+        elif isinstance(newTaggedVlans, Vlan):
+            string = string + str(newTaggedVlans.tag)
+        result = self.sshClient.execute(string)
+        if not self.__isValidResponse(result):
+            print "Failed to set tagged vlans"
+            return False
+        return True
+
+    def addTaggedVlans(self, newTaggedVlans):
+        if not self.inConfigMode:
+            print "can't set voice vlan when not in config mode"
+            return False
+        if not self.inInterface:
+            print "can't set voice vlan when not configuring interface"
+            return False
+        string = "switchport trunk allowed vlan add "
+        if isinstance(newTaggedVlans, list):
+            for i in range(0, len(newTaggedVlans)):
+                string = string + str(newTaggedVlans[i].tag)
+                if i != len(newTaggedVlans) - 1:
+                    string = string + ','
+        elif isinstance(newTaggedVlans, Vlan):
+            string = string + str(newTaggedVlans.tag)
+        result = self.sshClient.execute(string)
+        if not self.__isValidResponse(result):
+            print "Failed to set tagged vlans"
             return False
         return True
 

@@ -108,14 +108,32 @@ class Verify:
                 passed = False
         return passed
 
+    def __verifyTrunkDeactivate(self, iosConnection, provider, pic):
+        raise NotImplementedError()
+
+    def __verifyTrunkWork(self, iosConnection, provider, pic):
+        raise NotImplementedError()
+
+    def __verifyTrunkDeactivate(self, iosConnection, provider, pic):
+        raise NotImplementedError()
+
     # Returns true/false if pic is correct, prints out any errors
     def verify(self, iosConnection, provider, pic):
         if pic.action == "Deactivate":
-            return self.__verifyBasicDeactivate(iosConnection, provider, pic)
+            if pic.trunk:
+                self.__verifyTrunkDeactivate(iosConnection, provider, pic)
+            else:
+                return self.__verifyBasicDeactivate(iosConnection, provider, pic)
         elif pic.action == "Activate":
-            return self.__verifyBasicWork(iosConnection, provider, pic)
+            if pic.trunk:
+                self.__verifyTrunkWork(iosConnection, provider, pic)
+            else:
+                return self.__verifyBasicWork(iosConnection, provider, pic)
         elif pic.action == "Modify":
-            return self.__verifyBasicWork(iosConnection, provider, pic)
+            if pic.trunk:
+                self.__verifyTrunkWork(iosConnection, provider, pic)
+            else:
+                return self.__verifyBasicWork(iosConnection, provider, pic)
         else:
             print "PIC has invalid action, can't verify"
             return False

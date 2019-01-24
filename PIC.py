@@ -18,6 +18,7 @@ class PICConfig:
             self.vlan = Vlan(risqueString=vlan)
             self.vlanList = False
         elif isinstance(vlan, list):
+            self.trunk = True
             self.vlan = []
             for v in vlan:
                 self.vlan.append(Vlan(risqueString=v))
@@ -54,6 +55,7 @@ class PIC:
     currentConfig = None
     newConfig = None
     action = None
+    trunk = False
 
     def __init__(self, name, currentProvider, newProvider, action, services):
         # if name is None or newProvider is None or action is None:
@@ -81,6 +83,8 @@ class PIC:
         self.currentConfig = PICConfig(vlan, speed)
         if voiceVlan is not None:
             self.currentConfig.addVoiceVlan(voiceVlan)
+        if self.currentConfig.trunk:
+            self.trunk = True
 
     def applyNewConfig(self, voiceVlan, vlan, speed):
         if vlan is None and speed is None:
@@ -103,6 +107,7 @@ class PIC:
         if vlans is None:
             raise AttributeError("Invalid tagged vlans - null")
         self.newConfig.addTaggedVlans(vlans)
+        self.trunk = True
 
     def getProvider(self):
         if self.action == "Activate":
