@@ -4,12 +4,14 @@ import getpass
 from Risque import Risque
 
 
-def listToStr(list):
+def listToStr(lst):
+    if not isinstance(lst, list):
+        return str(lst)
     value = ""
-    for i in range(0, len(list)):
-        vlan = list[i]
+    for i in range(0, len(lst)):
+        vlan = lst[i]
         value = value + vlan.__str__()
-        if i < len(list) - 1:
+        if i < len(lst) - 1:
             value = value + ', '
     return value
 
@@ -28,9 +30,13 @@ def printTicket(ticket):
         else:
             print "Current Speed: None, Current Vlans: None, Current VoIP: None"
         if pic.newConfig is not None:
-            print "New Speed: {0}, New Vlans: {1}, Trunk: {4} New VoIP: {2}, New Services: {3}"\
-                .format(pic.newConfig.speed, listToStr(pic.newConfig.vlan), pic.newConfig.voiceVlan, pic.services,
-                        pic.newConfig.trunk)
+            if pic.newConfig.trunk:
+                print "TRUNK New Speed: {0}, New Native Vlan: {1}, New Tagged Vlans {4}, New VoIP: {2}, New Services: {3}" \
+                    .format(pic.newConfig.speed, listToStr(pic.newConfig.vlan), pic.newConfig.voiceVlan, pic.services,
+                            listToStr(pic.newConfig.taggedVlans))
+            else:
+                print "New Speed: {0}, New Vlans: {1}New VoIP: {2}, New Services: {3}"\
+                    .format(pic.newConfig.speed, listToStr(pic.newConfig.vlan), pic.newConfig.voiceVlan, pic.services)
         else:
             print "New Speed: None, New Vlans: None, New VoIP: None"
         print ""

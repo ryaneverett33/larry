@@ -3,6 +3,8 @@ from ui import ConfigTicket
 from ConfigurationDriver import ConfigurationDriver
 import signal
 from ui import art
+from paramiko import AuthenticationException
+from PasswordUtility import PasswordUtility
 
 
 class UI:
@@ -30,7 +32,17 @@ class UI:
             currentPage = self.currentPage
             try:
                 currentPage[1]()
+            except AuthenticationException:
+                result = raw_input("Failed to login to switch, change switch password? (y/n)")
+                if result.lower() == "y":
+                    newPassword = PasswordUtility.getpassword("Switch Password: ")
+                    user, risquePass, switchPass = ConfigurationDriver.getCredentials()
+                    ConfigurationDriver.storeCredentials(user, risquePass, newPassword)
+                self.goToMainPage()
             except StopIteration:
+                self.goToMainPage()
+            except Exception:
+                print 'General exception'
                 self.goToMainPage()
 
     def work_page(self):

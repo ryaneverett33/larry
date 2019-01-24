@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from UI import UI
 from PasswordUtility import PasswordUtility
 import sys
@@ -13,7 +15,10 @@ class larry:
         self.parseArgs()
         self.ui = UI(self)
         if not self.ignoreUpdate:
-            Install(lib=True).upgrade()
+            try:
+                Install(lib=True).upgrade()
+            except:
+                return
 
     def run(self):
         self.ui.main()

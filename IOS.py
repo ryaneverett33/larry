@@ -1,5 +1,6 @@
 from Vlan import Vlan
 from Speed import Speed
+from procedures import BaseTemplates
 
 
 # Represents an SSH connection to an IOS switch
@@ -9,6 +10,7 @@ class IOS:
     switchType = None   # e.g. c3750ep
     inConfigMode = False
     inInterface = False
+    isFexHost = False
 
     def __init__(self, sshClient, host, switchType):
         self.sshClient = sshClient
@@ -17,12 +19,68 @@ class IOS:
         self.sshClient.connect(host)
         self.switchType = switchType
         if self.sshClient.isForbiddenHost():
+            self.disconnect()
             raise NotImplementedError("Not allowed to make changes on host {0}, Reason: DISALLOWED_HOST".format(host))
+        if self.sshClient.isFexHost():
+            self.isFexHost = True
 
-    def sis(self):
+    # Return [Port, Name, Status, Vlan, Duplex, Speed, Type]
+    def __sisSplit(self, line):
+        splat = line.split(' ')
+        arr = []
+        for i in range(0, len(splat)):
+            word = splat[i]
+            if len(word) < 1:
+                continue
+            if "Not" in word and "Present" in splat[i + 1]:
+                arr.append("Not Present")
+                continue
+            arr.append(word)
+        return arr
+
+    # Return array of Tuples[Port, Name, Status, Vlan, Duplex, Speed, Type]
+    def __sis(self, include=None):
         # [output, hostname]
-        # result = self.sshClient.execute('sis')
-        raise NotImplementedError()
+        result = None
+        if include is not None:
+            if self.inConfigMode:
+                print "IOS::getConfig() in Config Mode!!"
+                result = self.sshClient.execute('do show int status | {0}'.format(include))
+            else:
+                result = self.sshClient.execute('show int status | i {0}'.format(include))
+        else:
+            if self.inConfigMode:
+                print "IOS::getConfig() in Config Mode!!"
+                result = self.sshClient.execute('do show int status')
+            else:
+                result = self.sshClient.execute('show int status')
+        rawLines = result[0].split('\n')
+        lines = []
+        for line in rawLines:
+            if "Port" in line and "Name" in line:
+                # skip header
+                continue
+            if len(line) <= 1:
+                continue
+            lines.append(self.__sisSplit(line))
+
+        return lines
+
+    # Dirty hack to get sis working for large switches
+    def sis(self, include=None):
+        result = self.__sis(include)
+        if include is None:
+            self.__sis()
+        return result
+
+    def findInterfaceOfPic(self, picName):
+        sis = self.sis(include=picName.lower())
+        for arr in sis:
+            interface = arr[0]
+            name = arr[1]
+            if name.lower() == picName.lower():
+                return interface
+        return None
 
     def disconnect(self):
         self.sshClient.disconnect()
@@ -135,10 +193,15 @@ class IOS:
         useConfig = config
         if useConfig is None:
             useConfig = self.getConfig(interface, flatten=False)
+        vlan = None
         for line in useConfig:
             if "switchport trunk allowed" in line:
-                return Vlan(switchString=line)
-        return None
+                vlan2 = Vlan.AllowedVlanList(line)
+                if vlan is None:
+                    vlan = vlan2
+                else:
+                    vlan = Vlan.JoinAllowedVlanList(vlan, vlan2)
+        return vlan
 
     def getNativeVlan(self, interface, config=None):
         useConfig = config
@@ -180,6 +243,62 @@ class IOS:
             result = self.sshClient.execute("switchport voice vlan {0}".format(newVoiceVlan.tag))[0]
         if not self.__isValidResponse(result):
             print "Failed to set voice vlan, vlan {0} may be bad".format(newVoiceVlan)
+            return False
+        return True
+
+    def setNativeVlan(self, newNativeVlan):
+        if not self.inConfigMode:
+            print "can't set voice vlan when not in config mode"
+            return False
+        if not self.inInterface:
+            print "can't set voice vlan when not configuring interface"
+            return False
+        result = self.sshClient.execute("switchport trunk native vlan {0}".format(newNativeVlan.tag))[0]
+        if not self.__isValidResponse(result):
+            print "Failed to set native vlan, vlan {0} may be bad".format(newNativeVlan)
+            return False
+        return True
+
+    # sets switchport trunk allowed vlan 3,4 so that vlans can be added
+    def setTaggedVlans(self, newTaggedVlans):
+        if not self.inConfigMode:
+            print "can't set voice vlan when not in config mode"
+            return False
+        if not self.inInterface:
+            print "can't set voice vlan when not configuring interface"
+            return False
+        string = "switchport trunk allowed vlan "
+        if isinstance(newTaggedVlans, list):
+            for i in range(0, len(newTaggedVlans)):
+                string = string + str(newTaggedVlans[i].tag)
+                if i != len(newTaggedVlans) - 1:
+                    string = string + ','
+        elif isinstance(newTaggedVlans, Vlan):
+            string = string + str(newTaggedVlans.tag)
+        result = self.sshClient.execute(string)
+        if not self.__isValidResponse(result):
+            print "Failed to set tagged vlans"
+            return False
+        return True
+
+    def addTaggedVlans(self, newTaggedVlans):
+        if not self.inConfigMode:
+            print "can't set voice vlan when not in config mode"
+            return False
+        if not self.inInterface:
+            print "can't set voice vlan when not configuring interface"
+            return False
+        string = "switchport trunk allowed vlan add "
+        if isinstance(newTaggedVlans, list):
+            for i in range(0, len(newTaggedVlans)):
+                string = string + str(newTaggedVlans[i].tag)
+                if i != len(newTaggedVlans) - 1:
+                    string = string + ','
+        elif isinstance(newTaggedVlans, Vlan):
+            string = string + str(newTaggedVlans.tag)
+        result = self.sshClient.execute(string)
+        if not self.__isValidResponse(result):
+            print "Failed to set tagged vlans"
             return False
         return True
 
@@ -317,3 +436,47 @@ class IOS:
             print "Failed to set switchport mode"
             return False
         return True
+
+    def getBaseTemplate(self):
+        if "3750" in self.switchType:
+            return BaseTemplates.BaseTemplates.template3750
+        elif "3850" in self.switchType:
+            return BaseTemplates.BaseTemplates.template3850
+        elif "9348" in self.switchType or "9300" in self.switchType:
+            return BaseTemplates.BaseTemplates.template9300
+        elif "3560" in self.switchType:
+            return BaseTemplates.BaseTemplates.template3560
+        elif "2960" in self.switchType:
+            return BaseTemplates.BaseTemplates.template2960
+        else:
+            return None
+
+    def applyBaseTemplate(self, template):
+        if not self.inConfigMode:
+            print "can't apply base config when not in config mode"
+            return False
+        if not self.inInterface:
+            print "can't apply base config when not configuring interface"
+            return False
+        result = self.sshClient.execute(template)[0]
+        if not self.__isValidResponse(result):
+            print "Failed to set config from base template"
+            return False
+        return True
+
+    def isInterfaceEmpty(self, switchConfig, flatten=False):
+        useConfig = switchConfig
+        if not flatten:
+            useConfig = self.__flatten(switchConfig)
+        if "3560" in self.switchType:
+            return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "3560")
+        elif "3750" in self.switchType:
+            return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "3750")
+        elif "2960" in self.switchType:
+            return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "2960")
+        elif "3850" in self.switchType:
+            return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "3850")
+        elif "9300" in self.switchType or "9348" in self.switchType:
+            return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "9300")
+        else:
+            raise AttributeError("Unknown switch type, unable to determine whether it's empty")

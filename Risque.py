@@ -164,9 +164,9 @@ class Risque:
                 newProvider = self.clean(newProvider)
                 currentSpeed = self.clean(currentSpeed)
                 if currentVlans is not None:
-                    for x in range(1, len(currentVlans)):
-                        currentVlans[x] = self.clean(currentVlans[x])
                     currentVlans = self.__removeTags(currentVlans)
+                    for x in range(0, len(currentVlans)):
+                        currentVlans[x] = self.clean(currentVlans[x])
                     if len(currentVlans) == 1:
                         # convert from list
                         currentVlans = currentVlans[0]
@@ -181,18 +181,22 @@ class Risque:
                         # convert from list
                         newVlans = newVlans[0]
                 if newTaggedVlans is not None:
+                    newTaggedVlans = self.__removeTags(newTaggedVlans)
                     for x in range(0, len(newTaggedVlans)):
                         if isinstance(newTaggedVlans[x], NavigableString):
                             newTaggedVlans[x] = self.clean(newTaggedVlans[x])
-                            newTaggedVlans = self.__removeTags(newTaggedVlans)
                 newVoip = self.clean(newVoip)
                 # Don't clean new services as we're not sure if it is a str or []
 
                 # Add Actions
                 pic = PIC(picId, currentProvider, newProvider, action, newServices)
+
                 if currentVlans is not None and currentSpeed is not None:
                     pic.applyCurrentConfig(currentVoip, currentVlans, currentSpeed)
-                if newVlans is not None and newSpeed is not None:
+                if newTaggedVlans is not None and newSpeed is not None:
+                    pic.applyNewConfig(newVoip, newVlans, newSpeed)
+                    pic.addTaggedVlans(newTaggedVlans)
+                elif newVlans is not None and newSpeed is not None:
                     pic.applyNewConfig(newVoip, newVlans, newSpeed)
                 if newTaggedVlans is not None:
                     pic.addTaggedVlans(newTaggedVlans)
