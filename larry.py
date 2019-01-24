@@ -12,8 +12,8 @@ class larry:
     ignoreUpdate = False
 
     def __init__(self):
-        self.parseArgs()
         self.ui = UI(self)
+        self.parseArgs()
         if not self.ignoreUpdate:
             try:
                 Install(lib=True).upgrade()
@@ -31,6 +31,8 @@ class larry:
                 Hosts.USE_DEBUG = True
             if arg == "--ignoreUpdate" or arg == "-ignoreUpdate":
                 self.ignoreUpdate = True
+            if arg == "--disableArt" or arg == "-disableArt":
+                self.ui.disableArt()
 
 
 if __name__ == "__main__":

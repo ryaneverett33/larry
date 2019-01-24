@@ -21,11 +21,11 @@ spanning-tree portfast
 service-policy input AutoQos-4.0-CiscoPhone-Input-Policy
 service-policy output AutoQos-4.0-Output-Policy
 """
-    template3560 = """srr-queue bandwidth share 1 30 35 5
-priority-queue out
-mls qos trust device cisco-phone
+    template3560 = """mls qos trust device cisco-phone
 mls qos trust cos
 auto qos voip cisco-phone
+spanning-tree portfast edge
+spanning-tree bpduguard enable
 """
     template2960 = """switchport port-security violation  protect
 switchport port-security aging time 1
@@ -39,7 +39,7 @@ ip verify source
 ip dhcp snooping limit rate 20
 """
 
-    minLines = 5
+    minLines = 7
 
     @staticmethod
     def __empty3560(switchConfig):

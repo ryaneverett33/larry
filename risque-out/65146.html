@@ -1,0 +1,1348 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /><meta http-equiv="X-UA-Compatible" content="IE=Edge" /><meta charset="utf-8" /><meta name="viewport" content="width=1200" /><title>
+	Ticket Detail - Risque Tickets
+</title>
+    <link rel="stylesheet" href="/Common/Content/bootstrap.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/bootstrap-multiselect.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/multiple-select.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/select2.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/purdue.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/risque.css" media="screen" />
+    <link rel="stylesheet" href="/Common/Content/risque-print.css" media="print" />
+    <script type="text/javascript" src="/Common/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.datepicker.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.timepicker.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/common.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/bootstrap.multiselect.js"></script>
+    <script type="text/javascript" src="/Common/Scripts/select2.min.js"></script>
+    <script src="/Common/Scripts/jquery.multiple.select.js"></script>
+    <script type="text/javascript">
+        function resetDotNetScrollPosition() {
+            var scrollX = document.getElementById('__SCROLLPOSITIONX');
+            var scrollY = document.getElementById('__SCROLLPOSITIONY');
+
+            if (scrollX != null && scrollY != null) {
+                scrollX.value = 0;
+                scrollY.value = 0;
+            }
+        }
+    </script>
+    
+    </head>
+<body>
+    <form method="post" action="./TicketDetail.aspx?id=65146" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=GDd-mh6UBslCB_2rI2dbt8-R8UJ1GqL_FmtHj1W3rh8H1_KmsgkW5FJUZQ1QNCeLdJb0n-xXF8NNU2HXyjaOr4YEQ_0-_-LHHp0BlcIhrmI1&amp;t=636765211280000000" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=N1myaU3blzTwAd0NV2h4-7BnnDn4SAEXzsESc7jNg9hPojO9F8z8zA6uJ__91kT7bjyZSSbIZIiKZJ0sYNMoh-IGw9hWVBOhp9yYysCVXZCfKRI5zWRcFLKzSvnLU8I50&amp;t=254cc609" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=61EyTO2EOO4rfavk2I6zju8pj6YafYopRoBuN7NFM334cP-dDAqvCAqEsP2eT4dPO_DHprykUGJZ3YvJ2MT-G9H2ZNr0Y-7rLZ1IbxZ5AlrRvztMm4bAHi9VJwmcLr86Uw7rH3ydP20kFNQPn4K8Xg2&amp;t=254cc609" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="5335BF19" />
+	<input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0" />
+	<input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="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" />
+</div>
+        <div class="purdue-top">
+            <div class="purdue-container">
+                <div class="purdue-row">
+                    <div class="logo"><a href="http://www.purdue.edu/">
+                        <img alt="Purdue University" src="/Common/Content/img/logo.png" /></a></div>
+                    <img src="/Common/Content/img/purdue-print.jpg" id="purdue-print" alt="" />
+                    <div class="department"><a href="/">Risque Tickets</a></div>
+                         
+                    <div id="login">
+                        Logged in as <a href="/Portal/Users/Edit.aspx">Ryan Everett</a><br />
+                        
+                        <a id="lnkLogout" class="btn btn-mini btn-inverse" href="javascript:__doPostBack(&#39;ctl00$lnkLogout&#39;,&#39;&#39;)" style="font-weight: normal">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="purdue-navbar" role="navigation">
+            <div class="purdue-container" style="width:1200px">
+                <ul class="purdue-nav purdue-navbar-nav">
+                    <li><a href='/Portal/'>Portal</a></li>
+<li><a href='/Records/'>Records</a></li>
+<li><a href='/Reports/'>Reports</a></li>
+<li><a href='/Resources/'>Resources</a></li>
+<li><a href='/Tickets/'>Tickets</a></li>
+<li><a href='/Tracker/'>Tracker</a></li>
+
+                    <li style="float: right">
+                        <a id="lnkHelp" data-toggle="modal" data-target="#pnlHelp_Content" href="javascript:__doPostBack(&#39;ctl00$lnkHelp&#39;,&#39;&#39;)">Need Help?</a>
+
+                    </li>
+                    <li style="float: right"><a href='javascript:window.print()'>Print Page</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="purdue-content">
+            <div class="purdue-container" style="background-color: #fff; padding-top: 15px;">
+                <div class="purdue-row">
+                    <div class="maincontent right">
+                        
+    <style type="text/css">
+        #topArea .form-horizontal .control-group, .accordion-inner .control-group {
+            margin-bottom: 3px;
+        }
+
+        #topArea h3 {
+            line-height: 25px;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .accordion-inner {
+            margin: 0 -1px;
+            padding: 0;
+        }
+
+        .accordion-group {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
+            color: #fff !important;
+        }
+
+        td select {
+            font-size: 12px;
+            height: auto;
+            padding: 0;
+        }
+
+        .ms-drop {
+            width: 320px;
+        }
+
+        .table tbody tr.success > td {
+            background-color: #bae4a8 !important;
+        }
+
+        td input[type="text"] {
+            font-size: 12px;
+            height: auto;
+            padding: 0;
+        }
+
+        .current-settings {
+            color: #777;
+        }
+
+        hr.style-two { /* Gradient transparent - color - transparent */
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+    </style>
+    <style type="text/css" media="print">
+        .printHidden {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$contentMain$scrptManager_TicketDetail', 'form1', ['tctl00$contentMain$updt_AdditionalContacts','contentMain_updt_AdditionalContacts','tctl00$contentMain$updateCommentsPNL','contentMain_updateCommentsPNL'], ['ctl00$contentMain$rdoCommentsAll','contentMain_rdoCommentsAll','ctl00$contentMain$rdoCommentsClientOnly','contentMain_rdoCommentsClientOnly','ctl00$contentMain$rdoCommentsInternalOnly','contentMain_rdoCommentsInternalOnly'], [], 90, 'ctl00');
+//]]>
+</script>
+
+    <h2>Ticket Detail - #<span id="contentMain_lblTicketID">65146</span>
+    </h2>
+    
+
+
+
+
+
+    
+    <div id="topArea" style="float: left; width: 50%;">
+        <div id="contentMain_pnlTicketContactInfo" class="form-horizontal">
+	
+            <h3>Contact Information</h3>
+            <div class="control-group">
+                <label class="control-label">Submitter:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactSubmitter">Mickey Kiefer</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Submitter Department:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactDeptName">safety and security</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Name:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactName">Mickey Kiefer</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Phone:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblContactPhone">765-494-3408</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Contact Email:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <a id="contentMain_lnkContactEmail" href="mailto:mlkiefer@purdue.edu?subject=Risque Ticket #65146">mlkiefer@purdue.edu</a>
+                </div>
+            </div>
+            <div class="control-group">
+                <div id="contentMain_pnlStandardAdditionalContacts">
+		
+                    <label class="control-label">Additional Contacts:</label>
+                    <div class="controls" style="padding-top: 4px">
+                        <span id="contentMain_lblContactAdditional">None</span>
+                    </div>
+                
+	</div>
+                
+                <div id="contentMain_updt_AdditionalContacts">
+		
+                        
+                    
+	</div>
+                
+            </div>
+            <br />
+            <h3>Ticket Information</h3>
+            <div class="control-group">
+                <label class="control-label">Submitted:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketSubmitted">7/9/2018 2:16 PM</span>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Due By:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketDue">7/12/2018 2:16 PM</span>
+                    
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Priority:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketPriority">Standard</span>
+                </div>
+            </div>
+            <div id="contentMain_pnlTicketAgent" class="control-group">
+		
+                <label class="control-label">Agent:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketAgent">Logan Townsend</span>
+                </div>
+            
+	</div>
+            <div class="control-group">
+                <label class="control-label">Status:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketStatus">Complete</span>
+                </div>
+            </div>
+            <div id="contentMain_pnlInternalStatus" class="control-group">
+		
+                <label class="control-label">Internal Status:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketInternalStatus">Active</span>
+                </div>
+            
+	</div>
+            <div id="contentMain_pnlEffectiveDate" class="control-group">
+		
+                <label class="control-label">Effective Date:</label>
+                <div class="controls" style="padding-top: 4px">
+                    <span id="contentMain_lblTicketEffective">7/9/2018</span>
+                    
+                </div>
+            
+	</div>
+            
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <div class="btn-group">
+                        <a id="contentMain_A1" class="btn dropdown-toggle" data-toggle="dropdown">Actions <span id="contentMain_Span1" class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                <a onclick="window.print()">Print</a>
+                            </li>
+                            <li>
+                                <a id="contentMain_lnkEmail" href="javascript:__doPostBack(&#39;ctl00$contentMain$lnkEmail&#39;,&#39;&#39;)">E-mail</a>
+                            </li>
+                            <li>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    
+
+                </div>
+            </div>
+        
+</div>
+    </div>
+    
+    
+
+    <div style="clear: both;"></div>
+
+    
+    <h2>Ticket Items  
+        
+    </h2>
+
+    
+    <div id="save-records-progress" style="display: none; float: left; margin: 0 0; width: 400px;">
+        <div class="progress progress-striped active" style="height: 30px; margin-bottom: 0">
+            <div class="bar" style="padding-top: 4px; width: 100%;">Saving records, please wait...</div>
+        </div>
+    </div>
+
+    <div id="contentMain_pnlLineSort" class="printHidden" style="clear: both; float: right; margin-top: -13px; padding-bottom: 10px;">
+	
+        <div style="float: left; font-weight: bold; margin-right: 10px; margin-top: 3px;">Sort:</div>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortPIC" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortPIC" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoLineSortPIC\&#39;,\&#39;\&#39;)&#39;, 0)" />
+            PIC
+   
+        </label>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortPatch" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortPatch" checked="checked" />
+            Patch
+   
+        </label>
+        <label class="radio inline">
+            <input id="contentMain_rdoLineSortProvider" type="radio" name="ctl00$contentMain$LineSort" value="rdoLineSortProvider" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoLineSortProvider\&#39;,\&#39;\&#39;)&#39;, 0)" />
+            Provider
+   
+        </label>
+    
+</div>
+    <div style="clear: both;"></div>
+    
+    <div>
+	<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdItems" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Action</th><th scope="col">Port Info</th><th scope="col">Settings</th><th class="printHidden" scope="col">Options</th>
+		</tr><tr class="success">
+			<td>
+                    <strong>Activate</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_0" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_0" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=PGW-102AC-A" target="_blank">PGW-102AC-A</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_0" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_0">pgw-101cabnw-c6wpp24-01-1 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_0" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            Port Info Unavailable
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_0"></div><span id="contentMain_grdItems_lblItemProvider_0">pgw-101cabnw-c3560cx-01-Gi1/0/1</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    
+                    
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_0" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_0"></span>
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_0">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_0" style="font-weight:normal;"><br />&nbsp;&nbsp;10/100T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_0">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_0">New VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_0" style="font-weight:normal;"><br />&nbsp;&nbsp;TERY_Private_Security_Camera_VLAN (738)</span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemServices_0">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_0" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_0'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_0" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl02$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_0" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Activate</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_1" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_1" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=PGW-102AC-B" target="_blank">PGW-102AC-B</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_1" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_1">pgw-101cabnw-c6wpp24-01-2 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_1" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            Port Info Unavailable
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_1"></div><span id="contentMain_grdItems_lblItemProvider_1">pgw-101cabnw-c3560cx-01-Gi1/0/2</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    
+                    
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_1" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_1"></span>
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_1">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_1" style="font-weight:normal;"><br />&nbsp;&nbsp;10/100T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_1">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_1">New VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_1" style="font-weight:normal;"><br />&nbsp;&nbsp;TERY_Private_Security_Camera_VLAN (738)</span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemServices_1">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_1" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_1'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_1" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl03$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_1" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Activate</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_2" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_2" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=PGW-101AC-A" target="_blank">PGW-101AC-A</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_2" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_2">pgw-102cabsw-c6wpp24-01-1 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_2" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            Port Info Unavailable
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_2"></div><span id="contentMain_grdItems_lblItemProvider_2">pgw-102cabsw-c3560cx-01-Gi1/0/1</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    
+                    
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_2" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_2"></span>
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_2">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_2" style="font-weight:normal;"><br />&nbsp;&nbsp;10/100T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_2">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_2">New VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_2" style="font-weight:normal;"><br />&nbsp;&nbsp;TERY_Private_Security_Camera_VLAN (738)</span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemServices_2">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_2" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_2'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_2" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl04$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_2" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr><tr class="success">
+			<td>
+                    <strong>Activate</strong>
+                    
+                </td><td>
+                    
+                    
+                    
+                    <strong>PIC&nbsp;ID:</strong>&nbsp;<span id="contentMain_grdItems_lblPicID_3" for="lblPicID"></span>
+                    <a id="contentMain_grdItems_PICHyperLink_3" href="../../Records/LinkMaintenance/ManageLinks.aspx?picid=PGW-101AC-B" target="_blank">PGW-101AC-B</a>
+                    <div id="contentMain_grdItems_pnlItemLinkInfo_3" style="width:250px;">
+				
+                        <strong>Patch:</strong>&nbsp;<span id="contentMain_grdItems_lblItemPatch_3">pgw-102cabsw-c6wpp24-01-2 (back)</span><br />
+                        
+                        <div id="contentMain_grdItems_PanelCurrentProviderPort_3" class="current-settings">
+					
+                            <strong>Current Provider:</strong><br />
+                            Port Info Unavailable
+                        
+				</div>
+                        <strong>New Provider:</strong> <div id="contentMain_grdItems_LineBreakProviderPortLabel_3"></div><span id="contentMain_grdItems_lblItemProvider_3">pgw-102cabsw-c3560cx-01-Gi1/0/2</span>
+                        
+                    
+			</div>
+                </td><td style="white-space:nowrap;">
+                    
+                    
+                    
+                    <div id="contentMain_grdItems_pnlCurrentVoIPVlan_3" class="current-settings">
+				
+                        <strong>Current VoIP VLAN:&nbsp;</strong>
+                        <span id="contentMain_grdItems_lblCurrentVoIPVlan_3"></span>
+                    
+			</div>
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemNewSpeed_3">
+				
+                        <strong>New&nbsp;Speed:</strong>&nbsp;
+                   
+                        <span id="contentMain_grdItems_lblItemNewSpeed_3" style="font-weight:normal;"><br />&nbsp;&nbsp;10/100T-SW-A</span><br />
+                        
+                    
+			</div>
+                    <div id="contentMain_grdItems_pnlItemNewVLAN_3">
+				
+                        <strong>
+                            <span id="contentMain_grdItems_lblItemNewVLANLabel_3">New VLAN:</span>
+                        </strong>
+                        <span id="contentMain_grdItems_lblItemNewVLAN_3" style="font-weight:normal;"><br />&nbsp;&nbsp;TERY_Private_Security_Camera_VLAN (738)</span>
+                        <br />
+                        
+                    
+			</div>
+                    
+                    
+                    
+                    <div id="contentMain_grdItems_pnlItemServices_3">
+				
+                        <strong>New&nbsp;Services:</strong>
+                        <span id="contentMain_grdItems_lblItemServices_3" style="font-weight:normal;">None</span>
+                        <br />
+                        
+                        <script>
+                            $(document
+                                .getElementById('contentMain_grdItems_lstItemServices_3'))
+                                .multipleSelect({
+                                    filter: false,
+                                    position: 'bottom',
+                                    selectAll: false
+                                });
+                        </script>
+                    
+			</div>
+                </td><td class="center printHidden">
+                    <div id="contentMain_grdItems_pnlItemHistory_3" style="margin-bottom: 5px;">
+				
+                        <input type="submit" name="ctl00$contentMain$grdItems$ctl05$btnItemHistory" value="View PIC History" id="contentMain_grdItems_btnItemHistory_3" class="btn btn-small" style="width:85px;-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box" />
+                    
+			</div>
+                    
+                    
+                    
+                    
+                    
+                </td>
+		</tr>
+	</table>
+</div>
+    
+
+
+
+
+    
+    <h2>Comments</h2>
+    <div id="contentMain_updateCommentsPNL">
+	
+            <div id="contentMain_pnlCommentFilters" class="printHidden" style="clear: both; float: right; margin-top: -13px; padding-bottom: 10px;">
+		
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsAll" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsAll" checked="checked" />All
+           
+                </label>
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsClientOnly" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsClientOnly" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoCommentsClientOnly\&#39;,\&#39;\&#39;)&#39;, 0)" />
+                    Client Only
+           
+                </label>
+                <label class="radio inline">
+                    <input id="contentMain_rdoCommentsInternalOnly" type="radio" name="ctl00$contentMain$CommentFilters" value="rdoCommentsInternalOnly" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$contentMain$rdoCommentsInternalOnly\&#39;,\&#39;\&#39;)&#39;, 0)" />
+                    Internal Only
+           
+                </label>
+            
+	</div>
+            <div style="clear: both;"></div>
+            
+            <div>
+		<table class="table table-bordered-striped table-bordered" cellspacing="0" rules="all" border="1" id="contentMain_grdComments" style="border-collapse:collapse;">
+			<tr>
+				<th scope="col">Date</th><th scope="col">Client</th><th scope="col">Comment</th><th scope="col">Visibility</th>
+			</tr><tr>
+				<td>7/9/2018 2:16:44 PM</td><td>Mickey Kiefer</td><td>I'm not sure what happened, but I used to be connected to these 4 cameras. They are showing deactivated in Risque - so I am asking for them to be reactivated. Unsure if the jumpers are still installed, and such. Thanks!</td><td>Client</td>
+			</tr>
+		</table>
+	</div>
+            
+            <div style="clear: both;"></div>
+        
+</div>
+
+    
+    
+    <div id="pnlHistory" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <input type="hidden" name="ctl00$contentMain$showModal_History" id="contentMain_showModal_History" />
+        <div class="modal-header">
+            <h3>
+                <i class="icon-time icon-white"></i>History for
+           
+                <span id="contentMain_lblPICHistoryTitle"></span>
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="btn-group" data-toggle="buttons-radio" style="clear: both; display: block; margin-bottom: 15px; text-align: center;">
+                <input type="submit" name="ctl00$contentMain$btnHistoryTask" value="Task History" id="contentMain_btnHistoryTask" class="btn btn-primary active" />
+                <input type="submit" name="ctl00$contentMain$btnHistoryPIC" value="PIC History" id="contentMain_btnHistoryPIC" class="btn" />
+            </div>
+            
+            <div id="contentMain_pnlHistoryTask">
+	
+                <h3>Tickets:</h3>
+                <div>
+
+	</div>
+
+                <h3>Work Assignments:</h3>
+                <div>
+
+	</div>
+            
+</div>
+
+            
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnHistoryClose" value="Close" id="contentMain_btnHistoryClose" class="btn" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlAssignTo" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <input type="hidden" name="ctl00$contentMain$showModal_AssignTo" id="contentMain_showModal_AssignTo" />
+        <input type="hidden" name="ctl00$contentMain$assignTo_TicketID" id="contentMain_assignTo_TicketID" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-user icon-white"></i>Assign To
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Group Member:</label>
+                    <div class="controls">
+                        <select name="ctl00$contentMain$ddlAssignTo" id="contentMain_ddlAssignTo">
+
+</select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnAssignTo_Save" value="Save" id="contentMain_btnAssignTo_Save" class="btn btn-inverse" />
+            <input type="submit" name="ctl00$contentMain$btnAssignToCancel" value="Cancel" id="contentMain_btnAssignToCancel" class="btn" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlHold" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-exclamation-sign icon-white"></i>Place Ticket On Hold
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Hold Reason:</label>
+                    <div class="controls">
+                        <textarea name="ctl00$contentMain$txtHoldReason" rows="2" cols="20" id="contentMain_txtHoldReason">
+</textarea>
+                    </div>
+                </div>
+                <div class="controls">
+                    <div class="checkbox">
+                        <label>
+                            <input id="contentMain_chkHoldNotify" type="checkbox" name="ctl00$contentMain$chkHoldNotify" />
+                            Notify Ticket Submitter
+                   
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="ctl00$contentMain$btnHoldSubmit" value="Place On Hold" id="contentMain_btnHoldSubmit" class="btn btn-inverse" />
+        </div>
+    </div>
+    
+    
+    <div id="pnlEditDueBy" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        
+        <input type="hidden" name="ctl00$contentMain$showModal_EditDueBy" id="contentMain_showModal_EditDueBy" />
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                <i class="icon-exclamation-sign icon-white"></i>Edit Ticket Due By Date
+            </h3>
+        </div>
+        
+
+
+
+
+        <div id="contentMain_pnlEditDueDate" style="width:100%;">
+	
+            <span class="input-append date" data-date="" data-date-format="mm/dd/yyyy" style="margin-left: 10px; margin-top: 10px;">
+                <input name="ctl00$contentMain$txtEditDueDate" type="text" value="7/12/2018" id="contentMain_txtEditDueDate" class="input-small" />
+                <span class="add-on">
+                    <i class="icon-calendar"></i>
+                </span>
+            </span>
+            <span class="input-append bootstrap-timepicker-component" style="margin-left: 10px; margin-top: 10px;">
+                <input name="ctl00$contentMain$txtEditDueTime" type="text" value="2:16 PM" id="contentMain_txtEditDueTime" class="input-small time" data-minute-step="5" />
+                <span class="add-on">
+                    <i class="icon-time"></i>
+                </span>
+            </span>
+        
+</div>
+        <div id="contentMain_rdoEditDueDate_ScheduledInfo" class="form-horizontal" style="margin-left: 10px;">
+	
+            <div class="control-group">
+                <label class="control-label" style="width: 100px !important">Scheduled:</label>
+                <div class="controls" style="margin-left: 100px !important">
+                    <label class="radio inline">
+                        <input id="contentMain_rdoNewDueDateScheduled_YES" type="radio" name="ctl00$contentMain$editDueDate_ScheduledInfo" value="rdoNewDueDateScheduled_YES" />
+                        Yes
+               
+                    </label>
+                    <label class="radio inline">
+                        <input id="contentMain_rdoNewDueDateScheduled_NO" type="radio" name="ctl00$contentMain$editDueDate_ScheduledInfo" value="rdoNewDueDateScheduled_NO" checked="checked" />
+                        No
+               
+                    </label>
+                </div>
+            </div>
+        
+</div>
+        <input type="submit" name="ctl00$contentMain$btnEditDueBy" value="Save" id="contentMain_btnEditDueBy" class="btn btn-inverse" style="margin-left: 50px;" />
+        <div id="contentMain_pnlSpace" style="height:10px;">
+
+</div>
+    </div>
+    
+    
+    <script type="text/javascript">
+        if (document.getElementById('contentMain_showModal_AssignTo').value === "true")
+            $('#pnlAssignTo').modal('show');
+
+        if (document.getElementById('contentMain_showModal_History').value === "true")
+            $('#pnlHistory').modal('show');
+
+        if (document.getElementById('contentMain_showModal_EditDueBy').value === "true")
+            $('#pnlEditDueBy').modal('show');
+    </script>
+
+                        
+                    </div>
+
+                    <div class="sidenav">
+                        <ul>
+                            <li class='sidenav-head'>Data Ticketing</li>
+<li><a href='/Tickets/Data/CreateTicket.aspx'>Create Ticket</a></li>
+<li><a href='/Tickets/Data/ViewTickets.aspx'>View Tickets</a></li>
+<li><a href='/Tickets/Data/SearchTickets.aspx'>Search Tickets</a></li>
+<li><a href='/Tickets/Constellation/ConstellationTickets.aspx'>View Archived Tickets</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="clear: both;"></div>
+        <div class="purdue-bottom">
+            <div class="purdue-container">
+                <div class="purdue-row">
+                    <div class="purdue-bottom-row">
+                        <p>Purdue University, West Lafayette, IN 47907&nbsp;(765) 494-4600</p>
+                        <p><a href="http://www.purdue.edu/purdue/disclaimer.html">&copy; 2019 Purdue University</a> | <a href="http://www.purdue.edu/purdue/ea_eou_statement.html">An equal access/equal opportunity university</a></p>
+                        <p>If you have trouble accessing this page because of a disability, please contact <a href="mailto:risque-admin@lists.purdue.edu">risque-admin@lists.purdue.edu</a>.</p>
+                        <p>Risque Galaxy version <span id="lblVersion">3.0.6947.15609</span> | Served by WPVWEBASP02A</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div id="pnlHelp_Content" class="modal hide fade" role="dialog" aria-hidden="true">
+            <input type="hidden" name="ctl00$showModal_Help_Content" id="showModal_Help_Content" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h3><i class="glyphicon glyphicon-plus icon-white" style="margin-right: 10px;"></i>Submit Help Request</h3>
+                    </div>
+                    <div class="modal-body" style="overflow:auto;">
+                        <div class="radio">
+                            <input id="rdoHelp1" type="radio" name="ctl00$rdoHelp" value="rdoHelp1" onclick="javascript:togTickets();" /><label for="rdoHelp1">Request for Status or Ask Question about a Risque Ticket</label>
+                        </div>
+                        <div id="helpTicketsPanel" style="display: none; margin-left: 20px;">
+                            <div class="control-label">
+                                <strong>Select a Ticket:</strong>
+                            </div>
+                            <div class="controls">
+                                <select name="ctl00$ddlHelpTickets" id="ddlHelpTickets" class="form-control ddlSearchableFullText" style="width:200px;">
+	<option value="67095">67095</option>
+	<option value="67290">67290</option>
+	<option value="67392">67392</option>
+	<option value="67444">67444</option>
+	<option value="67531">67531</option>
+	<option value="67538">67538</option>
+	<option value="67539">67539</option>
+	<option value="67564">67564</option>
+	<option value="67625">67625</option>
+	<option value="67799">67799</option>
+	<option value="67837">67837</option>
+	<option value="67844">67844</option>
+	<option value="67881">67881</option>
+	<option value="67920">67920</option>
+	<option value="67937">67937</option>
+	<option value="67938">67938</option>
+	<option value="67969">67969</option>
+	<option value="67986">67986</option>
+	<option value="67996">67996</option>
+	<option value="67999">67999</option>
+	<option value="68000">68000</option>
+	<option value="68001">68001</option>
+	<option value="68002">68002</option>
+	<option value="68003">68003</option>
+	<option value="68004">68004</option>
+	<option value="68008">68008</option>
+	<option value="68021">68021</option>
+	<option value="68024">68024</option>
+	<option value="68028">68028</option>
+	<option value="68030">68030</option>
+	<option value="68033">68033</option>
+	<option value="68034">68034</option>
+	<option value="68035">68035</option>
+	<option value="68037">68037</option>
+	<option value="68038">68038</option>
+	<option value="68039">68039</option>
+	<option value="68040">68040</option>
+	<option value="68041">68041</option>
+	<option value="68042">68042</option>
+	<option value="68043">68043</option>
+	<option value="68044">68044</option>
+	<option value="68045">68045</option>
+	<option value="68046">68046</option>
+	<option value="68047">68047</option>
+	<option value="68048">68048</option>
+	<option value="68049">68049</option>
+	<option value="68050">68050</option>
+	<option value="68051">68051</option>
+	<option value="68052">68052</option>
+	<option value="68053">68053</option>
+	<option value="68054">68054</option>
+	<option value="68055">68055</option>
+	<option value="68056">68056</option>
+	<option value="68057">68057</option>
+	<option value="68058">68058</option>
+	<option value="68059">68059</option>
+	<option value="68060">68060</option>
+	<option value="68061">68061</option>
+	<option value="68062">68062</option>
+	<option value="68063">68063</option>
+	<option value="68064">68064</option>
+	<option value="68065">68065</option>
+	<option value="68066">68066</option>
+	<option value="68067">68067</option>
+	<option value="68068">68068</option>
+	<option value="68069">68069</option>
+	<option value="68070">68070</option>
+	<option value="68071">68071</option>
+	<option value="68072">68072</option>
+	<option value="68073">68073</option>
+	<option value="68074">68074</option>
+	<option value="68075">68075</option>
+	<option value="68076">68076</option>
+	<option value="68077">68077</option>
+	<option value="68078">68078</option>
+	<option value="68079">68079</option>
+	<option value="68080">68080</option>
+	<option value="68081">68081</option>
+	<option value="68082">68082</option>
+	<option value="68083">68083</option>
+	<option value="68084">68084</option>
+	<option value="68085">68085</option>
+	<option value="68086">68086</option>
+	<option value="68087">68087</option>
+	<option value="68088">68088</option>
+	<option value="68089">68089</option>
+	<option value="68090">68090</option>
+	<option value="68091">68091</option>
+	<option value="68092">68092</option>
+	<option value="68093">68093</option>
+	<option value="68094">68094</option>
+	<option value="68095">68095</option>
+	<option value="68096">68096</option>
+	<option value="68097">68097</option>
+	<option value="68098">68098</option>
+	<option value="68099">68099</option>
+	<option value="68100">68100</option>
+	<option value="68101">68101</option>
+	<option value="68102">68102</option>
+	<option value="68103">68103</option>
+	<option value="68104">68104</option>
+	<option value="68105">68105</option>
+	<option value="68106">68106</option>
+	<option value="68107">68107</option>
+	<option value="68108">68108</option>
+	<option value="68109">68109</option>
+	<option value="68110">68110</option>
+	<option value="68111">68111</option>
+	<option value="68112">68112</option>
+	<option value="68113">68113</option>
+	<option value="68114">68114</option>
+	<option value="68115">68115</option>
+	<option value="68116">68116</option>
+	<option value="68117">68117</option>
+	<option value="68118">68118</option>
+	<option value="68119">68119</option>
+	<option value="68120">68120</option>
+	<option value="68121">68121</option>
+	<option value="68122">68122</option>
+	<option value="68123">68123</option>
+	<option value="68124">68124</option>
+	<option value="68125">68125</option>
+	<option value="68126">68126</option>
+	<option value="68127">68127</option>
+	<option value="68128">68128</option>
+	<option value="68129">68129</option>
+	<option value="68130">68130</option>
+	<option value="68131">68131</option>
+	<option value="68132">68132</option>
+	<option value="68133">68133</option>
+	<option value="68134">68134</option>
+	<option value="68135">68135</option>
+	<option value="68136">68136</option>
+	<option value="68137">68137</option>
+	<option value="68138">68138</option>
+	<option value="68139">68139</option>
+	<option value="68140">68140</option>
+	<option value="68141">68141</option>
+	<option value="68142">68142</option>
+	<option value="68143">68143</option>
+	<option value="68144">68144</option>
+	<option value="68145">68145</option>
+	<option value="68146">68146</option>
+	<option value="68147">68147</option>
+	<option value="68148">68148</option>
+	<option value="68149">68149</option>
+	<option value="68150">68150</option>
+	<option value="68151">68151</option>
+	<option value="68152">68152</option>
+	<option value="68153">68153</option>
+	<option value="68154">68154</option>
+	<option value="68155">68155</option>
+	<option value="68156">68156</option>
+	<option value="68157">68157</option>
+	<option value="68158">68158</option>
+	<option value="68159">68159</option>
+	<option value="68160">68160</option>
+	<option value="68161">68161</option>
+	<option value="68162">68162</option>
+	<option value="68163">68163</option>
+	<option value="68164">68164</option>
+	<option value="68165">68165</option>
+	<option value="68166">68166</option>
+	<option value="68167">68167</option>
+	<option value="68168">68168</option>
+	<option value="68169">68169</option>
+	<option value="68170">68170</option>
+	<option value="68171">68171</option>
+	<option value="68172">68172</option>
+	<option value="68173">68173</option>
+	<option value="68174">68174</option>
+	<option value="68175">68175</option>
+	<option value="68176">68176</option>
+	<option value="68177">68177</option>
+	<option value="68178">68178</option>
+	<option value="68179">68179</option>
+	<option value="68180">68180</option>
+
+</select>
+                            </div>
+                        </div>
+                        <div class="radio">
+                            <input id="rdoHelp2" type="radio" name="ctl00$rdoHelp" value="rdoHelp2" onclick="javascript:togProblem();" /><label for="rdoHelp2">Report a Problem with a Risque Application</label>
+                        </div>
+                        <div id="helpProblemPanel" style="display: none; margin-left: 20px;">
+                            <label class="control-label">
+                                <strong>Select&nbsp;Application(s):</strong>
+                            </label>
+                            <div class="controls">
+                                
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_0" type="checkbox" name="ctl00$rptHelpProblem$ctl00$chkApp" /><label for="rptHelpProblem_chkApp_0">Portal</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_1" type="checkbox" name="ctl00$rptHelpProblem$ctl01$chkApp" /><label for="rptHelpProblem_chkApp_1">Records</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_2" type="checkbox" name="ctl00$rptHelpProblem$ctl02$chkApp" /><label for="rptHelpProblem_chkApp_2">Reports</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_3" type="checkbox" name="ctl00$rptHelpProblem$ctl03$chkApp" /><label for="rptHelpProblem_chkApp_3">Resources</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_4" type="checkbox" name="ctl00$rptHelpProblem$ctl04$chkApp" /><label for="rptHelpProblem_chkApp_4">Tickets</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpProblem_chkApp_5" type="checkbox" name="ctl00$rptHelpProblem$ctl05$chkApp" /><label for="rptHelpProblem_chkApp_5">Tracker</label>
+                                        </div>
+                                    
+                            </div>
+                        </div>
+
+                        <div class="radio">
+                            <input id="rdoHelp3" type="radio" name="ctl00$rdoHelp" value="rdoHelp3" onclick="javascript:togFeature();" /><label for="rdoHelp3">Request Creation of a New Risque Feature</label>
+                        </div>
+                        <div id="helpFeaturePanel" style="display: none; margin-left: 20px;">
+                            <label class="control-label">
+                                <strong>Select&nbsp;Application(s):</strong>
+                            </label>
+                            <div class="controls">
+                                
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_0" type="checkbox" name="ctl00$rptHelpFeature$ctl00$chkApp" /><label for="rptHelpFeature_chkApp_0">Portal</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_1" type="checkbox" name="ctl00$rptHelpFeature$ctl01$chkApp" /><label for="rptHelpFeature_chkApp_1">Records</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_2" type="checkbox" name="ctl00$rptHelpFeature$ctl02$chkApp" /><label for="rptHelpFeature_chkApp_2">Reports</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_3" type="checkbox" name="ctl00$rptHelpFeature$ctl03$chkApp" /><label for="rptHelpFeature_chkApp_3">Resources</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_4" type="checkbox" name="ctl00$rptHelpFeature$ctl04$chkApp" /><label for="rptHelpFeature_chkApp_4">Tickets</label>
+                                        </div>
+                                    
+                                        <div class="checkbox">
+                                            <input id="rptHelpFeature_chkApp_5" type="checkbox" name="ctl00$rptHelpFeature$ctl05$chkApp" /><label for="rptHelpFeature_chkApp_5">Tracker</label>
+                                        </div>
+                                    
+                            </div>
+                        </div>
+                        <div class="radio">
+                            <input id="rdoHelp4" type="radio" name="ctl00$rdoHelp" value="rdoHelp4" checked="checked" onclick="javascript:togElse();" /><label for="rdoHelp4">Something else…</label>
+                        </div>
+                        <div class="control-group" style="margin-left:17%;">
+                            <textarea name="ctl00$txtHelpReq" rows="7" cols="20" id="txtHelpReq" class="form-control" PlaceHolder="Please enter as much detail about this request as possible." style="width:370px;">
+</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <input type="submit" name="ctl00$btnHelpSubmit" value="Submit Request" id="btnHelpSubmit" class="btn btn-primary" style="float: left;" />
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        if (document.getElementById('showModal_Help_Content').value == "true")
+                            $('#pnlHelp_Content').modal('show');
+                    </script>
+        </div>
+
+        <div class="modal fade" id="NoExcel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="color:white;">Excel Export Notice</h4>
+              </div>
+              <div class="modal-body">
+                <p>The data set presented is too large to export as an Excel file, please download it as a CSV instead. </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+
+theForm.oldSubmit = theForm.submit;
+theForm.submit = WebForm_SaveScrollPositionSubmit;
+
+theForm.oldOnSubmit = theForm.onsubmit;
+theForm.onsubmit = WebForm_SaveScrollPositionOnSubmit;
+//]]>
+</script>
+</form>
+    <script type="text/javascript">
+        $(".ddlSearchable").select2({
+            matcher: function (term, text) { return text.toUpperCase().indexOf(term.toUpperCase()) == 0; },
+            minimumResultsForSearch: 7
+        });
+
+        $(".ddlSearchableFullText").select2({
+            minimumResultsForSearch: 7
+        });
+
+        function togTickets() {
+            $('#helpProblemPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+
+            $('#helpTicketsPanel').show(400);
+        }
+
+        function togProblem() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+
+            $('#helpProblemPanel').show(400);
+        }
+
+        function togFeature() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpProblemPanel').hide(400);
+
+            $('#helpFeaturePanel').show(400);
+        }
+
+        function togElse() {
+            $('#helpTicketsPanel').hide(400);
+            $('#helpProblemPanel').hide(400);
+            $('#helpFeaturePanel').hide(400);
+        }
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-86579122-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

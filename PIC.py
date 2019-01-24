@@ -66,7 +66,6 @@ class PIC:
             try:
                 self.currentProvider = Provider(risqueString=currentProvider)
             except:
-                print "Failed to parse currentProvider"
                 self.currentProvider = None
         if newProvider is not None:
             try:

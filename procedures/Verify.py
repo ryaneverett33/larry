@@ -13,7 +13,7 @@ class Verify:
     def __verifyBasicDeactivate(self, iosConnection, provider, pic):
         interface = None
         if iosConnection.isFexHost:
-            interface = iosConnection.findInterfaceOfPic(pic.name)
+            interface = iosConnection.findFexInterface(pic, provider)
             print "Fex port has interface {0}".format(interface)
         else:
             interface = provider.getSwitchInterface()
@@ -40,7 +40,7 @@ class Verify:
         passed = True
         interface = None
         if iosConnection.isFexHost:
-            interface = iosConnection.findInterfaceOfPic(pic.name)
+            interface = iosConnection.findFexInterface(pic, provider)
             print "Fex port has interface {0}".format(interface)
         else:
             interface = provider.getSwitchInterface()
