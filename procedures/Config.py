@@ -17,7 +17,7 @@ class Config:
     def __basicDeactivate(self, iosConnection, provider, pic):
         interface = None
         if iosConnection.isFexHost:
-            interface = iosConnection.findInterfaceOfPic(pic.name)
+            interface = iosConnection.findFexInterface(pic, provider)
         else:
             interface = provider.getSwitchInterface()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
@@ -41,7 +41,7 @@ class Config:
     def __basicActivate(self, iosConnection, provider, pic):
         interface = None
         if iosConnection.isFexHost:
-            interface = iosConnection.findInterfaceOfPic(pic.name)
+            interface = iosConnection.findFexInterface(pic, provider)
         else:
             interface = provider.getSwitchInterface()
         risqueConfig = pic.getConfig()
@@ -80,7 +80,7 @@ class Config:
     def __basicModify(self, iosConnection, provider, pic):
         interface = None
         if iosConnection.isFexHost:
-            interface = iosConnection.findInterfaceOfPic(pic.name)
+            interface = iosConnection.findFexInterface(pic, provider)
         else:
             interface = provider.getSwitchInterface()
         risqueConfig = pic.getConfig()

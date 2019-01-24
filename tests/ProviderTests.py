@@ -92,10 +92,24 @@ class ProviderTests(unittest.TestCase):
         self.assertEqual(provider4.port, 1)
         self.assertEqual(provider4.intType, "Fa")
         self.assertFalse(provider4.uplink)
-        with self.assertRaises(AttributeError) as cm:
-            Provider(switchString='gi104/1/0/6')
+        provider5 = Provider(switchString="Gi103/1/0/9")
+        self.assertIsNotNone(provider5)
+        self.assertEqual(provider5.switch, 103)
+        self.assertEqual(provider5.port, 9)
+        self.assertEqual(provider5.intType, "Gi")
+        self.assertFalse(provider5.uplink)
+        self.assertTrue(provider5.fex)
+        provider6 = Provider(switchString="Gi101/1/0/11")
+        self.assertIsNotNone(provider6)
+        self.assertEqual(provider6.switch, 101)
+        self.assertEqual(provider6.port, 11)
+        self.assertEqual(provider6.intType, "Gi")
+        self.assertFalse(provider6.uplink)
+        self.assertTrue(provider6.fex)
+        # with self.assertRaises(AttributeError) as cm:
+        #    Provider(switchString='gi104/1/0/6')
 
-        self.assertEqual(cm.exception.message, "switchString is a FEX port, not supported!")
+        # self.assertEqual(cm.exception.message, "switchString is a FEX port, not supported!")
         with self.assertRaises(AttributeError) as cm:
             Provider(switchString='')
 

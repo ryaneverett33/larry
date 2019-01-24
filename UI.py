@@ -12,13 +12,13 @@ class UI:
     pages = None
     currentPage = None
     exitApp = False
+    artDisabled = False
 
     def __init__(self, app):
         self.app = app
         self.pages = [
             ["Do Ticket", self.work_page],
             ["Verify Ticket", self.verify_page],
-            ["Settings", self.settings_page],
             ["Store Credentials", self.credentials_page],
             ["Exit", self.exit],
             ["Art", self.artPage]
@@ -27,7 +27,8 @@ class UI:
         signal.signal(signal.SIGINT, self.ctrlchandler)
 
     def main(self):
-        print art.art.getArt()
+        if not self.artDisabled:
+            print art.art.getArt()
         while not self.exitApp:
             currentPage = self.currentPage
             try:
@@ -42,7 +43,6 @@ class UI:
             except StopIteration:
                 self.goToMainPage()
             except Exception:
-                print 'General exception'
                 self.goToMainPage()
 
     def work_page(self):
@@ -96,6 +96,11 @@ class UI:
     def artPage(self):
         print art.art.getArt()
         self.goToMainPage()
+
+    # The saddest setting
+    def disableArt(self):
+        self.artDisabled = True
+        self.pages.remove(["Art", self.artPage])
 
     def __printPages(self):
         i = 0

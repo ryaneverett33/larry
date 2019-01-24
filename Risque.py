@@ -5,8 +5,7 @@ from Ticket import Ticket
 from PIC import PIC
 import warnings
 from ConfigurationDriver import ConfigurationDriver
-import urllib3
-import exceptions
+from PasswordUtility import PasswordUtility
 
 
 class Risque:
@@ -27,6 +26,12 @@ class Risque:
             return self.parseTicket(ticket)
         except ValueError:
             print "Failed to get ticket, login invalid"
+            result = raw_input("Failed to login to risque, change risque password? (y/n)")
+            if result.lower() == "y":
+                newRisquePass = PasswordUtility.getpassword("Risque Password (BoilerKey): ")
+                user, risquePass, switchPass = ConfigurationDriver.getCredentials()
+                ConfigurationDriver.storeCredentials(user, newRisquePass, switchPass)
+            ConfigurationDriver.clearCookies()
             return None
 
     def getTicketBody(self, ticketNumber):

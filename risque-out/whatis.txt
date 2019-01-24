@@ -1,0 +1,2 @@
+FEX ports - 65146
+TRUNK ports - 53787

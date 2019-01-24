@@ -1,6 +1,7 @@
 from Vlan import Vlan
 from Speed import Speed
 from procedures import BaseTemplates
+from Provider import Provider
 
 
 # Represents an SSH connection to an IOS switch
@@ -81,6 +82,23 @@ class IOS:
             if name.lower() == picName.lower():
                 return interface
         return None
+
+    def findFexInterface(self, pic, provider):
+        # search sis if the pic name already exists
+        sisBasicSearch = self.findInterfaceOfPic(pic.name)
+        if sisBasicSearch is not None:
+            return sisBasicSearch
+        # PicName hasn't been added to sis (e.g. Activate)
+        # Find virtual switch (e.g. Gi112 or Gi132)
+        interfaces = self.sis(include=provider.building.lower())
+        if len(interfaces) == 0:
+            return None
+        else:
+            neighborInterface = interfaces[0][0]
+            neighborProvider = Provider(risqueString=neighborInterface)
+            print "neighborInterface: {0}, neighborProvider: {1}".format(neighborInterface, neighborProvider)
+            # Gi103/1/0/9
+            return "{0}{1}/1/0/{2}".format(neighborProvider.intType, neighborProvider.switch, provider.port)
 
     def disconnect(self):
         self.sshClient.disconnect()

@@ -9,6 +9,7 @@ class Provider:
     switchType = None   # e.g. c3750ep
     intType = None      # Gi, Te, Tw, Fa
     uplink = False      # e.g. Te1/1/3
+    fex = False         # e.g. Gi101/1/0/11
 
     def __init__(self, risqueString=None, switchString=None):
         if risqueString is not None:
@@ -95,7 +96,11 @@ class Provider:
         providerSplit = switch.split('/')
         if len(providerSplit) == 4:
             # ['gi104', '1', '0', '6']
-            raise AttributeError("switchString is a FEX port, not supported!")
+            self.fex = True
+            self.port = int(providerSplit[len(providerSplit) - 1])
+            self.intType = providerSplit[0][0:2]            # Assuming IntTypes can only be 2 characters
+            self.switch = int(providerSplit[0][2:])
+            return
         if len(providerSplit) < 2:
             raise AttributeError("switchString is an invalid provider")
         # ['Gi3', '0']

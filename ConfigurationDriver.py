@@ -40,19 +40,20 @@ class ConfigurationDriver:
             ConfigurationDriver.cookies = dict()
             for key in keys:
                 ConfigurationDriver.cookies[key] = cookies[key]
-            print "Stored cookies: {0}".format(ConfigurationDriver.cookies)
         except:
-            print "failed storing cookies"
             ConfigurationDriver.cookies = None
 
     @staticmethod
     def cookiesStored():
-        print "Cookies stored: {0}".format(ConfigurationDriver.cookies)
         return ConfigurationDriver.cookies is not None
 
     @staticmethod
     def getCookies():
         return ConfigurationDriver.cookies
+
+    @staticmethod
+    def clearCookies():
+        ConfigurationDriver.cookies = None
 
     @staticmethod
     def useTestCredentials(username, switchPassword):
