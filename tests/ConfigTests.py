@@ -9,7 +9,7 @@ from Hosts import Hosts
 class ConfigTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        ConfigurationDriver.useTestCredentials("","")
+        ConfigurationDriver.useTestCredentials("", "")
         Hosts.USE_DEBUG = True
 
     def test_basicModify(self):
