@@ -205,6 +205,8 @@ class Risque:
                     pic.applyNewConfig(newVoip, newVlans, newSpeed)
                 if newTaggedVlans is not None:
                     pic.addTaggedVlans(newTaggedVlans)
+                if patch is not None:
+                    pic.addPatchPanel(patch)
                 ticket.addPic(pic)
 
             return ticket

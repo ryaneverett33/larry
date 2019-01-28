@@ -21,8 +21,8 @@ def printTicket(ticket):
     print ""
     for i in range(0, len(ticket.pics)):
         pic = ticket.pics[i]
-        print "PIC: {0}, Action: {1}, Current Provider: {2}, New Provider: {3}"\
-            .format(pic.name, pic.action, pic.currentProvider, pic.newProvider)
+        print "PIC: {0}, Action: {1}, Patch-Panel: {4}, Current Provider: {2}, New Provider: {3}"\
+            .format(pic.name, pic.action, pic.currentProvider, pic.newProvider, pic.patch)
         if pic.currentConfig is not None:
             print "Current Speed: {0}, Current Vlans: {1}, Trunk: {3} Current VoIP: {2}"\
                 .format(pic.currentConfig.speed, listToStr(pic.currentConfig.vlan), pic.currentConfig.voiceVlan,
