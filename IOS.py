@@ -506,3 +506,10 @@ class IOS:
             return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "9300")
         else:
             raise AttributeError("Unknown switch type, unable to determine whether it's empty")
+
+    # Executes an arbitrary command, basically like ssh.execute() but with basic command verifcation
+    def do(self, switchCommand):
+        result = self.sshClient.execute(switchCommand)[0]
+        if not self.__isValidResponse(result):
+            print "{0} failed to execute".format(switchCommand)
+        return result
