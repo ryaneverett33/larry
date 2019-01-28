@@ -1,12 +1,13 @@
 from PIC import PIC
 
 class Ticket:
-    number = None
-    dueby = None
-    priority = None
-    status = None
-    pics = None
-    picNames = None     # [name] -> PIC object
+    number = None               # the ticket number this ticket represents (not used)
+    dueby = None                # the dueby date for a ticket (not used)
+    priority = None             # the priority of the ticket (not used)
+    status = None               # the status of the ticket (not used)
+    pics = None                 # list of all PICs in this ticket, provider supplied or not
+    configurablePics = None     # list of PICs with a provider port that can be configured
+    picNames = None             # [name] -> PIC object
 
     def __init__(self, number, dueby, priority, status):
         self.number = number
@@ -14,6 +15,7 @@ class Ticket:
         self.priority = priority
         self.status = status
         self.pics = []
+        self.configurablePics = []
         self.picNames = dict()
 
     def __containsPic(self, pic):
@@ -28,6 +30,11 @@ class Ticket:
         if not self.__containsPic(pic):
             self.pics.append(pic)
             self.picNames[pic.name] = pic
+            try:
+                if pic.getProvider() is not None:
+                    self.configurablePics.append(pic)
+            except AttributeError:
+                pass            # do nothing
             self.__sort()
         else:
             raise ValueError("PIC already added")

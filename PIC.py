@@ -1,6 +1,7 @@
 from Speed import Speed
 from Vlan import Vlan
 from Provider import Provider
+from Patch import Patch
 
 
 class PICConfig:
@@ -56,6 +57,7 @@ class PIC:
     newConfig = None
     action = None
     trunk = False
+    patch = None
 
     def __init__(self, name, currentProvider, newProvider, action, services):
         # if name is None or newProvider is None or action is None:
@@ -133,6 +135,13 @@ class PIC:
             if self.newConfig is None:
                 raise AttributeError("Config hasn't been supplied yet")
             return self.newConfig
+
+    def addPatchPanel(self, patchString):
+        try:
+            self.patch = Patch(risqueString=patchString)
+        except:
+            # if we fail to add parse the patch panel, silently fail
+            self.patch = None
 
     def getDescription(self):
         return self.name.lower()
