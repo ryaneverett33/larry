@@ -1,3 +1,6 @@
+from Hosts import Hosts
+
+
 class Patch:
     building = None         # bown
     room = None             # 1111a
@@ -22,6 +25,26 @@ class Patch:
         self.patchType = dashSplit[2]
         self.panelNumber = int(dashSplit[3])
         self.portNumber = int(dashSplit[4])
+
+    @staticmethod
+    def getHostsFromPatch(patch):
+        if patch is None:
+            return None
+        if patch.building is None or patch.room is None:
+            raise AttributeError("getHostsFromPatch requires a valid building and room")
+        buildingList = Hosts.getBuildings(patch.building)
+        if patch.building not in buildingList:
+            raise ValueError("Invalid Building, unable to get host")
+        #  search by room and switch
+        filtered = Hosts.filter(buildingList, str(patch.room), switches=True)
+        hosts = []
+        for host in filtered[patch.building]:
+            if Hosts.isEqual(host, patch.building, patch.room, None, None):
+                hosts.append(host)
+        if len(hosts) == 0:
+            return None
+        else:
+            return hosts
 
     def __str__(self):
         return "{0}-{1}-{2}-{3}-{4}".format(self.building, self.room, self.patchType, self.panelNumber, self.portNumber)

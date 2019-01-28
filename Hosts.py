@@ -204,8 +204,8 @@ class Hosts:
     def isEqual(hostname, building, room, device, stack):
         if hostname is None:
             return False
-        if building is None or room is None or device is None or stack is None:
-            raise AttributeError("isEqual must be given a building, room, device, and stack to compare against")
+        if building is None or room is None:
+            raise AttributeError("isEqual must be given a building and room to compare against")
         # valid host: mann-b032-c3750ep-01.tcom.purdue.edu
         hostSplit = hostname.split('-')
         if len(hostSplit) != 4:
@@ -216,13 +216,15 @@ class Hosts:
         if hostSplit[1] != str(room):
             #  print "room mismatch: {0}, {1}".format(hostSplit[1], room)
             return False
-        if hostSplit[2] != device:
-            #  print "device mismatch: {0}, {1}".format(hostSplit[2], device)
-            return False
-        hostStack = hostSplit[3].split('.')[0]
-        hostStack = int(hostStack)
-        if hostStack != stack:
-            return False
+        if device is not None:
+            if hostSplit[2] != device:
+                #  print "device mismatch: {0}, {1}".format(hostSplit[2], device)
+                return False
+        if stack is not None:
+            hostStack = hostSplit[3].split('.')[0]
+            hostStack = int(hostStack)
+            if hostStack != stack:
+                return False
         #  if hostSplit[3] != str(stack):
         #    print "stack mismatch: {0}, {1}".format(hostSplit[3], stack)
         #    return False
