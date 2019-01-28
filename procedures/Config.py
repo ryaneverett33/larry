@@ -239,6 +239,8 @@ class Config:
         if not self.verify.verify(iosConnection, provider, pic):
             self.logger.logError("Failed to configure {0} on {1}".format(pic.name, provider), True)
             # print "Failed to configure {0} on {1}".format(pic.name, provider)
+        else:
+            self.logger.logSuccess("Successfully configured {0}".format(pic.name), True)
 
     def run(self):
         currentHost = None
@@ -261,7 +263,7 @@ class Config:
                 driver = ConfigurationDriver.getDriver()
                 iosConnection = IOS(driver, currentHost, provider.switchType)
                 self.hostChanged = False
-            try :
+            try:
                 self.config(iosConnection, provider, pic)
             except Exception, e:
                 # print "Failed to configure {0} with provider {1}, error: {2}".format(pic.name, provider, e)

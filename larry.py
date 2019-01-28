@@ -5,6 +5,7 @@ from PasswordUtility import PasswordUtility
 import sys
 from Hosts import Hosts
 from INSTALL import Install
+from Logger import Logger
 
 
 class larry:
@@ -27,12 +28,14 @@ class larry:
         for arg in sys.argv:
             if arg == "--editor" or arg == "-editor":
                 PasswordUtility.useEditor()
-            if arg == "--hostsDebug" or arg == "-hostsDebug":
+            elif arg == "--hostsDebug" or arg == "-hostsDebug":
                 Hosts.USE_DEBUG = True
-            if arg == "--ignoreUpdate" or arg == "-ignoreUpdate":
+            elif arg == "--ignoreUpdate" or arg == "-ignoreUpdate":
                 self.ignoreUpdate = True
-            if arg == "--disableArt" or arg == "-disableArt":
+            elif arg == "--disableArt" or arg == "-disableArt":
                 self.ui.disableArt()
+            elif arg == "--noLogging" or arg == "-noLogging":
+                Logger.NO_LOGGING = True
 
 
 if __name__ == "__main__":
