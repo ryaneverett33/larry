@@ -85,7 +85,7 @@ class UI:
             except:
                 print "Invalid Action, must be a value between 0 and {0}".format(len(self.pages) - 1)
         self.currentPage = self.pages[index]
-        print "switching to page {0} with index {1}".format(self.currentPage[0], index)
+        # print "switching to page {0} with index {1}".format(self.currentPage[0], index)
 
     def exit(self):
         self.exitApp = True
@@ -109,6 +109,9 @@ class UI:
             i = i + 1
 
     def ctrlchandler(self, sig, frame):
+        if ConfigurationDriver.isLocked():
+            ConfigurationDriver.clearCredentials()
+            ConfigurationDriver.unlock()
         if self.currentPage[0] == "Main Page":
             self.exit()
         # raise an exception on main thread, and leave

@@ -3,16 +3,19 @@ from IOS import IOS
 from Vlan import Vlan
 from Speed import Speed
 from Verify import Verify
+from Logger import Logger
 
 
 class Config:
     ticket = None
     verify = None
     hostChanged = False
+    logger = None
 
     def __init__(self, ticket):
         self.ticket = ticket
         self.verify = Verify(ticket)
+        self.logger = Logger.getInstance(ticket.number)
 
     def __basicDeactivate(self, iosConnection, provider, pic):
         interface = None
@@ -23,7 +26,8 @@ class Config:
         switchConfig = iosConnection.getConfig(interface, flatten=False)
         description = iosConnection.getDescription(interface, switchConfig)
         if description is None or description != pic.getDescription():
-            print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
+            # print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
+            self.logger.logWarning("DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider), True)
 
         iosConnection.enterConfigMode()
         iosConnection.enterInterfaceConfig(interface)
@@ -49,7 +53,8 @@ class Config:
         switchConfig = iosConnection.getConfig(interface, flatten=False)
 
         if provider.uplink:
-            print "Provider is an uplink port, not supported yet!"
+            # print "Provider is an uplink port, not supported yet!"
+            self.logger.logError("Provider is an uplink port, not supported yet!", True)
             return
 
         iosConnection.enterConfigMode()
@@ -90,7 +95,8 @@ class Config:
         voiceVlan = iosConnection.getVoiceVlan(interface, switchConfig)
         description = iosConnection.getDescription(interface, switchConfig)
         if description is None or description != pic.getDescription():
-            print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
+            # print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
+            self.logger.logWarning("DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider), True)
 
         iosConnection.enterConfigMode()
         iosConnection.enterInterfaceConfig(interface)
@@ -111,7 +117,8 @@ class Config:
     def __trunkModify(self, iosConnection, provider, pic):
         interface = provider.getSwitchInterface()
         if iosConnection.isFexHost:
-            print "Can't modify trunk port on a FEX host"
+            # print "Can't modify trunk port on a FEX host"
+            self.logger.logError("Can't modify trunk port on a FEX host")
             return False
         risqueConfig = pic.getConfig()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
@@ -122,7 +129,9 @@ class Config:
         voiceVlan = iosConnection.getVoiceVlan(interface, switchConfig)
         description = iosConnection.getDescription(interface, switchConfig)
         if description is None or description != pic.getDescription():
-            print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
+            # print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
+            self.logger.logWarning(
+                "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider), True)
 
         iosConnection.enterConfigMode()
         iosConnection.enterInterfaceConfig(interface)
@@ -164,7 +173,8 @@ class Config:
     def __trunkActivate(self, iosConnection, provider, pic):
         interface = provider.getSwitchInterface()
         if iosConnection.isFexHost:
-            print "Can't modify trunk port on a FEX host"
+            # print "Can't modify trunk port on a FEX host"
+            self.logger.logError("Can't modify trunk port on a FEX host")
             return False
         risqueConfig = pic.getConfig()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
@@ -186,10 +196,15 @@ class Config:
 
     def __trunkDeactivate(self, iosConnection, provider, pic):
         interface = provider.getSwitchInterface()
+        if iosConnection.isFexHost:
+            # print "Can't modify trunk port on a FEX host"
+            self.logger.logError("Can't modify trunk port on a FEX host")
+            return False
         switchConfig = iosConnection.getConfig(interface, flatten=False)
         description = iosConnection.getDescription(interface, switchConfig)
         if description is None or description != pic.getDescription():
-            print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
+            self.logger.logError("Can't modify trunk port on a FEX host")
+            # print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
 
         iosConnection.enterConfigMode()
         iosConnection.enterInterfaceConfig(interface)
@@ -222,13 +237,19 @@ class Config:
             else:
                 self.__basicModify(iosConnection, provider, pic)
         if not self.verify.verify(iosConnection, provider, pic):
-            print "Failed to configure {0} on {1}".format(pic.name, provider)
-            print "Switch configuration"
+            self.logger.logError("Failed to configure {0} on {1}".format(pic.name, provider), True)
+            # print "Failed to configure {0} on {1}".format(pic.name, provider)
 
     def run(self):
         currentHost = None
         iosConnection = None
-        for pic in self.ticket.pics:
+
+        if len(self.ticket.configurablePics) == 0:
+            # print Logger.WARNING + "Ticket has no configurable PICs, add provider ports to continue" + Logger.NORMAL
+            self.logger.logWarning("Ticket has no configurable PICs, add provider ports to continue")
+            return
+
+        for pic in self.ticket.configurablePics:
             provider = pic.getProvider()
             newHost = provider.getHostFromProvider(provider)
             if currentHost != newHost:
@@ -243,7 +264,8 @@ class Config:
             try :
                 self.config(iosConnection, provider, pic)
             except Exception, e:
-                print "Failed to configure {0} with provider {1}, error: {2}".format(pic.name, provider, e)
+                # print "Failed to configure {0} with provider {1}, error: {2}".format(pic.name, provider, e)
+                self.logger.logException("Failed to configure {0} with provider {1}".format(pic.name, provider), e, True)
         if iosConnection is not None:
             # leaving host
             if self.hostChanged:

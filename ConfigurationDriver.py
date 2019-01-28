@@ -9,6 +9,7 @@ class ConfigurationDriver:
     switchPassword = None
     risquePassword = None
     cookies = None
+    _lock = False
 
     @staticmethod
     def getDriver():
@@ -54,6 +55,26 @@ class ConfigurationDriver:
     @staticmethod
     def clearCookies():
         ConfigurationDriver.cookies = None
+
+    @staticmethod
+    def clearCredentials():
+        ConfigurationDriver.user = None
+        ConfigurationDriver.switchPassword = None
+        ConfigurationDriver.risquePassword = None
+
+    # Dirty hack for checking whether or not the user is still storing credentials when they hit ctrl-c
+    # If they are, clear the credentials they stored because they probably made a mistake
+    @staticmethod
+    def lock():
+        ConfigurationDriver._lock = True
+
+    @staticmethod
+    def unlock():
+        ConfigurationDriver._lock = False
+
+    @staticmethod
+    def isLocked():
+        return ConfigurationDriver._lock
 
     @staticmethod
     def useTestCredentials(username, switchPassword):

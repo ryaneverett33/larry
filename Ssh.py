@@ -1,5 +1,6 @@
 import paramiko
 import time
+from Logger import Logger
 
 
 class Ssh:
@@ -24,6 +25,7 @@ class Ssh:
         '#',
         '>'
     }
+    logger = None
 
     # Password is not the boilerkey password
     def __init__(self, user, password):
@@ -32,10 +34,12 @@ class Ssh:
         self.client = paramiko.client.SSHClient()
         self.client.load_system_host_keys()
         self.client.set_missing_host_key_policy(paramiko.client.AutoAddPolicy())
+        self.logger = Logger.getInstance(None)
 
     # Connects to the host if a host is not already connected
     def connect(self, host):
-        print "SSH Driver connecting to {0}".format(host)
+        # print "SSH Driver connecting to {0}".format(host)
+        self.logger.logSSH("SSH Driver connecting to {0}".format(host))
         if self.connected:
             raise StandardError("Already connected to a host, must disconnect first")
         else:
@@ -101,7 +105,8 @@ class Ssh:
                 found = True
                 break
             if not found:
-                print "UNABLE TO FIND HOSTNAME"
+                # print "UNABLE TO FIND HOSTNAME"
+                self.logger.logSSH("UNABLE TO FIND HOSTNAME")
         if '\r' in hostname:
             hostname = hostname.split('\r')[0]
         if not keepMode:
@@ -128,9 +133,11 @@ class Ssh:
     # Commands are appended with a newline
     def execute(self, command):
         if not self.connected:
-            print "not connected to a host, can't execute"
+            # print "not connected to a host, can't execute"
+            self.logger.logSSH("not connected to a host, can't execute")
             return
-        print "Ssh Driver executing command {0}".format(command)
+        # print "Ssh Driver executing command {0}".format(command)
+        self.logger.logSSH("Ssh Driver executing command {0}".format(command))
         self.__waitForSendReady()
         self.__send(command)
         self.__waitForRecvReady()
