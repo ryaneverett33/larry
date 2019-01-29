@@ -45,6 +45,7 @@ class Install:
         shutil.rmtree(installDirectory)
         zipfile.ZipFile(installFile).extractall(installDirectory)
         self.makeExecutable(installDirectory + Common.executableFile)
+        self.addToPath()
         self.writeVersion(Common.getLatestVersion(), installDirectory)
         print "Upgraded larry to version {0}".format(Common.getLatestVersion())
 
@@ -57,6 +58,28 @@ class Install:
         f = open(installDirectory + Common.userVersionFile, "w")
         f.write(version)
         f.close()
+
+    def inPath(self):
+        try:
+            bashrc = open("{0}/.bashrc".format(Common.getUserHome()), "r")
+            lines = bashrc.read()
+            path = os.getenv("PATH")
+            return "larry" in path or "### larry" in lines
+        except:
+            return False
+
+    def addToPath(self):
+        if self.inPath():
+            return
+        # add to ~/.bashrc & ~/.profile
+        command = "export PATH=$PATH:/home/ONEPURDUE/${USER}/larry"
+        comment = "### larry"
+        bashrc = open("{0}/.bashrc".format(Common.getUserHome()), "a+")
+        profile = open("{0}/.profile".format(Common.getUserHome()), "a+")
+        bashrc.write("\n\n{0}\n{1}\n".format(comment, command))
+        profile.write("\n\n{0}\n{1}\n".format(comment, command))
+        bashrc.close()
+        profile.close()
 
     def main(self):
         print "Starting install for larry"
@@ -72,6 +95,7 @@ class Install:
             print "Installing at {0}".format(installDirectory)
             zipfile.ZipFile(installFile).extractall(installDirectory)
             self.makeExecutable(installDirectory + Common.executableFile)
+            self.addToPath()
             self.writeVersion(Common.getLatestVersion(), installDirectory)
             print "Installed larry version {0}".format(Common.getLatestVersion())
 
