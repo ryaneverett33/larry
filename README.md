@@ -13,6 +13,10 @@ $ python /home/ONEPURDUE/everettr/larry-release/INSTALL.py
 $ export PATH=$PATH:/home/ONEPURDUE/${USER}/larry
 ```
 
+## How to Use
+
+After adding to your ```$PATH```, you should be able to execute ```$ larry``` from anywhere. Else ```$ ~/larry/larry``` can start the program.
+
 ## Screenshots
 
 Main Screen
