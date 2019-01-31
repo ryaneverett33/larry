@@ -2,6 +2,9 @@ from BufferedSsh import BufferedSsh
 from shitSsh import shitSsh
 from Ssh import Ssh
 from PasswordUtility import PasswordUtility
+import os
+from COMMON import Common
+import json
 
 
 class ConfigurationDriver:
@@ -9,6 +12,7 @@ class ConfigurationDriver:
     switchPassword = None
     risquePassword = None
     cookies = None
+    loadedSession = None
     _lock = False
 
     @staticmethod
@@ -80,3 +84,38 @@ class ConfigurationDriver:
     def useTestCredentials(username, switchPassword):
         ConfigurationDriver.user = username
         ConfigurationDriver.switchPassword = switchPassword
+
+    @staticmethod
+    def tryLoadSession():
+        installDirectory = Common.getUserHome() + "larry/"
+        sessionDirectory = installDirectory + Common.sessionDirectory
+        if not os.path.exists(sessionDirectory):
+            os.mkdir(sessionDirectory)
+            return
+        else:
+            if os.path.exists(sessionDirectory + Common.sessionFile):
+                # try and load the session
+                try:
+                    f = open(sessionDirectory + Common.sessionFile, "r")
+                    data = f.read()
+                    ConfigurationDriver.cookies = json.loads(data)
+                    ConfigurationDriver.loadedSession = True
+                    print "Loaded session: {0}".format(ConfigurationDriver.cookies)
+                except Exception, e:
+                    print "Failed to load session " + e
+
+    @staticmethod
+    def saveSession():
+        installDirectory = Common.getUserHome() + "larry/"
+        sessionDirectory = installDirectory + Common.sessionDirectory
+        if not os.path.exists(sessionDirectory):
+            os.mkdir(sessionDirectory)
+        sessionData = json.dumps(ConfigurationDriver.cookies)
+        f = open(sessionDirectory + Common.sessionFile, "w+")
+        f.write(sessionData)
+        f.close()
+
+    @staticmethod
+    def clearSession():
+        ConfigurationDriver.cookies = None
+        ConfigurationDriver.loadedSession = False

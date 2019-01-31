@@ -1,0 +1,5 @@
+- Load user credentials from file
+- Session storage
+- Check Repairs
+    - If connected
+    - Else, check for mac addresses

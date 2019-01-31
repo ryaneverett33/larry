@@ -1,5 +1,6 @@
 import re
 import os
+from datetime import datetime
 
 
 class Common:
@@ -9,6 +10,8 @@ class Common:
     releaseFile = "latest.release"
     releasesDir = "releases/"
     executableFile = "larry"
+    sessionDirectory = "session/"
+    sessionFile = "cookies.session"
     ignoreDirectories = [".git", ".idea", "risque-out"]
 
     @staticmethod
@@ -35,3 +38,11 @@ class Common:
     def getUserHome():
         username = os.getenv("USER")
         return "/home/ONEPURDUE/{0}/".format(username)
+
+    @staticmethod
+    def currentTimeString():
+        return datetime.now().strftime("%m-%d-%Y %H:%M:%S")
+
+    @staticmethod
+    def timeStringToDate(string):
+        return datetime.strptime(string, "%m-%d-%Y %H:%M:%S")

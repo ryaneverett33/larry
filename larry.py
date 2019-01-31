@@ -2,6 +2,7 @@
 
 from UI import UI
 from PasswordUtility import PasswordUtility
+from ConfigurationDriver import ConfigurationDriver
 import sys
 from Hosts import Hosts
 from INSTALL import Install
@@ -22,6 +23,7 @@ class larry:
                 return
 
     def run(self):
+        ConfigurationDriver.tryLoadSession()
         self.ui.main()
 
     def parseArgs(self):
