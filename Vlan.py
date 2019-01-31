@@ -26,23 +26,27 @@ class Vlan:
             raise AttributeError("risqueString is not a valid vlan")
         # ['128.046.083.000', '24 Public Subnet (383)']
         ipSplit = risque.split('/')
+        if '/' in risque and not '.' in risque:
+            # Fix for KRAN/RAWL Card Swipe System Private Subnet (903)
+            combined = ipSplit[0] + '/' + ipSplit[1]
+            ipSplit = list()
+            ipSplit.append(combined)
         if len(ipSplit) is 1:
             # ITIS Networks Wired Device Management Subnet (1000)
-            if '/' not in risque:
-                if ' ' in risque:
-                    try:
-                        # ['ITIS Networks Wired Device Management Subnet ', '1000)']
-                        tagSplit = risque.split('(')
-                        if tagSplit[0][len(tagSplit[0]) - 1] == ' ':
-                            self.name = tagSplit[0][0:len(tagSplit[0]) - 1]  # remove space at the end
-                        else:
-                            self.name = tagSplit[0]
-                        self.tag = int(tagSplit[1][0:len(tagSplit[1]) - 1])  # remove the trailing ')'
-                    except AttributeError:
-                        raise
-                    except:
-                        raise AttributeError("risqueString is not a valid vlan")
-                    return
+            if ' ' in risque:
+                try:
+                    # ['ITIS Networks Wired Device Management Subnet ', '1000)']
+                    tagSplit = risque.split('(')
+                    if tagSplit[0][len(tagSplit[0]) - 1] == ' ':
+                        self.name = tagSplit[0][0:len(tagSplit[0]) - 1]  # remove space at the end
+                    else:
+                        self.name = tagSplit[0]
+                    self.tag = int(tagSplit[1][0:len(tagSplit[1]) - 1])  # remove the trailing ')'
+                except AttributeError:
+                    raise
+                except:
+                    raise AttributeError("risqueString is not a valid vlan")
+                return
             else:
                 raise AttributeError("risqueString is not a valid vlan")
         self.ipAddress = ipSplit[0]

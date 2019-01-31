@@ -50,6 +50,9 @@ class TestVlan(unittest.TestCase):
         self.assertEqual(vlan6.trunk, False)
         self.assertIsNone(vlan6.mask)
         self.assertEqual(vlan6.tag, 1000)
+        vlan7 = Vlan(risqueString="KRAN/RAWL Card Swipe System Private Subnet (903)")
+        self.assertIsNotNone(vlan7)
+
         with self.assertRaises(AttributeError) as cm:
             Vlan(risqueString='')
 
