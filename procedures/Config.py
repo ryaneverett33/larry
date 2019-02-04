@@ -254,6 +254,10 @@ class Config:
         for pic in self.ticket.configurablePics:
             provider = pic.getProvider()
             newHost = provider.getHostFromProvider(provider)
+            if provider.getHostFromProvider(provider) is None:
+                # print Logger.FAIL + "Failed to get host for provider {0}".format(provider) + Logger.NORMAL
+                self.logger.logError("Failed to get host for provider {0}".format(provider), True)
+                continue
             if currentHost != newHost:
                 if iosConnection is not None:
                     # leaving host
