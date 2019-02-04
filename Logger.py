@@ -2,6 +2,7 @@ from COMMON import Common
 import time
 import os
 import traceback
+import sys
 
 
 class Logger:
@@ -11,7 +12,6 @@ class Logger:
     logFile = None
     ticketFolder = None
     instance = None
-    NO_LOGGING = False
 
     # colors
     WARNING = '\033[93m'
@@ -20,9 +20,12 @@ class Logger:
     HEADER = '\033[95m'
     NORMAL = "\033[0m"
 
-    def __init__(self, ticketNumber, logFolder=None):
+    def __init__(self, ticketNumber, logFolder=None, noLogging=False):
         self.ticketNumber = ticketNumber
-        if not Logger.NO_LOGGING:
+        if noLogging:
+            self.logFile = sys.stdout
+            self.sshLogFile = sys.stdout
+        else:
             if logFolder is None:
                 self.logFolder = Common.getUserHome() + "larry/logs/"
             else:
@@ -40,16 +43,10 @@ class Logger:
             os.mkdir(self.ticketFolder)
 
     def logSSH(self, string):
-        if Logger.NO_LOGGING:
-            return
         self.sshLogFile.write("|{0}| - {1}\n".format(self.getTimeStamp(), string))
         self.sshLogFile.flush()
 
     def logWarning(self, string, echo):
-        if Logger.NO_LOGGING:
-            if echo:
-                self.printWarning(string)
-            return
         self.logFile.write("|{0}| WARNING - {1}\n".format(self.getTimeStamp(), string))
         self.logFile.flush()
         if echo:
@@ -57,10 +54,6 @@ class Logger:
             self.printWarning(string)
 
     def logError(self, string, echo):
-        if Logger.NO_LOGGING:
-            if echo:
-                self.printError(string)
-            return
         self.logFile.write("|{0}| ERROR - {1}\n".format(self.getTimeStamp(), string))
         self.logFile.flush()
         if echo:
@@ -68,20 +61,12 @@ class Logger:
             self.printError(string)
 
     def logSuccess(self, string, echo):
-        if Logger.NO_LOGGING:
-            if echo:
-                self.printSuccess(string)
-            return
         self.logFile.write("|{0}| SUCCESS - {1}\n".format(self.getTimeStamp(), string))
         self.logFile.flush()
         if echo:
             self.printSuccess(string)
 
     def logException(self, string, exception, echo):
-        if Logger.NO_LOGGING:
-            if echo:
-                self.printError(string)
-            return
         self.logFile.write("|{0}| EXCEPTION - Message: {1}, Error: {2}\n".format(self.getTimeStamp(), exception, string))
         self.logFile.write(traceback.format_exc())
         self.logFile.flush()
@@ -89,10 +74,6 @@ class Logger:
             self.printError(string)
 
     def logInfo(self, string, echo):
-        if Logger.NO_LOGGING:
-            if echo:
-                print string
-            return
         self.logFile.write("|{0}| - {1}\n".format(self.getTimeStamp(), string))
         self.logFile.flush()
         if echo:
@@ -131,8 +112,9 @@ class Logger:
                     return Logger.instance
 
     def close(self):
-        self.logFile.close()
-        self.sshLogFile.close()
+        if self.logFile is not sys.stdout:
+            self.logFile.close()
+            self.sshLogFile.close()
 
     @staticmethod
     def getTimeStamp():
@@ -140,3 +122,7 @@ class Logger:
         pm = (False, True)[localtime.tm_hour > 11]
         minFixed = ("0{0}".format(localtime.tm_min), str(localtime.tm_min))[localtime.tm_min > 9]
         return "{0}:{1} {2}".format(localtime.tm_hour % 12, minFixed, ("AM", "PM")[pm])
+
+    @staticmethod
+    def StdoutLogger():
+        return Logger(-1, noLogging=True)

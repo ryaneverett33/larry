@@ -37,7 +37,7 @@ class larry:
             elif arg == "--disableArt" or arg == "-disableArt":
                 self.ui.disableArt()
             elif arg == "--noLogging" or arg == "-noLogging":
-                Logger.NO_LOGGING = True
+                Logger.StdoutLogger()
 
 
 if __name__ == "__main__":

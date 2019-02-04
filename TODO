@@ -3,3 +3,5 @@
 - Check Repairs
     - If connected
     - Else, check for mac addresses
+Bugs
+- Check if a host is retrieved from Provider.getHostFromProvider before executing
