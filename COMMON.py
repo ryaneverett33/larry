@@ -1,5 +1,6 @@
 import re
 import os
+from datetime import datetime
 
 
 class Common:
@@ -9,7 +10,11 @@ class Common:
     releaseFile = "latest.release"
     releasesDir = "releases/"
     executableFile = "larry"
+    sessionDirectory = "session/"
+    sessionFile = "cookies.session"
+    vrfList = "vrf.list"
     ignoreDirectories = [".git", ".idea", "risque-out"]
+    __vrfHosts = None
 
     @staticmethod
     def getLatestVersion():
@@ -35,3 +40,24 @@ class Common:
     def getUserHome():
         username = os.getenv("USER")
         return "/home/ONEPURDUE/{0}/".format(username)
+
+    @staticmethod
+    def currentTimeString():
+        return datetime.now().strftime("%m-%d-%Y %H:%M:%S")
+
+    @staticmethod
+    def timeStringToDate(string):
+        return datetime.strptime(string, "%m-%d-%Y %H:%M:%S")
+
+    @staticmethod
+    def isHostVrfAffected(host):
+        return host in Common.getVrfHosts()
+
+    @staticmethod
+    def getVrfHosts():
+        if Common.__vrfHosts is None:
+            hostList = open(Common.baseDir + Common.vrfList, "r")
+            Common.__vrfHosts = hostList.readlines()
+            for i in range(0, len(Common.__vrfHosts)):
+                Common.__vrfHosts[i] = re.sub('[\r\n]', '', Common.__vrfHosts[i]).strip().encode('ascii', 'replace')
+        return Common.__vrfHosts

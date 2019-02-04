@@ -1,0 +1,8 @@
+- Load user credentials from file
+- Session storage [DISABLED]
+- Check Repairs
+    - If connected
+    - Else, check for mac addresses
+Bugs
+- Check if a host is retrieved from Provider.getHostFromProvider before executing [FIXED]
+- Executing an invalid command on a VRF affected host doesn't include Invalid Input error

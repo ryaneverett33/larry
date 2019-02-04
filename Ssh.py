@@ -1,6 +1,8 @@
 import paramiko
 import time
 from Logger import Logger
+from COMMON import Common
+from socket import timeout
 
 
 class Ssh:
@@ -19,6 +21,8 @@ class Ssh:
     expected = ""
     SSH_DISALLOWED_HOSTS = ["lynn-sbpe", "erht-sbpe"]   # itap-iape and lamb-sbpe have FEX ports
     SSH_FEX_HOST = ["itap-iape", "lamb-sbpe"]
+    SSH_TIMEOUT = 3                                     # timeout is three seconds
+    SSH_DIRTY_COMMAND = 'ls'
 
     # Enable Mode versus NonEnabled Mode
     modes = {
@@ -45,7 +49,9 @@ class Ssh:
         else:
             self.client.connect(host, username=self.user, password=self.password, look_for_keys=False)
             self.channel = self.client.invoke_shell(term="vt100", height=500)
+            self.channel.settimeout(self.SSH_TIMEOUT)
             self.connected = True
+            self.host = host
             self.findIOSHostname()
 
     # Disconnects from the current host
@@ -117,6 +123,7 @@ class Ssh:
                     break
         self.hostname = hostname
         self.cleanHostname()
+        self.logger.logSSH("IOS Hostname: {0}".format(self.hostname))
         return self.hostname
 
     # Fix for mjis-3063-c9348uxm-01.tcom.purdue.edu, where config t -> mjis-3063-c9348uxm-0(config)#
@@ -129,9 +136,31 @@ class Ssh:
                 hostClean = hostClean + '-'
         self.cleanedHostname = hostClean
 
+    def execute(self, command):
+        try:
+            if Common.isHostVrfAffected(self.host):
+                self.logger.logSSH("Host {0} is vrf affected!".format(self.host))
+                if '\n' in command:
+                    # multiline command, things break
+                    brokenCommands = command.split('\n')
+                    self.logger.logSSH("Multi-line command on a VRF Affected host, split into {0} commands".format(len(brokenCommands)))
+                    result = None
+                    for brokenCommand in brokenCommands:
+                        result = self.dirtyExecute(brokenCommand)
+                    return result
+                else:
+                    return self.dirtyExecute(command)
+            else:
+                self.logger.logSSH("Host {0} is not vrf affected".format(self.host))
+                return self.cleanExecute(command)
+        except timeout:
+            self.logger.logSSH("Failed to execute {0}, socket timedout".format(command))
+        except Exception, e:
+            self.logger.logSSH("Failed to execute {0}, exception: {1}".format(command, e))
+
     # Executes the command and returns [cleaned output, resultant hostname]
     # Commands are appended with a newline
-    def execute(self, command):
+    def cleanExecute(self, command):
         if not self.connected:
             # print "not connected to a host, can't execute"
             self.logger.logSSH("not connected to a host, can't execute")
@@ -172,6 +201,43 @@ class Ssh:
         # while not finishedRecieving:
         #     text = self.channel.recv(self.BUFFER_LEN)
             # check if text contains the expected string
+
+    # Workaround for VRF affected hosts: send clean command and don't wait for output, send dirty command and retrieve output
+    def dirtyExecute(self, command):
+        if not self.connected:
+            # print "not connected to a host, can't execute"
+            self.logger.logSSH("not connected to a host, can't execute")
+            return
+        # print "Ssh Driver executing command {0}".format(command)
+        self.logger.logSSH("Ssh Driver executing clean command `{0}`".format(command))
+        self.__waitForSendReady()
+        self.__send(command)
+        self.__waitForRecvReady()
+        self.channel.recv(self.BUFFER_LEN)
+        self.__waitForSendReady()
+        self.logger.logSSH("Ssh Driver executing dirty command `{0}`".format(self.SSH_DIRTY_COMMAND))
+        response = self.cleanExecute(self.SSH_DIRTY_COMMAND)
+        lines = response[0].split('\n')
+        # strip out the last three lines
+        newLines = []
+        foundCarrot = False
+        foundInvalid = False
+        for line in lines:
+            if line.strip() == '^' and not foundCarrot:
+                foundCarrot = True
+                continue
+            elif "Invalid input" in line and not foundInvalid:
+                foundInvalid = True
+                continue
+            newLines.append(line)
+        # flatten lines
+        flattened = ""
+        for i in range(0, len(newLines)):
+            flattened = flattened + newLines[i]
+            if i != len(newLines)-1:
+                flattened = flattened + '\n'
+        response[0] = flattened
+        return response
 
     def isForbiddenHost(self):
         for host in self.SSH_DISALLOWED_HOSTS:

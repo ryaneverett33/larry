@@ -13,6 +13,7 @@ class Risque:
     password = None
     session = None
     loggedIn = False
+    loadedSession = False
 
     def __init__(self, user, password):
         self.username = user
@@ -34,9 +35,23 @@ class Risque:
             ConfigurationDriver.clearCookies()
             return None
 
+    def testSession(self):
+        data = None
+        if ConfigurationDriver.cookiesStored():
+            data = self.session.get('https://risque.itap.purdue.edu', cookies=ConfigurationDriver.getCookies())
+        else:
+            return False
+        if "login" in data.url:
+            return False
+        return True
+
     def getTicketBody(self, ticketNumber):
-        if not ConfigurationDriver.cookiesStored():
-            self.login()
+        if not self.loadedSession:
+            if self.testSession():
+                self.loadedSession = True
+                ConfigurationDriver.saveSession()
+            else:
+                self.login()
         ticket = None
         if ConfigurationDriver.cookiesStored():
             ticket = self.session.get('https://risque.itap.purdue.edu/Tickets/Data/TicketDetail.aspx?id=%s' % ticketNumber,
@@ -45,6 +60,7 @@ class Risque:
             ticket = self.session.get(
                 'https://risque.itap.purdue.edu/Tickets/Data/TicketDetail.aspx?id=%s' % ticketNumber)
             ConfigurationDriver.storeCookies(self.session.cookies)
+
         txt = ticket.content
         # Store session
         if "You have asked to login to" in txt:
