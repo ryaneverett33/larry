@@ -283,6 +283,7 @@ class Verify:
                 # traceback.print_exc()
                 # print Logger.FAIL + "Failed to verify {0} with provider {1}, error: {2}".format(pic.name, provider, e) + Logger.NORMAL
                 self.logger.logException("Failed to verify {0} with provider {1}".format(pic.name, provider), e, True)
+                failed.append(pic)
 
         self.printSummary(self.ticket.configurablePics, failed)
         # if len(failed) != 0:

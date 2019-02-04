@@ -140,12 +140,22 @@ class Ssh:
         try:
             if Common.isHostVrfAffected(self.host):
                 self.logger.logSSH("Host {0} is vrf affected!".format(self.host))
-                return self.dirtyExecute(command)
+                if '\n' in command:
+                    # multiline command, things break
+                    brokenCommands = command.split('\n')
+                    self.logger.logSSH("Multi-line command on a VRF Affected host, split into {0} commands".format(len(brokenCommands)))
+                    result = None
+                    for brokenCommand in brokenCommands:
+                        result = self.dirtyExecute(brokenCommand)
+                    return result
+                else:
+                    return self.dirtyExecute(command)
             else:
                 self.logger.logSSH("Host {0} is not vrf affected".format(self.host))
                 return self.cleanExecute(command)
+        except timeout:
+            self.logger.logSSH("Failed to execute {0}, socket timedout".format(command))
         except Exception, e:
-            print e
             self.logger.logSSH("Failed to execute {0}, exception: {1}".format(command, e))
 
     # Executes the command and returns [cleaned output, resultant hostname]
@@ -203,19 +213,28 @@ class Ssh:
         self.__waitForSendReady()
         self.__send(command)
         self.__waitForRecvReady()
-        self.channel.recv(2*len(command))
+        self.channel.recv(self.BUFFER_LEN)
         self.__waitForSendReady()
         self.logger.logSSH("Ssh Driver executing dirty command `{0}`".format(self.SSH_DIRTY_COMMAND))
         response = self.cleanExecute(self.SSH_DIRTY_COMMAND)
         lines = response[0].split('\n')
         # strip out the last three lines
-        lines.pop()
-        lines.pop()
+        newLines = []
+        foundCarrot = False
+        foundInvalid = False
+        for line in lines:
+            if line.strip() == '^' and not foundCarrot:
+                foundCarrot = True
+                continue
+            elif "Invalid input" in line and not foundInvalid:
+                foundInvalid = True
+                continue
+            newLines.append(line)
         # flatten lines
         flattened = ""
-        for i in range(0, len(lines)):
-            flattened = flattened + lines[i]
-            if i != len(lines)-1:
+        for i in range(0, len(newLines)):
+            flattened = flattened + newLines[i]
+            if i != len(newLines)-1:
                 flattened = flattened + '\n'
         response[0] = flattened
         return response

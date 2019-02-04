@@ -23,7 +23,7 @@ class larry:
                 return
 
     def run(self):
-        ConfigurationDriver.tryLoadSession()
+        # ConfigurationDriver.tryLoadSession()
         self.ui.main()
 
     def parseArgs(self):

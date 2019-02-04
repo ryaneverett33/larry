@@ -5,3 +5,4 @@
     - Else, check for mac addresses
 Bugs
 - Check if a host is retrieved from Provider.getHostFromProvider before executing
+- Executing an invalid command on a VRF affected host doesn't include Invalid Input error
