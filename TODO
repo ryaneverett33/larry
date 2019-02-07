@@ -6,5 +6,5 @@
 Bugs
 - Check if a host is retrieved from Provider.getHostFromProvider before executing [FIXED]
 - Executing an invalid command on a VRF affected host doesn't include Invalid Input error
-- Don't check if vrf per each ssh::execute cycle
-- Increase socket timeout for no vrf affected hosts
+- Don't check if vrf per each ssh::execute cycle [FIXED]
+- Increase socket timeout for no vrf affected hosts [FIXED]

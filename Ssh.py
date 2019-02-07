@@ -21,8 +21,10 @@ class Ssh:
     expected = ""
     SSH_DISALLOWED_HOSTS = ["lynn-sbpe", "erht-sbpe"]   # itap-iape and lamb-sbpe have FEX ports
     SSH_FEX_HOST = ["itap-iape", "lamb-sbpe"]
-    SSH_TIMEOUT = 3                                     # timeout is three seconds
+    SSH_TIMEOUT = 10                                     # avoid forever waiting for ssh
+    SSH_VRF_TIMEOUT = 3                                  # reduce timeout for vrf
     SSH_DIRTY_COMMAND = 'ls'
+    vrfAffected = False
 
     # Enable Mode versus NonEnabled Mode
     modes = {
@@ -49,9 +51,15 @@ class Ssh:
         else:
             self.client.connect(host, username=self.user, password=self.password, look_for_keys=False)
             self.channel = self.client.invoke_shell(term="vt100", height=500)
-            self.channel.settimeout(self.SSH_TIMEOUT)
             self.connected = True
             self.host = host
+            if Common.isHostVrfAffected(host):
+                self.vrfAffected = True
+                self.channel.settimeout(self.SSH_VRF_TIMEOUT)
+                self.logger.logSSH("Host {0} is vrf affected, new timeout: {1}".format(self.host, self.SSH_VRF_TIMEOUT))
+            else:
+                self.channel.settimeout(self.SSH_TIMEOUT)
+                self.logger.logSSH("Host {0} is not vrf affected, new timeout: {1}".format(self.host, self.SSH_TIMEOUT))
             self.findIOSHostname()
 
     # Disconnects from the current host
@@ -138,8 +146,8 @@ class Ssh:
 
     def execute(self, command):
         try:
-            if Common.isHostVrfAffected(self.host):
-                self.logger.logSSH("Host {0} is vrf affected!".format(self.host))
+            if self.vrfAffected:
+
                 if '\n' in command:
                     # multiline command, things break
                     brokenCommands = command.split('\n')
@@ -151,7 +159,6 @@ class Ssh:
                 else:
                     return self.dirtyExecute(command)
             else:
-                self.logger.logSSH("Host {0} is not vrf affected".format(self.host))
                 return self.cleanExecute(command)
         except timeout:
             self.logger.logSSH("Failed to execute {0}, socket timedout".format(command))
