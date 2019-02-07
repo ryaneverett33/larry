@@ -1,0 +1,11 @@
+{
+  "expire" : "string",
+  "credentials" : {
+    "username" : "string",
+    "risquePassword" : "string",
+    "switchPassword" : "string"
+  },
+  "cookies" : {
+    "key" : "value"
+  }
+}

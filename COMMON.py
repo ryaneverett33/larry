@@ -12,6 +12,7 @@ class Common:
     executableFile = "larry"
     sessionDirectory = "session/"
     sessionFile = "cookies.session"
+    persistenceFile = "user.persistence"
     vrfList = "vrf.list"
     ignoreDirectories = [".git", ".idea", "risque-out"]
     __vrfHosts = None
@@ -43,11 +44,13 @@ class Common:
 
     @staticmethod
     def currentTimeString():
-        return datetime.now().strftime("%m-%d-%Y %H:%M:%S")
+        # return datetime.now().strftime("%m-%d-%Y %H:%M:%S")
+        return datetime.now().strftime("%m-%d-%Y")
 
     @staticmethod
     def timeStringToDate(string):
-        return datetime.strptime(string, "%m-%d-%Y %H:%M:%S")
+        # return datetime.strptime(string, "%m-%d-%Y %H:%M:%S")
+        return datetime.strptime(string, "%m-%d-%Y")
 
     @staticmethod
     def isHostVrfAffected(host):
