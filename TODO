@@ -8,3 +8,4 @@ Bugs
 - Executing an invalid command on a VRF affected host doesn't include Invalid Input error
 - Don't check if vrf per each ssh::execute cycle [FIXED]
 - Increase socket timeout for no vrf affected hosts [FIXED]
+- Handle case where IOSConnection fails to connect and kills the program
