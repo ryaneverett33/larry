@@ -21,8 +21,8 @@ class Ssh:
     expected = ""
     SSH_DISALLOWED_HOSTS = ["lynn-sbpe", "erht-sbpe"]   # itap-iape and lamb-sbpe have FEX ports
     SSH_FEX_HOST = ["itap-iape", "lamb-sbpe"]
-    SSH_TIMEOUT = 10                                     # avoid forever waiting for ssh
-    SSH_VRF_TIMEOUT = 3                                  # reduce timeout for vrf
+    SSH_TIMEOUT = 30                                     # avoid forever waiting for ssh
+    SSH_VRF_TIMEOUT = 10                                  # reduce timeout for vrf
     SSH_DIRTY_COMMAND = 'ls'
     vrfAffected = False
 
