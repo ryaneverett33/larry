@@ -1,6 +1,12 @@
 # Changelog
 
 An incomplete log of larry growing up.
+# 0.46
+- Implemented Persistence; login once, securely saves credentials
+- Included initial fixes for socket timeouts caused by long responses and adjusting for VRF
+- Reduced number of VRF affected checks when running
+- Bug wrangling
+
 # 0.45
 
 - Implemented VRF Workaround ([List of affected devices](https://1drv.ms/x/s!Am7FgEBKIICGia17HGoi-OeXzGaIHw))
