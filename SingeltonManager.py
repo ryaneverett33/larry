@@ -4,4 +4,4 @@
 
 def getPersistenceModule():
     import PersistenceModule
-    return PersistenceModule.PersistenceModule.getInstance(noInit=True).save()
+    return PersistenceModule.PersistenceModule.getInstance(noInit=True)

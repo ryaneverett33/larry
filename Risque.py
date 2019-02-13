@@ -70,7 +70,9 @@ class Risque:
             raise ValueError("Failed to get ticket body, login invalid")
         else:
             if not ConfigurationDriver.loadedSession:
-                SingeltonManager.getPersistenceModule().save()
+                persist = SingeltonManager.getPersistenceModule()
+                if persist is not None:
+                    persist.save()
         return txt
 
     # Returns a cleaned version of the string

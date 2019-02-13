@@ -19,7 +19,7 @@ class UI:
         self.pages = [
             ["Do Ticket", self.work_page],
             ["Verify Ticket", self.verify_page],
-            ["Store Credentials", self.credentials_page],
+            # ["Store Credentials", self.credentials_page],
             ["Exit", self.exit],
             ["Art", self.artPage]
         ]
