@@ -10,3 +10,4 @@ Bugs
 - Increase socket timeout for no vrf affected hosts [FIXED]
 - Handle case where IOSConnection fails to connect and kills the program
 - Handle socket timeout where a switch takes a long time to respond, but is responding (Adaptive-timeout)
+- PersistenceModule breaks util/scraper
