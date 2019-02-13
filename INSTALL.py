@@ -47,6 +47,7 @@ class Install:
         self.makeExecutable(installDirectory + Common.executableFile)
         self.addToPath()
         self.writeVersion(Common.getLatestVersion(), installDirectory)
+        print "Changelog at {0}".format(Common.changelogURL)
         print "Upgraded larry to version {0}".format(Common.getLatestVersion())
 
     def makeExecutable(self, file):
@@ -97,6 +98,7 @@ class Install:
             self.makeExecutable(installDirectory + Common.executableFile)
             self.addToPath()
             self.writeVersion(Common.getLatestVersion(), installDirectory)
+            print "Changelog at {0}".format(Common.changelogURL)
             print "Installed larry version {0}".format(Common.getLatestVersion())
 
     def ctrlchandler(self, sig, frame):

@@ -1,8 +1,13 @@
-- Load user credentials from file
-- Session storage [DISABLED]
+- Load user credentials from file [IMPLEMENTED]
+- Session storage [IMPLEMENTED]
 - Check Repairs
     - If connected
     - Else, check for mac addresses
 Bugs
 - Check if a host is retrieved from Provider.getHostFromProvider before executing [FIXED]
 - Executing an invalid command on a VRF affected host doesn't include Invalid Input error
+- Don't check if vrf per each ssh::execute cycle [FIXED]
+- Increase socket timeout for no vrf affected hosts [FIXED]
+- Handle case where IOSConnection fails to connect and kills the program
+- Handle socket timeout where a switch takes a long time to respond, but is responding (Adaptive-timeout)
+- PersistenceModule breaks util/scraper [FIXED]

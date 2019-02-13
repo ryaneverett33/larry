@@ -1,5 +1,6 @@
 import sys
 sys.path.insert(0, "../")
+import traceback
 import getpass
 from Risque import Risque
 
@@ -66,6 +67,7 @@ def main():
         except Exception, e:
             print "Unable to grab ticket from risque"
             print sys.exc_info()
+            print traceback.format_exc()
             sys.exit(-1)
     ticket = r.parseTicket(textBody)
     printTicket(ticket)

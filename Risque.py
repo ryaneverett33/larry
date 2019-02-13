@@ -6,6 +6,7 @@ from PIC import PIC
 import warnings
 from ConfigurationDriver import ConfigurationDriver
 from PasswordUtility import PasswordUtility
+import SingeltonManager
 
 
 class Risque:
@@ -46,12 +47,14 @@ class Risque:
         return True
 
     def getTicketBody(self, ticketNumber):
-        if not self.loadedSession:
-            if self.testSession():
-                self.loadedSession = True
-                ConfigurationDriver.saveSession()
-            else:
-                self.login()
+        # if not self.loadedSession:
+        #     if self.testSession():
+        #         self.loadedSession = True
+        #         ConfigurationDriver.saveSession()
+        #     else:
+        #         self.login()
+        if not ConfigurationDriver.loadedSession:
+            self.login()
         ticket = None
         if ConfigurationDriver.cookiesStored():
             ticket = self.session.get('https://risque.itap.purdue.edu/Tickets/Data/TicketDetail.aspx?id=%s' % ticketNumber,
@@ -65,6 +68,11 @@ class Risque:
         # Store session
         if "You have asked to login to" in txt:
             raise ValueError("Failed to get ticket body, login invalid")
+        else:
+            if not ConfigurationDriver.loadedSession:
+                persist = SingeltonManager.getPersistenceModule()
+                if persist is not None:
+                    persist.save()
         return txt
 
     # Returns a cleaned version of the string
