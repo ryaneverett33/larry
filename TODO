@@ -11,3 +11,4 @@ Bugs
 - Handle case where IOSConnection fails to connect and kills the program
 - Handle socket timeout where a switch takes a long time to respond, but is responding (Adaptive-timeout)
 - PersistenceModule breaks util/scraper [FIXED]
+- Mac Address Table gets truncated for long row counts (e.g. Po1)
