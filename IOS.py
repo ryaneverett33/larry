@@ -2,6 +2,7 @@ from Vlan import Vlan
 from Speed import Speed
 from procedures import BaseTemplates
 from Provider import Provider
+import re
 
 
 # Represents an SSH connection to an IOS switch
@@ -12,6 +13,8 @@ class IOS:
     inConfigMode = False
     inInterface = False
     isFexHost = False
+    macAddrRegEx = re.compile("[0-9a-zA-Z]{4}.[0-9a-zA-Z]{4}.[0-9a-zA-Z]{4}")
+    vlanRegEx = re.compile("[0-9]+")
 
     def __init__(self, sshClient, host, switchType):
         self.sshClient = sshClient
@@ -66,6 +69,16 @@ class IOS:
             lines.append(self.__sisSplit(line))
 
         return lines
+
+    def __macAddressTableSplit(self, line):
+        splat = line.split(' ')
+        arr = []
+        for i in range(0, len(splat)):
+            word = splat[i]
+            if len(word) < 1:
+                continue
+            arr.append(word)
+        return arr
 
     # Dirty hack to get sis working for large switches
     def sis(self, include=None):
@@ -506,6 +519,51 @@ class IOS:
             return BaseTemplates.BaseTemplates.isInterfaceEmpty(useConfig, "9300")
         else:
             raise AttributeError("Unknown switch type, unable to determine whether it's empty")
+
+    def getConnectionState(self, interface):
+        connection = None
+        if self.inConfigMode:
+            print "IOS::getConfig() in Config Mode!!"
+            connection = self.sshClient.execute("do show int {0}".format(interface))[0]
+        else:
+            connection = self.sshClient.execute("show int {0}".format(interface))[0]
+        if "connected" in connection:
+            return "connected"
+        elif "notconnect" in connection:
+            return "notconnect"
+        elif "disabled" in connection:
+            return "disabled"
+        elif "err-disabled" in connection:
+            return "err-disabled"
+        else:
+            raise ValueError("Interface is in unrecognized state")
+
+    # return array of (vlan, mac-address)
+    def getMacAddresses(self, interface):
+        addressTable = None
+        if self.inConfigMode:
+            print "IOS::getConfig() in Config Mode!!"
+            addressTable = self.sshClient.execute("do mac address-table int {0}".format(interface))[0]
+        else:
+            addressTable = self.sshClient.execute("mac address-table int {0}".format(interface))[0]
+        rows = addressTable.split('\n')
+        addresses = list()
+        for i in range(0, len(rows)):
+            if i < 4:
+                continue
+            # '1000    001d.b340.9ac0    DYNAMIC     Po1'
+            rowSplit = self.__macAddressTableSplit(rows[i])
+            tup = [None, None]
+            for column in rowSplit:
+                if tup[0] is None and self.vlanRegEx.match(column) is not None:
+                    tup[0] = column
+                elif tup[1] is None and self.macAddrRegEx.match(column) is not None:
+                    tup[1] = column
+                if tup[0] is not None and tup[1] is not None:
+                    break
+            if tup[0] is not None:
+                addresses.append(tup)
+        return addresses
 
     # Executes an arbitrary command, basically like ssh.execute() but with basic command verifcation
     def do(self, switchCommand):
