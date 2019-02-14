@@ -1,5 +1,6 @@
 from PIC import PIC
 
+
 class Ticket:
     number = None               # the ticket number this ticket represents (not used)
     dueby = None                # the dueby date for a ticket (not used)

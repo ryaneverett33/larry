@@ -17,6 +17,7 @@ class Common:
     ignoreDirectories = [".git", ".idea", "risque-out"]
     changelogURL = "https://github.com/Changer098/larry/blob/master/CHANGELOG.md"
     __vrfHosts = None
+    vrfDisabled = False
 
     @staticmethod
     def getLatestVersion():
@@ -55,10 +56,14 @@ class Common:
 
     @staticmethod
     def isHostVrfAffected(host):
+        if Common.vrfDisabled:
+            return False
         return host in Common.getVrfHosts()
 
     @staticmethod
     def getVrfHosts():
+        if Common.vrfDisabled:
+            return None
         if Common.__vrfHosts is None:
             hostList = open(Common.baseDir + Common.vrfList, "r")
             Common.__vrfHosts = hostList.readlines()

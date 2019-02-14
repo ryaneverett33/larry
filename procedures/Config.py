@@ -236,6 +236,9 @@ class Config:
                 self.__trunkModify(iosConnection, provider, pic)
             else:
                 self.__basicModify(iosConnection, provider, pic)
+        elif pic.action == "Repair":
+            self.logger.logError("PIC ({0},{1}) action is a Repair, cannot repair PICs".format(pic.name, provider), True)
+            return
         if not self.verify.verify(iosConnection, provider, pic):
             self.logger.logError("Failed to configure {0} on {1}".format(pic.name, provider), True)
             # print "Failed to configure {0} on {1}".format(pic.name, provider)

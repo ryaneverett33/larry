@@ -1,6 +1,6 @@
 - Load user credentials from file [IMPLEMENTED]
 - Session storage [IMPLEMENTED]
-- Check Repairs
+- Check Repairs [IMPLEMENTED]
     - If connected
     - Else, check for mac addresses
 Bugs
@@ -11,4 +11,3 @@ Bugs
 - Handle case where IOSConnection fails to connect and kills the program
 - Handle socket timeout where a switch takes a long time to respond, but is responding (Adaptive-timeout)
 - PersistenceModule breaks util/scraper [FIXED]
-- PersistenceModule not working on glitch (doesn't load at startup)

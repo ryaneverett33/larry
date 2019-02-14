@@ -101,6 +101,8 @@ class PIC:
             return
         elif self.action == "Modify":
             return
+        elif self.action == "Repair":
+            return
         else:
             raise ValueError("PIC given an invalid action")
 
@@ -115,11 +117,15 @@ class PIC:
             if self.newProvider is None:
                 raise AttributeError("Provider hasn't been supplied yet")
             return self.newProvider
-        if self.action == "Modify":
+        elif self.action == "Modify":
             if self.newProvider is None and self.currentProvider is None:
                 raise AttributeError("Provider hasn't been supplied yet")
             return (self.newProvider, self.currentProvider)[self.currentProvider is None]
-        if self.action == "Deactivate":
+        elif self.action == "Deactivate":
+            if self.newProvider is None:
+                raise AttributeError("Provider hasn't been supplied yet")
+            return self.newProvider
+        elif self.action == "Repair":
             if self.newProvider is None:
                 raise AttributeError("Provider hasn't been supplied yet")
             return self.newProvider
@@ -129,12 +135,19 @@ class PIC:
             if self.newConfig is None:
                 raise AttributeError("Config hasn't been supplied yet")
             return self.newConfig
-        if self.action == "Modify":
+        elif self.action == "Modify":
             return self.newConfig
-        if self.action == "Deactivate":
+        elif self.action == "Deactivate":
             if self.newConfig is None:
                 raise AttributeError("Config hasn't been supplied yet")
             return self.newConfig
+        elif self.action == "Repair":
+            if self.newConfig is not None:
+                return self.newConfig
+            elif self.currentConfig is not None:
+                return self.currentConfig
+            else:
+                raise AttributeError("Config hasn't been supplied yet")
 
     def addPatchPanel(self, patchString):
         try:

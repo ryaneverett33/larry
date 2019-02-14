@@ -12,6 +12,7 @@ class Logger:
     logFile = None
     ticketFolder = None
     instance = None
+    disableColor = False
 
     # colors
     WARNING = '\033[93m'
@@ -81,22 +82,31 @@ class Logger:
 
     @staticmethod
     def printWarning(string):
-        print Logger.WARNING + string + Logger.NORMAL
+        if Logger.disableColor:
+            print Logger.NORMAL + string + Logger.NORMAL
+        else:
+            print Logger.WARNING + string + Logger.NORMAL
 
     @staticmethod
     def printError(string):
-        print Logger.FAIL + string + Logger.NORMAL
+        if Logger.disableColor:
+            print Logger.NORMAL + string + Logger.NORMAL
+        else:
+            print Logger.FAIL + string + Logger.NORMAL
 
     @staticmethod
     def printSuccess(string):
-        print Logger.OKGREEN + string + Logger.NORMAL
+        if Logger.disableColor:
+            print Logger.NORMAL + string + Logger.NORMAL
+        else:
+            print Logger.OKGREEN + string + Logger.NORMAL
 
     @staticmethod
     def getInstance(ticketNumber):
         if ticketNumber is None:
             if Logger.instance is None:
                 print Logger.FAIL + "Can't get singleton instance having not been initialized first" + Logger.NORMAL
-                return None
+                return Logger.StdoutLogger()
             else:
                 return Logger.instance
         else:

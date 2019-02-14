@@ -118,28 +118,28 @@ class Verify:
         switchConfig = iosConnection.getConfig(interface)
         if switchConfig is None:
             # print "{0} - Failed to get config".format(pic.name)
-            self.logger.printError("{0} - Failed to get config".format(pic.name), True)
+            self.logger.logError("{0} - Failed to get config".format(pic.name), True)
             return False
         passed = True
         # Check shut status
         if "shut" not in switchConfig:
             # print "{0} - port has not been shutdown".format(pic.name)
-            self.logger.printError("{0} - port has not been shutdown".format(pic.name), True)
+            self.logger.logError("{0} - port has not been shutdown".format(pic.name), True)
             passed = False
         # Check native vlan status
         if "switchport trunk native vlan" in switchConfig:
             # print "{0} - port still has a native vlan".format(pic.name)
-            self.logger.printError("{0} - port still has a native vlan".format(pic.name), True)
+            self.logger.logError("{0} - port still has a native vlan".format(pic.name), True)
             passed = False
         # Check tagged vlans only 1
         if "switchport trunk allowed vlan 1" not in switchConfig:
             # print "{0} - port still has a native vlan".format(pic.name)
-            self.logger.printError("{0} - port still has tagged vlans".format(pic.name), True)
+            self.logger.logError("{0} - port still has tagged vlans".format(pic.name), True)
             passed = False
         # Check speed
         if "speed" in switchConfig:
             # print "{0} - port still has a speed".format(pic.name)
-            self.logger.printError("{0} - port still has a speed".format(pic.name), True)
+            self.logger.logError("{0} - port still has a speed".format(pic.name), True)
             passed = False
         return passed
 
@@ -149,7 +149,7 @@ class Verify:
         risqueConfig = pic.getConfig()
         if switchConfig is None:
             # print "{0} - Failed to get config".format(pic.name)
-            self.logger.printError("{0} - Failed to get config".format(pic.name), True)
+            self.logger.logError("{0} - Failed to get config".format(pic.name), True)
             return False
         passed = True
         voiceVlan = iosConnection.getVoiceVlan(interface, switchConfig)
@@ -160,44 +160,68 @@ class Verify:
         if speed is None or speed.speedTuple != risqueConfig.speed.speedTuple:
             # print "{0} - incorrect speed".format(pic.name)
             # print "\trisque: {0}, switch: {1}".format(risqueConfig.speed, speed)
-            self.logger.printError("{0} - incorrect speed".format(pic.name), True)
-            self.logger.printError("\trisque: {0}, switch: {1}".format(risqueConfig.speed, speed), True)
+            self.logger.logError("{0} - incorrect speed".format(pic.name), True)
+            self.logger.logError("\trisque: {0}, switch: {1}".format(risqueConfig.speed, speed), True)
             passed = False
         # Check shut status
         if iosConnection.isShutdown(interface, switchConfig):
             # print "{0} - port is shutdown".format(pic.name)
-            self.logger.printError("{0} - port is shutdown".format(pic.name), True)
+            self.logger.logError("{0} - port is shutdown".format(pic.name), True)
             passed = False
         # Check voice
         if risqueConfig.voiceVlan is not None:
             if voiceVlan is None or voiceVlan.tag != risqueConfig.voiceVlan.tag:
                 # print "{0} - incorrect voice vlan".format(pic.name)
                 # print "\trisque: {0}, switch: {1}".format(risqueConfig.voiceVlan, voiceVlan)
-                self.logger.printError("{0} - incorrect voice vlan".format(pic.name), True)
-                self.logger.printError("\trisque: {0}, switch: {1}".format(risqueConfig.voiceVlan, voiceVlan), True)
+                self.logger.logError("{0} - incorrect voice vlan".format(pic.name), True)
+                self.logger.logError("\trisque: {0}, switch: {1}".format(risqueConfig.voiceVlan, voiceVlan), True)
                 passed = False
         nativeVlan = iosConnection.getNativeVlan(interface, switchConfig)
         taggedVlans = iosConnection.getTaggedVlans(interface, switchConfig)
         # Check mode
         if mode != "trunk":
             # print "{0} - switchport is not set to trunk mode".format(pic.name)
-            self.logger.printError("{0} - switchport is not set to trunk mode".format(pic.name), True)
+            self.logger.logError("{0} - switchport is not set to trunk mode".format(pic.name), True)
             passed = False
         # Check the native vlan (IT MAY NOT EXIST)
         if risqueConfig.vlan is not None and risqueConfig.vlan.tag != 1:
             if nativeVlan is None or nativeVlan.tag != risqueConfig.vlan.tag:
                 # print "{0} - incorrect native vlan".format(pic.name)
                 # print "\trisque: {0}, switch: {1}".format(risqueConfig.vlan, nativeVlan)
-                self.logger.printError("{0} - incorrect native vlan".format(pic.name), True)
-                self.logger.printError("\trisque: {0}, switch: {1}".format(risqueConfig.vlan, nativeVlan), True)
+                self.logger.logError("{0} - incorrect native vlan".format(pic.name), True)
+                self.logger.logError("\trisque: {0}, switch: {1}".format(risqueConfig.vlan, nativeVlan), True)
                 passed = False
         # Check tagged vlans
         for vlan in risqueConfig.taggedVlans:
             if vlan is None or not Vlan.tagInVlanList(taggedVlans, vlan.tag):
                 # print "{0} missing tagged vlan {1}".format(pic.name, vlan)
-                self.logger.printError("{0} missing tagged vlan {1}".format(pic.name, vlan), True)
+                self.logger.logError("{0} missing tagged vlan {1}".format(pic.name, vlan), True)
                 passed = False
         return passed
+
+    def __verifyRepair(self, iosConnection, provider, pic):
+        try:
+            interface = provider.getSwitchInterface()
+            connection = iosConnection.getConnectionState(interface)
+            if connection != "connected":
+                if connection == "disabled" or connection == "err-disabled":
+                    self.logger.logError("{0} is down ({1})".format(pic.name, connection), True)
+                elif connection == "notconnect":
+                    self.logger.logWarning("{0} is down (notconnect)".format(pic.name), True)
+                # check if there are mac addresses
+                macAddresses = iosConnection.getMacAddresses(interface)
+                if len(macAddresses) > 0:
+                    self.logger.logInfo("{0} has {1} mac addresses connected to it".format(pic.name, len(macAddresses)), True)
+                    return True
+                else:
+                    self.logger.logError("{0} has no mac addresses connected to it".format(pic.name), True)
+                    return False
+            else:
+                return True
+        except Exception, e:
+            self.logger.logException("Exception occurred verifying repair", e, False)
+            print "Failed to Verify repair, check logs for error"
+            return False
 
     # Returns true/false if pic is correct, prints out any errors
     def verify(self, iosConnection, provider, pic):
@@ -216,6 +240,8 @@ class Verify:
                 return self.__verifyTrunkWork(iosConnection, provider, pic)
             else:
                 return self.__verifyBasicWork(iosConnection, provider, pic)
+        elif pic.action == "Repair":
+            return self.__verifyRepair(iosConnection, provider, pic)
         else:
             self.logger.printError("PIC has invalid action, can't verify", True)
             # print "PIC has invalid action, can't verify"
@@ -247,7 +273,10 @@ class Verify:
             coloredString = "{0} {1}/{2} PASSED - {3}/{2} FAILED".format((Logger.WARNING, Logger.FAIL)[len(failed) == len(pics)], len(pics) - len(failed), len(pics), len(failed)) + Logger.NORMAL
             string = "{0}/{1} PASSED - {2}/{1} FAILED".format(len(pics) - len(failed), len(pics), len(failed))
             self.logger.logInfo(string, False)
-            print coloredString
+            if Logger.disableColor:
+                print string
+            else:
+                print coloredString
             self.printFailedPics(failed)
 
     def run(self):

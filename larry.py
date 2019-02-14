@@ -7,6 +7,7 @@ import sys
 from Hosts import Hosts
 from INSTALL import Install
 from Logger import Logger
+from COMMON import Common
 
 
 class larry:
@@ -31,12 +32,15 @@ class larry:
         self.ui.main()
 
     def showHelp(self):
-        print "--editor|-editor\t\t\t\t[DEBUG]Force password utility to act as if it's in an editor"
-        print "--hostsDebug|-hostsDebug\t\t[DEBUG]Force larry to use the debug version of the hosts file"
-        print "--ignoreUpdate|-ignoreUpdate\tDisallow larry to check for updates on launch"
-        print "--disableArt|-disableArt\t\tDoesn't print larry the lobster art :("
-        print "--noLogging|-noLogging\t\t\tTurns off debug logging"
-        print "--h|-h\t\t\t\t\t\t\tDisplays this help screen"
+        print "usage: larry [option]"
+        print "  -editor, --editor\t\t\t[DEBUG]Force password utility to act as if it's in an editor"
+        print "  -hostsDebug, --hostsDebug\t\t[DEBUG]Force larry to use the debug version of the hosts file"
+        print "  -ignoreUpdate, --ignoreUpdate\t\tDisallow larry to check for updates on launch"
+        print "  -disableArt, --disableArt\t\tDoesn't print larry the lobster art :("
+        print "  -noLogging, --noLogging\t\tTurns off debug logging"
+        print "  -disableVrf, --disableVrf\t\tDisables larry's VRF workaround"
+        print "  -disableColor, --disableColor\t\tDisable color output"
+        print "  -h, -h\t\t\t\tDisplays this help screen"
 
     def parseArgs(self):
         for arg in sys.argv:
@@ -50,6 +54,10 @@ class larry:
                 self.ui.disableArt()
             elif arg == "--noLogging" or arg == "-noLogging":
                 Logger.StdoutLogger()
+            elif arg == "--disableVrf" or arg == "-disableVrf":
+                Common.vrfDisabled = True
+            elif arg == "--disableColor" or arg == "-disableColor":
+                Logger.disableColor = True
             elif arg == "--h" or arg == "-h":
                 self.showHelp()
                 exit(1)
