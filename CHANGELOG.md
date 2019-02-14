@@ -1,6 +1,12 @@
 # Changelog
 
 An incomplete log of larry growing up.
+# 0.47
+- Implemented Verifying Repairs
+- Fixed help formatting
+- Allowed the ability to disable the vrf workaround
+- Allowed the ability to disable color output
+
 # 0.46
 - Implemented Persistence; login once, securely saves credentials
 - Included initial fixes for socket timeouts caused by long responses and adjusting for VRF
