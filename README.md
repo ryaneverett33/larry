@@ -4,7 +4,7 @@
   <img alt="logo" src="https://raw.githubusercontent.com/Changer098/larry/master/screenshots/icon-small.jpg">
 </p>
 
-- A tool for activates, modifies, and deactivates
+A tool for activates, modifies, and deactivates
 
 ## Install
 
@@ -12,6 +12,9 @@
 $ python /home/ONEPURDUE/everettr/larry-release/INSTALL.py
 $ source ~/.bashrc
 ```
+
+## Changelog
+[CHANGELOG](https://github.com/Changer098/larry/blob/master/CHANGELOG.md)
 
 ## How to Use
 
