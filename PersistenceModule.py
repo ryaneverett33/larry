@@ -19,7 +19,7 @@ class PersistenceModule:
     def __init__(self):
         if self.DISABLED:
             return
-        self.persistenceFile = Common.getUserHome() + 'larry/' + Common.persistenceFile
+        self.persistenceFile = Common.getUserHome() + Common.dataDirectory + Common.persistenceFile
         if os.path.exists(self.persistenceFile):
             # try and load session info
             try:
@@ -86,6 +86,8 @@ class PersistenceModule:
             jsonStr = json.dumps(data)
             key = self.__createKey()
             ciphertext = self.encrypt(jsonStr, key)
+            if not os.path.isdir(Common.getUserHome() + Common.dataDirectory):
+                os.mkdir(Common.getUserHome() + Common.dataDirectory)
             f = open(self.persistenceFile, "w+")
             f.write(ciphertext)
             ConfigurationDriver.loadedSession = True

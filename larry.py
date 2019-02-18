@@ -40,7 +40,8 @@ class larry:
         print "  -noLogging, --noLogging\t\tTurns off debug logging"
         print "  -disableVrf, --disableVrf\t\tDisables larry's VRF workaround"
         print "  -disableColor, --disableColor\t\tDisable color output"
-        print "  -h, -h\t\t\t\tDisplays this help screen"
+        print "  -disablePM, --disablePM\t\tDisables the Persistence Module"
+        print "  -h, --h\t\t\t\tDisplays this help screen"
 
     def parseArgs(self):
         for arg in sys.argv:
@@ -58,6 +59,8 @@ class larry:
                 Common.vrfDisabled = True
             elif arg == "--disableColor" or arg == "-disableColor":
                 Logger.disableColor = True
+            elif arg == "--disablePM" or arg == "-disablePM":
+                self.disablePersistence = True
             elif arg == "--h" or arg == "-h":
                 self.showHelp()
                 exit(1)

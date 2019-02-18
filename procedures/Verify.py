@@ -23,6 +23,7 @@ class Verify:
         else:
             interface = provider.getSwitchInterface()
         switchConfig = iosConnection.getConfig(interface)
+        self.logger.logAfter(pic.name, interface, switchConfig)
         if switchConfig is None:
             # print "{0} - Failed to get config".format(pic.name)
             self.logger.logError("{0} - Failed to get config".format(pic.name), True)
@@ -55,6 +56,7 @@ class Verify:
         else:
             interface = provider.getSwitchInterface()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
+        self.logger.logAfter(pic.name, interface, switchConfig)
         if switchConfig is None:
             # print "{0} - Failed to get config".format(pic.name)
             self.logger.logError("{0} - Failed to get config".format(pic.name), True)
@@ -116,6 +118,7 @@ class Verify:
     def __verifyTrunkDeactivate(self, iosConnection, provider, pic):
         interface = provider.getSwitchInterface()
         switchConfig = iosConnection.getConfig(interface)
+        self.logger.logAfter(pic.name, interface, switchConfig)
         if switchConfig is None:
             # print "{0} - Failed to get config".format(pic.name)
             self.logger.logError("{0} - Failed to get config".format(pic.name), True)
@@ -146,6 +149,7 @@ class Verify:
     def __verifyTrunkWork(self, iosConnection, provider, pic):
         interface = provider.getSwitchInterface()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
+        self.logger.logAfter(pic.name, interface, switchConfig)
         risqueConfig = pic.getConfig()
         if switchConfig is None:
             # print "{0} - Failed to get config".format(pic.name)

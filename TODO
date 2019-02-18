@@ -12,4 +12,4 @@ Bugs
 - Handle socket timeout where a switch takes a long time to respond, but is responding (Adaptive-timeout)
 - PersistenceModule breaks util/scraper [FIXED]
 - Mac Address Table gets truncated for long row counts (e.g. Po1)
-- Verify fails when port is shutdown (Ticket is a verify but really it should be an activate)
+- Modify fails when port is shutdown (Ticket is a modify but really it should be an activate) [FIXED]
