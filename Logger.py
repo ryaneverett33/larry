@@ -28,7 +28,7 @@ class Logger:
             self.sshLogFile = sys.stdout
         else:
             if logFolder is None:
-                self.logFolder = Common.getUserHome() + "larry/logs/"
+                self.logFolder = Common.getUserHome() + Common.dataDirectory + "/logs/"
             else:
                 self.logFolder = logFolder
             self.ticketFolder = self.logFolder + str(ticketNumber) + "/"

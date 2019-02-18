@@ -19,7 +19,7 @@ class PersistenceModule:
     def __init__(self):
         if self.DISABLED:
             return
-        self.persistenceFile = Common.getUserHome() + 'larry/' + Common.persistenceFile
+        self.persistenceFile = Common.getUserHome() + Common.dataDirectory + Common.persistenceFile
         if os.path.exists(self.persistenceFile):
             # try and load session info
             try:
