@@ -24,6 +24,7 @@ class Config:
         else:
             interface = provider.getSwitchInterface()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
+        self.logger.logBefore(pic.name, interface, switchConfig)
         description = iosConnection.getDescription(interface, switchConfig)
         if description is None or description != pic.getDescription():
             # print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
@@ -51,6 +52,7 @@ class Config:
         risqueConfig = pic.getConfig()
 
         switchConfig = iosConnection.getConfig(interface, flatten=False)
+        self.logger.logBefore(pic.name, interface, switchConfig)
 
         if provider.uplink:
             # print "Provider is an uplink port, not supported yet!"
@@ -90,6 +92,7 @@ class Config:
             interface = provider.getSwitchInterface()
         risqueConfig = pic.getConfig()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
+        self.logger.logBefore(pic.name, interface, switchConfig)
         vlan = iosConnection.getVlan(interface, switchConfig)
         speed = iosConnection.getSpeed(interface, switchConfig)
         voiceVlan = iosConnection.getVoiceVlan(interface, switchConfig)
@@ -127,6 +130,7 @@ class Config:
             return False
         risqueConfig = pic.getConfig()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
+        self.logger.logBefore(pic.name, interface, switchConfig)
         switchMode = iosConnection.getSwitchportMode(interface, switchConfig)
         nativeVlan = iosConnection.getNativeVlan(interface, switchConfig)
         taggedVlans = iosConnection.getTaggedVlans(interface, switchConfig)
@@ -189,6 +193,7 @@ class Config:
             return False
         risqueConfig = pic.getConfig()
         switchConfig = iosConnection.getConfig(interface, flatten=False)
+        self.logger.logBefore(pic.name, interface, switchConfig)
         switchMode = iosConnection.getSwitchportMode(interface, switchConfig)
 
         iosConnection.enterConfigMode()
@@ -212,6 +217,7 @@ class Config:
             self.logger.logError("Can't modify trunk port on a FEX host")
             return False
         switchConfig = iosConnection.getConfig(interface, flatten=False)
+        self.logger.logBefore(pic.name, interface, switchConfig)
         description = iosConnection.getDescription(interface, switchConfig)
         if description is None or description != pic.getDescription():
             self.logger.logError("Can't modify trunk port on a FEX host")

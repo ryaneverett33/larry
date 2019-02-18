@@ -5,6 +5,7 @@ import signal
 from ui import art
 from paramiko import AuthenticationException
 from PasswordUtility import PasswordUtility
+import traceback
 
 
 class UI:
@@ -42,7 +43,9 @@ class UI:
                 self.goToMainPage()
             except StopIteration:
                 self.goToMainPage()
-            except Exception:
+            except Exception, e:
+                print e
+                print traceback.format_exc()
                 self.goToMainPage()
 
     def work_page(self):

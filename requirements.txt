@@ -2,3 +2,4 @@ requests
 lxml
 BeautifulSoup4
 paramiko
+simple-crypt
