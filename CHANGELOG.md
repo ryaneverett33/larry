@@ -36,6 +36,8 @@ An incomplete log of larry growing up.
 - Configuration/Verification with Base Templates is implemented as well
 - Updated executable to fix argument passing
 
+# 0.35
+
 # 0.1.2 [[Initial Release](https://github.com/Changer098/larry/releases/tag/0.1.2)]
 
 - Basic Verification working
