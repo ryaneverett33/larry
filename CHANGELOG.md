@@ -1,6 +1,12 @@
 # Changelog
 
 An incomplete log of larry growing up.
+# 0.48
+- Added Before/After Logging (logs the configuration before any changes are applied and after changes are applied)
+- Moved logs folder and the persistence file from ```larry/``` to ```larry-data/```
+- Modifies will now check if the port is shutdown and enable the port if it is.
+- Barnacle bopping
+
 # 0.47
 - Implemented Verifying Repairs
 - Fixed help formatting
