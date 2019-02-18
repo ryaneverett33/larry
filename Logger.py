@@ -192,7 +192,7 @@ class Logger:
         localtime = time.localtime(time.time())
         # pm = (False, True)[localtime.tm_hour > 11]
         pm = True if localtime.tm_hour > 11 else False
-        hourFixed = localtime.tm_hour % 12 if localtime.tm_hour != 12 else localtime.tm_hour % 12 + 1
+        hourFixed = localtime.tm_hour % 12 if localtime.tm_hour != 12 else 12
         minFixed = ("0{0}".format(localtime.tm_min), str(localtime.tm_min))[localtime.tm_min > 9]
         return "{0}:{1} {2}".format(hourFixed, minFixed, ("AM", "PM")[pm])
 
