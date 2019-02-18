@@ -14,6 +14,7 @@ class Common:
     sessionFile = "cookies.session"
     persistenceFile = "user.persistence"
     vrfList = "vrf.list"
+    dataDirectory = "larry-data"
     ignoreDirectories = [".git", ".idea", "risque-out"]
     changelogURL = "https://github.com/Changer098/larry/blob/master/CHANGELOG.md"
     __vrfHosts = None

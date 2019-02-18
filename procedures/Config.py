@@ -94,6 +94,7 @@ class Config:
         speed = iosConnection.getSpeed(interface, switchConfig)
         voiceVlan = iosConnection.getVoiceVlan(interface, switchConfig)
         description = iosConnection.getDescription(interface, switchConfig)
+        shutdown = iosConnection.isShutdown(interface, switchConfig)
         if description is None or description != pic.getDescription():
             # print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
             self.logger.logWarning("DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider), True)
@@ -110,6 +111,10 @@ class Config:
                 self.hostChanged = True
         if speed is None or speed.speedTuple != risqueConfig.speed.speedTuple:
             iosConnection.setSpeed(risqueConfig.speed)
+            self.hostChanged = True
+        if shutdown:
+            self.logger.logWarning("INTERFACE IS SHUTDOWN ON A MODIFY, ENABLING THE PORT - PIC: {0}, provider: {1}".format(pic.name, provider), True)
+            iosConnection.shutdown(no=True)
             self.hostChanged = True
         iosConnection.leaveInterfaceConfig()
         iosConnection.leaveConfigMode()
@@ -128,6 +133,7 @@ class Config:
         speed = iosConnection.getSpeed(interface, switchConfig)
         voiceVlan = iosConnection.getVoiceVlan(interface, switchConfig)
         description = iosConnection.getDescription(interface, switchConfig)
+        shutdown = iosConnection.isShutdown(interface, switchConfig)
         if description is None or description != pic.getDescription():
             # print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
             self.logger.logWarning(
@@ -166,6 +172,11 @@ class Config:
             if len(vlans) > 0:
                 iosConnection.addTaggedVlans(vlans)
                 self.hostChanged = True
+
+        if shutdown:
+            self.logger.logWarning("INTERFACE IS SHUTDOWN ON A MODIFY, ENABLING THE TRUNK PORT - PIC: {0}, provider: {1}".format(pic.name, provider), True)
+            iosConnection.shutdown(no=True)
+            self.hostChanged = True
 
         iosConnection.leaveInterfaceConfig()
         iosConnection.leaveConfigMode()
