@@ -38,6 +38,9 @@ An incomplete log of larry growing up.
 
 # 0.35
 
+- Added support for trunk ports (semi-tested) and FEX ports (needs more testing)
+- Added support for Template Based configuration, determining whether a port is empty is still wonky
+
 # 0.1.2 [[Initial Release](https://github.com/Changer098/larry/releases/tag/0.1.2)]
 
 - Basic Verification working
