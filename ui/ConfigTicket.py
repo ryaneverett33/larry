@@ -10,11 +10,12 @@ class ConfigTicket:
     def __init__(self, appUI):
         self.appUI = appUI
 
-    def main(self):
+    def main(self, ticketNumber=None):
         if not ConfigurationDriver.credentialsStored():
             ConfigurationDriver.lock()
         username, risquePassword, switchPassword = ConfigurationDriver.getCredentials()
-        ticketNumber = raw_input("Risque Ticket Number: ")
+        if ticketNumber is None:
+            ticketNumber = raw_input("Risque Ticket Number: ")
         ConfigurationDriver.unlock()
         print "Getting Info from Risque"
         if self.risque is None:
@@ -22,7 +23,8 @@ class ConfigTicket:
         ticket = self.risque.getTicketData(ticketNumber)
         if ticket is None:
             print "Failed to get ticket from risque"
-            self.appUI.goToMainPage()
+            if self.appUI is not None:
+                self.appUI.goToMainPage()
             return
         self.__printDebugTicket(ticket)
         Config.Config(ticket).run()
