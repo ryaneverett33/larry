@@ -4,6 +4,7 @@
     - If connected
     - Else, check for mac addresses
 - Implement smarter rules for APs and UPSs
+- Apply duplex to port
 Bugs
 - Check if a host is retrieved from Provider.getHostFromProvider before executing [FIXED]
 - Executing an invalid command on a VRF affected host doesn't include Invalid Input error
