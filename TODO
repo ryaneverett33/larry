@@ -3,6 +3,7 @@
 - Check Repairs [IMPLEMENTED]
     - If connected
     - Else, check for mac addresses
+- Implement smarter rules for APs and UPSs
 Bugs
 - Check if a host is retrieved from Provider.getHostFromProvider before executing [FIXED]
 - Executing an invalid command on a VRF affected host doesn't include Invalid Input error
@@ -13,3 +14,4 @@ Bugs
 - PersistenceModule breaks util/scraper [FIXED]
 - Mac Address Table gets truncated for long row counts (e.g. Po1)
 - Modify fails when port is shutdown (Ticket is a modify but really it should be an activate) [FIXED]
+- Write fails for drug-177b-c6pp24-06-22
