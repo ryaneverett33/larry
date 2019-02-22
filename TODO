@@ -5,6 +5,9 @@
     - Else, check for mac addresses
 - Implement smarter rules for APs and UPSs
 - Apply duplex to port
+- Find voice vlan if not supplied by risque
+- Verify VoIP only tickets (Vlan 1)
+- Verify should warn if there's no VoIP vlan
 Bugs
 - Check if a host is retrieved from Provider.getHostFromProvider before executing [FIXED]
 - Executing an invalid command on a VRF affected host doesn't include Invalid Input error
@@ -16,3 +19,4 @@ Bugs
 - Mac Address Table gets truncated for long row counts (e.g. Po1)
 - Modify fails when port is shutdown (Ticket is a modify but really it should be an activate) [FIXED]
 - Write fails for drug-177b-c6pp24-06-22
+- Possible VoIP Vlan not getting added
