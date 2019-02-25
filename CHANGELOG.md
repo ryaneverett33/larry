@@ -1,6 +1,10 @@
 # Changelog
 
 An incomplete log of larry growing up.
+
+# 0.48.1 (Bug Fix releas)
+- Log when VoIP info can't be verified/configured
+
 # 0.48
 - Added Before/After Logging (logs the configuration before any changes are applied and after changes are applied)
 - Moved logs folder and the persistence file from ```larry/``` to ```larry-data/```
