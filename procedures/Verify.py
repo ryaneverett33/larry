@@ -94,6 +94,12 @@ class Verify:
                 self.logger.logError("{0} - incorrect voice vlan".format(pic.name), True)
                 self.logger.logError("\trisque: {0}, switch: {1}".format(risqueConfig.voiceVlan, voiceVlan), True)
                 passed = False
+        else:
+            self.logger.logWarning("Risque doesn't have a voice vlan", True)
+            if voiceVlan is None:
+                self.logger.logWarning("{0} does not have a voice vlan".format(pic.name), True)
+            else:
+                self.logger.logInfo("{0} has voice vlan {1}".format(pic.name, voiceVlan))
         # Check description
         if description != pic.getDescription():
             # print "{0} - incorrect description".format(pic.name)

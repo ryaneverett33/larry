@@ -77,6 +77,8 @@ class Config:
         # Set voice vlan
         if risqueConfig.voiceVlan is not None:
             iosConnection.setVoiceVlan(risqueConfig.voiceVlan)
+        else:
+            self.logger.logWarning("Risque does not have a voice vlan for {0}".format(pic.name), True)
         # Set no shut
         iosConnection.shutdown(no=True)
 
@@ -112,6 +114,8 @@ class Config:
             if voiceVlan is None or voiceVlan.tag != risqueConfig.voiceVlan.tag:
                 iosConnection.setVoiceVlan(risqueConfig.voiceVlan)
                 self.hostChanged = True
+        else:
+            self.logger.logWarning("Risque does not have a voice vlan for {0}".format(pic.name), True)
         if speed is None or speed.speedTuple != risqueConfig.speed.speedTuple:
             iosConnection.setSpeed(risqueConfig.speed)
             self.hostChanged = True
