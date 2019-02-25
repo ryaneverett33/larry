@@ -99,7 +99,7 @@ class Verify:
             if voiceVlan is None:
                 self.logger.logWarning("{0} does not have a voice vlan".format(pic.name), True)
             else:
-                self.logger.logInfo("{0} has voice vlan {1}".format(pic.name, voiceVlan))
+                self.logger.logInfo("{0} has voice vlan {1}".format(pic.name, voiceVlan), True)
         # Check description
         if description != pic.getDescription():
             # print "{0} - incorrect description".format(pic.name)
