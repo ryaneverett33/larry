@@ -2,7 +2,7 @@
 
 An incomplete log of larry growing up.
 
-# 0.48.1 (Bug Fix releas)
+# 0.48.1 and 0.48.2 (Bug Fix release)
 - Log when VoIP info can't be verified/configured
 
 # 0.48
