@@ -15,8 +15,10 @@ class IOS:
     isFexHost = False
     macAddrRegEx = re.compile("[0-9a-zA-Z]{4}.[0-9a-zA-Z]{4}.[0-9a-zA-Z]{4}")
     vlanRegEx = re.compile("[0-9]+")
+    voiceVlan = None
 
     def __init__(self, sshClient, host, switchType):
+        voiceVlan = None
         self.sshClient = sshClient
         if self.sshClient.connected:
             self.sshClient.disconnect()
@@ -564,6 +566,25 @@ class IOS:
             if tup[0] is not None:
                 addresses.append(tup)
         return addresses
+
+    def findVoiceVlan(self):
+        if self.voiceVlan is not None:
+            return self.voiceVlan
+        else:
+            result = self.sshClient.execute('show running-config | i switchport voice vlan')[0]
+            lines = result.split('\n')
+            if len(lines) == 0:
+                return None
+            else:
+                for line in lines:
+                    if "switchport voice vlan" in line:
+                        # switchport voice vlan 3022
+                        words = line.split(' ')
+                        for word in words:
+                            if self.vlanRegEx.match(word) is not None:
+                                self.voiceVlan = word.strip()
+                                return self.voiceVlan
+                return None
 
     # Executes an arbitrary command, basically like ssh.execute() but with basic command verifcation
     def do(self, switchCommand):

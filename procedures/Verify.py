@@ -96,10 +96,19 @@ class Verify:
                 passed = False
         else:
             self.logger.logWarning("Risque doesn't have a voice vlan", True)
+            switchGlobalVoiceVlan = iosConnection.findVoiceVlan()
             if voiceVlan is None:
-                self.logger.logWarning("{0} does not have a voice vlan".format(pic.name), True)
+                if switchGlobalVoiceVlan is not None:
+                    self.logger.logError("{0} does not have a voice vlan".format(pic.name), True)
+                    passed = False
             else:
-                self.logger.logInfo("{0} has voice vlan {1}".format(pic.name, voiceVlan), True)
+                # self.logger.logInfo("{0} has voice vlan {1}".format(pic.name, voiceVlan), True)
+                # check if globalvoicevlan and current voice vlan are the same
+                if switchGlobalVoiceVlan == str(voiceVlan.tag):
+                    self.logger.logInfo("Voice vlan for {0} is {1}".format(pic.name, switchGlobalVoiceVlan), True)
+                else:
+                    self.logger.logWarning("{0} has a different voice vlan ({1}) than the switch's 'global' voice vlan({2})"
+                                           .format(pic.name, voiceVlan.tag, switchGlobalVoiceVlan), True)
         # Check description
         if description != pic.getDescription():
             # print "{0} - incorrect description".format(pic.name)
