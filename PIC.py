@@ -27,6 +27,9 @@ class PICConfig:
         self.speed = Speed(risqueString=speed)
 
     def addVoiceVlan(self, voiceVlan):
+        if isinstance(voiceVlan, Vlan):
+            self.voiceVlan = voiceVlan
+            return
         if type(voiceVlan) is not str:
             raise AttributeError("addVoiceVlan given null attributes")
         self.voiceVlan = Vlan(risqueString=voiceVlan)
@@ -93,6 +96,11 @@ class PIC:
         self.newConfig = PICConfig(vlan, speed)
         if voiceVlan is not None:
             self.newConfig.addVoiceVlan(voiceVlan)
+        else:
+            # voice vlan is None
+            if self.currentConfig is not None and self.currentConfig.voiceVlan is not None:
+                print "New config doesn't have a voice vlan but current config does, using old voice vlan"
+                self.newConfig.addVoiceVlan(self.currentConfig.voiceVlan)
 
     def __isValidAction(self):
         if self.action == "Activate":

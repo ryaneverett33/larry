@@ -165,7 +165,7 @@ class Logger:
     def getInstance(ticketNumber):
         if ticketNumber is None:
             if Logger.instance is None:
-                print Logger.FAIL + "Can't get singleton instance having not been initialized first" + Logger.NORMAL
+                # print Logger.FAIL + "Can't get singleton instance having not been initialized first" + Logger.NORMAL
                 return Logger.StdoutLogger()
             else:
                 return Logger.instance
