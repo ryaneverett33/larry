@@ -2,6 +2,9 @@
 
 An incomplete log of larry growing up.
 
+# 0.49
+- Fix issues with VoIP and not matching up with risque
+
 # 0.48.1 and 0.48.2 (Bug Fix release)
 - Log when VoIP info can't be verified/configured
 
