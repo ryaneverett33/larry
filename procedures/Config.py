@@ -79,6 +79,12 @@ class Config:
             iosConnection.setVoiceVlan(risqueConfig.voiceVlan)
         else:
             self.logger.logWarning("Risque does not have a voice vlan for {0}".format(pic.name), True)
+            switchGlobalVoiceVlan = iosConnection.findVoiceVlan()
+            if switchGlobalVoiceVlan is None:
+                self.logger.logError("Unable to retrieve voice vlan for switch", False)
+            else:
+                iosConnection.setVoiceVlan(switchGlobalVoiceVlan)
+                self.logger.logInfo("Set voice vlan for {0} to {1}".format(pic.name, switchGlobalVoiceVlan), False)
         # Set no shut
         iosConnection.shutdown(no=True)
 
@@ -116,6 +122,14 @@ class Config:
                 self.hostChanged = True
         else:
             self.logger.logWarning("Risque does not have a voice vlan for {0}".format(pic.name), True)
+            switchGlobalVoiceVlan = iosConnection.findVoiceVlan()
+            if switchGlobalVoiceVlan is None:
+                self.logger.logError("Unable to retrieve voice vlan for switch", False)
+            # If voice vlan already exists on switch, ignore and continue
+            # else add globalvoicevlan to interface
+            if voiceVlan is None and switchGlobalVoiceVlan is not None:
+                iosConnection.setVoiceVlan(switchGlobalVoiceVlan)
+                self.logger.logInfo("Set voice vlan for {0} to {1}".format(pic.name, switchGlobalVoiceVlan), False)
         if speed is None or speed.speedTuple != risqueConfig.speed.speedTuple:
             iosConnection.setSpeed(risqueConfig.speed)
             self.hostChanged = True
