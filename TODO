@@ -13,3 +13,4 @@ Bugs
 - PersistenceModule breaks util/scraper [FIXED]
 - Mac Address Table gets truncated for long row counts (e.g. Po1)
 - Modify fails when port is shutdown (Ticket is a modify but really it should be an activate) [FIXED]
+- Larry fails to grab voice vlan for #69584
