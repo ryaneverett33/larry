@@ -262,9 +262,19 @@ class IOS:
             return False
         result = None
         if no:
-            result = self.sshClient.execute("no switchport access vlan {0}".format(newVlan.tag))[0]
+            tag = None
+            if isinstance(newVlan, Vlan):
+                tag = newVlan.tag
+            elif isinstance(newVlan, str):
+                tag = newVlan
+            result = self.sshClient.execute("no switchport access vlan {0}".format(tag))[0]
         else:
-            result = self.sshClient.execute("switchport access vlan {0}".format(newVlan.tag))[0]
+            tag = None
+            if isinstance(newVlan, Vlan):
+                tag = newVlan.tag
+            elif isinstance(newVlan, str):
+                tag = newVlan
+            result = self.sshClient.execute("switchport access vlan {0}".format(tag))[0]
         if not self.__isValidResponse(result):
             print "Failed to set vlan, vlan {0} may be bad".format(newVlan)
             return False
@@ -279,9 +289,19 @@ class IOS:
             return False
         result = None
         if no:
-            result = self.sshClient.execute("no switchport voice vlan {0}".format(newVoiceVlan.tag))[0]
+            tag = None
+            if isinstance(newVoiceVlan, Vlan):
+                tag = newVoiceVlan.tag
+            elif isinstance(newVoiceVlan, str):
+                tag = newVoiceVlan
+            result = self.sshClient.execute("no switchport voice vlan {0}".format(tag))[0]
         else:
-            result = self.sshClient.execute("switchport voice vlan {0}".format(newVoiceVlan.tag))[0]
+            tag = None
+            if isinstance(newVoiceVlan, Vlan):
+                tag = newVoiceVlan.tag
+            elif isinstance(newVoiceVlan, str):
+                tag = newVoiceVlan
+            result = self.sshClient.execute("switchport voice vlan {0}".format(tag))[0]
         if not self.__isValidResponse(result):
             print "Failed to set voice vlan, vlan {0} may be bad".format(newVoiceVlan)
             return False
@@ -294,7 +314,12 @@ class IOS:
         if not self.inInterface:
             print "can't set voice vlan when not configuring interface"
             return False
-        result = self.sshClient.execute("switchport trunk native vlan {0}".format(newNativeVlan.tag))[0]
+        tag = None
+        if isinstance(newNativeVlan, Vlan):
+            tag = newNativeVlan.tag
+        elif isinstance(newNativeVlan, str):
+            tag = newNativeVlan
+        result = self.sshClient.execute("switchport trunk native vlan {0}".format(tag))[0]
         if not self.__isValidResponse(result):
             print "Failed to set native vlan, vlan {0} may be bad".format(newNativeVlan)
             return False
