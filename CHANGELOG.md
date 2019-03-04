@@ -2,6 +2,10 @@
 
 An incomplete log of larry growing up.
 
+# 0.49.1
+- Fix IOS so that an addVlan can take a string object or a vlan object
+- Investigating issue where risque doesn't return any voip info even though voip data exists
+
 # 0.49
 - Fix issues with VoIP and not matching up with risque
 
