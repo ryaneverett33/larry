@@ -16,6 +16,9 @@ class IOS:
     macAddrRegEx = re.compile("[0-9a-zA-Z]{4}.[0-9a-zA-Z]{4}.[0-9a-zA-Z]{4}")
     vlanRegEx = re.compile("[0-9]+")
     voiceVlan = None
+    POWER_NO = "never"
+    POWER_AUTO = "auto"
+    apcTrippliteDeviceRegex = "(apc)[A-z0-9]+|(trp)[A-z0-9]+"
 
     def __init__(self, sshClient, host, switchType):
         voiceVlan = None
@@ -86,7 +89,7 @@ class IOS:
     def sis(self, include=None):
         result = self.__sis(include)
         if include is None:
-            self.__sis()
+            return self.__sis()
         return result
 
     def findInterfaceOfPic(self, picName):
@@ -205,6 +208,50 @@ class IOS:
             if "speed" in line:
                 return Speed(switchString=line)
         return None
+
+    def getDuplex(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "duplex" in line:
+                return Speed.resolveDuplexFromSwitch(line)
+        return None
+
+    # gets the current number of UPSs in the TR
+    def getUPSCount(self):
+        # sis | i (apc)[A-z0-9]+|(trp)[A-z0-9]+ returns all apc/tripplite devices
+        devices = self.sis(include=self.apcTrippliteDeviceRegex)
+        deviceCount = 0
+        if devices is None or len(devices) == 0:
+            return deviceCount
+        upsList = Hosts.getUPSList()
+        for device in devices:
+            if device in upsList:
+                deviceCount = deviceCount + 1
+        return deviceCount
+
+    def getPower(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "power" in line:
+                if "no" in line:
+                    return self.POWER_NO
+                elif "auto" in line:
+                    return self.POWER_AUTO
+                elif "never" in line:
+                    return self.POWER_NO
+                elif "max" in line:
+                    # get max power level
+                    # [' power inline port ', ' 20000']
+                    lineSplit = line.split("maximum")
+                    if len(lineSplit) != 2:
+                        return None
+                    return int(lineSplit[1])
+
+        return self.POWER_AUTO  # if the switch has no power setting, the default is auto
 
     def isShutdown(self, interface, config=None):
         useConfig = config

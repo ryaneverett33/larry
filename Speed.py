@@ -233,3 +233,14 @@ class Speed:
         speed.__fillTuple()
         speed.noSpeed = True
         return speed
+
+    @staticmethod
+    def resolveDuplexFromSwitch(duplex):
+        if duplex is None or not isinstance(duplex, str) or len(duplex) == 0:
+            return None
+        if "full" in duplex:
+            return Speed.DUPLEX_FULL
+        elif "half" in duplex:
+            return Speed.DUPLEX_HALF
+        else:
+            return Speed.DUPLEX_AUTO

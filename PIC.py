@@ -2,6 +2,7 @@ from Speed import Speed
 from Vlan import Vlan
 from Provider import Provider
 from Patch import Patch
+import re
 
 
 class PICConfig:
@@ -61,6 +62,8 @@ class PIC:
     action = None
     trunk = False
     patch = None
+    apRegex = re.compile("(AP-)[A-z]+")
+    upsRegex = re.compile("[A-z-0-9]+(HW-UPS)")
 
     def __init__(self, name, currentProvider, newProvider, action, services):
         # if name is None or newProvider is None or action is None:
@@ -166,3 +169,16 @@ class PIC:
 
     def getDescription(self):
         return self.name.lower()
+
+    def isAP(self):
+        # matches PICs of type BIDC-103AP-B but not of type BIDC-103A-AP
+        return self.apRegex.match(self.name) is not None
+
+    def isUPS(self):
+        # matches PICs of type CREC-B318HW-UPS
+        return self.upsRegex.match(self.name) is not None
+
+    def getUPSName(self):
+        # return name of type yong-664-trp1500
+        provider = self.getProvider()
+

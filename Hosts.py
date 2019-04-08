@@ -136,14 +136,27 @@ class Hosts:
             "c9348uxm",
         }
 
+    @staticmethod
+    def getUPSList():
+        return {
+            "apc1500rm",
+            "apc3000",
+            "apc5000",
+            "apc6000",
+            "apc750",
+            "trp1500",
+            "trp6000"
+        }
+
     #  Removes all but (if true) switches and (if true) chassis
     #  if vlan, don't reject vlan hosts
     @staticmethod
-    def filter(hostList, room, switches=False, chassis=False, vlan=False):
+    def filter(hostList, room, switches=False, chassis=False, vlan=False, ups=False):
         Switches = Hosts.getSwitchList()
         Chassis = Hosts.getChassisList()
-        if not isinstance(switches, bool) or not isinstance(chassis, bool) or not isinstance(vlan, bool):
-            print("filter() was give non-boolean parameters")
+        UPSs = Hosts.getUPSList()
+        if not isinstance(switches, bool) or not isinstance(chassis, bool) or not isinstance(vlan, bool) or not isinstance(ups, bool):
+            print("filter() was given non-boolean parameters")
             return None
         if not isinstance(hostList, dict):
             print("filter() was given a non-dict parameter")
@@ -176,6 +189,16 @@ class Hosts:
                         if buildingName not in newHosts:
                             newHosts[buildingName] = list()
                         newHosts[buildingName].append(value)
+                if vlan and "vlan" in value:
+                    if buildingName not in newHosts:
+                        newHosts[buildingName] = list()
+                    newHosts[buildingName].append(value)
+                if ups:
+                    if device in UPSs:
+                        if buildingName not in newHosts:
+                            newHosts[buildingName] = list()
+                        newHosts[buildingName].append(value)
+
         return newHosts
 
     # Return hostname

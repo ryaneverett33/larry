@@ -167,3 +167,19 @@ class Provider:
             return "{0}0/{1}".format(self.intType, self.port)
         else:
             return "{0}{1}/{2}/{3}".format(self.intType, self.switch, (0, 1)[self.uplink], self.port)
+
+    def isValidUPSName(self, name):
+        # of type yong-664-trp1500-01
+        # check building name is same, check tr is same
+        # check ups model is a valid model
+        # ['yong', '664', 'trp1500', '01']
+        nameSplit = name.split('-')
+        if nameSplit is None or len(nameSplit) < 3:
+            return False
+        if nameSplit[0] != self.building:
+            return False
+        if nameSplit[1] != self.TR:
+            return False
+        if nameSplit[2] not in Hosts.getUPSList():
+            return False
+        return True
