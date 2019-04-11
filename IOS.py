@@ -2,6 +2,7 @@ from Vlan import Vlan
 from Speed import Speed
 from procedures import BaseTemplates
 from Provider import Provider
+import Hosts
 import re
 
 
@@ -223,11 +224,10 @@ class IOS:
         # sis | i (apc)[A-z0-9]+|(trp)[A-z0-9]+ returns all apc/tripplite devices
         devices = self.sis(include=self.apcTrippliteDeviceRegex)
         deviceCount = 0
-        if devices is None or len(devices) == 0:
+        if devices is None or len(devices) <= 1:
             return deviceCount
-        upsList = Hosts.getUPSList()
         for device in devices:
-            if device in upsList:
+            if Hosts.Hosts.isUPS(device[1]):
                 deviceCount = deviceCount + 1
         return deviceCount
 
@@ -489,7 +489,7 @@ class IOS:
             return False
         return True
 
-    def setDuplex(self, newSpeed, no=False):
+    def setDuplex(self, newDuplex, no=False):
         if not self.inConfigMode:
             print "can't set duplex when not in config mode"
             return False
@@ -497,9 +497,9 @@ class IOS:
             print "can't set duplex when not configuring interface"
             return False
         duplex = ""
-        if newSpeed.duplex == Speed.DUPLEX_FULL:
+        if newDuplex == Speed.DUPLEX_FULL:
             duplex = "full"
-        elif newSpeed.duplex == Speed.DUPLEX_HALF:
+        elif newDuplex == Speed.DUPLEX_HALF:
             duplex = "half"
         else:
             duplex = "auto"
@@ -509,7 +509,27 @@ class IOS:
         else:
             result = self.sshClient.execute("duplex {0}".format(duplex))[0]
         if not self.__isValidResponse(result):
-            print "Failed to set speed, duplex {0} may be bad".format(duplex)
+            print "Failed to set duplex, duplex {0} may be bad".format(duplex)
+            return False
+        return True
+
+    def setPower(self, power, no=False):
+        if not self.inConfigMode:
+            print "can't set power when not in config mode"
+            return False
+        if not self.inInterface:
+            print "can't set power when not configuring interface"
+            return False
+        result = None
+        if no:
+            result = self.sshClient.execute("power inline never")[0]
+        else:
+            if isinstance(power, int):
+                result = self.sshClient.execute("power inline port maximum {0}".format(power))[0]
+            if isinstance(power, str):
+                result = self.sshClient.execute("power inline auto")
+        if not self.__isValidResponse(result):
+            print "Failed to set power on port"
             return False
         return True
 

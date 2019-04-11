@@ -172,7 +172,15 @@ class PIC:
 
     def isAP(self):
         # matches PICs of type BIDC-103AP-B but not of type BIDC-103A-AP
-        return self.apRegex.match(self.name) is not None
+        if self.apRegex.match(self.name) is not None:
+            return True
+        # check if vlan is 1001, see #70004 for an AP THAT DOESN'T FOLLOW THE STANDARD
+        config = self.getConfig()
+        if config is None:
+            return False
+        if isinstance(config.vlan, Vlan) and config.vlan.tag == 1001:
+            return True
+        return False
 
     def isUPS(self):
         # matches PICs of type CREC-B318HW-UPS

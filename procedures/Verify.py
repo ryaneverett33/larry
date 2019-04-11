@@ -88,6 +88,7 @@ class Verify:
                 if duplex is None or duplex is not Speed.Speed.DUPLEX_FULL:
                     self.logger.logError("{0} - AP has incorrect duplex".format(pic.name), True)
                     self.logger.logError("\tswitch: {0}".format(duplex), True)
+                    passed = False
             # check for speed auto on Te/Tw ports, else check speed matches
             if "Te" in provider.intType or "Tw" in provider.intType:
                 # getSpeed returns None if speed auto
@@ -161,7 +162,7 @@ class Verify:
         if pic.isAP():
             # check power on 3750s
             if "3750" in provider.switchType:
-                power = iosConnection.getPower()
+                power = iosConnection.getPower(interface, switchConfig)
                 if power is None or power != 20000:
                     self.logger.logError("{0} - AP has incorrect power for a 3750".format(pic.name), True)
                     self.logger.logError("\tswitch: {0}".format(power), True)

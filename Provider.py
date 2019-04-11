@@ -159,6 +159,24 @@ class Provider:
                 return host
         return None
 
+    @staticmethod
+    # Assumes the TR has all the same types of UPSs (if more than one)
+    # Returns the first type found
+    def getUPSTypeFromProvider(provider):
+        if provider is None:
+            return None
+        if provider.building is None or provider.TR is None:
+            raise AttributeError("getUPSTypeFromProvider requires a valid building and room")
+        buildingList = Hosts.getBuildings(provider.building)
+        if provider.building not in buildingList:
+            raise ValueError("Invalid Building, unable to get host")
+        #  search by room and switch
+        filtered = Hosts.filter(buildingList, str(provider.TR), ups=True)
+        if filtered[provider.building] is None:
+            return None
+        # convert host (stew-115b-apc5000rm-01.tcom.purdue.edu) to device (apc5000rm)
+        return Hosts.hostToUPSDevice(filtered[provider.building][0])
+
     # Returns an interface corresponding to this provider
     # e.g., gi3/0/1, te1/1/3, fa0/1, tw3/0/1
     def getSwitchInterface(self):
