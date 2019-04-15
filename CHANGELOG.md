@@ -2,6 +2,11 @@
 
 An incomplete log of larry growing up.
 
+# 0.5
+- Added support for activating UPSs and APs
+- Added support for the Ssh client not having to request '--MORE--' every time
+- Should fix issues retrieving global voice vlan
+
 # 0.49.1
 - Fix IOS so that an addVlan can take a string object or a vlan object
 - Investigating issue where risque doesn't return any voip info even though voip data exists
