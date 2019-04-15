@@ -663,7 +663,7 @@ class IOS:
         if self.voiceVlan is not None:
             return self.voiceVlan
         else:
-            result = self.sshClient.execute('show running-config | i switchport voice vlan')
+            result = self.sshClient.execute('show running-config | i switchport voice vlan', noMore=True)
             if result is None:
                 return None
             else:

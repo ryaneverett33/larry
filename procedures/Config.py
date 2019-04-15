@@ -55,6 +55,7 @@ class Config:
         upsCount = 0
         upsDevice = None
         self.logger.logBefore(pic.name, interface, switchConfig)
+        switchGlobalVoiceVlan = iosConnection.findVoiceVlan()
 
         if provider.uplink:
             # print "Provider is an uplink port, not supported yet!"
@@ -101,7 +102,6 @@ class Config:
             iosConnection.setVoiceVlan(risqueConfig.voiceVlan)
         else:
             self.logger.logWarning("Risque does not have a voice vlan for {0}".format(pic.name), True)
-            switchGlobalVoiceVlan = iosConnection.findVoiceVlan()
             if switchGlobalVoiceVlan is None:
                 self.logger.logError("Unable to retrieve voice vlan for switch", False)
             else:
