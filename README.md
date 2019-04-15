@@ -13,12 +13,16 @@ $ python /home/ONEPURDUE/everettr/larry-release/INSTALL.py
 $ source ~/.bashrc
 ```
 
-## Changelog
-[CHANGELOG](https://github.com/Changer098/larry/blob/master/CHANGELOG.md)
-
 ## How to Use
 
 After adding to your ```$PATH```, you should be able to execute ```$ larry``` from anywhere. Else ```$ ~/larry/larry``` can start the program.
+
+## Links
+[CHANGELOG](https://github.com/Changer098/larry/blob/master/CHANGELOG.md)
+
+[Latest Release](https://github.com/Changer098/larry/releases/latest)
+
+[Limitations](https://github.com/Changer098/larry/blob/master/Limitations.md)
 
 ## Screenshots
 
@@ -33,7 +37,3 @@ Doing a Ticket
 Verifying a Ticket
 
 ![Verifying a Ticket](https://raw.githubusercontent.com/Changer098/larry/master/screenshots/verify-ticket.PNG)
-
-## Links
-
-- [Limitations](https://github.com/Changer098/larry/blob/master/Limitations.md)
