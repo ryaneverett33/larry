@@ -3,6 +3,7 @@
 - Check Repairs [IMPLEMENTED]
     - If connected
     - Else, check for mac addresses
+SERVICES Ticket #70065
 Bugs
 - Check if a host is retrieved from Provider.getHostFromProvider before executing [FIXED]
 - Executing an invalid command on a VRF affected host doesn't include Invalid Input error

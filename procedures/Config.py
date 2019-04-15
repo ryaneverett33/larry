@@ -52,12 +52,18 @@ class Config:
         risqueConfig = pic.getConfig()
 
         switchConfig = iosConnection.getConfig(interface, flatten=False)
+        upsCount = 0
+        upsDevice = None
         self.logger.logBefore(pic.name, interface, switchConfig)
+        switchGlobalVoiceVlan = iosConnection.findVoiceVlan()
 
         if provider.uplink:
             # print "Provider is an uplink port, not supported yet!"
             self.logger.logError("Provider is an uplink port, not supported yet!", True)
             return
+        if pic.isUPS():
+            upsCount = iosConnection.getUPSCount()
+            upsDevice = provider.getUPSTypeFromProvider(provider)
 
         iosConnection.enterConfigMode()
         iosConnection.enterInterfaceConfig(interface)
@@ -67,11 +73,28 @@ class Config:
             iosConnection.applyBaseTemplate(iosConnection.getBaseTemplate())
 
         # Set Description
-        iosConnection.setDescription(pic.getDescription())
+        if pic.isUPS():
+            # 70136
+            # stew-215a-apc1500rm-01
+            fixedUPSCount = "0{0}".format(upsCount + 1) if (upsCount + 1) < 10 else str(upsCount + 1) # add leading zeroes
+            newDescription = "{0}-{1}-{2}-{3}".format(provider.building, provider.TR, upsDevice, fixedUPSCount)
+            iosConnection.setDescription(newDescription)
+        else:
+            iosConnection.setDescription(pic.getDescription())
         # Set access mode
         iosConnection.setSwitchportMode("access")
         # Set speed
-        iosConnection.setSpeed(risqueConfig.speed)
+        if pic.isAP():
+            if "Gi" in provider.intType:
+                iosConnection.setSpeed(risqueConfig.speed)
+                # set duplex
+                iosConnection.setDuplex(Speed.DUPLEX_FULL)
+            elif "Te" in provider.intType or "Tw" in provider.intType:
+                iosConnection.setSpeed(Speed.SpeedAutoObject())
+            else:
+                iosConnection.setSpeed(risqueConfig.speed)
+        else:
+            iosConnection.setSpeed(risqueConfig.speed)
         # Set vlan
         iosConnection.setVlan(risqueConfig.vlan)
         # Set voice vlan
@@ -79,12 +102,14 @@ class Config:
             iosConnection.setVoiceVlan(risqueConfig.voiceVlan)
         else:
             self.logger.logWarning("Risque does not have a voice vlan for {0}".format(pic.name), True)
-            switchGlobalVoiceVlan = iosConnection.findVoiceVlan()
             if switchGlobalVoiceVlan is None:
                 self.logger.logError("Unable to retrieve voice vlan for switch", False)
             else:
                 iosConnection.setVoiceVlan(switchGlobalVoiceVlan)
                 self.logger.logInfo("Set voice vlan for {0} to {1}".format(pic.name, switchGlobalVoiceVlan), False)
+        # set power for AP
+        if pic.isAP() and "3750" in provider.switchType:
+            iosConnection.setPower(20000)
         # Set no shut
         iosConnection.shutdown(no=True)
 
@@ -106,7 +131,7 @@ class Config:
         voiceVlan = iosConnection.getVoiceVlan(interface, switchConfig)
         description = iosConnection.getDescription(interface, switchConfig)
         shutdown = iosConnection.isShutdown(interface, switchConfig)
-        if description is None or description != pic.getDescription():
+        if not pic.isUPS and (description is None or description != pic.getDescription()):
             # print "DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider)
             self.logger.logWarning("DESCRIPTIONS DON'T MATCH ON MODIFY - PIC: {0}, provider: {1}".format(pic.name, provider), True)
 

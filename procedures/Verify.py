@@ -1,6 +1,7 @@
 from ConfigurationDriver import ConfigurationDriver
 from IOS import IOS
 from Vlan import Vlan
+import Speed
 import traceback
 from Logger import Logger
 
@@ -80,12 +81,35 @@ class Verify:
         mode = iosConnection.getSwitchportMode(interface, switchConfig)
         vlan = iosConnection.getVlan(interface, switchConfig)
         # Check speed
-        if speed is None or speed.speedTuple != risqueConfig.speed.speedTuple:
-            # print "{0} - incorrect speed".format(pic.name)
-            # print "\trisque: {0}, switch: {1}".format(risqueConfig.speed, speed)
-            self.logger.logError("{0} - incorrect speed".format(pic.name), True)
-            self.logger.logError("\trisque: {0}, switch: {1}".format(risqueConfig.speed, speed), True)
-            passed = False
+        if pic.isAP():
+            # check duplex on Gigabit Ports
+            if "Gi" in provider.intType:
+                duplex = iosConnection.getDuplex(interface, switchConfig)
+                if duplex is None or duplex is not Speed.Speed.DUPLEX_FULL:
+                    self.logger.logError("{0} - AP has incorrect duplex".format(pic.name), True)
+                    self.logger.logError("\tswitch: {0}".format(duplex), True)
+                    passed = False
+            # check for speed auto on Te/Tw ports, else check speed matches
+            if "Te" in provider.intType or "Tw" in provider.intType:
+                # getSpeed returns None if speed auto
+                if speed is not None:
+                    self.logger.logError("{0} - AP is not speed auto".format(pic.name), True)
+                    self.logger.logError("\tswitch: {0}".format(speed), True)
+                    passed = False
+            else:
+                if speed is None or speed.speedTuple != risqueConfig.speed.speedTuple:
+                    # print "{0} - incorrect speed".format(pic.name)
+                    # print "\trisque: {0}, switch: {1}".format(risqueConfig.speed, speed)
+                    self.logger.logError("{0} - AP has incorrect speed".format(pic.name), True)
+                    self.logger.logError("\trisque: {0}, switch: {1}".format(risqueConfig.speed, speed), True)
+                    passed = False
+        else:
+            if speed is None or speed.speedTuple != risqueConfig.speed.speedTuple:
+                # print "{0} - incorrect speed".format(pic.name)
+                # print "\trisque: {0}, switch: {1}".format(risqueConfig.speed, speed)
+                self.logger.logError("{0} - incorrect speed".format(pic.name), True)
+                self.logger.logError("\trisque: {0}, switch: {1}".format(risqueConfig.speed, speed), True)
+                passed = False
         # Check voice
         if risqueConfig.voiceVlan is not None:
             if voiceVlan is None or voiceVlan.tag != risqueConfig.voiceVlan.tag:
@@ -109,13 +133,20 @@ class Verify:
                 else:
                     self.logger.logWarning("{0} has a different voice vlan ({1}) than the switch's 'global' voice vlan({2})"
                                            .format(pic.name, voiceVlan.tag, switchGlobalVoiceVlan), True)
-        # Check description
-        if description != pic.getDescription():
-            # print "{0} - incorrect description".format(pic.name)
-            # print "\trisque: {0}, switch: {1}".format(pic.getDescription(), description)
-            self.logger.logError("{0} - incorrect description".format(pic.name), True)
-            self.logger.logError("\trisque: {0}, switch: {1}".format(pic.getDescription(), description), True)
-            passed = False
+        if pic.isUPS():
+            # check UPS has proper name
+            if not provider.isValidUPSName(description):
+                self.logger.logError("{0} - UPS has incorrect description".format(pic.name), True)
+                self.logger.logError("\tswitch: {1}".format(description), True)
+                passed = False
+        else:
+            # Check description
+            if description != pic.getDescription():
+                # print "{0} - incorrect description".format(pic.name)
+                # print "\trisque: {0}, switch: {1}".format(pic.getDescription(), description)
+                self.logger.logError("{0} - incorrect description".format(pic.name), True)
+                self.logger.logError("\trisque: {0}, switch: {1}".format(pic.getDescription(), description), True)
+                passed = False
         # Check mode
         if mode != "access":
             # print "{0} - switchport is not set to access mode".format(pic.name)
@@ -128,6 +159,15 @@ class Verify:
             self.logger.logError("{0} - incorrect vlan".format(pic.name), True)
             self.logger.logError("\trisque: {0}, switch: {1}".format(risqueConfig.vlan, vlan), True)
             passed = False
+        if pic.isAP():
+            # check power on 3750s
+            if "3750" in provider.switchType:
+                power = iosConnection.getPower(interface, switchConfig)
+                if power is None or power != 20000:
+                    self.logger.logError("{0} - AP has incorrect power for a 3750".format(pic.name), True)
+                    self.logger.logError("\tswitch: {0}".format(power), True)
+                    passed = False
+
         return passed
 
     def __verifyTrunkDeactivate(self, iosConnection, provider, pic):

@@ -144,7 +144,7 @@ class Ssh:
                 hostClean = hostClean + '-'
         self.cleanedHostname = hostClean
 
-    def execute(self, command):
+    def execute(self, command, noMore=False):
         try:
             if self.vrfAffected:
 
@@ -154,12 +154,12 @@ class Ssh:
                     self.logger.logSSH("Multi-line command on a VRF Affected host, split into {0} commands".format(len(brokenCommands)))
                     result = None
                     for brokenCommand in brokenCommands:
-                        result = self.dirtyExecute(brokenCommand)
+                        result = self.dirtyExecute(brokenCommand, noMore)
                     return result
                 else:
-                    return self.dirtyExecute(command)
+                    return self.dirtyExecute(command, noMore)
             else:
-                return self.cleanExecute(command)
+                return self.cleanExecute(command, noMore)
         except timeout:
             self.logger.logSSH("Failed to execute {0}, socket timedout".format(command))
         except Exception, e:
@@ -167,7 +167,7 @@ class Ssh:
 
     # Executes the command and returns [cleaned output, resultant hostname]
     # Commands are appended with a newline
-    def cleanExecute(self, command):
+    def cleanExecute(self, command, noMore=False):
         if not self.connected:
             # print "not connected to a host, can't execute"
             self.logger.logSSH("not connected to a host, can't execute")
@@ -190,7 +190,10 @@ class Ssh:
                 if len(line) == 0:
                     continue
                 if "more" in line.lower():
-                    self.__send(' ')
+                    if noMore:
+                        self.__send('q')
+                    else:
+                        self.__send(' ')
                     # print "REQUESTING MORE, SENDING NEWLINE, line: {0}".format(line)
                     continue
                 if command in line:
@@ -210,7 +213,7 @@ class Ssh:
             # check if text contains the expected string
 
     # Workaround for VRF affected hosts: send clean command and don't wait for output, send dirty command and retrieve output
-    def dirtyExecute(self, command):
+    def dirtyExecute(self, command, noMore=False):
         if not self.connected:
             # print "not connected to a host, can't execute"
             self.logger.logSSH("not connected to a host, can't execute")
@@ -223,7 +226,7 @@ class Ssh:
         self.channel.recv(self.BUFFER_LEN)
         self.__waitForSendReady()
         self.logger.logSSH("Ssh Driver executing dirty command `{0}`".format(self.SSH_DIRTY_COMMAND))
-        response = self.cleanExecute(self.SSH_DIRTY_COMMAND)
+        response = self.cleanExecute(self.SSH_DIRTY_COMMAND, noMore)
         lines = response[0].split('\n')
         # strip out the last three lines
         newLines = []

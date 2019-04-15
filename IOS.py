@@ -2,6 +2,7 @@ from Vlan import Vlan
 from Speed import Speed
 from procedures import BaseTemplates
 from Provider import Provider
+import Hosts
 import re
 
 
@@ -16,6 +17,9 @@ class IOS:
     macAddrRegEx = re.compile("[0-9a-zA-Z]{4}.[0-9a-zA-Z]{4}.[0-9a-zA-Z]{4}")
     vlanRegEx = re.compile("[0-9]+")
     voiceVlan = None
+    POWER_NO = "never"
+    POWER_AUTO = "auto"
+    apcTrippliteDeviceRegex = "(apc)[A-z0-9]+|(trp)[A-z0-9]+"
 
     def __init__(self, sshClient, host, switchType):
         voiceVlan = None
@@ -86,7 +90,7 @@ class IOS:
     def sis(self, include=None):
         result = self.__sis(include)
         if include is None:
-            self.__sis()
+            return self.__sis()
         return result
 
     def findInterfaceOfPic(self, picName):
@@ -205,6 +209,49 @@ class IOS:
             if "speed" in line:
                 return Speed(switchString=line)
         return None
+
+    def getDuplex(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "duplex" in line:
+                return Speed.resolveDuplexFromSwitch(line)
+        return None
+
+    # gets the current number of UPSs in the TR
+    def getUPSCount(self):
+        # sis | i (apc)[A-z0-9]+|(trp)[A-z0-9]+ returns all apc/tripplite devices
+        devices = self.sis(include=self.apcTrippliteDeviceRegex)
+        deviceCount = 0
+        if devices is None or len(devices) <= 1:
+            return deviceCount
+        for device in devices:
+            if Hosts.Hosts.isUPS(device[1]):
+                deviceCount = deviceCount + 1
+        return deviceCount
+
+    def getPower(self, interface, config=None):
+        useConfig = config
+        if useConfig is None:
+            useConfig = self.getConfig(interface, flatten=False)
+        for line in useConfig:
+            if "power" in line:
+                if "no" in line:
+                    return self.POWER_NO
+                elif "auto" in line:
+                    return self.POWER_AUTO
+                elif "never" in line:
+                    return self.POWER_NO
+                elif "max" in line:
+                    # get max power level
+                    # [' power inline port ', ' 20000']
+                    lineSplit = line.split("maximum")
+                    if len(lineSplit) != 2:
+                        return None
+                    return int(lineSplit[1])
+
+        return self.POWER_AUTO  # if the switch has no power setting, the default is auto
 
     def isShutdown(self, interface, config=None):
         useConfig = config
@@ -442,7 +489,7 @@ class IOS:
             return False
         return True
 
-    def setDuplex(self, newSpeed, no=False):
+    def setDuplex(self, newDuplex, no=False):
         if not self.inConfigMode:
             print "can't set duplex when not in config mode"
             return False
@@ -450,9 +497,9 @@ class IOS:
             print "can't set duplex when not configuring interface"
             return False
         duplex = ""
-        if newSpeed.duplex == Speed.DUPLEX_FULL:
+        if newDuplex == Speed.DUPLEX_FULL:
             duplex = "full"
-        elif newSpeed.duplex == Speed.DUPLEX_HALF:
+        elif newDuplex == Speed.DUPLEX_HALF:
             duplex = "half"
         else:
             duplex = "auto"
@@ -462,7 +509,27 @@ class IOS:
         else:
             result = self.sshClient.execute("duplex {0}".format(duplex))[0]
         if not self.__isValidResponse(result):
-            print "Failed to set speed, duplex {0} may be bad".format(duplex)
+            print "Failed to set duplex, duplex {0} may be bad".format(duplex)
+            return False
+        return True
+
+    def setPower(self, power, no=False):
+        if not self.inConfigMode:
+            print "can't set power when not in config mode"
+            return False
+        if not self.inInterface:
+            print "can't set power when not configuring interface"
+            return False
+        result = None
+        if no:
+            result = self.sshClient.execute("power inline never")[0]
+        else:
+            if isinstance(power, int):
+                result = self.sshClient.execute("power inline port maximum {0}".format(power))[0]
+            if isinstance(power, str):
+                result = self.sshClient.execute("power inline auto")
+        if not self.__isValidResponse(result):
+            print "Failed to set power on port"
             return False
         return True
 
@@ -596,7 +663,11 @@ class IOS:
         if self.voiceVlan is not None:
             return self.voiceVlan
         else:
-            result = self.sshClient.execute('show running-config | i switchport voice vlan')[0]
+            result = self.sshClient.execute('show running-config | i switchport voice vlan', noMore=True)
+            if result is None:
+                return None
+            else:
+                result = result[0]
             lines = result.split('\n')
             if len(lines) == 0:
                 return None

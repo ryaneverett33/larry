@@ -11,6 +11,7 @@ class Speed:
     duplex = None       # auto, full, half
     speedTuple = None   # 10, 100, 1000, 2500, 5000, 10000
     speedAuto = False
+    isSpeedAutoObject = False
     noSpeed = False
 
     def __init__(self, name=None, risqueString=None, switchString=None):
@@ -163,9 +164,10 @@ class Speed:
     @staticmethod
     def SpeedAutoObject():
         speed = Speed()
-        speed.setDuplex(speed.DUPLEX_AUTO)
+        speed.duplex = Speed.DUPLEX_AUTO
         speed.__fillTuple()
         speed.speedAuto = True
+        speed.isSpeedAutoObject = True
         return speed
 
     # Fills the speed Tuple
@@ -215,6 +217,8 @@ class Speed:
             raise AttributeError("Speed::switchCommand() given invalid arguments")
         if speed.noSpeed:
             return "no speed auto"
+        if speed.isSpeedAutoObject:
+            return "speed auto"
         base = "speed "
         speeds = ""
         count = 0
@@ -233,3 +237,14 @@ class Speed:
         speed.__fillTuple()
         speed.noSpeed = True
         return speed
+
+    @staticmethod
+    def resolveDuplexFromSwitch(duplex):
+        if duplex is None or not isinstance(duplex, str) or len(duplex) == 0:
+            return None
+        if "full" in duplex:
+            return Speed.DUPLEX_FULL
+        elif "half" in duplex:
+            return Speed.DUPLEX_HALF
+        else:
+            return Speed.DUPLEX_AUTO
