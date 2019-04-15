@@ -2,7 +2,7 @@
 
 An incomplete log of larry growing up.
 
-# 0.50 [[Beta 2 Release](https://github.com/Changer098/larry/releases/tag/0.5)]
+# 0.50 [[Beta 2 Release](https://github.com/Changer098/larry/releases/tag/0.50)]
 - Added support for activating UPSs and APs
 - Added support for the Ssh client not having to request '--MORE--' every time
 - Should fix issues retrieving global voice vlan
