@@ -136,31 +136,14 @@ class Hosts:
             "c9348uxm",
         }
 
-    @staticmethod
-    def getUPSList():
-        return {
-            "apc1500",
-            "apc1500rm",
-            "apc3000",
-            "apc3000rm",
-            "apc5000",
-            "apc5000rm",
-            "apc6000",
-            "apc6000rm",
-            "apc750",
-            "trp1500",
-            "trp6000"
-        }
-
     #  Removes all but (if true) switches and (if true) chassis
     #  if vlan, don't reject vlan hosts
     @staticmethod
-    def filter(hostList, room, switches=False, chassis=False, vlan=False, ups=False):
+    def filter(hostList, room, switches=False, chassis=False, vlan=False):
         Switches = Hosts.getSwitchList()
         Chassis = Hosts.getChassisList()
-        UPSs = Hosts.getUPSList()
-        if not isinstance(switches, bool) or not isinstance(chassis, bool) or not isinstance(vlan, bool) or not isinstance(ups, bool):
-            print("filter() was given non-boolean parameters")
+        if not isinstance(switches, bool) or not isinstance(chassis, bool) or not isinstance(vlan, bool):
+            print("filter() was give non-boolean parameters")
             return None
         if not isinstance(hostList, dict):
             print("filter() was given a non-dict parameter")
@@ -193,21 +176,6 @@ class Hosts:
                         if buildingName not in newHosts:
                             newHosts[buildingName] = list()
                         newHosts[buildingName].append(value)
-                if vlan and "vlan" in value:
-                    if buildingName not in newHosts:
-                        newHosts[buildingName] = list()
-                    newHosts[buildingName].append(value)
-                if ups:
-                    fixedDevice = None
-                    if "r" in device or "m" in device:
-                        fixedDevice = device[0:device.rfind('0')+1]
-                    else:
-                        fixedDevice = device
-                    if fixedDevice in UPSs:
-                        if buildingName not in newHosts:
-                            newHosts[buildingName] = list()
-                        newHosts[buildingName].append(value)
-
         return newHosts
 
     # Return hostname
@@ -294,37 +262,6 @@ class Hosts:
         itapIp = Hosts.getIPAddressOfHost('itap-iape-01.tcom.purdue.edu')
         print "itap-iape IP: {0}".format(itapIp)
         return itapIp == ip
-
-    @staticmethod
-    # Returns true if the host is a UPS device or not
-    def isUPS(host):
-        return Hosts.hostToUPSDevice(host) is not None
-
-    @staticmethod
-    # returns the
-    def hostToUPSDevice(host):
-        # host = stew-215a-apc1500r
-        if host is None or len(host) == 0:
-            return None
-        # ['stew', '215a', 'apc1500r']
-        hostSplit = host.split('-')
-        if len(hostSplit) < 3:
-            return None
-        upsDevice = hostSplit[2]
-        if "r" in upsDevice or "m" in upsDevice:
-            # remove trailing qualifiers (apc1500rm -> apc1500)
-            lastZero = upsDevice.rfind('0')
-            upsDevice = upsDevice[0:lastZero + 1]
-        device = None
-        for host in Hosts.getUPSList():
-            if upsDevice == host:
-                device = upsDevice
-                break
-        if device is None:
-            return None
-        if "apc" in device and not "rm" in device:
-            return device + "rm"
-        return device
 
 
 class OSException(Exception):
