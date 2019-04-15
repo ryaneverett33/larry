@@ -164,7 +164,7 @@ class Speed:
     @staticmethod
     def SpeedAutoObject():
         speed = Speed()
-        speed.setDuplex(speed.DUPLEX_AUTO)
+        speed.duplex = Speed.DUPLEX_AUTO
         speed.__fillTuple()
         speed.speedAuto = True
         speed.isSpeedAutoObject = True
