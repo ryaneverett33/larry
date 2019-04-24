@@ -25,19 +25,19 @@ def printTicket(ticket):
         print "PIC: {0}, Action: {1}, Patch-Panel: {4}, Current Provider: {2}, New Provider: {3}"\
             .format(pic.name, pic.action, pic.currentProvider, pic.newProvider, pic.patch)
         if pic.currentConfig is not None:
-            print "Current Speed: {0}, Current Vlans: {1}, Trunk: {3} Current VoIP: {2}"\
+            print "Current Speed: {0}, Current Vlans: {1}, Trunk: {3} Current VoIP: {2}, Current Services: {4}"\
                 .format(pic.currentConfig.speed, listToStr(pic.currentConfig.vlan), pic.currentConfig.voiceVlan,
-                        pic.currentConfig.trunk)
+                        pic.currentConfig.trunk, pic.currentConfig.services)
         else:
-            print "Current Speed: None, Current Vlans: None, Current VoIP: None"
+            print "Current Speed: None, Current Vlans: None, Current VoIP: None, Current Services: None"
         if pic.newConfig is not None:
             if pic.newConfig.trunk:
                 print "TRUNK New Speed: {0}, New Native Vlan: {1}, New Tagged Vlans {4}, New VoIP: {2}, New Services: {3}" \
-                    .format(pic.newConfig.speed, listToStr(pic.newConfig.vlan), pic.newConfig.voiceVlan, pic.services,
+                    .format(pic.newConfig.speed, listToStr(pic.newConfig.vlan), pic.newConfig.voiceVlan, pic.newConfig.services,
                             listToStr(pic.newConfig.taggedVlans))
             else:
-                print "New Speed: {0}, New Vlans: {1}New VoIP: {2}, New Services: {3}"\
-                    .format(pic.newConfig.speed, listToStr(pic.newConfig.vlan), pic.newConfig.voiceVlan, pic.services)
+                print "New Speed: {0}, New Vlans: {1} New VoIP: {2}, New Services: {3}"\
+                    .format(pic.newConfig.speed, listToStr(pic.newConfig.vlan), pic.newConfig.voiceVlan, pic.newConfig.services)
         else:
             print "New Speed: None, New Vlans: None, New VoIP: None"
         print ""

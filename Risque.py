@@ -160,7 +160,7 @@ class Risque:
                     currentVoip = currentVoip.contents[1]
                 else:
                     currentVoip = None
-                currentServices = cols[2].find('span', {'id': 'contentMain_grdItems_pnlItemOldServices_' + str(j)})
+                currentServices = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemOldServices_' + str(j)})
                 if currentServices is not None:
                     currentServices = currentServices.contents
                 # newSpeed = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemNewSpeed_' + str(j)}).contents[1]
@@ -187,7 +187,10 @@ class Risque:
                 # newServices = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemServices_' + str(j)}).string
                 newServices = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemServices_' + str(j)})
                 if newServices is not None:
-                    newServices = newServices.contents
+                    if newServices.string == "None":
+                        newServices = None
+                    else:
+                        newServices = newServices.contents
 
                 # Clean the data
                 pidId = self.clean(picId)
@@ -231,7 +234,7 @@ class Risque:
                 # Don't clean new services as we're not sure if it is a str or []
 
                 # Add Actions
-                pic = PIC(picId, currentProvider, newProvider, action, newServices)
+                pic = PIC(picId, currentProvider, newProvider, action)
 
                 if currentVlans is not None and currentSpeed is not None:
                     pic.applyCurrentConfig(currentVoip, currentVlans, currentSpeed)

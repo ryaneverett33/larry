@@ -60,7 +60,6 @@ class PICConfig:
 
 
 class PIC:
-    services = None
     name = None
     currentProvider = None
     newProvider = None
@@ -72,7 +71,7 @@ class PIC:
     apRegex = re.compile("(AP-)[A-z]+")
     upsRegex = re.compile("[A-z-0-9]+(HW-UPS)")
 
-    def __init__(self, name, currentProvider, newProvider, action, services):
+    def __init__(self, name, currentProvider, newProvider, action):
         # if name is None or newProvider is None or action is None:
         #    raise AttributeError("PIC given null attributes")
         self.name = name
@@ -88,7 +87,6 @@ class PIC:
             except:
                 print "Failed to parse newProvider"
                 self.newProvider = None
-        self.services = services
         self.__isValidAction()
 
     def applyCurrentConfig(self, voiceVlan, vlan, speed):
