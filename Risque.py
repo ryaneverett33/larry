@@ -160,6 +160,9 @@ class Risque:
                     currentVoip = currentVoip.contents[1]
                 else:
                     currentVoip = None
+                currentServices = cols[2].find('span', {'id': 'contentMain_grdItems_pnlItemOldServices_' + str(j)})
+                if currentServices is not None:
+                    currentServices = currentServices.contents
                 # newSpeed = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemNewSpeed_' + str(j)}).contents[1]
                 newSpeed = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemNewSpeed_' + str(j)})
                 if newSpeed is not None:
@@ -184,7 +187,7 @@ class Risque:
                 # newServices = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemServices_' + str(j)}).string
                 newServices = cols[2].find('span', {'id': 'contentMain_grdItems_lblItemServices_' + str(j)})
                 if newServices is not None:
-                    newServices = newServices.string
+                    newServices = newServices.contents
 
                 # Clean the data
                 pidId = self.clean(picId)
@@ -214,6 +217,16 @@ class Risque:
                     for x in range(0, len(newTaggedVlans)):
                         if isinstance(newTaggedVlans[x], NavigableString):
                             newTaggedVlans[x] = self.clean(newTaggedVlans[x])
+                if currentServices is not None:
+                    currentServices = self.__removeTags(currentServices)
+                    for x in range(0, len(currentServices)):
+                        if isinstance(currentServices[x], NavigableString):
+                            currentServices[x] = self.clean(currentServices[x])
+                if newServices is not None:
+                    newServices = self.__removeTags(newServices)
+                    for x in range(0, len(newServices)):
+                        if isinstance(newServices[x], NavigableString):
+                            newServices[x] = self.clean(newServices[x])
                 newVoip = self.clean(newVoip)
                 # Don't clean new services as we're not sure if it is a str or []
 
@@ -222,6 +235,8 @@ class Risque:
 
                 if currentVlans is not None and currentSpeed is not None:
                     pic.applyCurrentConfig(currentVoip, currentVlans, currentSpeed)
+                if currentServices is not None:
+                    pic.addServices(False, currentServices)
                 if newTaggedVlans is not None and newSpeed is not None:
                     pic.applyNewConfig(newVoip, newVlans, newSpeed)
                     pic.addTaggedVlans(newTaggedVlans)
@@ -229,6 +244,8 @@ class Risque:
                     pic.applyNewConfig(newVoip, newVlans, newSpeed)
                 if newTaggedVlans is not None:
                     pic.addTaggedVlans(newTaggedVlans)
+                if newServices is not None:
+                    pic.addServices(True, newServices)
                 if patch is not None:
                     pic.addPatchPanel(patch)
                 ticket.addPic(pic)

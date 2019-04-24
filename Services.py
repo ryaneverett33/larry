@@ -17,4 +17,15 @@ class Services:
             self.__parseServices(services)
 
     def __parseServices(self, services):
-        raise NotImplementedError()
+        for service in services:
+            if "DHCP" in service:
+                self.allowDHCP = True
+            elif "BPDU" in service:
+                self.disableBPDU = True
+            elif "CDP" in service:
+                self.disableCDP = True
+            elif "Power" in service:
+                self.disablePOE = True
+            elif "Voice" in service:
+                self.disableVoIP = True
+

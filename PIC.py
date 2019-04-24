@@ -2,6 +2,7 @@ from Speed import Speed
 from Vlan import Vlan
 from Provider import Provider
 from Patch import Patch
+from Services import Services
 import re
 
 
@@ -12,6 +13,7 @@ class PICConfig:
     vlanList = False
     speed = None
     trunk = False
+    services = None
 
     def __init__(self, vlan, speed):
         if type(speed) is not str or vlan is None:
@@ -42,6 +44,11 @@ class PICConfig:
         for vlan in taggedVlans:
             self.taggedVlans.append(Vlan(risqueString=vlan))
         self.trunk = True
+
+    def addServices(self, services):
+        if not isinstance(services, list):
+            raise AttributeError("addServices given null attributes")
+        self.services = Services(services)
 
     # returns a new PICConfig of the differences between two configs, null if the same
     @staticmethod
@@ -122,6 +129,14 @@ class PIC:
             raise AttributeError("Invalid tagged vlans - null")
         self.newConfig.addTaggedVlans(vlans)
         self.trunk = True
+
+    def addServices(self, new, services):
+        if services is None:
+            raise AttributeError("Invalid tagged vlans - null")
+        if new:
+            self.newConfig.addServices(services)
+        else:
+            self.currentConfig.addServices(services)
 
     def getProvider(self):
         if self.action == "Activate":
