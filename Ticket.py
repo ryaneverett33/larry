@@ -22,8 +22,31 @@ class Ticket:
     def __containsPic(self, pic):
         return self.picNames.has_key(pic)
 
+    @staticmethod
+    # x < y: -1, x == y: 0, x > y: 1
+    def __cmp(x, y):
+        xProvider = None
+        yProvider = None
+        try:
+            xProvider = x.getProvider()
+        except AttributeError:
+            xProvider = None
+        try:
+            yProvider = y.getProvider()
+        except AttributeError:
+            yProvider = None
+        # Handle null
+        if xProvider is None and yProvider is not None:
+            return -1
+        elif xProvider is not None and yProvider is None:
+            return 1
+        elif xProvider is None and yProvider is None:
+            return 0
+        return (yProvider.TR < xProvider.TR) - (yProvider.TR > xProvider.TR)
+
     def __sort(self):
-        self.pics = sorted(self.pics, cmp=lambda x, y: (y.newProvider.TR < x.newProvider.TR) - (y.newProvider.TR > x.newProvider.TR))
+        # cmp=lambda x, y: (y.newProvider.TR < x.newProvider.TR) - (y.newProvider.TR > x.newProvider.TR)
+        self.pics = sorted(self.pics, cmp=Ticket.__cmp)
 
     def addPic(self, pic):
         if not isinstance(pic, PIC):

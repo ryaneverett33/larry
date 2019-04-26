@@ -2,6 +2,7 @@ from Speed import Speed
 from Vlan import Vlan
 from Provider import Provider
 from Patch import Patch
+from Services import Services
 import re
 
 
@@ -12,6 +13,7 @@ class PICConfig:
     vlanList = False
     speed = None
     trunk = False
+    services = None
 
     def __init__(self, vlan, speed):
         if type(speed) is not str or vlan is None:
@@ -43,6 +45,11 @@ class PICConfig:
             self.taggedVlans.append(Vlan(risqueString=vlan))
         self.trunk = True
 
+    def addServices(self, services):
+        if not isinstance(services, list):
+            raise AttributeError("addServices given null attributes")
+        self.services = Services(services)
+
     # returns a new PICConfig of the differences between two configs, null if the same
     @staticmethod
     def diffConfig(oldConfig, newConfig):
@@ -53,7 +60,6 @@ class PICConfig:
 
 
 class PIC:
-    services = None
     name = None
     currentProvider = None
     newProvider = None
@@ -65,7 +71,7 @@ class PIC:
     apRegex = re.compile("(AP-)[A-z]+")
     upsRegex = re.compile("[A-z-0-9]+(HW-UPS)")
 
-    def __init__(self, name, currentProvider, newProvider, action, services):
+    def __init__(self, name, currentProvider, newProvider, action):
         # if name is None or newProvider is None or action is None:
         #    raise AttributeError("PIC given null attributes")
         self.name = name
@@ -81,7 +87,6 @@ class PIC:
             except:
                 print "Failed to parse newProvider"
                 self.newProvider = None
-        self.services = services
         self.__isValidAction()
 
     def applyCurrentConfig(self, voiceVlan, vlan, speed):
@@ -122,6 +127,14 @@ class PIC:
             raise AttributeError("Invalid tagged vlans - null")
         self.newConfig.addTaggedVlans(vlans)
         self.trunk = True
+
+    def addServices(self, new, services):
+        if services is None:
+            raise AttributeError("Invalid tagged vlans - null")
+        if new:
+            self.newConfig.addServices(services)
+        else:
+            self.currentConfig.addServices(services)
 
     def getProvider(self):
         if self.action == "Activate":
