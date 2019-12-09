@@ -89,16 +89,19 @@ class Risque:
     def login(self):
         print "Logging in"
         login = self.session.get(
-            'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal')
+            # 'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal')
+            'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal%2fLoginHelperRisque.aspx%3fredirecturl%3dhttps%253a%252f%252frisque.itap.purdue.edu%252fPortal%252fDefault.aspx&renew=true')
         login_html = lxml.html.fromstring(login.text)
-        hidden_inputs = login_html.xpath(r'//form//input[@type="hidden"]')
+        # hidden_inputs = login_html.xpath(r'//form//input[@type="hidden"]')
+        hidden_inputs = login_html.xpath(r'//form//input')
         form = {x.attrib["name"]: x.attrib["value"] for x in hidden_inputs}
 
         form['username'] = self.username
         form['password'] = self.password
 
         response = self.session.post(
-            'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal',
+            # 'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal',
+            'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal%2fLoginHelperRisque.aspx%3fredirecturl%3dhttps%253a%252f%252frisque.itap.purdue.edu%252fPortal%252fDefault.aspx&renew=true',
             data=form)
         self.loggedIn = True
 
