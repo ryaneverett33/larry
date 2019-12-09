@@ -40,28 +40,28 @@ class larry:
         self.ui.main()
 
     def __showHelp(self):
-        print "usage: larry [option]"
-        print "  -t, --t NUM\t\t\t\tDo a ticket and exit"
-        print "  -v, --v NUM\t\t\t\tVerify a ticket and exit"
-        print ""
-        print "  -editor, --editor\t\t\t[DEBUG]Force password utility to act as if it's in an editor"
-        print "  -hostsDebug, --hostsDebug\t\t[DEBUG]Force larry to use the debug version of the hosts file"
-        print "  -ignoreUpdate, --ignoreUpdate\t\tDisallow larry to check for updates on launch"
-        print "  -disableArt, --disableArt\t\tDoesn't print larry the lobster art :("
-        print "  -noLogging, --noLogging\t\tTurns off debug logging"
-        print "  -disableVrf, --disableVrf\t\tDisables larry's VRF workaround"
-        print "  -disableColor, --disableColor\t\tDisable color output"
-        print "  -disablePM, --disablePM\t\tDisables the Persistence Module"
-        print "  -h, --h\t\t\t\tDisplays this help screen"
-        print "  -V, --V\t\t\t\tDisplays the current version"
+        print("usage: larry [option]")
+        print("  -t, --t NUM\t\t\t\tDo a ticket and exit")
+        print("  -v, --v NUM\t\t\t\tVerify a ticket and exit")
+        print("")
+        print("  -editor, --editor\t\t\t[DEBUG]Force password utility to act as if it's in an editor")
+        print("  -hostsDebug, --hostsDebug\t\t[DEBUG]Force larry to use the debug version of the hosts file")
+        print("  -ignoreUpdate, --ignoreUpdate\t\tDisallow larry to check for updates on launch")
+        print("  -disableArt, --disableArt\t\tDoesn't print larry the lobster art :(")
+        print("  -noLogging, --noLogging\t\tTurns off debug logging")
+        print("  -disableVrf, --disableVrf\t\tDisables larry's VRF workaround")
+        print("  -disableColor, --disableColor\t\tDisable color output")
+        print("  -disablePM, --disablePM\t\tDisables the Persistence Module")
+        print("  -h, --h\t\t\t\tDisplays this help screen")
+        print("  -V, --V\t\t\t\tDisplays the current version")
 
     def __invalidTicketFormat(self, arg):
-        print "Invalid Ticket Number"
-        print "USAGE: larry {0} NUMBER, e.g. larry {0} 69420".format(arg)
+        print("Invalid Ticket Number")
+        print("USAGE: larry {0} NUMBER, e.g. larry {0} 69420".format(arg))
         exit(-1)
 
     def __printVersion(self):
-        print "larry version {0}".format(Common.VERSION)
+        print("larry version {0}".format(Common.VERSION))
 
     def parseArgs(self):
         for i in range(0, len(sys.argv)):

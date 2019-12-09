@@ -44,12 +44,12 @@ class BufferedSshClients:
                 client.close()
 
     def __populateClients(self):
-        print "populating clients"
+        print("populating clients")
         for i in range(0, self.CLIENT_COUNT):
-            print "create client {0}".format(i)
+            print("create client {0}".format(i))
             client = self.__createClient(self.host)
             if client is None:
-                print "createClient failed to create a client"
+                print("createClient failed to create a client")
             else:
                 self.clients.append(client)
             # channel = self.client.get_transport().open_session()

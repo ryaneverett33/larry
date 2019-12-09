@@ -41,12 +41,12 @@ class BufferedSsh:
             self.client.close()
 
     def __populateChannels(self):
-        print "populating channels"
+        print("populating channels")
         for i in range(0, self.CHANNEL_SIZE):
-            print "create channel {0}".format(i)
+            print("create channel {0}".format(i))
             channel = self.client.get_transport().open_session()
             if channel is None:
-                print "open_session returned None"
+                print("open_session returned None")
             self.channels.append(channel)
 
     def __getChannel(self):

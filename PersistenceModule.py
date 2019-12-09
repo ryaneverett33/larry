@@ -31,7 +31,7 @@ class PersistenceModule:
                 # check expire date
                 if self.__isExpired(data["expire"]):
                     os.remove(self.persistenceFile)
-                    print "Persistence File expired"
+                    print("Persistence File expired")
                 else:
                     # load credentials and cookies
                     ConfigurationDriver.storeCredentials(data["credentials"]["username"], data["credentials"]["risquePassword"],
@@ -42,7 +42,7 @@ class PersistenceModule:
                     risque = Risque(username, risquePassword)
                     if not risque.testSession():
                         # session is invalid
-                        print "Persistence Module loaded an invalid session"
+                        print("Persistence Module loaded an invalid session")
                         # clean up
                         ConfigurationDriver.clearCookies()
                         ConfigurationDriver.clearCredentials()
@@ -50,9 +50,9 @@ class PersistenceModule:
                         os.remove(self.persistenceFile)
                     else:
                         # session is valid
-                        print "Persistence Module loaded a valid session"
+                        print("Persistence Module loaded a valid session")
                         ConfigurationDriver.loadedSession = True
-            except Exception, e:
+            except Exception as e:
                 # failed to read data, erase it
                 os.remove(self.persistenceFile)
                 self.loaded = False
@@ -91,8 +91,8 @@ class PersistenceModule:
             f = open(self.persistenceFile, "w+")
             f.write(ciphertext)
             ConfigurationDriver.loadedSession = True
-        except Exception, e:
-            print "Failed to save Session, error {0}".format(e)
+        except Exception as e:
+            print("Failed to save Session, error {0}".format(e))
 
     # Create encryption/decryption key
     def __createKey(self):

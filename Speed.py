@@ -187,7 +187,7 @@ class Speed:
             self.speedTuple[5] = 10000
 
     def printDebug(self):
-        print "name: {0}, duplex: {1}, auto? {2}, tuple: {3}".format(self.name, self.duplex, self.speedAuto, self.speedTuple)
+        print("name: {0}, duplex: {1}, auto? {2}, tuple: {3}".format(self.name, self.duplex, self.speedAuto, self.speedTuple))
 
     def __str__(self):
         speeds = []

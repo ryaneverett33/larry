@@ -163,8 +163,8 @@ class Vlan:
         combinedList.sort(cmp=lambda x, y: (y.tag < x.tag) - (y.tag > x.tag))
         return combinedList
     def printDebug(self):
-        print "ip: {0}, tag: {1}, name: {2}, mask: {3}, trunk? {4}, voice? {5}"\
-            .format(self.ipAddress, self.tag, self.name, self.mask, self.trunk, self.voice)
+        print("ip: {0}, tag: {1}, name: {2}, mask: {3}, trunk? {4}, voice? {5}"\
+            .format(self.ipAddress, self.tag, self.name, self.mask, self.trunk, self.voice))
 
     # Returns true if a tag already exists in a vlan list, false if it doesn't
     @staticmethod

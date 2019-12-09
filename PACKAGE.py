@@ -43,11 +43,11 @@ class Package:
         file.close()
 
     def printHelp(self):
-        print "larry - release helper HELP"
-        print "-n\t--n\t\tCreate a new release"
-        print "-s\t--s\t\tSet as latest version"
-        print "-v\t--v\t\tGet the latest version"
-        print "-h\t--h\t\tPrint this help screen"
+        print("larry - release helper HELP")
+        print("-n\t--n\t\tCreate a new release")
+        print("-s\t--s\t\tSet as latest version")
+        print("-v\t--v\t\tGet the latest version")
+        print("-h\t--h\t\tPrint this help screen")
 
     def getFiles(self, directory):
         f = []
@@ -69,16 +69,16 @@ class Package:
     def createReleaseFile(self, filename, directory):
         files = self.getFiles(directory)
         if len(files) == 0:
-            print "Empty directory, can't create release file"
+            print("Empty directory, can't create release file")
             return False
         else:
-            print "{0} files in directory, creating release file".format(len(files))
+            print("{0} files in directory, creating release file".format(len(files)))
         with zipfile.ZipFile(filename, 'w') as myzip:
             # myzip.write('eggs.txt')
             i = 0
             for file in files:
                 if i % 5 == 0:
-                    print "{0}/{1}".format(i, len(files))
+                    print("{0}/{1}".format(i, len(files)))
                 myzip.write(file)
                 i = i + 1
         return True
@@ -92,9 +92,9 @@ class Package:
         copyfile(filename, releasesFolder)
 
     def main(self):
-        print "larry - release helper"
+        print("larry - release helper")
         if self.mode == "version":
-            print "latest version: {0}".format(Common.getLatestVersion())
+            print("latest version: {0}".format(Common.getLatestVersion()))
         elif self.mode == "new":
             directory = raw_input("directory: ")
             latestVersion = Common.getLatestVersion()
@@ -102,16 +102,16 @@ class Package:
             while releaseNumber is None:
                 releaseNumber = raw_input("release number: ")
                 if self.setVersion and Common.compareVersions(releaseNumber, latestVersion) != 1:
-                    print "release number not greater than current version {0}".format(latestVersion)
+                    print("release number not greater than current version {0}".format(latestVersion))
                     response = raw_input("do you want to set a different number (y/n)? ")
                     if response == "y":
                         releaseNumber = None
             # create release file
             filename = "{0}.release".format(releaseNumber)
             if self.createReleaseFile(filename, directory):
-                print "Created release file at {0}".format(filename)
+                print("Created release file at {0}".format(filename))
             else:
-                print "Failed to create release file, quitting"
+                print("Failed to create release file, quitting")
                 return
             self.storeReleaseFile(filename)
             if self.setVersion:

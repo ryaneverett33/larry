@@ -2,6 +2,10 @@
 
 An incomplete log of larry growing up.
 
+# 0.53
+- Won't completely break on python 3 (needs an input rewrite)
+- Fix for Purdue Auth change
+
 # 0.52
 - Added Services parsing
 - Added -t/-v for automating larry

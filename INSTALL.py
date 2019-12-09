@@ -47,8 +47,8 @@ class Install:
         self.makeExecutable(installDirectory + Common.executableFile)
         self.addToPath()
         self.writeVersion(Common.getLatestVersion(), installDirectory)
-        print "Changelog at {0}".format(Common.changelogURL)
-        print "Upgraded larry to version {0}".format(Common.getLatestVersion())
+        print("Upgraded larry to version {0}".format(Common.getLatestVersion()))
+        print("Changelog at {0}".format(Common.changelogURL))
 
     def makeExecutable(self, file):
         # https://stackoverflow.com/a/12792002
@@ -83,7 +83,7 @@ class Install:
         profile.close()
 
     def main(self):
-        print "Starting install for larry"
+        print("Starting install for larry")
         installDirectory = Common.getUserHome() + "larry/"
         if self.isAlreadyInstalled(installDirectory):
             if self.isUpgradeAvailable():
@@ -93,13 +93,13 @@ class Install:
                 self.upgrade(installDirectory, force=True)
         else:
             installFile = Common.baseDir + Common.releaseFile
-            print "Installing at {0}".format(installDirectory)
+            print("Installing at {0}".format(installDirectory))
             zipfile.ZipFile(installFile).extractall(installDirectory)
             self.makeExecutable(installDirectory + Common.executableFile)
             self.addToPath()
             self.writeVersion(Common.getLatestVersion(), installDirectory)
-            print "Changelog at {0}".format(Common.changelogURL)
-            print "Installed larry version {0}".format(Common.getLatestVersion())
+            print("Changelog at {0}".format(Common.changelogURL))
+            print("Installed larry version {0}".format(Common.getLatestVersion()))
 
     def ctrlchandler(self, sig, frame):
         exit(0)
