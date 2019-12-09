@@ -19,7 +19,7 @@ class Common:
     changelogURL = "https://github.com/Changer098/larry/blob/master/CHANGELOG.md"
     __vrfHosts = None
     vrfDisabled = False
-    VERSION = "0.50"
+    VERSION = "0.53"
 
     @staticmethod
     def getLatestVersion():

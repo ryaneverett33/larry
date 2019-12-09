@@ -11,7 +11,7 @@ def main():
     password = PasswordUtility.getpassword("SSH password: ")
     ConfigurationDriver.useTestCredentials(username, password)
 
-    print "Running Activate Test"
+    print("Running Activate Test")
     ticket = Ticket(0, None, None, None)
     pic = PIC("test", "pjis-141-c3560cx-01:01-Gi1/0/3", "pjis-141-c3560cx-01:01-Gi1/0/3", "Activate", None)
     pic.applyNewConfig(None, "128.210.148.000/24 Public Subnet (877)", "10/100T-SW-A")
@@ -19,7 +19,7 @@ def main():
     config = Config.Config(ticket)
     config.run()
 
-    print "Running Modify Test"
+    print("Running Modify Test")
     ticket = Ticket(0, None, None, None)
     pic = PIC("test", "pjis-141-c3560cx-01:01-Gi1/0/3", "pjis-141-c3560cx-01:01-Gi1/0/3", "Modify", None)
     pic.applyCurrentConfig(None, "128.210.148.000/24 Public Subnet (877)", "10/100T-SW-A")
@@ -28,7 +28,7 @@ def main():
     config = Config.Config(ticket)
     config.run()
 
-    print "Running Deactivate Test"
+    print("Running Deactivate Test")
     ticket = Ticket(0, None, None, None)
     pic = PIC("test", "pjis-141-c3560cx-01:01-Gi1/0/3", "pjis-141-c3560cx-01:01-Gi1/0/3", "Deactivate", None)
     pic.applyCurrentConfig(None, "128.210.148.000/24 Public Subnet (1)", "100/1000T-SW-A")

@@ -29,7 +29,7 @@ class UI:
 
     def main(self):
         if not self.artDisabled:
-            print art.art.getArt()
+            print(art.art.getArt())
         while not self.exitApp:
             currentPage = self.currentPage
             try:
@@ -43,29 +43,29 @@ class UI:
                 self.goToMainPage()
             except StopIteration:
                 self.goToMainPage()
-            except Exception, e:
-                print e
-                print traceback.format_exc()
+            except Exception as e:
+                print(e)
+                print(traceback.format_exc())
                 self.goToMainPage()
 
     def work_page(self):
-        print "Work"
+        print("Work")
         ConfigTicket.ConfigTicket(self).main()
         self.goToMainPage()
 
     def verify_page(self):
-        print "Verify"
+        print("Verify")
         VerifyTicket.VerifyTicket(self).main()
         self.goToMainPage()
 
     def settings_page(self):
-        print "Settings"
+        print("Settings")
         self.goToMainPage()
 
     def credentials_page(self):
-        print "Store Credentials"
+        print("Store Credentials")
         if ConfigurationDriver.credentialsStored():
-            print "Credentials already stored"
+            print("Credentials already stored")
             response = raw_input("overwrite? (y/n): ")
             if response.lower() == "y":
                 ConfigurationDriver.getCredentials()
@@ -84,11 +84,11 @@ class UI:
                     index = rawIndex
                     break
                 else:
-                    print "invalid index: {0}, range: [0,{1}]".format(rawIndex, len(self.pages))
+                    print("invalid index: {0}, range: [0,{1}]".format(rawIndex, len(self.pages)))
             except:
-                print "Invalid Action, must be a value between 0 and {0}".format(len(self.pages) - 1)
+                print("Invalid Action, must be a value between 0 and {0}".format(len(self.pages) - 1))
         self.currentPage = self.pages[index]
-        # print "switching to page {0} with index {1}".format(self.currentPage[0], index)
+        # print("switching to page {0} with index {1}".format(self.currentPage[0], index)
 
     def exit(self):
         self.exitApp = True
@@ -97,7 +97,7 @@ class UI:
         self.currentPage = ["Main Page", self.main_page]
 
     def artPage(self):
-        print art.art.getArt()
+        print(art.art.getArt())
         self.goToMainPage()
 
     # The saddest setting
@@ -108,7 +108,7 @@ class UI:
     def __printPages(self):
         i = 0
         for page in self.pages:
-            print "{0} - {1}".format(i, page[0])
+            print("{0} - {1}".format(i, page[0]))
             i = i + 1
 
     def ctrlchandler(self, sig, frame):

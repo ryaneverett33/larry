@@ -16,11 +16,11 @@ def main():
     # hostname = ssh.findIOSHostname()
     # print hostname
     message = ssh.execute("show run int gi1/0/1")
-    print message[0]
+    print(message[0])
     message = ssh.execute("sis")
-    print message[0]
+    print(message[0])
     message = ssh.execute("config t")
-    print message[1]
+    print(message[1])
     ssh.disconnect()
 
 

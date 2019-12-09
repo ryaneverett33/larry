@@ -3,6 +3,7 @@ import os
 
 class Hosts:
     DEBUG_LOCATION = "C:\Users\everettr\Documents\hosts"
+    # DEBUG_LOCATION = "C:\\Users\\ryane\\Desktop\\hosts"
     USE_DEBUG = False
 
     @staticmethod
@@ -260,7 +261,7 @@ class Hosts:
     # Returns true if the ip address matches itap-iape's ip address, false else
     def isItapIape(ip):
         itapIp = Hosts.getIPAddressOfHost('itap-iape-01.tcom.purdue.edu')
-        print "itap-iape IP: {0}".format(itapIp)
+        print("itap-iape IP: {0}".format(itapIp))
         return itapIp == ip
 
 

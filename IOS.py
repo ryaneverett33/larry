@@ -54,13 +54,13 @@ class IOS:
         result = None
         if include is not None:
             if self.inConfigMode:
-                print "IOS::getConfig() in Config Mode!!"
+                print("IOS::getConfig() in Config Mode!!")
                 result = self.sshClient.execute('do show int status | {0}'.format(include))
             else:
                 result = self.sshClient.execute('show int status | i {0}'.format(include))
         else:
             if self.inConfigMode:
-                print "IOS::getConfig() in Config Mode!!"
+                print("IOS::getConfig() in Config Mode!!")
                 result = self.sshClient.execute('do show int status')
             else:
                 result = self.sshClient.execute('show int status')
@@ -144,12 +144,12 @@ class IOS:
     def getConfig(self, interface, flatten=True):
         switchConfig = None
         if self.inConfigMode:
-            print "IOS::getConfig() in Config Mode!!"
+            print("IOS::getConfig() in Config Mode!!")
             switchConfig = self.sshClient.execute("do show run int {0}".format(interface))[0]
         else:
             switchConfig = self.sshClient.execute("show run int {0}".format(interface))[0]
         if not self.__isValidResponse(switchConfig):
-            print "Failed to get switch config, {0} may be invalid".format(interface)
+            print("Failed to get switch config, {0} may be invalid".format(interface))
             return None
         # clean up lines
         lines = []
@@ -274,7 +274,7 @@ class IOS:
                 elif "access" in line:
                     return "access"
                 else:
-                    print "Unknown switchport mode: {0}".format(line)
+                    print("Unknown switchport mode: {0}".format(line))
         return None
 
     def getTaggedVlans(self, interface, config=None):
@@ -302,10 +302,10 @@ class IOS:
 
     def setVlan(self, newVlan, no=False):
         if not self.inConfigMode:
-            print "can't set vlan when not in config mode"
+            print("can't set vlan when not in config mode")
             return False
         if not self.inInterface:
-            print "can't set vlan when not configuring interface"
+            print("can't set vlan when not configuring interface")
             return False
         result = None
         if no:
@@ -323,16 +323,16 @@ class IOS:
                 tag = newVlan
             result = self.sshClient.execute("switchport access vlan {0}".format(tag))[0]
         if not self.__isValidResponse(result):
-            print "Failed to set vlan, vlan {0} may be bad".format(newVlan)
+            print("Failed to set vlan, vlan {0} may be bad".format(newVlan))
             return False
         return True
 
     def setVoiceVlan(self, newVoiceVlan, no=False):
         if not self.inConfigMode:
-            print "can't set voice vlan when not in config mode"
+            print("can't set voice vlan when not in config mode")
             return False
         if not self.inInterface:
-            print "can't set voice vlan when not configuring interface"
+            print("can't set voice vlan when not configuring interface")
             return False
         result = None
         if no:
@@ -350,16 +350,16 @@ class IOS:
                 tag = newVoiceVlan
             result = self.sshClient.execute("switchport voice vlan {0}".format(tag))[0]
         if not self.__isValidResponse(result):
-            print "Failed to set voice vlan, vlan {0} may be bad".format(newVoiceVlan)
+            print("Failed to set voice vlan, vlan {0} may be bad".format(newVoiceVlan))
             return False
         return True
 
     def setNativeVlan(self, newNativeVlan):
         if not self.inConfigMode:
-            print "can't set voice vlan when not in config mode"
+            print("can't set voice vlan when not in config mode")
             return False
         if not self.inInterface:
-            print "can't set voice vlan when not configuring interface"
+            print("can't set voice vlan when not configuring interface")
             return False
         tag = None
         if isinstance(newNativeVlan, Vlan):
@@ -368,17 +368,17 @@ class IOS:
             tag = newNativeVlan
         result = self.sshClient.execute("switchport trunk native vlan {0}".format(tag))[0]
         if not self.__isValidResponse(result):
-            print "Failed to set native vlan, vlan {0} may be bad".format(newNativeVlan)
+            print("Failed to set native vlan, vlan {0} may be bad".format(newNativeVlan))
             return False
         return True
 
     # sets switchport trunk allowed vlan 3,4 so that vlans can be added
     def setTaggedVlans(self, newTaggedVlans):
         if not self.inConfigMode:
-            print "can't set voice vlan when not in config mode"
+            print("can't set voice vlan when not in config mode")
             return False
         if not self.inInterface:
-            print "can't set voice vlan when not configuring interface"
+            print("can't set voice vlan when not configuring interface")
             return False
         string = "switchport trunk allowed vlan "
         if isinstance(newTaggedVlans, list):
@@ -390,16 +390,16 @@ class IOS:
             string = string + str(newTaggedVlans.tag)
         result = self.sshClient.execute(string)
         if not self.__isValidResponse(result):
-            print "Failed to set tagged vlans"
+            print("Failed to set tagged vlans")
             return False
         return True
 
     def addTaggedVlans(self, newTaggedVlans):
         if not self.inConfigMode:
-            print "can't set voice vlan when not in config mode"
+            print("can't set voice vlan when not in config mode")
             return False
         if not self.inInterface:
-            print "can't set voice vlan when not configuring interface"
+            print("can't set voice vlan when not configuring interface")
             return False
         string = "switchport trunk allowed vlan add "
         if isinstance(newTaggedVlans, list):
@@ -411,14 +411,14 @@ class IOS:
             string = string + str(newTaggedVlans.tag)
         result = self.sshClient.execute(string)
         if not self.__isValidResponse(result):
-            print "Failed to set tagged vlans"
+            print("Failed to set tagged vlans")
             return False
         return True
 
     def enterConfigMode(self):
         result = self.sshClient.execute("config t")[0]
         if not self.__isValidResponse(result):
-            print "Failed to enter config mode"
+            print("Failed to enter config mode")
             return False
         self.inConfigMode = True
         return True
@@ -426,7 +426,7 @@ class IOS:
     def enterInterfaceConfig(self, interface):
         result = self.sshClient.execute("int {0}".format(interface))[0]
         if not self.__isValidResponse(result):
-            print "Failed to enter config mode on interface {0}".format(interface)
+            print("Failed to enter config mode on interface {0}".format(interface))
             return False
         self.inInterface = True
         return False
@@ -434,7 +434,7 @@ class IOS:
     def leaveConfigMode(self):
         result = self.sshClient.execute("end")[0]
         if not self.__isValidResponse(result):
-            print "Failed to exit config mode"
+            print("Failed to exit config mode")
             return False
         self.inConfigMode = False
         return True
@@ -442,7 +442,7 @@ class IOS:
     def leaveInterfaceConfig(self):
         result = self.sshClient.execute("exit")[0]
         if not self.__isValidResponse(result):
-            print "Failed to exit config mode"
+            print("Failed to exit config mode")
             return False
         self.inInterface = False
         return True
@@ -452,15 +452,15 @@ class IOS:
         if "OK" in result:
             return True
         else:
-            print "Failed to write configuration, result: {0}".format(result)
+            print("Failed to write configuration, result: {0}".format(result))
             return False
 
     def setSpeed(self, newSpeed, no=False):
         if not self.inConfigMode:
-            print "can't set speed when not in config mode"
+            print("can't set speed when not in config mode")
             return False
         if not self.inInterface:
-            print "can't set speed when not configuring interface"
+            print("can't set speed when not configuring interface")
             return False
         result = None
         if no:
@@ -468,16 +468,16 @@ class IOS:
         else:
             result = self.sshClient.execute("{0}".format(Speed.switchCommand(newSpeed)))[0]
         if not self.__isValidResponse(result):
-            print "Failed to set speed, speed {0} may be bad".format(newSpeed)
+            print("Failed to set speed, speed {0} may be bad".format(newSpeed))
             return False
         return True
 
     def setDescription(self, newDescription, no=False):
         if not self.inConfigMode:
-            print "can't set description when not in config mode"
+            print("can't set description when not in config mode")
             return False
         if not self.inInterface:
-            print "can't set description when not configuring interface"
+            print("can't set description when not configuring interface")
             return False
         result = None
         if no:
@@ -485,16 +485,16 @@ class IOS:
         else:
             result = self.sshClient.execute("description {0}".format(newDescription))[0]
         if not self.__isValidResponse(result):
-            print "Failed to set speed, description {0} may be bad".format(newDescription)
+            print("Failed to set speed, description {0} may be bad".format(newDescription))
             return False
         return True
 
     def setDuplex(self, newDuplex, no=False):
         if not self.inConfigMode:
-            print "can't set duplex when not in config mode"
+            print("can't set duplex when not in config mode")
             return False
         if not self.inInterface:
-            print "can't set duplex when not configuring interface"
+            print("can't set duplex when not configuring interface")
             return False
         duplex = ""
         if newDuplex == Speed.DUPLEX_FULL:
@@ -509,16 +509,16 @@ class IOS:
         else:
             result = self.sshClient.execute("duplex {0}".format(duplex))[0]
         if not self.__isValidResponse(result):
-            print "Failed to set duplex, duplex {0} may be bad".format(duplex)
+            print("Failed to set duplex, duplex {0} may be bad".format(duplex))
             return False
         return True
 
     def setPower(self, power, no=False):
         if not self.inConfigMode:
-            print "can't set power when not in config mode"
+            print("can't set power when not in config mode")
             return False
         if not self.inInterface:
-            print "can't set power when not configuring interface"
+            print("can't set power when not configuring interface")
             return False
         result = None
         if no:
@@ -529,16 +529,16 @@ class IOS:
             if isinstance(power, str):
                 result = self.sshClient.execute("power inline auto")
         if not self.__isValidResponse(result):
-            print "Failed to set power on port"
+            print("Failed to set power on port")
             return False
         return True
 
     def shutdown(self, no=False):
         if not self.inConfigMode:
-            print "can't set speed when not in config mode"
+            print("can't set speed when not in config mode")
             return False
         if not self.inInterface:
-            print "can't set speed when not configuring interface"
+            print("can't set speed when not configuring interface")
             return False
         result = None
         if no:
@@ -546,16 +546,16 @@ class IOS:
         else:
             result = self.sshClient.execute("shutdown")[0]
         if not self.__isValidResponse(result):
-            print "Failed to set shutdown status on port"
+            print("Failed to set shutdown status on port")
             return False
         return True
 
     def setSwitchportMode(self, mode):
         if not self.inConfigMode:
-            print "can't set speed when not in config mode"
+            print("can't set speed when not in config mode")
             return False
         if not self.inInterface:
-            print "can't set speed when not configuring interface"
+            print("can't set speed when not configuring interface")
             return False
         result = None
         if mode == "access":
@@ -563,10 +563,10 @@ class IOS:
         elif mode == "trunk":
             result = self.sshClient.execute("switchport mode trunk")[0]
         else:
-            print "Invalid switchport mode, {0} not supported".format(mode)
+            print("Invalid switchport mode, {0} not supported".format(mode))
             return False
         if not self.__isValidResponse(result):
-            print "Failed to set switchport mode"
+            print("Failed to set switchport mode")
             return False
         return True
 
@@ -586,14 +586,14 @@ class IOS:
 
     def applyBaseTemplate(self, template):
         if not self.inConfigMode:
-            print "can't apply base config when not in config mode"
+            print("can't apply base config when not in config mode")
             return False
         if not self.inInterface:
-            print "can't apply base config when not configuring interface"
+            print("can't apply base config when not configuring interface")
             return False
         result = self.sshClient.execute(template)[0]
         if not self.__isValidResponse(result):
-            print "Failed to set config from base template"
+            print("Failed to set config from base template")
             return False
         return True
 
@@ -617,7 +617,7 @@ class IOS:
     def getConnectionState(self, interface):
         connection = None
         if self.inConfigMode:
-            print "IOS::getConfig() in Config Mode!!"
+            print("IOS::getConfig() in Config Mode!!")
             connection = self.sshClient.execute("do show int {0}".format(interface))[0]
         else:
             connection = self.sshClient.execute("show int {0}".format(interface))[0]
@@ -636,7 +636,7 @@ class IOS:
     def getMacAddresses(self, interface):
         addressTable = None
         if self.inConfigMode:
-            print "IOS::getConfig() in Config Mode!!"
+            print("IOS::getConfig() in Config Mode!!")
             addressTable = self.sshClient.execute("do mac address-table int {0}".format(interface))[0]
         else:
             addressTable = self.sshClient.execute("mac address-table int {0}".format(interface))[0]
@@ -686,5 +686,5 @@ class IOS:
     def do(self, switchCommand):
         result = self.sshClient.execute(switchCommand)[0]
         if not self.__isValidResponse(result):
-            print "{0} failed to execute".format(switchCommand)
+            print("{0} failed to execute".format(switchCommand))
         return result

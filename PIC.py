@@ -85,7 +85,7 @@ class PIC:
             try:
                 self.newProvider = Provider(risqueString=newProvider)
             except:
-                print "Failed to parse newProvider"
+                print("Failed to parse newProvider")
                 self.newProvider = None
         self.__isValidAction()
 
@@ -107,7 +107,7 @@ class PIC:
         else:
             # voice vlan is None
             if self.currentConfig is not None and self.currentConfig.voiceVlan is not None:
-                print "New config doesn't have a voice vlan but current config does, using old voice vlan"
+                print("New config doesn't have a voice vlan but current config does, using old voice vlan")
                 self.newConfig.addVoiceVlan(self.currentConfig.voiceVlan)
 
     def __isValidAction(self):

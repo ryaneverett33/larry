@@ -27,7 +27,7 @@ class Risque:
             ticket = self.getTicketBody(ticketNumber)
             return self.parseTicket(ticket)
         except ValueError:
-            print "Failed to get ticket, login invalid"
+            print("Failed to get ticket, login invalid")
             result = raw_input("Failed to login to risque, change risque password? (y/n)")
             if result.lower() == "y":
                 newRisquePass = PasswordUtility.getpassword("Risque Password (BoilerKey): ")
@@ -87,7 +87,7 @@ class Risque:
         return value
 
     def login(self):
-        print "Logging in"
+        print("Logging in")
         login = self.session.get(
             # 'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal')
             'https://www.purdue.edu/apps/account/cas/login?service=https%3a%2f%2frisque.itap.purdue.edu%2fPortal%2fLoginHelperRisque.aspx%3fredirecturl%3dhttps%253a%252f%252frisque.itap.purdue.edu%252fPortal%252fDefault.aspx&renew=true')

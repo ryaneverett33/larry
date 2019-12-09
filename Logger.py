@@ -138,28 +138,28 @@ class Logger:
         self.logFile.write("|{0}| - {1}\n".format(self.getTimeStamp(), string))
         self.logFile.flush()
         if echo:
-            print string
+            print(string)
 
     @staticmethod
     def printWarning(string):
         if Logger.disableColor:
-            print Logger.NORMAL + string + Logger.NORMAL
+            print(Logger.NORMAL + string + Logger.NORMAL)
         else:
-            print Logger.WARNING + string + Logger.NORMAL
+            print(Logger.WARNING + string + Logger.NORMAL)
 
     @staticmethod
     def printError(string):
         if Logger.disableColor:
-            print Logger.NORMAL + string + Logger.NORMAL
+            print(Logger.NORMAL + string + Logger.NORMAL)
         else:
-            print Logger.FAIL + string + Logger.NORMAL
+            print(Logger.FAIL + string + Logger.NORMAL)
 
     @staticmethod
     def printSuccess(string):
         if Logger.disableColor:
-            print Logger.NORMAL + string + Logger.NORMAL
+            print(Logger.NORMAL + string + Logger.NORMAL)
         else:
-            print Logger.OKGREEN + string + Logger.NORMAL
+            print(Logger.OKGREEN + string + Logger.NORMAL)
 
     @staticmethod
     def getInstance(ticketNumber):
